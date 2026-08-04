@@ -85,24 +85,56 @@ function SAPSDQuestApp() {
 
   // Auto-save & Load persistence
   useEffect(() => {
-    // Reset data on initialization for a clean start
-    localStorage.removeItem("sap-quest-data");
-    setFormData({
-      orderType: "",
-      orderDate: "",
-      salesOrg: "",
-      deliveryDate: "",
-      distChannel: "",
-      paymentCond: "",
-      customer: "",
-      price: "",
-      material: "",
-    });
-    setSelectedTransaction("");
-    setXp(0);
-    setCompletedMissions(0);
-    setFeedbackState("idle");
-    setMode("standard");
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      // Logic for reseting or warning can go here if needed
+      // But user requested a confirmation for reset and warning on reload.
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    // Initial load check
+    const hasBeenReset = sessionStorage.getItem("sap-quest-session-reset");
+    if (!hasBeenReset) {
+      if (confirm("Deseja iniciar um novo treino? Os dados anteriores serão zerados para esta sessão.")) {
+        localStorage.removeItem("sap-quest-data");
+        setFormData({
+          orderType: "",
+          orderDate: "",
+          salesOrg: "",
+          deliveryDate: "",
+          distChannel: "",
+          paymentCond: "",
+          customer: "",
+          price: "",
+          material: "",
+        });
+        setSelectedTransaction("");
+        setXp(0);
+        setCompletedMissions(0);
+        setFeedbackState("idle");
+        setMode("standard");
+        sessionStorage.setItem("sap-quest-session-reset", "true");
+        toast.success("Sessão resetada com sucesso.");
+      } else {
+        // Try to load existing data
+        const saved = localStorage.getItem("sap-quest-data");
+        if (saved) {
+          try {
+            const parsed = JSON.parse(saved);
+            setFormData(parsed.formData);
+            setSelectedTransaction(parsed.selectedTransaction);
+            setXp(parsed.xp);
+            setCompletedMissions(parsed.completedMissions);
+            setFeedbackState(parsed.feedbackState);
+            setMode(parsed.mode);
+          } catch (e) {
+            console.error("Failed to load data", e);
+          }
+        }
+        sessionStorage.setItem("sap-quest-session-reset", "true");
+      }
+    }
+
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
   }, []);
 
   useEffect(() => {
