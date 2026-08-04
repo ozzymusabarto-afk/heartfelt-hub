@@ -282,25 +282,25 @@ function SAPSDQuestApp() {
           </div>
 
           {/* 3. Dual Interactive Workspace */}
-          <div className="grid grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
             {/* Left Box */}
-            <Card className="p-8 border-slate-200 shadow-sm rounded-2xl flex flex-col h-full bg-white">
+            <Card className="p-6 md:p-8 border-slate-200 shadow-sm rounded-2xl flex flex-col h-full bg-white">
               <div className="mb-6">
-                <h3 className="font-bold text-slate-800 text-lg">Passo 2 de 4: Escolha a Transação correta</h3>
-                <p className="text-sm text-slate-500">Qual transação você deve utilizar para resolver esta solicitação?</p>
+                <h3 className="font-bold text-slate-800 text-lg">Passo 2 de 4: Escolha a Transação</h3>
+                <p className="text-sm text-slate-500">Qual transação você deve utilizar?</p>
               </div>
 
               <RadioGroup value={selectedTransaction} onValueChange={setSelectedTransaction} className="space-y-3 mb-8">
                 {[
                   { id: "VA01", label: "VA01 - Criar Ordem de Venda" },
-                  { id: "BP", label: "BP - Criar / Alterar Cliente (Business Partner)" },
+                  { id: "BP", label: "BP - Criar / Alterar Cliente" },
                   { id: "VL01N", label: "VL01N - Criar Entrega" },
                   { id: "VF01", label: "VF01 - Faturar" },
-                  { id: "SE16N", label: "SE16N - Exibir Dados da Tabela" },
+                  { id: "SE16N", label: "SE16N - Exibir Dados" },
                 ].map((item) => (
                   <Label
                     key={item.id}
-                    className={`flex items-center gap-3 p-4 border rounded-xl cursor-pointer transition-all hover:bg-slate-50 ${
+                    className={`flex items-center gap-3 p-4 border rounded-xl cursor-pointer transition-all hover:bg-slate-50 min-h-[56px] ${
                       selectedTransaction === item.id ? "border-primary bg-indigo-50/50 ring-1 ring-primary" : "border-slate-100"
                     }`}
                   >
@@ -313,8 +313,8 @@ function SAPSDQuestApp() {
               </RadioGroup>
 
               <div className="mt-auto bg-slate-50 p-4 rounded-xl flex gap-3 border border-slate-100">
-                <div className="size-10 bg-blue-100 rounded-lg flex-shrink-0 flex items-center justify-center">
-                  <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Hugo&style=circle" alt="Hugo Mini" className="size-8" />
+                <div className="size-10 bg-blue-100 rounded-lg flex-shrink-0 overflow-hidden">
+                  <img src={avatarUrl} alt="Hugo Mini" className="size-full object-cover" />
                 </div>
                 <p className="text-[11px] text-slate-500 leading-relaxed italic">
                   <span className="font-bold text-slate-700 block not-italic mb-0.5">Dica do Chefe Hugo:</span>
@@ -324,16 +324,16 @@ function SAPSDQuestApp() {
             </Card>
 
             {/* Right Box */}
-            <Card className="p-8 border-slate-200 shadow-sm rounded-2xl bg-white">
+            <Card className="p-6 md:p-8 border-slate-200 shadow-sm rounded-2xl bg-white">
               <div className="mb-6">
-                <h3 className="font-bold text-slate-800 text-lg">Passo 3 de 4: Preencha os dados da Ordem de Venda</h3>
+                <h3 className="font-bold text-slate-800 text-lg">Passo 3 de 4: Preencha os dados</h3>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Tipo de Ordem</Label>
                   <Select value={formData.orderType} onValueChange={(v) => handleInputChange("orderType", v)}>
-                    <SelectTrigger className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700">
+                    <SelectTrigger className="h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700">
                       <SelectValue placeholder="Selecione..." />
                     </SelectTrigger>
                     <SelectContent>
@@ -348,7 +348,7 @@ function SAPSDQuestApp() {
                     placeholder="Ex: 17.05.2024" 
                     value={formData.orderDate}
                     onChange={(e) => handleInputChange("orderDate", e.target.value)}
-                    className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                    className="h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -357,9 +357,10 @@ function SAPSDQuestApp() {
                     placeholder="Ex: 1000" 
                     value={formData.salesOrg}
                     onChange={(e) => handleInputChange("salesOrg", e.target.value)}
-                    className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                    className="h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
                   />
                 </div>
+
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Data de Entrega</Label>
                   <Input 
