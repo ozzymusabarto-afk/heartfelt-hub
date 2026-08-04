@@ -229,6 +229,28 @@ function SAPSDQuestApp() {
     }
   }, [isHelpOpen]);
 
+  // Click outside to close help
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (helpContainerRef.current && !helpContainerRef.current.contains(event.target as Node)) {
+        setIsHelpOpen(false);
+      }
+    }
+    if (isHelpOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isHelpOpen]);
+
+  // Persist expanded sections
+  useEffect(() => {
+    localStorage.setItem("sap-quest-help-expanded", JSON.stringify(expandedSections));
+  }, [expandedSections]);
+
+  const toggleSection = (id: string) => {
+    setExpandedSections(prev => ({ ...prev, [id]: !prev[id] }));
+  };
+
   useEffect(() => {
     const savedData = localStorage.getItem("sap-quest-history");
     if (savedData) {
