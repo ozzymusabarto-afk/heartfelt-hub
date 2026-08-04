@@ -412,9 +412,33 @@ function SAPSDQuestApp() {
                   <p className="text-xs text-slate-600">Adriana, crie uma ordem de venda urgente para a <b>ALFA DISTRIBUIDORA</b>.</p>
                 </div>
               </div>
-              <Button variant="outline" size="sm" className="h-8 text-[10px] font-bold text-slate-500 gap-1.5 border-slate-200 rounded-lg">
-                <HelpCircle className="size-3" /> AJUDA DO CAMPO [F1]
-              </Button>
+              <div className="relative">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className={`h-8 text-[10px] font-bold gap-1.5 border-slate-200 rounded-lg transition-colors ${isHelpOpen ? 'bg-indigo-600 text-white border-indigo-600' : 'text-slate-500'}`}
+                  onClick={() => setIsHelpOpen(!isHelpOpen)}
+                >
+                  <HelpCircle className="size-3" /> AJUDA DO CAMPO [F1]
+                </Button>
+                
+                {isHelpOpen && (
+                  <Card className="absolute right-0 top-10 w-64 p-4 z-50 shadow-xl border-indigo-100 animate-in fade-in zoom-in duration-200">
+                    <div className="flex justify-between items-center mb-2">
+                      <h4 className="text-xs font-bold text-indigo-600 uppercase">Ajuda Contextual</h4>
+                      <Button variant="ghost" size="icon" className="size-5 h-5 w-5" onClick={() => setIsHelpOpen(false)}>
+                        <X className="size-3" />
+                      </Button>
+                    </div>
+                    <div className="space-y-2 text-[11px] text-slate-600">
+                      <p>• <b>Transação VA01:</b> Usada para criar ordens de venda.</p>
+                      <p>• <b>Tipo OR:</b> Standard Order (Pedido Normal).</p>
+                      <p>• <b>Org. Vendas 1000:</b> Estrutura padrão para o exercício.</p>
+                      <p className="pt-2 text-[10px] text-slate-400 italic">Pressione [ESC] ou [F1] para fechar.</p>
+                    </div>
+                  </Card>
+                )}
+              </div>
             </div>
             
             {/* Stepper de 4 passos */}
