@@ -184,9 +184,9 @@ function SAPSDQuestApp() {
             <div className="flex flex-col gap-1">
               <div className="flex justify-between items-end gap-4">
                 <span className="text-[10px] font-bold text-slate-400 leading-none uppercase">XP</span>
-                <span className="text-[10px] font-bold text-slate-700 leading-none">350 / 500</span>
+                <span className="text-[10px] font-bold text-slate-700 leading-none" aria-label={`XP atual: ${xp} de 500`}>{xp} / 500</span>
               </div>
-              <Progress value={70} className="h-1.5 w-24 bg-slate-100" />
+              <Progress value={(xp / 500) * 100} className="h-1.5 w-24 bg-slate-100" />
             </div>
           </Card>
 
@@ -194,8 +194,9 @@ function SAPSDQuestApp() {
             <div className="size-8 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600">
               <Star className="size-5" />
             </div>
-            <span className="text-xs font-bold text-slate-700">1.250</span>
+            <span className="text-xs font-bold text-slate-700">{xp * 3}</span>
           </Card>
+
 
           <div className="flex items-center bg-slate-100 p-1 rounded-full">
             <Button 
