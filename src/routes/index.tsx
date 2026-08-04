@@ -449,7 +449,7 @@ function SAPSDQuestApp() {
             </Card>
 
             {/* Right Box */}
-            <Card className={`p-4 lg:p-4 border-slate-200 shadow-sm rounded-2xl bg-white transition-opacity flex flex-col h-full overflow-hidden ${!selectedTransaction ? "opacity-50 pointer-events-none select-none" : "opacity-100"}`}>
+            <Card className={`p-4 lg:p-4 border-slate-200 shadow-sm rounded-2xl bg-white transition-opacity flex flex-col h-full lg:overflow-hidden ${!selectedTransaction ? "opacity-50 pointer-events-none select-none" : "opacity-100"}`}>
               <div className="mb-3">
                 <h3 className="font-semibold text-slate-800 text-lg">Passo 3 de 4: Dados</h3>
                 {!selectedTransaction && <p className="text-[10px] text-amber-600 font-medium">Selecione uma transação no Passo 2.</p>}
