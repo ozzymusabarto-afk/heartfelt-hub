@@ -59,8 +59,8 @@ function SAPSDQuestApp() {
   const [selectedTransaction, setSelectedTransaction] = useState("");
   const [mode, setMode] = useState("standard");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [xp, setXp] = useState(350);
-  const [completedMissions, setCompletedMissions] = useState(12);
+  const [xp, setXp] = useState(0);
+  const [completedMissions, setCompletedMissions] = useState(0);
   const [formData, setFormData] = useState({
     orderType: "",
     orderDate: "",
@@ -83,8 +83,8 @@ function SAPSDQuestApp() {
       const parsed = JSON.parse(savedData);
       setFormData(parsed.formData || {});
       setSelectedTransaction(parsed.selectedTransaction || "");
-      setXp(parsed.xp || 350);
-      setCompletedMissions(parsed.completedMissions || 12);
+      setXp(parsed.xp ?? 0);
+      setCompletedMissions(parsed.completedMissions ?? 0);
       if (parsed.feedbackState) setFeedbackState(parsed.feedbackState);
       if (parsed.mode) setMode(parsed.mode);
     }
