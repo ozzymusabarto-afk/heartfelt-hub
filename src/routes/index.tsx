@@ -230,19 +230,19 @@ function SAPSDQuestApp() {
 
 
         {/* CENTER CANVAS (Flexible Grid Main Content) */}
-        <main className="bg-slate-50 p-8 overflow-y-auto space-y-8">
+        <main className="bg-slate-50 p-4 md:p-8 overflow-y-auto flex-1 space-y-6 md:space-y-8">
           {/* 1. Chefe Hugo Order Banner */}
-          <Card className="p-6 border-slate-200 shadow-sm rounded-2xl flex items-center justify-between gap-6">
-            <div className="flex items-center gap-6">
-              <div className="size-16 bg-blue-100 rounded-2xl overflow-hidden ring-4 ring-blue-50 flex-shrink-0">
+          <Card className="p-4 md:p-6 border-slate-200 shadow-sm rounded-2xl flex flex-col md:flex-row items-center md:justify-between gap-4 md:gap-6">
+            <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 text-center md:text-left">
+              <div className="size-16 md:size-20 bg-blue-100 rounded-2xl overflow-hidden ring-4 ring-blue-50 flex-shrink-0">
                 <img 
-                  src="https://api.dicebear.com/7.x/avataaars/svg?seed=Hugo&backgroundColor=b6e3f4&style=circle&top=shortHair&accessories=prescription02&facialHair=none&clothing=shirtBlue" 
+                  src={avatarUrl} 
                   alt="Chefe Hugo" 
                   className="size-full object-cover"
                 />
               </div>
               <div>
-                <div className="flex items-center gap-2 mb-1">
+                <div className="flex items-center justify-center md:justify-start gap-2 mb-1">
                   <h3 className="font-bold text-slate-800">Chefe Hugo</h3>
                   <span className="animate-bounce">👋</span>
                 </div>
@@ -252,13 +252,14 @@ function SAPSDQuestApp() {
                 </p>
               </div>
             </div>
-            <Button variant="outline" className="gap-2 border-slate-200 text-slate-600 font-bold rounded-xl whitespace-nowrap">
-              <HelpCircle className="size-4" /> Ajuda do Campo (F1)
+            <Button variant="outline" className="w-full md:w-auto gap-2 border-slate-200 text-slate-600 font-bold rounded-xl whitespace-nowrap min-h-[44px]">
+              <HelpCircle className="size-4" /> Ajuda (F1)
             </Button>
           </Card>
 
           {/* 2. Progress Stepper Bar */}
-          <div className="flex items-center justify-between px-10 relative">
+          <div className="hidden md:flex items-center justify-between px-10 relative">
+
             <div className="absolute h-1 top-1/2 left-10 right-10 -translate-y-1/2 bg-slate-200 z-0"></div>
             {[
               { id: 1, label: "Contexto", status: "complete" },
