@@ -35,27 +35,56 @@ const CORRECT_DATA = {
 };
 
 function HugoAvatar({ className }: { className?: string }) {
-  // Using a visual SVG representation instead of an external <img> to ensure it never breaks
+  const [imgError, setImgError] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  
+  // High-quality, friendly 3D-style male avatar URL (DiceBear Avataaars)
+  const avatarUrl = "https://api.dicebear.com/7.x/avataaars/svg?seed=Hugo&hair=shortCombover&eyebrows=default&clothing=shirt&clothingColor=3c52e3&skinColor=edb98a&backgroundColor=b6e3f4";
+
   return (
     <div 
       className={`rounded-2xl flex-shrink-0 flex items-center justify-center bg-indigo-600 shadow-md relative group overflow-hidden ${className}`}
       role="img"
       aria-label="Avatar do Chefe Hugo - Status: Online"
     >
-      <svg
-        viewBox="0 0 36 36"
-        fill="none"
-        role="presentation"
-        className="size-full"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path d="M18 36c10 0 18-8 18-18S28 0 18 0 0 8 0 18s8 18 18 18z" fill="#4F46E5"/>
-        <path d="M18 30c-4 0-7.5-2-9-5 .5-4.5 4-8 9-8s8.5 3.5 9 8c-1.5 3-5 5-9 5z" fill="#E2E8F0"/>
-        <circle cx="18" cy="14" r="6" fill="#E2E8F0"/>
-        <path d="M14 14c0 1 1 2 4 2s4-1 4-2" stroke="#4F46E5" strokeWidth="1.5" strokeLinecap="round"/>
-      </svg>
+      {!imgError ? (
+        <img 
+          src={avatarUrl} 
+          alt="" 
+          className={`size-full object-cover transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+          aria-hidden="true"
+          onLoad={() => {
+            console.log("Chefe Hugo avatar loaded successfully");
+            setIsLoaded(true);
+          }}
+          onError={(e) => {
+            console.error("Error loading Chefe Hugo avatar:", e);
+            setImgError(true);
+          }}
+        />
+      ) : (
+        <svg
+          viewBox="0 0 36 36"
+          fill="none"
+          role="presentation"
+          className="size-full"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M18 36c10 0 18-8 18-18S28 0 18 0 0 8 0 18s8 18 18 18z" fill="#4F46E5"/>
+          <path d="M18 30c-4 0-7.5-2-9-5 .5-4.5 4-8 9-8s8.5 3.5 9 8c-1.5 3-5 5-9 5z" fill="#E2E8F0"/>
+          <circle cx="18" cy="14" r="6" fill="#E2E8F0"/>
+          <path d="M14 14c0 1 1 2 4 2s4-1 4-2" stroke="#4F46E5" strokeWidth="1.5" strokeLinecap="round"/>
+        </svg>
+      )}
+      
+      {!isLoaded && !imgError && (
+        <div className="absolute inset-0 flex items-center justify-center bg-indigo-100 animate-pulse">
+          <User className="size-1/2 text-indigo-300" />
+        </div>
+      )}
+
       <div 
-        className="absolute -bottom-0.5 -right-0.5 size-3 bg-green-500 border-2 border-white dark:border-slate-800 rounded-full"
+        className="absolute -bottom-0.5 -right-0.5 size-3 bg-green-500 border-2 border-white dark:border-slate-800 rounded-full z-10"
         aria-hidden="true"
       ></div>
     </div>
@@ -94,6 +123,7 @@ function SAPSDQuestApp() {
       setXp(parsed.xp || 350);
       setCompletedMissions(parsed.completedMissions || 12);
       if (parsed.feedbackState) setFeedbackState(parsed.feedbackState);
+      if (parsed.mode) setMode(parsed.mode);
     }
   }, []);
 
@@ -103,10 +133,11 @@ function SAPSDQuestApp() {
       selectedTransaction,
       xp,
       completedMissions,
-      feedbackState
+      feedbackState,
+      mode // Persisting the mode (SD/TAX) as part of the theme/state
     };
     localStorage.setItem("sap-quest-data", JSON.stringify(dataToSave));
-  }, [formData, selectedTransaction, xp, completedMissions, feedbackState]);
+  }, [formData, selectedTransaction, xp, completedMissions, feedbackState, mode]);
 
 
 
