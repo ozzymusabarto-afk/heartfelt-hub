@@ -34,6 +34,24 @@ const CORRECT_DATA = {
   material: "MAT-SD-015",
 };
 
+function HugoAvatar({ className }: { className?: string }) {
+  const avatarUrl = "https://api.dicebear.com/7.x/avataaars/svg?seed=Hugo&hair=shortCombover&eyebrows=default&clothing=shirt&clothingColor=3c52e3";
+  
+  return (
+    <div className={`bg-blue-100 rounded-2xl overflow-hidden ring-4 ring-blue-50 flex-shrink-0 flex items-center justify-center ${className}`}>
+      <img 
+        src={avatarUrl} 
+        alt="Chefe Hugo" 
+        className="size-full object-cover"
+        onError={(e) => {
+          (e.target as HTMLImageElement).src = "https://api.dicebear.com/7.x/bottts-neutral/svg?seed=Hugo";
+        }}
+      />
+    </div>
+  );
+}
+
+
 function SAPSDQuestApp() {
   const [selectedTransaction, setSelectedTransaction] = useState("");
   const [mode, setMode] = useState("standard");
@@ -51,7 +69,7 @@ function SAPSDQuestApp() {
     price: "",
     material: "",
   });
-  const [feedbackState, setFeedbackState] = useState<"idle" | "success" | "error">("idle");
+  const [feedbackState, setFeedbackState] = useState<"idle" | "review" | "success" | "error">("idle");
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [hintMessage, setHintMessage] = useState("");
 
@@ -78,7 +96,6 @@ function SAPSDQuestApp() {
   }, [formData, selectedTransaction, xp, completedMissions]);
 
 
-  const avatarUrl = "https://api.dicebear.com/7.x/avataaars/svg?seed=Hugo&hair=shortCombover&eyebrows=default&clothing=shirt&clothingColor=3c52e3";
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -289,13 +306,8 @@ function SAPSDQuestApp() {
           {/* 1. Chefe Hugo Order Banner */}
           <Card className="p-4 md:p-6 border-slate-200 shadow-sm rounded-2xl flex flex-col md:flex-row items-center md:justify-between gap-4 md:gap-6">
             <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 text-center md:text-left">
-              <div className="size-16 md:size-20 bg-blue-100 rounded-2xl overflow-hidden ring-4 ring-blue-50 flex-shrink-0">
-                <img 
-                  src={avatarUrl} 
-                  alt="Chefe Hugo" 
-                  className="size-full object-cover"
-                />
-              </div>
+              <HugoAvatar className="size-16 md:size-20" />
+
               <div>
                 <div className="flex items-center justify-center md:justify-start gap-2 mb-1">
                   <h3 className="font-semibold text-slate-800">Chefe Hugo</h3>
@@ -370,9 +382,8 @@ function SAPSDQuestApp() {
               </RadioGroup>
 
               <div className="mt-auto bg-slate-50 p-4 rounded-xl flex gap-3 border border-slate-100">
-                <div className="size-10 bg-blue-100 rounded-lg flex-shrink-0 overflow-hidden">
-                  <img src={avatarUrl} alt="Hugo Mini" className="size-full object-cover" />
-                </div>
+                <HugoAvatar className="size-10 rounded-lg ring-0 shadow-none" />
+
                 <p className="text-[11px] text-slate-500 leading-relaxed italic">
                   <span className="font-bold text-slate-700 block not-italic mb-0.5">Dica do Chefe Hugo:</span>
                   Pense: qual transação inicia o processo Order-to-Cash?
@@ -485,11 +496,12 @@ function SAPSDQuestApp() {
               </div>
 
               <Button 
-                onClick={handleSubmit}
+                onClick={() => setFeedbackState("review")}
                 className="w-full h-12 mt-8 bg-primary hover:bg-indigo-700 text-white font-bold rounded-xl shadow-md transition-all scale-100 active:scale-95 gap-2"
               >
-                🚀 Conferir e Submeter
+                📝 Revisar Pedido
               </Button>
+
             </Card>
           </div>
 
@@ -567,21 +579,34 @@ function SAPSDQuestApp() {
               {feedbackState === "success" ? <Star className="size-16" /> : <Target className="size-16" />}
             </div>
             
-            <div className={`size-20 rounded-3xl overflow-hidden mb-4 ring-4 ring-white shadow-md transition-all ${
-              feedbackState === "success" ? "bg-green-100 scale-110" : "bg-blue-100"
-            }`}>
-              <img 
-                src={avatarUrl}
-                alt="Chefe Hugo Feedback" 
-                className="size-full object-cover"
-              />
-            </div>
+            <HugoAvatar className="size-20 rounded-3xl mb-4 ring-4 ring-white shadow-md transition-all scale-110" />
+
 
 
             <h3 className="font-semibold text-slate-800 mb-1">Feedback do Chefe Hugo</h3>
             <p className="text-xs text-slate-600 leading-relaxed mb-6" aria-live="polite">
-              {feedbackState === "idle" && "Aguardando submissão do pedido. Selecione a transação, preencha os campos e clique em 'Conferir e Submeter'."}
+              {feedbackState === "idle" && "Aguardando preenchimento dos campos. Selecione a transação e preencha os dados à esquerda."}
+              {feedbackState === "review" && (
+                <div className="text-left space-y-2">
+                  <p className="font-bold text-slate-800 border-b pb-1 mb-2 text-center">Resumo do Pedido</p>
+                  <p><strong>Transação:</strong> {selectedTransaction || "Não selecionada"}</p>
+                  <p><strong>Tipo:</strong> {formData.orderType}</p>
+                  <p><strong>Cliente:</strong> {formData.customer}</p>
+                  <p><strong>Material:</strong> {formData.material}</p>
+                  <p><strong>Org. Vendas:</strong> {formData.salesOrg}</p>
+                  
+                  <div className="pt-4 flex flex-col gap-2">
+                    <Button onClick={handleSubmit} className="w-full bg-green-600 hover:bg-green-700 text-white">
+                      Confirmar e Enviar 🚀
+                    </Button>
+                    <Button variant="ghost" onClick={() => setFeedbackState("idle")} className="w-full text-xs text-slate-500">
+                      Voltar e Editar
+                    </Button>
+                  </div>
+                </div>
+              )}
               {(feedbackState === "success" || feedbackState === "error") && hintMessage}
+
             </p>
 
 
