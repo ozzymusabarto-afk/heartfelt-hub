@@ -552,7 +552,7 @@ function SAPSDQuestApp() {
                     Aprenda e pratique todo o fluxo de pedido à fatura.
                   </p>
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-bold text-slate-700 bg-slate-100 px-2 py-1 rounded-lg">[4 / 8 Missões]</span>
+                    <span className="text-[10px] font-bold text-slate-700 bg-slate-100 px-2 py-1 rounded-lg">[{completedMissions} / 8 Missões]</span>
                     <Button variant="ghost" size="sm" className="h-7 text-indigo-600 text-[10px] font-bold hover:bg-indigo-50">VER DETALHES</Button>
                   </div>
                 </div>
