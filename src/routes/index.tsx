@@ -269,6 +269,7 @@ function SAPSDQuestApp() {
     setFormData({
       orderType: "", orderDate: "", salesOrg: "", deliveryDate: "",
       distChannel: "", paymentCond: "", customer: "", price: "", material: "",
+      incoterms: "", division: "", poNumber: "",
     });
   };
 
