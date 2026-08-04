@@ -363,7 +363,7 @@ function SAPSDQuestApp() {
               { icon: Trophy, label: "Conquistas", sub: "Medalhas e troféus" },
               { icon: Settings, label: "Configurações", sub: "Conta e preferências" },
             ].map((item) => (
-              <Button key={item.label} variant="ghost" className={`w-full justify-start h-10 px-3 py-1.5 rounded-xl gap-3 ${item.active ? "bg-indigo-50 text-primary" : "text-slate-500 hover:bg-slate-50"}`}>
+              <Button key={item.label} variant="ghost" className={`w-full justify-start h-10 px-3 py-1.5 rounded-xl gap-3 ${item.label === "Trilha Principal" ? "bg-indigo-50 text-primary" : "text-slate-500 hover:bg-slate-50"}`}>
                 <item.icon className="size-4" />
                 <div className="flex flex-col items-start text-left">
                   <span className="text-xs font-bold leading-tight">{item.label}</span>
