@@ -686,8 +686,8 @@ function SAPSDQuestApp() {
                 </li>
               ))}
             </ul>
-            <Button className="w-full bg-white hover:bg-slate-100 text-indigo-900 font-black rounded-xl h-11 shadow-xl">
-              Quero desbloquear!
+            <Button className="w-full bg-white hover:bg-slate-100 text-indigo-900 font-black rounded-xl h-10 shadow-xl">
+              Ativar Modo Premium
             </Button>
           </Card>
         </aside>
