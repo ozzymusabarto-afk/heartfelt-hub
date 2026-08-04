@@ -84,39 +84,52 @@ function SAPSDQuestApp() {
 
   // Auto-save continuous progress in local storage
   useEffect(() => {
-    const handleBeforeUnload = (e: BeforeUnloadEvent) => {};
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    const hasBeenReset = sessionStorage.getItem("sap-quest-session-reset");
-    if (!hasBeenReset) {
-      if (confirm("Deseja iniciar um novo treino? Os dados anteriores serão zerados para esta sessão.")) {
-        localStorage.removeItem("sap-quest-data");
-        resetGame();
-        setXp(0);
-        setCompletedMissions(0);
-        setMode("standard");
-        sessionStorage.setItem("sap-quest-session-reset", "true");
-        toast.success("Sessão resetada com sucesso.");
-      } else {
-        const saved = localStorage.getItem("sap-quest-data");
-        if (saved) {
-          try {
-            const parsed = JSON.parse(saved);
-            setFormData(parsed.formData);
-            setSelectedTransaction(parsed.selectedTransaction);
-            setXp(parsed.xp);
-            setCompletedMissions(parsed.completedMissions);
-            setFeedbackState(parsed.feedbackState);
-            setMode(parsed.mode);
-          } catch (e) {
-            console.error("Failed to load data", e);
-          }
+    // Force reset on FIRST LOAD ONLY if no explicit "keep" flag
+    const hasStarted = sessionStorage.getItem("sap-quest-session-started");
+    
+    if (!hasStarted) {
+      // Clear storage to ensure clean state on fresh load
+      localStorage.removeItem("sap-quest-data");
+      localStorage.removeItem("sap-quest-history");
+      
+      setXp(0);
+      setCompletedMissions(0);
+      setTrainingHistory([]);
+      setFormData({
+        orderType: "", orderDate: "", salesOrg: "", deliveryDate: "",
+        distChannel: "", paymentCond: "", customer: "", price: "", material: "",
+      });
+      setSelectedTransaction("");
+      setFeedbackState("idle");
+      
+      sessionStorage.setItem("sap-quest-session-started", "true");
+      toast.info("Bem-vindo ao SAP SD Quest! Dados zerados.");
+    } else {
+      // Restore if already started in this session
+      const saved = localStorage.getItem("sap-quest-data");
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          setFormData(parsed.formData || {});
+          setSelectedTransaction(parsed.selectedTransaction || "");
+          setXp(parsed.xp || 0);
+          setCompletedMissions(parsed.completedMissions || 0);
+          setFeedbackState(parsed.feedbackState || "idle");
+          setMode(parsed.mode || "standard");
+        } catch (e) {
+          console.error("Failed to load data", e);
         }
-        sessionStorage.setItem("sap-quest-session-reset", "true");
+      }
+      
+      const savedHistory = localStorage.getItem("sap-quest-history");
+      if (savedHistory) {
+        try {
+          setTrainingHistory(JSON.parse(savedHistory));
+        } catch (e) {
+          console.error("Failed to parse history", e);
+        }
       }
     }
-
-    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
   }, []);
 
   useEffect(() => {
