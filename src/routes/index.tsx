@@ -475,8 +475,11 @@ function SAPSDQuestApp() {
 
             <div className="space-y-2 text-[10px] font-bold text-slate-400 uppercase">
               <span>Progresso Real</span>
-              <Progress value={(completedMissions/30)*100} className="h-1.5" />
-              <div className="flex justify-between"><span>XP {xp}/500</span></div>
+              <div className="flex justify-between items-center text-indigo-600 mb-1">
+                <span>XP</span>
+                <span>{xp}/500</span>
+              </div>
+              <Progress value={(xp/500)*100} className="h-1.5" />
             </div>
           </div>
         </aside>
