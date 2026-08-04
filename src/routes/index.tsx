@@ -325,8 +325,7 @@ function SAPSDQuestApp() {
                   <span className="animate-bounce">👋</span>
                 </div>
                 <p className="text-sm text-slate-600 leading-relaxed max-w-2xl">
-                  Adriana, recebemos um pedido urgente do cliente <span className="font-bold text-primary">ALFA DISTRIBUIDORA LTDA</span>. 
-                  Precisamos criar uma ordem de venda com os dados informados. <span className="underline decoration-indigo-300 decoration-2 underline-offset-2">Atenção aos detalhes!</span>
+                  Adriana, crie uma ordem de venda urgente para a <span className="font-bold text-primary">ALFA DISTRIBUIDORA LTDA</span>.
                 </p>
               </div>
             </div>
