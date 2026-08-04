@@ -69,6 +69,9 @@ function SAPSDQuestApp() {
     customer: "",
     price: "",
     material: "",
+    incoterms: "",
+    division: "",
+    poNumber: "",
   });
   const [feedbackState, setFeedbackState] = useState<"idle" | "review" | "success" | "error">("idle");
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
@@ -98,6 +101,7 @@ function SAPSDQuestApp() {
       setFormData({
         orderType: "", orderDate: "", salesOrg: "", deliveryDate: "",
         distChannel: "", paymentCond: "", customer: "", price: "", material: "",
+        incoterms: "", division: "", poNumber: "",
       });
       setSelectedTransaction("");
       setFeedbackState("idle");
@@ -265,6 +269,7 @@ function SAPSDQuestApp() {
     setFormData({
       orderType: "", orderDate: "", salesOrg: "", deliveryDate: "",
       distChannel: "", paymentCond: "", customer: "", price: "", material: "",
+      incoterms: "", division: "", poNumber: "",
     });
   };
 
@@ -406,16 +411,22 @@ function SAPSDQuestApp() {
                   { id: "orderType", label: "Tipo", type: "select", options: ["OR", "QT"] },
                   { id: "orderDate", label: "Data Pedido" },
                   { id: "salesOrg", label: "Org. Vendas", disabled: !formData.orderType },
-                  { id: "customer", label: "Cliente" },
-                  { id: "material", label: "Material", span: true }
+                  { id: "distChannel", label: "Canal Dist.", type: "select", options: ["10", "20"] },
+                  { id: "division", label: "Setor Ativ.", type: "select", options: ["00", "01"] },
+                  { id: "customer", label: "Emissor" },
+                  { id: "poNumber", label: "Nº Pedido" },
+                  { id: "material", label: "Material" },
+                  { id: "price", label: "Preço" },
+                  { id: "incoterms", label: "Incoterms", type: "select", options: ["FOB", "CIF"] },
+                  { id: "paymentCond", label: "Cond. Pagto.", type: "select", options: ["0001", "NT30"] },
                 ].map((field) => {
                   const fieldId = field.id as keyof typeof formData;
                   return (
-                    <div key={field.id} className={`space-y-1 ${field.span ? "col-span-2" : ""}`}>
+                    <div key={field.id} className={`space-y-1`}>
                       <Label className="text-[10px] font-bold text-slate-500 uppercase">{field.label}</Label>
                       {field.type === "select" ? (
                         <Select value={formData[fieldId] || ""} onValueChange={(v) => handleInputChange(field.id, v)}>
-                          <SelectTrigger className="h-9 rounded-lg"><SelectValue placeholder="Selecione" /></SelectTrigger>
+                          <SelectTrigger className="h-9 rounded-lg"><SelectValue placeholder="-" /></SelectTrigger>
                           <SelectContent>{field.options?.map(o => <SelectItem key={o} value={o}>{o}</SelectItem>)}</SelectContent>
                         </Select>
                       ) : (
@@ -430,7 +441,58 @@ function SAPSDQuestApp() {
                   );
                 })}
               </div>
-              <Button onClick={handleSubmit} className="w-full h-10 mt-4 bg-primary text-white font-bold rounded-xl">📝 Submeter</Button>
+              <Button onClick={handleSubmit} className="w-full h-10 mt-4 bg-primary text-white font-bold rounded-xl">📝 Submeter Ordem</Button>
+            </Card>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Card className="p-4 bg-white shadow-sm border-slate-200 rounded-2xl">
+              <h3 className="font-semibold text-slate-800 mb-3 text-sm flex items-center gap-2">
+                <Target className="size-4 text-indigo-500" /> Missões Recentes
+              </h3>
+              <div className="space-y-2">
+                {[
+                  { name: "Criação de Ordem Standard", status: "Em andamento", xp: "+25" },
+                  { name: "Verificação de Estoque (ATP)", status: "Bloqueado", xp: "+50" },
+                  { name: "Fluxo Completo OTC", status: "Bloqueado", xp: "+150" },
+                ].map((m, i) => (
+                  <div key={i} className="flex justify-between items-center p-2 rounded-xl border border-slate-50 hover:bg-slate-50 transition-colors">
+                    <div className="flex flex-col">
+                      <span className="text-xs font-bold text-slate-700">{m.name}</span>
+                      <span className="text-[10px] text-slate-400">{m.status}</span>
+                    </div>
+                    <Badge variant="outline" className="text-[10px] font-bold text-indigo-600 border-indigo-100 bg-indigo-50/30">
+                      {m.xp} XP
+                    </Badge>
+                  </div>
+                ))}
+              </div>
+            </Card>
+
+            <Card className="p-4 bg-white shadow-sm border-slate-200 rounded-2xl">
+              <h3 className="font-semibold text-slate-800 mb-3 text-sm flex items-center gap-2">
+                <Shield className="size-4 text-emerald-500" /> Parceiros & Processos OTC
+              </h3>
+              <div className="grid grid-cols-2 gap-2">
+                <div className="p-2 rounded-xl bg-slate-50 border border-slate-100 flex flex-col items-center text-center">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase">Processos OTC</span>
+                  <span className="text-xs font-bold text-slate-700 mt-1">1 / 12</span>
+                  <div className="w-full bg-slate-200 h-1 rounded-full mt-2">
+                    <div className="bg-emerald-500 h-full rounded-full" style={{ width: '8%' }}></div>
+                  </div>
+                </div>
+                <div className="p-2 rounded-xl bg-slate-50 border border-slate-100 flex flex-col items-center text-center">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase">Parceiros BP</span>
+                  <span className="text-xs font-bold text-slate-700 mt-1">2 / 45</span>
+                  <div className="w-full bg-slate-200 h-1 rounded-full mt-2">
+                    <div className="bg-indigo-500 h-full rounded-full" style={{ width: '4%' }}></div>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-3 p-2 rounded-xl border border-dashed border-slate-200 flex items-center justify-between group cursor-pointer hover:border-indigo-300">
+                <span className="text-[10px] font-bold text-slate-500">Documentação SD Wiki</span>
+                <ArrowRight className="size-3 text-slate-300 group-hover:text-indigo-500 transition-colors" />
+              </div>
             </Card>
           </div>
         </main>
