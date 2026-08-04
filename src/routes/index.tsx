@@ -179,7 +179,7 @@ function SAPSDQuestApp() {
 
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans flex flex-col pb-20 md:pb-0">
+    <div className="min-h-screen lg:h-screen lg:max-h-screen lg:overflow-hidden bg-background text-foreground font-sans flex flex-col pb-20 md:pb-0">
 
       {/* 2. Header Bar (Full Width Top Nav) */}
       <header className="sticky top-0 z-50 w-full border-b border-border bg-card shadow-sm px-4 md:px-6 py-3 flex items-center justify-between">
