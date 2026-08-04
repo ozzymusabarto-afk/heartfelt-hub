@@ -99,15 +99,17 @@ function SAPSDQuestApp() {
   }, []);
 
   useEffect(() => {
-    const dataToSave = {
-      formData,
-      selectedTransaction,
-      xp,
-      completedMissions,
-      feedbackState,
-      mode // Persisting the mode (SD/TAX) as part of the theme/state
-    };
-    localStorage.setItem("sap-quest-data", JSON.stringify(dataToSave));
+    if (xp > 0 || completedMissions > 0 || selectedTransaction !== "" || feedbackState !== "idle") {
+      const dataToSave = {
+        formData,
+        selectedTransaction,
+        xp,
+        completedMissions,
+        feedbackState,
+        mode
+      };
+      localStorage.setItem("sap-quest-data", JSON.stringify(dataToSave));
+    }
   }, [formData, selectedTransaction, xp, completedMissions, feedbackState, mode]);
 
 
