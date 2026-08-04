@@ -418,10 +418,10 @@ function SAPSDQuestApp() {
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Data do Pedido</Label>
                   <Input 
-                    placeholder="Ex: 17.05.2024" 
+                    placeholder="Informe a data" 
                     value={formData.orderDate}
                     onChange={(e) => handleInputChange("orderDate", e.target.value)}
-                    className="h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                    className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -430,7 +430,7 @@ function SAPSDQuestApp() {
                     placeholder="Ex: 1000" 
                     value={formData.salesOrg}
                     onChange={(e) => handleInputChange("salesOrg", e.target.value)}
-                    className={`h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700 focus:ring-2 focus:ring-primary ${validationErrors.includes("salesOrg") ? "border-red-400 bg-red-50/50" : ""}`}
+                    className={`h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700 focus:ring-2 focus:ring-primary ${validationErrors.includes("salesOrg") ? "border-red-400 bg-red-50/50" : ""}`}
                     aria-label="Org. de Vendas"
                   />
 
@@ -439,25 +439,25 @@ function SAPSDQuestApp() {
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Data de Entrega</Label>
                   <Input 
-                    placeholder="Ex: 24.05.2024" 
+                    placeholder="Informe a data" 
                     value={formData.deliveryDate}
                     onChange={(e) => handleInputChange("deliveryDate", e.target.value)}
-                    className="h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                    className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
                   />
                 </div>
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Canal de Distr.</Label>
                   <Input 
-                    placeholder="Ex: 10" 
+                    placeholder="Código do Canal" 
                     value={formData.distChannel}
                     onChange={(e) => handleInputChange("distChannel", e.target.value)}
-                    className="h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                    className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
                   />
                 </div>
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Condição Pagto.</Label>
                   <Select value={formData.paymentCond} onValueChange={(v) => handleInputChange("paymentCond", v)}>
-                    <SelectTrigger className="h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700">
+                    <SelectTrigger className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700">
                       <SelectValue placeholder="Selecione..." />
                     </SelectTrigger>
                     <SelectContent>
@@ -469,10 +469,10 @@ function SAPSDQuestApp() {
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Cliente</Label>
                   <Input 
-                    placeholder="Ex: 200015" 
+                    placeholder="Código do Cliente" 
                     value={formData.customer}
                     onChange={(e) => handleInputChange("customer", e.target.value)}
-                    className={`h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700 focus:ring-2 focus:ring-primary ${validationErrors.includes("customer") ? "border-red-400 bg-red-50/50" : ""}`}
+                    className={`h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700 focus:ring-2 focus:ring-primary ${validationErrors.includes("customer") ? "border-red-400 bg-red-50/50" : ""}`}
                     aria-label="Cliente"
                   />
 
@@ -480,19 +480,19 @@ function SAPSDQuestApp() {
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Preço Líquido</Label>
                   <Input 
-                    placeholder="Ex: 150,00 BRL" 
+                    placeholder="Valor total" 
                     value={formData.price}
                     onChange={(e) => handleInputChange("price", e.target.value)}
-                    className="h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                    className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
                   />
                 </div>
                 <div className="col-span-1 sm:col-span-2 space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Material</Label>
                   <Input 
-                    placeholder="Ex: MAT-SD-015" 
+                    placeholder="Código do Material" 
                     value={formData.material}
                     onChange={(e) => handleInputChange("material", e.target.value)}
-                    className={`h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700 focus:ring-2 focus:ring-primary ${validationErrors.includes("material") ? "border-red-400 bg-red-50/50" : ""}`}
+                    className={`h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700 focus:ring-2 focus:ring-primary ${validationErrors.includes("material") ? "border-red-400 bg-red-50/50" : ""}`}
                     aria-label="Material"
                   />
 
@@ -501,9 +501,9 @@ function SAPSDQuestApp() {
 
               <Button 
                 onClick={handleSubmit}
-                className="w-full h-12 mt-8 bg-primary hover:bg-indigo-700 text-white font-bold rounded-xl shadow-md transition-all scale-100 active:scale-95 gap-2"
+                className="w-full h-11 mt-6 bg-primary hover:bg-indigo-700 text-white font-bold rounded-xl shadow-md transition-all scale-100 active:scale-95 gap-2"
               >
-                📝 Validar e Revisar
+                📝 Conferir e Submeter
               </Button>
 
             </Card>
