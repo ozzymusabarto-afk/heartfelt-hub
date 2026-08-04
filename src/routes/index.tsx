@@ -19,14 +19,78 @@ import {
   SelectValue 
 } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/")({
   component: SAPSDQuestApp,
 });
 
+const CORRECT_DATA = {
+  transaction: "VA01",
+  orderType: "OR",
+  salesOrg: "1000",
+  customer: "200015",
+  material: "MAT-SD-015",
+};
+
 function SAPSDQuestApp() {
-  const [selectedTransaction, setSelectedTransaction] = useState("VA01");
+  const [selectedTransaction, setSelectedTransaction] = useState("");
   const [mode, setMode] = useState("standard");
+  const [formData, setFormData] = useState({
+    orderType: "",
+    orderDate: "",
+    salesOrg: "",
+    deliveryDate: "",
+    distChannel: "",
+    paymentCond: "",
+    customer: "",
+    price: "",
+    material: "",
+  });
+  const [feedbackState, setFeedbackState] = useState<"idle" | "success" | "error">("idle");
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = () => {
+    if (!selectedTransaction) {
+      setFeedbackState("error");
+      toast.error("Selecione uma transação!");
+      return;
+    }
+
+    const isCorrect = 
+      selectedTransaction === CORRECT_DATA.transaction &&
+      formData.orderType === CORRECT_DATA.orderType &&
+      formData.salesOrg === CORRECT_DATA.salesOrg &&
+      formData.customer === CORRECT_DATA.customer &&
+      formData.material === CORRECT_DATA.material;
+
+    if (isCorrect) {
+      setFeedbackState("success");
+      toast.success("Ordem criada com sucesso!");
+    } else {
+      setFeedbackState("error");
+      toast.error("Dados incorretos. Revise o formulário.");
+    }
+  };
+
+  const resetGame = () => {
+    setFeedbackState("idle");
+    setSelectedTransaction("");
+    setFormData({
+      orderType: "",
+      orderDate: "",
+      salesOrg: "",
+      deliveryDate: "",
+      distChannel: "",
+      paymentCond: "",
+      customer: "",
+      price: "",
+      material: "",
+    });
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans flex flex-col">
