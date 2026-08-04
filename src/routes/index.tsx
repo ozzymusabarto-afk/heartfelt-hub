@@ -366,10 +366,10 @@ function SAPSDQuestApp() {
       </header>
 
       <div className="flex-1 flex flex-col md:flex-row relative">
-        <aside className={`fixed inset-y-0 left-0 z-40 w-[260px] bg-card border-r p-6 transform transition-transform md:relative md:translate-x-0 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} h-screen md:h-auto`}>
-          <nav className="space-y-1">
+        <aside className={`fixed inset-y-0 left-0 z-40 w-[260px] bg-card border-r p-6 transform transition-transform md:relative md:translate-x-0 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} h-screen md:h-auto flex flex-col`}>
+          <nav className="space-y-1 flex-1">
             {[
-              { icon: Target, label: "Trilha Principal", sub: "Carreira passo a passo", active: true },
+              { icon: Gamepad2, label: "Trilha Principal", sub: "Carreira passo a passo", active: true },
               { icon: Rocket, label: "Treino Rápido", sub: "Desafios aleatórios" },
               { icon: BookOpen, label: "Módulos & Apostila", sub: "Estude por tópico" },
               { icon: Crown, label: "Modos Premium", sub: "Recursos exclusivos" },
@@ -377,15 +377,31 @@ function SAPSDQuestApp() {
               { icon: Trophy, label: "Conquistas", sub: "Medalhas e troféus" },
               { icon: Settings, label: "Configurações", sub: "Conta e preferências" },
             ].map((item) => (
-              <Button key={item.label} variant="ghost" className={`w-full justify-start h-10 px-3 py-1.5 rounded-xl gap-3 ${item.label === "Trilha Principal" ? "bg-indigo-50 text-primary" : "text-slate-500 hover:bg-slate-50"}`}>
-                <item.icon className="size-4" />
+              <Button key={item.label} variant="ghost" className={`w-full justify-start h-12 px-3 py-2 rounded-xl gap-3 ${item.label === "Trilha Principal" ? "bg-indigo-600 text-white shadow-md shadow-indigo-100" : "text-slate-500 hover:bg-indigo-50 hover:text-indigo-600"}`}>
+                <item.icon className={`size-5 ${item.label === "Trilha Principal" ? "text-white" : ""}`} />
                 <div className="flex flex-col items-start text-left">
                   <span className="text-xs font-bold leading-tight">{item.label}</span>
-                  <span className="text-[9px] text-slate-400">{item.sub}</span>
+                  <span className={`text-[9px] ${item.label === "Trilha Principal" ? "text-indigo-100" : "text-slate-400"}`}>{item.sub}</span>
                 </div>
               </Button>
             ))}
           </nav>
+
+          <Card className="mt-8 p-4 bg-indigo-50 border-indigo-100 rounded-2xl relative overflow-hidden group cursor-pointer hover:bg-indigo-100 transition-colors">
+            <div className="relative z-10">
+              <div className="flex items-center gap-2 mb-2">
+                <Crown className="size-4 text-indigo-600" />
+                <span className="text-[10px] font-black text-indigo-600 uppercase tracking-wider">Premium</span>
+              </div>
+              <p className="text-[11px] font-bold text-slate-700 leading-snug mb-3">
+                Quer acelerar sua carreira? Desbloqueie tudo no SAP SD Quest Premium!
+              </p>
+              <Button size="sm" className="w-full h-8 bg-indigo-600 text-white text-[10px] font-bold rounded-lg gap-2">
+                ASSINAR AGORA <ArrowRight className="size-3" />
+              </Button>
+            </div>
+            <Crown className="absolute -right-4 -bottom-4 size-20 text-indigo-200/50 -rotate-12 group-hover:scale-110 transition-transform" />
+          </Card>
         </aside>
 
         <main className="bg-slate-50 p-4 flex-1 flex flex-col gap-4">
