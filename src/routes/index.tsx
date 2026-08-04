@@ -81,6 +81,14 @@ function SAPSDQuestApp() {
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [hintMessage, setHintMessage] = useState("");
   const [isHelpOpen, setIsHelpOpen] = useState(false);
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("sap-quest-help-expanded");
+      return saved ? JSON.parse(saved) : { "VA01": true };
+    }
+    return { "VA01": true };
+  });
+  const helpScrollRef = useRef<HTMLDivElement>(null);
   const [trainingHistory, setTrainingHistory] = useState<{
     id: string;
     status: "success" | "error";
