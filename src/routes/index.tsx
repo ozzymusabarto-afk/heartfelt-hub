@@ -395,9 +395,10 @@ function SAPSDQuestApp() {
             </Card>
 
             {/* Right Box */}
-            <Card className="p-6 md:p-8 border-slate-200 shadow-sm rounded-2xl bg-white">
-              <div className="mb-6">
+            <Card className={`p-4 lg:p-5 border-slate-200 shadow-sm rounded-2xl bg-white transition-opacity ${!selectedTransaction ? "opacity-50 pointer-events-none select-none" : "opacity-100"}`}>
+              <div className="mb-4">
                 <h3 className="font-semibold text-slate-800 text-lg">Passo 3 de 4: Preencha os dados</h3>
+                {!selectedTransaction && <p className="text-xs text-amber-600 font-medium">Selecione uma transação no Passo 2 para liberar este formulário.</p>}
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
