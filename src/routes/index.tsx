@@ -1161,7 +1161,7 @@ function SAPSDQuestApp() {
                 </div>
                 <div>
                   <h4 className="text-[11px] font-bold text-slate-800">Próxima promoção</h4>
-                  <p className="text-[10px] text-slate-500">Faltam {500 - xp} XP para Consultor SD Júnior</p>
+                  <p className="text-[10px] text-slate-500">Faltam {500 - xp} XP para a próxima promoção na AAM Corp</p>
                 </div>
               </div>
             </Card>
