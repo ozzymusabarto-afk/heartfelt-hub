@@ -75,27 +75,66 @@ function SAPSDQuestApp() {
   const [feedbackState, setFeedbackState] = useState<"idle" | "review" | "success" | "error">("idle");
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [hintMessage, setHintMessage] = useState("");
+  const [trainingHistory, setTrainingHistory] = useState<{
+    id: string;
+    status: "success" | "error";
+    transaction: string;
+    message: string;
+    timestamp: number;
+  }[]>([]);
 
   // Auto-save & Load persistence
   useEffect(() => {
-    // Reset data on initialization for a clean start
-    localStorage.removeItem("sap-quest-data");
-    setFormData({
-      orderType: "",
-      orderDate: "",
-      salesOrg: "",
-      deliveryDate: "",
-      distChannel: "",
-      paymentCond: "",
-      customer: "",
-      price: "",
-      material: "",
-    });
-    setSelectedTransaction("");
-    setXp(0);
-    setCompletedMissions(0);
-    setFeedbackState("idle");
-    setMode("standard");
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      // Logic for reseting or warning can go here if needed
+      // But user requested a confirmation for reset and warning on reload.
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    // Initial load check
+    const hasBeenReset = sessionStorage.getItem("sap-quest-session-reset");
+    if (!hasBeenReset) {
+      if (confirm("Deseja iniciar um novo treino? Os dados anteriores serão zerados para esta sessão.")) {
+        localStorage.removeItem("sap-quest-data");
+        setFormData({
+          orderType: "",
+          orderDate: "",
+          salesOrg: "",
+          deliveryDate: "",
+          distChannel: "",
+          paymentCond: "",
+          customer: "",
+          price: "",
+          material: "",
+        });
+        setSelectedTransaction("");
+        setXp(0);
+        setCompletedMissions(0);
+        setFeedbackState("idle");
+        setMode("standard");
+        sessionStorage.setItem("sap-quest-session-reset", "true");
+        toast.success("Sessão resetada com sucesso.");
+      } else {
+        // Try to load existing data
+        const saved = localStorage.getItem("sap-quest-data");
+        if (saved) {
+          try {
+            const parsed = JSON.parse(saved);
+            setFormData(parsed.formData);
+            setSelectedTransaction(parsed.selectedTransaction);
+            setXp(parsed.xp);
+            setCompletedMissions(parsed.completedMissions);
+            setFeedbackState(parsed.feedbackState);
+            setMode(parsed.mode);
+          } catch (e) {
+            console.error("Failed to load data", e);
+          }
+        }
+        sessionStorage.setItem("sap-quest-session-reset", "true");
+      }
+    }
+
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
   }, []);
 
   useEffect(() => {
@@ -112,7 +151,24 @@ function SAPSDQuestApp() {
     }
   }, [formData, selectedTransaction, xp, completedMissions, feedbackState, mode]);
 
+  // Load history from localStorage
+  useEffect(() => {
+    const savedData = localStorage.getItem("sap-quest-history");
+    if (savedData) {
+      try {
+        setTrainingHistory(JSON.parse(savedData));
+      } catch (e) {
+        console.error("Failed to parse history", e);
+      }
+    }
+  }, []);
 
+  // Save history to localStorage
+  useEffect(() => {
+    if (trainingHistory.length > 0) {
+      localStorage.setItem("sap-quest-history", JSON.stringify(trainingHistory));
+    }
+  }, [trainingHistory]);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -157,13 +213,34 @@ function SAPSDQuestApp() {
         toast.info("Dados validados! Revise o resumo antes de enviar.");
       } else {
         setFeedbackState("success");
-        setHintMessage("🎉 Excelente, Adriana! A ordem de venda foi criada com sucesso!");
+        const successMsg = "🎉 Excelente, Adriana! A ordem de venda foi criada com sucesso!";
+        setHintMessage(successMsg);
         setXp(prev => Math.min(prev + 25, 500));
         setCompletedMissions(prev => prev + 1);
+        setTrainingHistory(prev => {
+          const newItem: { id: string; status: "success" | "error"; transaction: string; message: string; timestamp: number } = {
+            id: Math.random().toString(36).substr(2, 9),
+            status: "success",
+            transaction: selectedTransaction,
+            message: "Fluxo concluído corretamente.",
+            timestamp: Date.now()
+          };
+          return [newItem, ...prev].slice(0, 10);
+        });
         toast.success("Parabéns! Desafio concluído corretamente. +25 XP");
       }
     } else {
       setFeedbackState("error");
+      setTrainingHistory(prev => {
+        const newItem: { id: string; status: "success" | "error"; transaction: string; message: string; timestamp: number } = {
+          id: Math.random().toString(36).substr(2, 9),
+          status: "error",
+          transaction: selectedTransaction || "N/A",
+          message: hintMessage || "Dados incorretos no formulário.",
+          timestamp: Date.now()
+        };
+        return [newItem, ...prev].slice(0, 10);
+      });
       toast.error("Ops! Verifique os dados. Erros não geram XP.");
     }
   };
@@ -208,32 +285,37 @@ function SAPSDQuestApp() {
           <h1 className="font-display font-bold text-lg md:text-xl tracking-tight text-slate-800">SAP SD Quest</h1>
         </div>
 
-        <div className="hidden lg:flex items-center gap-4">
-          <Card className="flex items-center gap-3 px-3 py-1.5 border-slate-200 shadow-none rounded-xl">
-            <div className="size-8 bg-amber-100 rounded-full flex items-center justify-center text-amber-600">
-              <Shield className="size-5" />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-[10px] font-bold text-slate-400 leading-none uppercase">Nível 1</span>
-              <span className="text-xs font-bold text-slate-700">Trainee SD</span>
-            </div>
-          </Card>
-
-          <Card className="flex items-center gap-3 px-3 py-1.5 border-slate-200 shadow-none rounded-xl">
-            <div className="flex flex-col gap-1">
-              <div className="flex justify-between items-end gap-4">
-                <span className="text-[10px] font-bold text-slate-400 leading-none uppercase">XP</span>
-                <span className="text-[10px] font-bold text-slate-700 leading-none" aria-label={`XP atual: ${xp} de 500`}>{xp} / 500</span>
+        <div className="hidden lg:flex items-center gap-2">
+          <Card className="flex items-center gap-3 px-3 py-1.5 border-slate-200 shadow-none rounded-xl bg-slate-50/50">
+            <div className="flex items-center gap-4">
+              <div className="flex flex-col border-r pr-4 border-slate-200">
+                <span className="text-[9px] font-black text-slate-400 uppercase leading-none mb-1">Status Carreira</span>
+                <div className="flex items-center gap-2">
+                  <div className="size-6 bg-amber-100 rounded-full flex items-center justify-center text-amber-600">
+                    <Shield className="size-3.5" />
+                  </div>
+                  <span className="text-xs font-bold text-slate-700">Trainee SD (Nível 1)</span>
+                </div>
               </div>
-              <Progress value={(xp / 500) * 100} className="h-1.5 w-24 bg-slate-100" />
-            </div>
-          </Card>
+              
+              <div className="flex flex-col border-r pr-4 border-slate-200">
+                <span className="text-[9px] font-black text-slate-400 uppercase leading-none mb-1">Missões Concluídas</span>
+                <div className="flex items-center gap-2">
+                  <div className="size-6 bg-indigo-100 rounded-full flex items-center justify-center text-primary">
+                    <Target className="size-3.5" />
+                  </div>
+                  <span className="text-xs font-bold text-slate-700">{completedMissions} / 30</span>
+                </div>
+              </div>
 
-          <Card className="flex items-center gap-3 px-3 py-1.5 border-slate-200 shadow-none rounded-xl">
-            <div className="size-8 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600">
-              <Star className="size-5" />
+              <div className="flex flex-col min-w-[120px]">
+                <div className="flex justify-between items-center mb-1">
+                  <span className="text-[9px] font-black text-slate-400 uppercase leading-none">XP Atual ({xp})</span>
+                  <span className="text-[9px] font-bold text-slate-700 leading-none">{xp}/500</span>
+                </div>
+                <Progress value={(xp / 500) * 100} className="h-1.5 bg-slate-200" />
+              </div>
             </div>
-            <span className="text-xs font-bold text-slate-700">{xp}</span>
           </Card>
 
 
@@ -315,7 +397,7 @@ function SAPSDQuestApp() {
 
 
         {/* CENTER CANVAS (Flexible Grid Main Content) */}
-        <main className="bg-slate-50 p-3 md:p-4 lg:p-4 overflow-hidden flex-1 flex flex-col space-y-3 lg:space-y-3">
+        <main className="bg-slate-50 p-3 md:p-4 lg:p-4 overflow-y-auto lg:overflow-hidden flex-1 flex flex-col space-y-3 lg:space-y-3">
           {/* 1. Chefe Hugo Order Banner */}
           <Card className="p-2 lg:p-3 border-slate-200 shadow-sm rounded-2xl flex flex-col md:flex-row items-center md:justify-between gap-3 md:gap-4 shrink-0">
             <div className="flex flex-col md:flex-row items-center gap-3 md:gap-4 text-center md:text-left">
@@ -361,9 +443,9 @@ function SAPSDQuestApp() {
           </div>
 
           {/* 3. Dual Interactive Workspace */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4 flex-1 overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4 flex-1 lg:overflow-hidden">
             {/* Left Box */}
-            <Card className="p-4 lg:p-4 border-slate-200 shadow-sm rounded-2xl flex flex-col h-full bg-white overflow-hidden">
+            <Card className="p-4 lg:p-4 border-slate-200 shadow-sm rounded-2xl flex flex-col h-full bg-white lg:overflow-hidden">
               <div className="mb-3">
                 <h3 className="font-semibold text-slate-800 text-lg">Passo 2 de 4: Transação</h3>
                 <p className="text-xs text-slate-500">Qual código inicia o processo?</p>
@@ -404,7 +486,7 @@ function SAPSDQuestApp() {
             </Card>
 
             {/* Right Box */}
-            <Card className={`p-4 lg:p-4 border-slate-200 shadow-sm rounded-2xl bg-white transition-opacity flex flex-col h-full overflow-hidden ${!selectedTransaction ? "opacity-50 pointer-events-none select-none" : "opacity-100"}`}>
+            <Card className={`p-4 lg:p-4 border-slate-200 shadow-sm rounded-2xl bg-white transition-opacity flex flex-col h-full lg:overflow-hidden ${!selectedTransaction ? "opacity-50 pointer-events-none select-none" : "opacity-100"}`}>
               <div className="mb-3">
                 <h3 className="font-semibold text-slate-800 text-lg">Passo 3 de 4: Dados</h3>
                 {!selectedTransaction && <p className="text-[10px] text-amber-600 font-medium">Selecione uma transação no Passo 2.</p>}
@@ -438,11 +520,14 @@ function SAPSDQuestApp() {
                   <Input 
                     placeholder="Ex: 1000" 
                     value={formData.salesOrg}
+                    disabled={!formData.orderType || !formData.orderDate}
                     onChange={(e) => handleInputChange("salesOrg", e.target.value)}
-                    className={`h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700 focus:ring-2 focus:ring-primary ${validationErrors.includes("salesOrg") ? "border-red-400 bg-red-50/50" : ""}`}
+                    className={`h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700 focus:ring-2 focus:ring-primary ${validationErrors.includes("salesOrg") ? "border-red-400 bg-red-50/50" : ""} disabled:opacity-50`}
                     aria-label="Org. de Vendas"
                   />
-
+                  {(!formData.orderType || !formData.orderDate) && (
+                    <p className="text-[9px] text-amber-600 font-medium">Preencha o Tipo e Data acima.</p>
+                  )}
                 </div>
 
                 <div className="space-y-1.5">
@@ -640,8 +725,34 @@ function SAPSDQuestApp() {
             </Button>
           </Card>
 
-          {/* 2. Progress Tracker Card */}
+          {/* 2. Training History & Progress */}
           <div className="space-y-3 shrink-0">
+            <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest px-1">Histórico de Tentativas</h4>
+            <Card className="p-3 border-slate-200 shadow-sm rounded-2xl max-h-[160px] overflow-y-auto space-y-2">
+              {trainingHistory.length === 0 ? (
+                <p className="text-[10px] text-slate-400 text-center py-4 italic">Nenhuma tentativa registrada.</p>
+              ) : (
+                trainingHistory.map((item) => (
+                  <div key={item.id} className={`p-2 rounded-lg border text-[10px] flex flex-col gap-1 ${
+                    item.status === "success" ? "bg-green-50 border-green-100" : "bg-red-50 border-red-100"
+                  }`}>
+                    <div className="flex justify-between items-center">
+                      <span className="font-bold text-slate-700">{item.transaction}</span>
+                      <span className={`px-1.5 py-0.5 rounded-full text-[8px] font-black uppercase ${
+                        item.status === "success" ? "bg-green-500 text-white" : "bg-red-500 text-white"
+                      }`}>
+                        {item.status === "success" ? "Correto" : "Erro"}
+                      </span>
+                    </div>
+                    <p className="text-slate-600 line-clamp-2">{item.message}</p>
+                    <span className="text-[8px] text-slate-400 self-end">
+                      {new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    </span>
+                  </div>
+                ))
+              )}
+            </Card>
+
             <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest px-1">Seu Progresso</h4>
             <Card className="p-4 border-slate-200 shadow-sm rounded-2xl space-y-4">
               <div className="space-y-2">
