@@ -75,6 +75,13 @@ function SAPSDQuestApp() {
   const [feedbackState, setFeedbackState] = useState<"idle" | "review" | "success" | "error">("idle");
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [hintMessage, setHintMessage] = useState("");
+  const [trainingHistory, setTrainingHistory] = useState<{
+    id: string;
+    status: "success" | "error";
+    transaction: string;
+    message: string;
+    timestamp: number;
+  }[]>([]);
 
   // Auto-save & Load persistence
   useEffect(() => {
