@@ -359,7 +359,7 @@ function SAPSDQuestApp() {
                   const id = label.split(" ")[0];
                   return (
                     <Label key={id} className={`flex items-center gap-2 p-2 border rounded-xl cursor-pointer hover:bg-slate-50 ${selectedTransaction === id ? "border-primary bg-indigo-50" : "border-slate-100"}`}>
-                      <RadioGroupItem value={id} /> <span className="text-xs font-bold text-slate-700">{label || ""}</span>
+                      <RadioGroupItem value={id} /> <span className="text-xs font-bold text-slate-700">{label ?? ""}</span>
                     </Label>
                   );
                 })}
