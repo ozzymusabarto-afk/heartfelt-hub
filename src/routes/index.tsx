@@ -154,7 +154,7 @@ function SAPSDQuestApp() {
       }
     } else {
       setFeedbackState("error");
-      toast.error("Dados incorretos. Chefe Hugo deixou uma dica para você.");
+      toast.error("Ops! Verifique os dados. Erros não geram XP.");
     }
   };
 
