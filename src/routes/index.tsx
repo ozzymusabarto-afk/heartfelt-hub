@@ -298,7 +298,7 @@ function SAPSDQuestApp() {
               </div>
               <div>
                 <div className="flex items-center justify-center md:justify-start gap-2 mb-1">
-                  <h3 className="font-bold text-slate-800">Chefe Hugo</h3>
+                  <h3 className="font-semibold text-slate-800">Chefe Hugo</h3>
                   <span className="animate-bounce">👋</span>
                 </div>
                 <p className="text-sm text-slate-600 leading-relaxed max-w-2xl">
@@ -502,7 +502,7 @@ function SAPSDQuestApp() {
                   <Shield className="size-5" />
                 </div>
                 <div className="flex flex-col">
-                  <h4 className="text-sm font-bold text-slate-800">Processo OTC</h4>
+                  <h4 className="text-sm font-semibold text-slate-800">Processo OTC</h4>
                   <p className="text-[11px] text-slate-400">Aprenda todo o fluxo.</p>
                 </div>
               </div>
