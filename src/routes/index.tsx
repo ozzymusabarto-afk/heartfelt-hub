@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { 
   Rocket, Target, BookOpen, Crown, BarChart3, Trophy, Settings, 
   ChevronRight, HelpCircle, CheckCircle2, Flame, Star, Shield,
-  Search, Bell, Plus, MoreHorizontal, ArrowRight, Check
+  Search, Bell, Plus, MoreHorizontal, ArrowRight, Check, Menu, X,
+  Gamepad2, Dices, User
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
