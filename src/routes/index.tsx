@@ -255,8 +255,14 @@ function SAPSDQuestApp() {
     });
   };
 
-  const successRate = trainingHistory.length > 0 
-    ? Math.round((trainingHistory.filter(h => h.status === "success").length / trainingHistory.length) * 100)
+  const filteredHistory = trainingHistory.filter(h => {
+    if (historyPeriod === "all") return true;
+    const days = historyPeriod === "7d" ? 7 : 30;
+    return (Date.now() - h.timestamp) < (days * 24 * 60 * 60 * 1000);
+  });
+
+  const successRate = filteredHistory.length > 0 
+    ? Math.round((filteredHistory.filter(h => h.status === "success").length / filteredHistory.length) * 100)
     : 0;
 
   return (
