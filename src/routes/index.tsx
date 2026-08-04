@@ -58,6 +58,12 @@ function HugoAvatar({ className }: { className?: string }) {
 }
 
 function SAPSDQuestApp() {
+  const [isAuth, setIsAuth] = useState(false);
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [showOnboarding, setShowOnboarding] = useState(false);
+  const [onboardingStep, setOnboardingStep] = useState(0);
+
   const [selectedTransaction, setSelectedTransaction] = useState("");
   const [mode, setMode] = useState("standard");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -109,11 +115,12 @@ function SAPSDQuestApp() {
 
   const generatePDFReport = () => {
     toast.info("Gerando relatório...");
-    // Mock PDF generation logic
     const content = `
       RELATÓRIO DE TREINAMENTO SAP SD QUEST
       Data: ${new Date().toLocaleDateString()}
+      Consultor(a): ${userName}
       -------------------------------------
+      Empresa: AAM Corp
       Status: Nível 1 - Trainee SD
       XP Total: ${xp} / 500
       Missões Concluídas: ${completedMissions} / 30
@@ -130,16 +137,40 @@ function SAPSDQuestApp() {
     toast.success("Relatório baixado com sucesso!");
   };
 
-  // Auto-save continuous progress and draft form
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (userName.trim() && password.trim()) {
+      localStorage.setItem("sap-quest-username", userName);
+      setIsAuth(true);
+      
+      const hasCompletedOnboarding = localStorage.getItem("sap-quest-onboarding-done");
+      if (!hasCompletedOnboarding) {
+        setShowOnboarding(true);
+      }
+      toast.success(`Bem-vindo(a), Consultor(a) ${userName}!`);
+    } else {
+      toast.error("Preencha todos os campos para acessar o SAP GUI.");
+    }
+  };
+
+  const finishOnboarding = () => {
+    localStorage.setItem("sap-quest-onboarding-done", "true");
+    setShowOnboarding(false);
+    toast.info("Jornada iniciada! Boa sorte nas demandas.");
+  };
+
   useEffect(() => {
+    const savedUser = localStorage.getItem("sap-quest-username");
+    if (savedUser) {
+      setUserName(savedUser);
+      setIsAuth(true);
+    }
+
     const hasStarted = sessionStorage.getItem("sap-quest-session-started");
-    
-    // Recovery logic
     const saved = localStorage.getItem("sap-quest-data");
     const savedHistory = localStorage.getItem("sap-quest-history");
     
     if (!hasStarted) {
-      // Force reset for new session
       localStorage.removeItem("sap-quest-data");
       localStorage.removeItem("sap-quest-history");
       setFormData({
@@ -154,7 +185,6 @@ function SAPSDQuestApp() {
       setFeedbackState("idle");
       sessionStorage.setItem("sap-quest-session-started", "true");
     } else {
-      // Load saved state if session already started
       if (saved) {
         try {
           const parsed = JSON.parse(saved);
