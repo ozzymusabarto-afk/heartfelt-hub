@@ -37,13 +37,13 @@ const CORRECT_DATA = {
 function HugoAvatar({ className }: { className?: string }) {
   return (
     <div 
-      className={`rounded-2xl flex-shrink-0 flex items-center justify-center bg-indigo-100 border-2 border-indigo-500 shadow-sm relative group overflow-hidden p-1 ${className}`}
+      className={`rounded-2xl flex-shrink-0 flex items-center justify-center bg-white border-2 border-indigo-500 shadow-md relative group overflow-hidden p-1 ${className}`}
       role="img"
-      aria-label="Avatar do Chefe Hugo"
+      aria-label="Avatar do Chefe Hugo 3D"
     >
       <img 
-        src="https://api.dicebear.com/7.x/notionists/svg?seed=Hugo&glasses=variant02" 
-        alt="Chefe Hugo" 
+        src="https://api.multiavatar.com/hugo.svg" 
+        alt="Chefe Hugo 3D" 
         className="size-full object-contain"
       />
       <div 
