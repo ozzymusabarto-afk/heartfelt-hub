@@ -610,7 +610,7 @@ function SAPSDQuestApp() {
                     <Button onClick={handleSubmit} className="w-full bg-green-600 hover:bg-green-700 text-white h-9">
                       Confirmar e Enviar 🚀
                     </Button>
-                    <Button variant="ghost" onClick={() => setFeedbackState("idle")} className="w-full text-xs text-slate-500">
+                    <Button variant="ghost" onClick={() => setFeedbackState("idle")} className="w-full text-[10px] text-slate-500 h-8">
                       Voltar e Editar
                     </Button>
                   </div>
