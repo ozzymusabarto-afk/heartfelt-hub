@@ -609,17 +609,17 @@ function SAPSDQuestApp() {
               <div className="space-y-2">
                 <div className="flex justify-between text-xs font-bold">
                   <span className="text-slate-500">Missões concluídas</span>
-                  <span className="text-slate-800">12 / 30</span>
+                  <span className="text-slate-800" aria-label={`Missões concluídas: ${completedMissions} de 30`}>{completedMissions} / 30</span>
                 </div>
-                <Progress value={40} className="h-2 bg-slate-100" />
+                <Progress value={(completedMissions / 30) * 100} className="h-2 bg-slate-100" />
               </div>
 
               <div className="space-y-2">
                 <div className="flex justify-between text-xs font-bold">
                   <span className="text-slate-500">XP neste nível</span>
-                  <span className="text-slate-800">350 / 500</span>
+                  <span className="text-slate-800" aria-label={`XP atual: ${xp} de 500`}>{xp} / 500</span>
                 </div>
-                <Progress value={70} className="h-2 bg-slate-100" />
+                <Progress value={(xp / 500) * 100} className="h-2 bg-slate-100" />
               </div>
 
               <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 flex items-center gap-3">
@@ -628,8 +628,9 @@ function SAPSDQuestApp() {
                 </div>
                 <div className="flex flex-col">
                   <span className="text-[10px] font-bold text-slate-400 uppercase">Próxima Promoção</span>
-                  <span className="text-[11px] font-bold text-slate-700">Faltam 150 XP para Júnior</span>
+                  <span className="text-[11px] font-bold text-slate-700">Faltam {500 - xp} XP para Júnior</span>
                 </div>
+
               </div>
             </Card>
           </div>
