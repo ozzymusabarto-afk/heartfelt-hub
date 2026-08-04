@@ -223,7 +223,7 @@ function SAPSDQuestApp() {
             <div className="size-8 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600">
               <Star className="size-5" />
             </div>
-            <span className="text-xs font-bold text-slate-700">{xp * 3}</span>
+            <span className="text-xs font-bold text-slate-700">{xp}</span>
           </Card>
 
 
