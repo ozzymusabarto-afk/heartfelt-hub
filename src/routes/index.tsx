@@ -719,7 +719,49 @@ function SAPSDQuestApp() {
               </div>
             )}
             {feedbackState === "error" && <Button onClick={() => setFeedbackState("idle")} variant="outline" className="w-full text-xs h-9 rounded-xl border-red-200 text-red-600 hover:bg-red-50">TENTAR NOVAMENTE</Button>}
-          </Card>
+            </Card>
+
+            <div className="space-y-2">
+              <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Histórico de Submissões</h3>
+              <Card className="bg-white border-slate-200 shadow-sm rounded-2xl overflow-hidden">
+                <div className="max-h-[200px] overflow-y-auto divide-y divide-slate-50">
+                  {trainingHistory.length === 0 ? (
+                    <div className="p-4 text-center text-[10px] text-slate-400 italic">
+                      Nenhuma submissão realizada.
+                    </div>
+                  ) : (
+                    trainingHistory.map((h) => (
+                      <div key={h.id} className="p-3 hover:bg-slate-50 transition-colors">
+                        <div className="flex justify-between items-start mb-1">
+                          <span className={`text-[9px] font-black uppercase ${h.status === 'success' ? 'text-emerald-600' : 'text-red-500'}`}>
+                            {h.status === 'success' ? 'Sucesso' : 'Falha'}
+                          </span>
+                          <span className="text-[8px] text-slate-400 font-medium">
+                            {new Date(h.timestamp).toLocaleDateString()}
+                          </span>
+                        </div>
+                        <h5 className="text-[10px] font-bold text-slate-800 truncate">{h.missionName || h.transaction}</h5>
+                        {h.status === 'success' && (
+                          <div className="flex items-center justify-between mt-1 text-[8px] text-slate-500 font-semibold">
+                            <span>+{h.xpEarned} XP</span>
+                            <span>Progresso: {h.progressAtTime}%</span>
+                          </div>
+                        )}
+                      </div>
+                    ))
+                  )}
+                </div>
+              </Card>
+            </div>
+
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="w-full h-8 text-[10px] font-bold text-red-500 hover:text-red-600 hover:bg-red-50 border-red-100 rounded-xl gap-2 transition-all active:scale-[0.98]"
+              onClick={fullReset}
+            >
+              <X className="size-3" /> REINICIAR PROGRESSO
+            </Button>
 
           <div className="space-y-4">
             <div className="flex items-center justify-between pl-1">
