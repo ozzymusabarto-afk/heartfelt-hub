@@ -134,7 +134,7 @@ function SAPSDQuestApp() {
     }
   }, []);
 
-  // Continuous auto-save
+  // Continuous auto-save and tab sync
   useEffect(() => {
     const dataToSave = {
       formData,
@@ -145,6 +145,23 @@ function SAPSDQuestApp() {
       mode
     };
     localStorage.setItem("sap-quest-data", JSON.stringify(dataToSave));
+
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === "sap-quest-data" && e.newValue) {
+        try {
+          const parsed = JSON.parse(e.newValue);
+          if (parsed.xp !== undefined) setXp(parsed.xp);
+          if (parsed.completedMissions !== undefined) setCompletedMissions(parsed.completedMissions);
+          // Only update feedback if it changed to keep UI consistent
+          if (parsed.feedbackState && parsed.feedbackState !== feedbackState) setFeedbackState(parsed.feedbackState);
+        } catch (err) {
+          console.error("Tab sync error", err);
+        }
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
   }, [formData, selectedTransaction, xp, completedMissions, feedbackState, mode]);
 
   // Shortcut for F1 Help
