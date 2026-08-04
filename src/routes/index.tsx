@@ -35,67 +35,44 @@ const CORRECT_DATA = {
 };
 
 function HugoAvatar({ className }: { className?: string }) {
-  const [imgError, setImgError] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [retryCount, setRetryCount] = useState(0);
-  
-  // Friendly male character with glasses and short brown hair (DiceBear Avataaars)
-  const avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=Hugo&hair=shortCombover&eyebrows=default&clothing=shirt&clothingColor=3c52e3&skinColor=edb98a&backgroundColor=b6e3f4&glasses=wayfarers&retry=${retryCount}`;
-
-  const handleRetry = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    console.log("Tentando recarregar o avatar do Chefe Hugo...");
-    setImgError(false);
-    setIsLoaded(false);
-    setRetryCount(prev => prev + 1);
-  };
-
   return (
     <div 
       className={`rounded-2xl flex-shrink-0 flex items-center justify-center bg-indigo-100 border-2 border-indigo-500 shadow-md relative group overflow-hidden ${className}`}
       role="img"
-      aria-label="Avatar do Chefe Hugo - Status: Online"
+      aria-label="Avatar do Chefe Hugo - Personagem Masculino Sorridente"
     >
-      {!imgError ? (
-        <img 
-          src={avatarUrl} 
-          alt="" 
-          className={`size-full object-cover transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-          aria-hidden="true"
-          onLoad={() => {
-            console.log("Avatar do Chefe Hugo carregado com sucesso!");
-            setIsLoaded(true);
-          }}
-          onError={(e) => {
-            console.error("Erro ao carregar avatar do Chefe Hugo:", e);
-            setImgError(true);
-          }}
-        />
-      ) : (
-        <div className="flex flex-col items-center justify-center p-2 text-center h-full w-full bg-indigo-50">
-          <svg viewBox="0 0 36 36" fill="none" className="size-3/4 mb-1" xmlns="http://www.w3.org/2000/svg">
-            <path d="M18 36c10 0 18-8 18-18S28 0 18 0 0 8 0 18s8 18 18 18z" fill="#4F46E5"/>
-            <path d="M18 30c-4 0-7.5-2-9-5 .5-4.5 4-8 9-8s8.5 3.5 9 8c-1.5 3-5 5-9 5z" fill="#E2E8F0"/>
-            <circle cx="18" cy="14" r="6" fill="#E2E8F0"/>
-            <path d="M15 13h2m2 0h2" stroke="#4F46E5" strokeWidth="1" strokeLinecap="round"/>
-            <path d="M14 14c0 1 1 2 4 2s4-1 4-2" stroke="#4F46E5" strokeWidth="1" strokeLinecap="round"/>
-          </svg>
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            className="h-6 text-[8px] px-2 font-bold uppercase text-indigo-600 hover:bg-indigo-100"
-            onClick={handleRetry}
-          >
-            Tentar Novamente
-          </Button>
-        </div>
-      )}
-      
-      {!isLoaded && !imgError && (
-        <div className="absolute inset-0 flex items-center justify-center bg-indigo-50 animate-pulse">
-          <User className="size-1/2 text-indigo-300" />
-        </div>
-      )}
+      <svg
+        viewBox="0 0 200 200"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="size-full"
+      >
+        {/* Background/Shirt */}
+        <rect width="200" height="200" fill="#E0E7FF" />
+        <path d="M40 190C40 160 70 140 100 140C130 140 160 160 160 190V200H40V190Z" fill="#3C52E3" />
+        
+        {/* Face/Neck */}
+        <rect x="90" y="130" width="20" height="20" fill="#EDB98A" />
+        <path d="M60 85C60 55 78 35 100 35C122 35 140 55 140 85C140 115 122 135 100 135C78 135 60 115 60 85Z" fill="#EDB98A" />
+        
+        {/* Hair */}
+        <path d="M60 75C60 45 80 30 100 30C120 30 140 45 140 75C140 65 130 40 100 40C70 40 60 65 60 75Z" fill="#4B2C20" />
+        <path d="M70 45C85 35 115 35 130 45C125 38 110 32 100 32C90 32 75 38 70 45Z" fill="#4B2C20" />
+        
+        {/* Eyes & Glasses */}
+        <rect x="75" y="78" width="20" height="15" rx="2" stroke="#1E293B" strokeWidth="2.5" />
+        <rect x="105" y="78" width="20" height="15" rx="2" stroke="#1E293B" strokeWidth="2.5" />
+        <path d="M95 85H105" stroke="#1E293B" strokeWidth="2.5" />
+        <circle cx="85" cy="85" r="2" fill="#1E293B" />
+        <circle cx="115" cy="85" r="2" fill="#1E293B" />
+        
+        {/* Smile */}
+        <path d="M85 108C90 115 110 115 115 108" stroke="#4B2C20" strokeWidth="2" strokeLinecap="round" />
+        
+        {/* Ears */}
+        <circle cx="60" cy="85" r="6" fill="#EDB98A" />
+        <circle cx="140" cy="85" r="6" fill="#EDB98A" />
+      </svg>
 
       <div 
         className="absolute -bottom-0.5 -right-0.5 size-3 bg-green-500 border-2 border-white dark:border-slate-800 rounded-full z-10 shadow-sm"
