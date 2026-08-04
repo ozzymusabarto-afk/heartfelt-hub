@@ -86,6 +86,30 @@ function SAPSDQuestApp() {
     timestamp: number;
   }[]>([]);
   const [historyPeriod, setHistoryPeriod] = useState<"all" | "7d" | "30d">("all");
+  const helpCloseRef = useRef<HTMLButtonElement>(null);
+
+  const generatePDFReport = () => {
+    toast.info("Gerando relatório...");
+    // Mock PDF generation logic
+    const content = `
+      RELATÓRIO DE TREINAMENTO SAP SD QUEST
+      Data: ${new Date().toLocaleDateString()}
+      -------------------------------------
+      Status: Nível 1 - Trainee SD
+      XP Total: ${xp} / 500
+      Missões Concluídas: ${completedMissions} / 30
+      Taxa de Sucesso: ${successRate}%
+      -------------------------------------
+      Missão Atual: Criar Ordem (VA01) - ${completedMissions > 0 ? "CONCLUÍDO" : "DISPONÍVEL"}
+    `;
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `relatorio_sap_sd_${Date.now()}.txt`;
+    link.click();
+    toast.success("Relatório baixado com sucesso!");
+  };
 
   // Auto-save continuous progress and draft form
   useEffect(() => {
