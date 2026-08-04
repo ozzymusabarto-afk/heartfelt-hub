@@ -220,9 +220,10 @@ function SAPSDQuestApp() {
         
         <div className="lg:hidden flex items-center gap-2">
            <Badge variant="outline" className="bg-amber-50 text-amber-600 border-amber-200">Lvl 1</Badge>
-           <Badge variant="outline" className="bg-indigo-50 text-primary border-indigo-200">350 XP</Badge>
+           <Badge variant="outline" className="bg-indigo-50 text-primary border-indigo-200">{xp} XP</Badge>
         </div>
       </header>
+
 
 
       <div className="flex-1 flex flex-col md:grid md:grid-cols-[260px_1fr] lg:grid-cols-[260px_1fr_300px] overflow-hidden relative">
