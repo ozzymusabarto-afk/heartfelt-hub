@@ -37,6 +37,7 @@ const CORRECT_DATA = {
 function SAPSDQuestApp() {
   const [selectedTransaction, setSelectedTransaction] = useState("");
   const [mode, setMode] = useState("standard");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [formData, setFormData] = useState({
     orderType: "",
     orderDate: "",
@@ -49,6 +50,8 @@ function SAPSDQuestApp() {
     material: "",
   });
   const [feedbackState, setFeedbackState] = useState<"idle" | "success" | "error">("idle");
+
+  const avatarUrl = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=256&q=80";
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -94,7 +97,8 @@ function SAPSDQuestApp() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans flex flex-col">
+    <div className="min-h-screen bg-background text-foreground font-sans flex flex-col pb-20 md:pb-0">
+
       {/* 2. Header Bar (Full Width Top Nav) */}
       <header className="sticky top-0 z-50 w-full border-b border-border bg-card shadow-sm px-6 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
