@@ -4,7 +4,7 @@ import {
   Rocket, Target, BookOpen, Crown, BarChart3, Trophy, Settings, 
   ChevronRight, HelpCircle, CheckCircle2, Flame, Star, Shield,
   Search, Bell, Plus, MoreHorizontal, ArrowRight, Check, Menu, X,
-  Gamepad2, Dices, User, UserCheck, Download, Upload, Eye, EyeOff
+  Gamepad2, Dices, User, UserCheck, Download, Upload, Eye, EyeOff, LogIn
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -80,8 +80,9 @@ function SAPSDQuestApp() {
     message: string;
     timestamp: number;
   }[]>([]);
+  const [historyPeriod, setHistoryPeriod] = useState<"all" | "7d" | "30d">("all");
 
-  // Auto-save & Load persistence
+  // Auto-save continuous progress in local storage
   useEffect(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {};
     window.addEventListener("beforeunload", handleBeforeUnload);
@@ -254,8 +255,14 @@ function SAPSDQuestApp() {
     });
   };
 
-  const successRate = trainingHistory.length > 0 
-    ? Math.round((trainingHistory.filter(h => h.status === "success").length / trainingHistory.length) * 100)
+  const filteredHistory = trainingHistory.filter(h => {
+    if (historyPeriod === "all") return true;
+    const days = historyPeriod === "7d" ? 7 : 30;
+    return (Date.now() - h.timestamp) < (days * 24 * 60 * 60 * 1000);
+  });
+
+  const successRate = filteredHistory.length > 0 
+    ? Math.round((filteredHistory.filter(h => h.status === "success").length / filteredHistory.length) * 100)
     : 0;
 
   return (
@@ -318,7 +325,16 @@ function SAPSDQuestApp() {
                 <Upload className="size-4" />
               </Label>
             </div>
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="ml-2 h-8 text-[11px] font-bold border-indigo-200 text-indigo-600 hover:bg-indigo-50 gap-1.5"
+              onClick={() => toast.info("Sincronização na nuvem estará disponível em breve! Por enquanto, use Exportar/Importar.")}
+            >
+              <LogIn className="size-3" /> LOGIN
+            </Button>
           </div>
+
         </div>
       </header>
 
@@ -414,17 +430,33 @@ function SAPSDQuestApp() {
           </Card>
 
           <div className="space-y-3 shrink-0">
-            <div className="flex justify-between px-1 text-[10px] font-bold text-slate-400 uppercase">
-              <span>Desempenho</span> <span className="text-indigo-600">{successRate}% Acerto</span>
+            <div className="flex justify-between items-center px-1 text-[10px] font-bold text-slate-400 uppercase">
+              <span>Desempenho</span> 
+              <Select value={historyPeriod} onValueChange={(v: any) => setHistoryPeriod(v)}>
+                <SelectTrigger className="h-5 w-20 text-[9px] border-none bg-transparent shadow-none p-0 focus:ring-0">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all" className="text-[9px]">Tudo</SelectItem>
+                  <SelectItem value="7d" className="text-[9px]">7 dias</SelectItem>
+                  <SelectItem value="30d" className="text-[9px]">30 dias</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="flex justify-between px-1 text-[10px] font-bold text-indigo-600 mb-1">
+              <span>Taxa de Acerto</span>
+              <span>{successRate}%</span>
             </div>
             <Card className="p-2 max-h-[140px] overflow-y-auto space-y-1">
-              {trainingHistory.map(h => (
+              {filteredHistory.map(h => (
                 <div key={h.id} className={`p-1.5 rounded-lg border text-[9px] flex justify-between items-center ${h.status === "success" ? "bg-green-50" : "bg-red-50"}`}>
                   <span className="font-bold">{h.transaction}</span>
                   <span className="text-slate-500">{new Date(h.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                 </div>
               ))}
+              {filteredHistory.length === 0 && <p className="text-[9px] text-slate-400 text-center py-2">Nenhum registro</p>}
             </Card>
+
             <div className="space-y-2 text-[10px] font-bold text-slate-400 uppercase">
               <span>Progresso Real</span>
               <Progress value={(completedMissions/30)*100} className="h-1.5" />
