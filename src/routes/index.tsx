@@ -325,7 +325,16 @@ function SAPSDQuestApp() {
                 <Upload className="size-4" />
               </Label>
             </div>
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="ml-2 h-8 text-[11px] font-bold border-indigo-200 text-indigo-600 hover:bg-indigo-50 gap-1.5"
+              onClick={() => toast.info("Sincronização na nuvem estará disponível em breve! Por enquanto, use Exportar/Importar.")}
+            >
+              <LogIn className="size-3" /> LOGIN
+            </Button>
           </div>
+
         </div>
       </header>
 
