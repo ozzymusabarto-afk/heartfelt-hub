@@ -58,7 +58,7 @@ function SAPSDQuestApp() {
   const [mode, setMode] = useState("standard");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [xp, setXp] = useState(0);
-  const [completedMissions, setCompletedMissions] = useState(0);
+  const [completedMissions, setCompletedMissions] = useState(12);
   const [formData, setFormData] = useState({
     orderType: "",
     orderDate: "",
@@ -76,6 +76,7 @@ function SAPSDQuestApp() {
   const [feedbackState, setFeedbackState] = useState<"idle" | "review" | "success" | "error">("idle");
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [hintMessage, setHintMessage] = useState("");
+  const [isHelpOpen, setIsHelpOpen] = useState(false);
   const [trainingHistory, setTrainingHistory] = useState<{
     id: string;
     status: "success" | "error";
@@ -85,70 +86,67 @@ function SAPSDQuestApp() {
   }[]>([]);
   const [historyPeriod, setHistoryPeriod] = useState<"all" | "7d" | "30d">("all");
 
-  // Auto-save continuous progress in local storage
+  // Auto-save continuous progress and draft form
   useEffect(() => {
-    // Force reset on FIRST LOAD ONLY if no explicit "keep" flag
     const hasStarted = sessionStorage.getItem("sap-quest-session-started");
     
+    // Recovery logic
+    const saved = localStorage.getItem("sap-quest-data");
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (parsed.formData) setFormData(parsed.formData);
+        if (parsed.selectedTransaction) setSelectedTransaction(parsed.selectedTransaction);
+        if (parsed.xp !== undefined) setXp(parsed.xp);
+        if (parsed.completedMissions !== undefined) setCompletedMissions(parsed.completedMissions);
+        if (parsed.feedbackState) setFeedbackState(parsed.feedbackState);
+        if (parsed.mode) setMode(parsed.mode);
+      } catch (e) {
+        console.error("Failed to load data", e);
+      }
+    }
+
+    const savedHistory = localStorage.getItem("sap-quest-history");
+    if (savedHistory) {
+      try {
+        setTrainingHistory(JSON.parse(savedHistory));
+      } catch (e) {
+        console.error("Failed to parse history", e);
+      }
+    }
+    
     if (!hasStarted) {
-      // Clear storage to ensure clean state on fresh load
-      localStorage.removeItem("sap-quest-data");
-      localStorage.removeItem("sap-quest-history");
-      
-      setXp(0);
-      setCompletedMissions(0);
-      setTrainingHistory([]);
-      setFormData({
-        orderType: "", orderDate: "", salesOrg: "", deliveryDate: "",
-        distChannel: "", paymentCond: "", customer: "", price: "", material: "",
-        incoterms: "", division: "", poNumber: "",
-      });
-      setSelectedTransaction("");
-      setFeedbackState("idle");
-      
       sessionStorage.setItem("sap-quest-session-started", "true");
-      toast.info("Bem-vindo ao SAP SD Quest! Dados zerados.");
-    } else {
-      // Restore if already started in this session
-      const saved = localStorage.getItem("sap-quest-data");
-      if (saved) {
-        try {
-          const parsed = JSON.parse(saved);
-          setFormData(parsed.formData || {});
-          setSelectedTransaction(parsed.selectedTransaction || "");
-          setXp(parsed.xp || 0);
-          setCompletedMissions(parsed.completedMissions || 0);
-          setFeedbackState(parsed.feedbackState || "idle");
-          setMode(parsed.mode || "standard");
-        } catch (e) {
-          console.error("Failed to load data", e);
-        }
-      }
-      
-      const savedHistory = localStorage.getItem("sap-quest-history");
-      if (savedHistory) {
-        try {
-          setTrainingHistory(JSON.parse(savedHistory));
-        } catch (e) {
-          console.error("Failed to parse history", e);
-        }
-      }
     }
   }, []);
 
+  // Continuous auto-save
   useEffect(() => {
-    if (xp > 0 || completedMissions > 0 || selectedTransaction !== "" || feedbackState !== "idle") {
-      const dataToSave = {
-        formData,
-        selectedTransaction,
-        xp,
-        completedMissions,
-        feedbackState,
-        mode
-      };
-      localStorage.setItem("sap-quest-data", JSON.stringify(dataToSave));
-    }
+    const dataToSave = {
+      formData,
+      selectedTransaction,
+      xp,
+      completedMissions,
+      feedbackState,
+      mode
+    };
+    localStorage.setItem("sap-quest-data", JSON.stringify(dataToSave));
   }, [formData, selectedTransaction, xp, completedMissions, feedbackState, mode]);
+
+  // Shortcut for F1 Help
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "F1") {
+        e.preventDefault();
+        setIsHelpOpen(prev => !prev);
+      }
+      if (e.key === "Escape" && isHelpOpen) {
+        setIsHelpOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isHelpOpen]);
 
   useEffect(() => {
     const savedData = localStorage.getItem("sap-quest-history");
