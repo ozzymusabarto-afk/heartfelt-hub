@@ -100,15 +100,23 @@ function SAPSDQuestApp() {
     <div className="min-h-screen bg-background text-foreground font-sans flex flex-col pb-20 md:pb-0">
 
       {/* 2. Header Bar (Full Width Top Nav) */}
-      <header className="sticky top-0 z-50 w-full border-b border-border bg-card shadow-sm px-6 py-3 flex items-center justify-between">
+      <header className="sticky top-0 z-50 w-full border-b border-border bg-card shadow-sm px-4 md:px-6 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="md:hidden" 
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          >
+            {isSidebarOpen ? <X /> : <Menu />}
+          </Button>
           <div className="size-10 bg-indigo-100 rounded-lg flex items-center justify-center text-primary">
             <Rocket className="size-6" />
           </div>
-          <h1 className="font-display font-bold text-xl tracking-tight text-slate-800">SAP SD Quest</h1>
+          <h1 className="font-display font-bold text-lg md:text-xl tracking-tight text-slate-800">SAP SD Quest</h1>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-4">
           <Card className="flex items-center gap-3 px-3 py-1.5 border-slate-200 shadow-none rounded-xl">
             <div className="size-8 bg-amber-100 rounded-full flex items-center justify-center text-amber-600">
               <Shield className="size-5" />
@@ -133,14 +141,7 @@ function SAPSDQuestApp() {
             <div className="size-8 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600">
               <Star className="size-5" />
             </div>
-            <span className="text-xs font-bold text-slate-700">1.250 Pontos</span>
-          </Card>
-
-          <Card className="flex items-center gap-3 px-3 py-1.5 border-slate-200 shadow-none rounded-xl">
-            <div className="size-8 bg-orange-100 rounded-full flex items-center justify-center text-orange-600">
-              <Flame className="size-5" />
-            </div>
-            <span className="text-xs font-bold text-slate-700">7 dias</span>
+            <span className="text-xs font-bold text-slate-700">1.250</span>
           </Card>
 
           <div className="flex items-center bg-slate-100 p-1 rounded-full">
@@ -150,7 +151,7 @@ function SAPSDQuestApp() {
               className={`rounded-full h-8 text-[11px] font-bold px-4 ${mode === "standard" ? "bg-primary text-white" : "text-slate-500"}`}
               onClick={() => setMode("standard")}
             >
-              SD Standard
+              SD
             </Button>
             <Button 
               variant={mode === "tax" ? "default" : "ghost"} 
@@ -158,11 +159,17 @@ function SAPSDQuestApp() {
               className={`rounded-full h-8 text-[11px] font-bold px-4 ${mode === "tax" ? "bg-primary text-white" : "text-slate-500"}`}
               onClick={() => setMode("tax")}
             >
-              Localização Brasil (TAX)
+              TAX
             </Button>
           </div>
         </div>
+        
+        <div className="lg:hidden flex items-center gap-2">
+           <Badge variant="outline" className="bg-amber-50 text-amber-600 border-amber-200">Lvl 1</Badge>
+           <Badge variant="outline" className="bg-indigo-50 text-primary border-indigo-200">350 XP</Badge>
+        </div>
       </header>
+
 
       <div className="flex-1 grid grid-cols-[260px_1fr_300px] overflow-hidden">
         {/* LEFT SIDEBAR (Fixed Width: 260px) */}
