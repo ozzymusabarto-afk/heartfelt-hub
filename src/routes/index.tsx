@@ -598,6 +598,27 @@ function SAPSDQuestApp() {
           </Card>
         </aside>
       </div>
+
+      {/* 3. Mobile Navigation (Bottom) */}
+      <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-border flex items-center justify-around h-20 md:hidden px-4 shadow-[0_-4px_10px_rgba(0,0,0,0.05)]">
+        <Button variant="ghost" className="flex flex-col items-center gap-1 h-full flex-1 text-primary">
+          <Gamepad2 className="size-6" />
+          <span className="text-[10px] font-bold">Missões</span>
+        </Button>
+        <Button variant="ghost" className="flex flex-col items-center gap-1 h-full flex-1 text-slate-400">
+          <Dices className="size-6" />
+          <span className="text-[10px] font-bold">Treino</span>
+        </Button>
+        <Button variant="ghost" className="flex flex-col items-center gap-1 h-full flex-1 text-slate-400">
+          <BarChart3 className="size-6" />
+          <span className="text-[10px] font-bold">Progresso</span>
+        </Button>
+        <Button variant="ghost" className="flex flex-col items-center gap-1 h-full flex-1 text-slate-400">
+          <User className="size-6" />
+          <span className="text-[10px] font-bold">Perfil</span>
+        </Button>
+      </nav>
     </div>
   );
 }
+
