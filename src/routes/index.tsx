@@ -328,23 +328,23 @@ function SAPSDQuestApp() {
           </Card>
 
           {/* 2. Progress Stepper Bar */}
-          <div className="hidden md:flex items-center justify-between px-10 relative">
+          <div className="hidden lg:flex items-center justify-between px-10 relative py-2">
 
-            <div className="absolute h-1 top-1/2 left-10 right-10 -translate-y-1/2 bg-slate-200 z-0"></div>
+            <div className="absolute h-0.5 top-1/2 left-10 right-10 -translate-y-1/2 bg-slate-200 z-0"></div>
             {[
               { id: 1, label: "Contexto", status: "complete" },
               { id: 2, label: "Transação", status: "active" },
               { id: 3, label: "Preencher Dados", status: "pending" },
               { id: 4, label: "Revisar & Enviar", status: "pending" },
             ].map((step, idx) => (
-              <div key={step.id} className="flex flex-col items-center gap-2 relative z-10 bg-slate-50 px-4">
-                <div className={`size-10 rounded-full flex items-center justify-center font-bold text-sm transition-all shadow-sm ${
-                  step.status === "active" ? "bg-primary text-white scale-110 ring-4 ring-indigo-100" : 
+              <div key={step.id} className="flex flex-col items-center gap-1.5 relative z-10 bg-slate-50 px-4">
+                <div className={`size-8 rounded-full flex items-center justify-center font-bold text-[10px] transition-all shadow-sm ${
+                  step.status === "active" ? "bg-primary text-white scale-110 ring-2 ring-indigo-100" : 
                   step.status === "complete" ? "bg-green-500 text-white" : "bg-white text-slate-400 border border-slate-200"
                 }`}>
-                  {step.status === "complete" ? <Check className="size-5" /> : step.id}
+                  {step.status === "complete" ? <Check className="size-4" /> : step.id}
                 </div>
-                <span className={`text-[11px] font-bold uppercase tracking-wider ${
+                <span className={`text-[9px] font-bold uppercase tracking-wider ${
                   step.status === "active" ? "text-primary" : "text-slate-400"
                 }`}>{step.label}</span>
               </div>
