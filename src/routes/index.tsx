@@ -377,7 +377,7 @@ function SAPSDQuestApp() {
                 ].map((item) => (
                   <Label
                     key={item.id}
-                    className={`flex items-center gap-2 p-3 border rounded-xl cursor-pointer transition-all hover:bg-slate-50 min-h-[44px] focus-within:ring-2 focus-within:ring-primary ${
+                    className={`flex items-center gap-2 p-2 border rounded-xl cursor-pointer transition-all hover:bg-slate-50 min-h-[36px] focus-within:ring-2 focus-within:ring-primary ${
                       selectedTransaction === item.id ? "border-primary bg-indigo-50/50 ring-1 ring-primary" : 
                       validationErrors.includes("transaction") ? "border-red-400 bg-red-50/50 ring-1 ring-red-200" : "border-slate-100"
                     }`}
