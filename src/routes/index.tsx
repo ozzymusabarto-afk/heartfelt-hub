@@ -335,7 +335,7 @@ function SAPSDQuestApp() {
           </Card>
 
           {/* 2. Progress Stepper Bar */}
-          <div className="hidden lg:flex items-center justify-between px-10 relative py-2">
+          <div className="hidden lg:flex items-center justify-between px-10 relative py-1 shrink-0">
 
             <div className="absolute h-0.5 top-1/2 left-10 right-10 -translate-y-1/2 bg-slate-200 z-0"></div>
             {[
