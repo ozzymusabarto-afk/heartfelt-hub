@@ -361,17 +361,45 @@ function SAPSDQuestApp() {
 
   const fullReset = () => {
     if (confirm("Tem certeza que deseja reiniciar TODO o seu progresso? Isso limpará seu XP e histórico de missões.")) {
+      // Salva estado para desfazer
+      const currentState = { xp, completedMissions, trainingHistory };
+      setLastStateBeforeReset(currentState);
+      setShowUndoReset(true);
+
+      // Limpa dados
       setXp(0);
       setCompletedMissions(0);
       setTrainingHistory([]);
       resetGame();
       localStorage.removeItem("sap-quest-data");
       localStorage.removeItem("sap-quest-history");
-      toast.success("Progresso reiniciado com sucesso!");
+      toast.success("Progresso reiniciado!");
+
+      // Inicia timeout para ocultar botão de desfazer
+      if (undoTimeoutRef.current) clearTimeout(undoTimeoutRef.current);
+      undoTimeoutRef.current = setTimeout(() => {
+        setShowUndoReset(false);
+        setLastStateBeforeReset(null);
+      }, 10000); // 10 segundos
+    }
+  };
+
+  const undoReset = () => {
+    if (lastStateBeforeReset) {
+      setXp(lastStateBeforeReset.xp);
+      setCompletedMissions(lastStateBeforeReset.completedMissions);
+      setTrainingHistory(lastStateBeforeReset.trainingHistory);
+      setShowUndoReset(false);
+      setLastStateBeforeReset(null);
+      if (undoTimeoutRef.current) clearTimeout(undoTimeoutRef.current);
+      toast.success("Reinício desfeito com sucesso!");
     }
   };
 
   const filteredHistory = trainingHistory.filter(h => {
+    const matchesSearch = (h.missionName || h.transaction || "").toLowerCase().includes(historySearch.toLowerCase());
+    if (!matchesSearch) return false;
+    
     if (historyPeriod === "all") return true;
     const days = historyPeriod === "7d" ? 7 : 30;
     return (Date.now() - h.timestamp) < (days * 24 * 60 * 60 * 1000);
