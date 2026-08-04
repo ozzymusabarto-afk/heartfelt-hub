@@ -37,13 +37,22 @@ const CORRECT_DATA = {
 function HugoAvatar({ className }: { className?: string }) {
   const [imgError, setImgError] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [retryCount, setRetryCount] = useState(0);
   
-  // High-quality, friendly 3D-style male avatar URL (DiceBear Avataaars)
-  const avatarUrl = "https://api.dicebear.com/7.x/avataaars/svg?seed=Hugo&hair=shortCombover&eyebrows=default&clothing=shirt&clothingColor=3c52e3&skinColor=edb98a&backgroundColor=b6e3f4";
+  // Friendly male character with glasses and short brown hair (DiceBear Avataaars)
+  const avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=Hugo&hair=shortCombover&eyebrows=default&clothing=shirt&clothingColor=3c52e3&skinColor=edb98a&backgroundColor=b6e3f4&glasses=wayfarers&retry=${retryCount}`;
+
+  const handleRetry = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    console.log("Tentando recarregar o avatar do Chefe Hugo...");
+    setImgError(false);
+    setIsLoaded(false);
+    setRetryCount(prev => prev + 1);
+  };
 
   return (
     <div 
-      className={`rounded-2xl flex-shrink-0 flex items-center justify-center bg-indigo-600 shadow-md relative group overflow-hidden ${className}`}
+      className={`rounded-2xl flex-shrink-0 flex items-center justify-center bg-indigo-100 border-2 border-indigo-500 shadow-md relative group overflow-hidden ${className}`}
       role="img"
       aria-label="Avatar do Chefe Hugo - Status: Online"
     >
@@ -54,37 +63,42 @@ function HugoAvatar({ className }: { className?: string }) {
           className={`size-full object-cover transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
           aria-hidden="true"
           onLoad={() => {
-            console.log("Chefe Hugo avatar loaded successfully");
+            console.log("Avatar do Chefe Hugo carregado com sucesso!");
             setIsLoaded(true);
           }}
           onError={(e) => {
-            console.error("Error loading Chefe Hugo avatar:", e);
+            console.error("Erro ao carregar avatar do Chefe Hugo:", e);
             setImgError(true);
           }}
         />
       ) : (
-        <svg
-          viewBox="0 0 36 36"
-          fill="none"
-          role="presentation"
-          className="size-full"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M18 36c10 0 18-8 18-18S28 0 18 0 0 8 0 18s8 18 18 18z" fill="#4F46E5"/>
-          <path d="M18 30c-4 0-7.5-2-9-5 .5-4.5 4-8 9-8s8.5 3.5 9 8c-1.5 3-5 5-9 5z" fill="#E2E8F0"/>
-          <circle cx="18" cy="14" r="6" fill="#E2E8F0"/>
-          <path d="M14 14c0 1 1 2 4 2s4-1 4-2" stroke="#4F46E5" strokeWidth="1.5" strokeLinecap="round"/>
-        </svg>
+        <div className="flex flex-col items-center justify-center p-2 text-center h-full w-full bg-indigo-50">
+          <svg viewBox="0 0 36 36" fill="none" className="size-3/4 mb-1" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 36c10 0 18-8 18-18S28 0 18 0 0 8 0 18s8 18 18 18z" fill="#4F46E5"/>
+            <path d="M18 30c-4 0-7.5-2-9-5 .5-4.5 4-8 9-8s8.5 3.5 9 8c-1.5 3-5 5-9 5z" fill="#E2E8F0"/>
+            <circle cx="18" cy="14" r="6" fill="#E2E8F0"/>
+            <path d="M15 13h2m2 0h2" stroke="#4F46E5" strokeWidth="1" strokeLinecap="round"/>
+            <path d="M14 14c0 1 1 2 4 2s4-1 4-2" stroke="#4F46E5" strokeWidth="1" strokeLinecap="round"/>
+          </svg>
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="h-6 text-[8px] px-2 font-bold uppercase text-indigo-600 hover:bg-indigo-100"
+            onClick={handleRetry}
+          >
+            Tentar Novamente
+          </Button>
+        </div>
       )}
       
       {!isLoaded && !imgError && (
-        <div className="absolute inset-0 flex items-center justify-center bg-indigo-100 animate-pulse">
+        <div className="absolute inset-0 flex items-center justify-center bg-indigo-50 animate-pulse">
           <User className="size-1/2 text-indigo-300" />
         </div>
       )}
 
       <div 
-        className="absolute -bottom-0.5 -right-0.5 size-3 bg-green-500 border-2 border-white dark:border-slate-800 rounded-full z-10"
+        className="absolute -bottom-0.5 -right-0.5 size-3 bg-green-500 border-2 border-white dark:border-slate-800 rounded-full z-10 shadow-sm"
         aria-hidden="true"
       ></div>
     </div>
