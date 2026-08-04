@@ -434,6 +434,7 @@ function SAPSDQuestApp() {
             </Card>
 
             {/* Barra de progresso: XP (350 / 500 XP) */}
+            {/* Barra de progresso: XP (350 / 500 XP) */}
             <Card className="flex items-center gap-3 px-3 py-1.5 border-slate-200 shadow-none rounded-xl bg-slate-50/50 min-w-[160px]">
               <div className="flex flex-col w-full">
                 <div className="flex justify-between items-end mb-1">
@@ -449,7 +450,7 @@ function SAPSDQuestApp() {
               <Star className="size-4 text-amber-500 fill-amber-500" />
               <div className="flex flex-col">
                 <span className="text-[9px] font-black text-slate-400 uppercase leading-none mb-0.5">Pontos</span>
-                <span className="text-[11px] font-bold text-slate-700 leading-none">1.250</span>
+                <span className="text-[11px] font-bold text-slate-700 leading-none">{xp * 5}</span>
               </div>
             </Card>
 
