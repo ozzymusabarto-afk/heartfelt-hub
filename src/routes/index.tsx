@@ -693,7 +693,7 @@ function SAPSDQuestApp() {
                 </li>
               ))}
             </ul>
-            <Button className="w-full bg-white hover:bg-slate-100 text-indigo-900 font-black rounded-xl h-10 shadow-xl">
+            <Button className="w-full bg-white hover:bg-slate-100 text-indigo-900 font-black rounded-xl h-9 shadow-xl text-xs">
               Ativar Modo Premium
             </Button>
           </Card>
