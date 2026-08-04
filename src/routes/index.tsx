@@ -150,7 +150,7 @@ function SAPSDQuestApp() {
         setHintMessage("🎉 Excelente, Adriana! A ordem de venda foi criada com sucesso!");
         setXp(prev => Math.min(prev + 25, 500));
         setCompletedMissions(prev => prev + 1);
-        toast.success("Ordem criada com sucesso! +25 XP");
+        toast.success("Parabéns! Desafio concluído corretamente. +25 XP");
       }
     } else {
       setFeedbackState("error");
