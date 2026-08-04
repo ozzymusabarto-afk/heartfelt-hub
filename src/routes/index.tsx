@@ -641,7 +641,7 @@ function SAPSDQuestApp() {
           {/* 2. Progress Tracker Card */}
           <div className="space-y-3 shrink-0">
             <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest px-1">Seu Progresso</h4>
-            <Card className="p-5 border-slate-200 shadow-sm rounded-2xl space-y-6">
+            <Card className="p-4 border-slate-200 shadow-sm rounded-2xl space-y-4">
               <div className="space-y-2">
                 <div className="flex justify-between text-xs font-bold">
                   <span className="text-slate-500">Missões concluídas</span>
