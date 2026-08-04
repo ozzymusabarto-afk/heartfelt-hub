@@ -584,73 +584,104 @@ function SAPSDQuestApp() {
                 
                 {isHelpOpen && (
                   <Card 
-                    className="absolute right-0 top-10 w-[320px] p-5 z-50 shadow-2xl border-indigo-100 animate-in fade-in zoom-in duration-200"
+                    ref={helpContainerRef}
+                    className="fixed inset-0 md:absolute md:inset-auto md:right-0 md:top-10 w-full h-full md:w-[320px] md:h-auto md:max-h-[80vh] p-0 z-[60] shadow-2xl border-indigo-100 animate-in fade-in slide-in-from-bottom-4 md:slide-in-from-top-2 duration-200 flex flex-col bg-white overflow-hidden rounded-none md:rounded-2xl"
                     role="dialog"
                     aria-modal="true"
                     aria-labelledby="help-title"
                   >
-                    <div className="flex justify-between items-center mb-3">
+                    <div className="flex justify-between items-center p-5 border-b border-slate-100 bg-white sticky top-0 z-10">
                       <div className="flex items-center gap-2">
                         <HelpCircle className="size-4 text-indigo-600" />
-                        <h4 id="help-title" className="text-xs font-black text-indigo-600 uppercase tracking-widest">Ajuda Contextual</h4>
+                        <h4 id="help-title" className="text-xs font-black text-indigo-600 uppercase tracking-widest">Guia de Apoio SAP</h4>
                       </div>
                       <Button 
                         variant="ghost" 
                         size="icon" 
-                        className="size-6 h-6 w-6 hover:bg-slate-100 rounded-lg ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600" 
+                        className="size-8 h-8 w-8 hover:bg-slate-100 rounded-lg ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600" 
                         onClick={() => setIsHelpOpen(false)}
                         ref={helpCloseRef}
                         aria-label="Fechar ajuda"
                       >
-                        <X className="size-4 text-slate-400" />
+                        <X className="size-5 text-slate-400" />
                       </Button>
                     </div>
-                    <div className="space-y-3 text-[12px] text-slate-600 leading-relaxed max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
-                      <div className="p-3 bg-indigo-50/50 rounded-xl border border-indigo-100/50">
-                        <p className="font-bold text-indigo-900 mb-1 flex items-center gap-1.5">
-                          <span className="size-1.5 rounded-full bg-indigo-600" /> Transação VA01
-                        </p>
-                        <p>Utilizada no SAP para a criação de ordens de venda. É o ponto de entrada para o processo Order-to-Cash (O2C).</p>
-                      </div>
 
-                      <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                        <p className="font-bold text-slate-800 mb-1 flex items-center gap-1.5">
-                          <span className="size-1.5 rounded-full bg-slate-400" /> Tipo de Ordem (OR)
-                        </p>
-                        <p>O código "OR" (Standard Order) define o fluxo comercial padrão para vendas de produtos em estoque.</p>
-                      </div>
-
-                      <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                        <p className="font-bold text-slate-800 mb-1 flex items-center gap-1.5">
-                          <span className="size-1.5 rounded-full bg-slate-400" /> Organização de Vendas
-                        </p>
-                        <p>Define a unidade responsável pela comercialização. No exercício, utilize o código <b>1000</b>.</p>
-                      </div>
-
-                      <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                        <p className="font-bold text-slate-800 mb-1 flex items-center gap-1.5">
-                          <span className="size-1.5 rounded-full bg-slate-400" /> Canais e Setores
-                        </p>
-                        <p><b>Canal 10:</b> Venda Direta. <br/> <b>Setor 00:</b> Divisão de produtos padrão.</p>
-                      </div>
-
-                      <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                        <p className="font-bold text-slate-800 mb-1 flex items-center gap-1.5">
-                          <span className="size-1.5 rounded-full bg-slate-400" /> Incoterms & Pagamento
-                        </p>
-                        <p>Utilize <b>FOB</b> (Free On Board) para frete e <b>0001</b> para pagamento imediato.</p>
-                      </div>
-
-                      <div className="p-3 bg-amber-50 rounded-xl border border-amber-100">
-                        <p className="font-bold text-amber-800 mb-1 flex items-center gap-1.5">
-                          <span className="size-1.5 rounded-full bg-amber-500" /> Dica de Mestre
-                        </p>
-                        <p>Certifique-se de que o emissor da ordem (Sold-to Party) seja o código <b>200015</b>.</p>
-                      </div>
+                    <div 
+                      ref={helpScrollRef}
+                      className="flex-1 overflow-y-auto p-5 space-y-3 custom-scrollbar bg-slate-50/30"
+                    >
+                      {[
+                        { 
+                          id: "VA01", 
+                          title: "Transação VA01", 
+                          icon: Rocket, 
+                          content: "Utilizada no SAP para a criação de ordens de venda. É o ponto de entrada para o processo Order-to-Cash (O2C).",
+                          variant: "indigo"
+                        },
+                        { 
+                          id: "OR", 
+                          title: "Tipo de Ordem (OR)", 
+                          icon: FileText, 
+                          content: "O código 'OR' (Standard Order) define o fluxo comercial padrão para vendas de produtos em estoque.",
+                          variant: "slate"
+                        },
+                        { 
+                          id: "ORG", 
+                          title: "Organização de Vendas", 
+                          icon: Target, 
+                          content: "Define a unidade responsável pela comercialização. No exercício, utilize o código 1000.",
+                          variant: "slate"
+                        },
+                        { 
+                          id: "CHANNELS", 
+                          title: "Canais e Setores", 
+                          icon: BarChart3, 
+                          content: "Canal 10: Venda Direta. Setor 00: Divisão de produtos padrão.",
+                          variant: "slate"
+                        },
+                        { 
+                          id: "INCO", 
+                          title: "Incoterms & Pagamento", 
+                          icon: Shield, 
+                          content: "Utilize FOB (Free On Board) para frete e 0001 para pagamento imediato.",
+                          variant: "slate"
+                        },
+                        { 
+                          id: "HINT", 
+                          title: "Dica de Mestre", 
+                          icon: Star, 
+                          content: "Certifique-se de que o emissor da ordem (Sold-to Party) seja o código 200015.",
+                          variant: "amber"
+                        }
+                      ].map((section) => (
+                        <div key={section.id} className="border border-slate-200 rounded-xl overflow-hidden bg-white shadow-sm">
+                          <button 
+                            onClick={() => toggleSection(section.id)}
+                            className="w-full flex items-center justify-between p-3 text-left hover:bg-slate-50 transition-colors"
+                          >
+                            <div className="flex items-center gap-2">
+                              <section.icon className={`size-3.5 ${section.variant === 'indigo' ? 'text-indigo-600' : section.variant === 'amber' ? 'text-amber-500' : 'text-slate-400'}`} />
+                              <span className="text-[11px] font-bold text-slate-700">{section.title}</span>
+                            </div>
+                            <ChevronDown className={`size-3.5 text-slate-400 transition-transform ${expandedSections[section.id] ? 'rotate-180' : ''}`} />
+                          </button>
+                          {expandedSections[section.id] && (
+                            <div className="p-3 pt-0 text-[11px] text-slate-500 leading-relaxed animate-in fade-in slide-in-from-top-1 duration-200">
+                              <div className="h-px bg-slate-100 mb-3" />
+                              {section.content}
+                            </div>
+                          )}
+                        </div>
+                      ))}
                     </div>
-                    <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400 font-medium">
-                      <span>Pressione [ESC] para fechar</span>
-                      <span className="bg-slate-100 px-2 py-0.5 rounded text-[9px]">v1.4.0</span>
+
+                    <div className="p-4 border-t border-slate-100 bg-white flex items-center justify-between text-[10px] text-slate-400 font-medium">
+                      <div className="flex items-center gap-2">
+                        <kbd className="px-1.5 py-0.5 bg-slate-100 rounded text-[9px] border border-slate-200">ESC</kbd>
+                        <span>para fechar</span>
+                      </div>
+                      <span className="bg-slate-100 px-2 py-0.5 rounded text-[9px]">v1.5.0</span>
                     </div>
                   </Card>
                 )}
