@@ -693,7 +693,17 @@ function SAPSDQuestApp() {
           </Card>
 
           <div className="space-y-4">
-            <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Seu Progresso</h3>
+            <div className="flex items-center justify-between pl-1">
+              <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Seu Progresso</h3>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="h-6 px-2 text-[9px] font-bold text-indigo-600 hover:bg-indigo-50 gap-1 rounded-md"
+                onClick={generatePDFReport}
+              >
+                <FileText className="size-3" /> RELATÓRIO
+              </Button>
+            </div>
             <Card className="p-4 bg-white border-slate-200 shadow-sm rounded-2xl space-y-4">
               <div className="flex justify-between items-center text-[11px] font-bold text-slate-700">
                 <span className="text-slate-400 uppercase text-[9px] font-black">Missões Concluídas</span>
@@ -703,9 +713,15 @@ function SAPSDQuestApp() {
                 <span className="text-slate-400 uppercase text-[9px] font-black">XP Neste Nível</span>
                 <span>{xp} / 500</span>
               </div>
-              <div className="flex justify-between items-center text-[10px] text-emerald-600 font-bold -mt-3">
-                <span>Progresso Total</span>
-                <span>{Math.round((completedMissions / 30) * 100)}%</span>
+              <div className="space-y-1">
+                <div className="flex items-center justify-between text-[8px] font-black text-slate-300 uppercase">
+                  <span>VA01: +25 XP</span>
+                  <span>BP: +40 XP</span>
+                </div>
+                <div className="flex justify-between items-center text-[10px] text-emerald-600 font-bold">
+                  <span>Progresso Total</span>
+                  <span>{Math.round((completedMissions / 30) * 100)}%</span>
+                </div>
               </div>
               <Progress value={(xp/500)*100} className="h-2 bg-slate-100" />
               
