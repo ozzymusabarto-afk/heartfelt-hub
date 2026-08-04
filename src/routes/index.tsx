@@ -350,7 +350,7 @@ function SAPSDQuestApp() {
       localHint = "A Org. Vendas correta é 1000.";
     } else if (!formData.customer || formData.customer !== CORRECT_DATA.customer) {
       errors.push("customer");
-      localHint = "O cliente ALFA é 200015.";
+      localHint = "O cliente AAM LOGÍSTICA é 200015.";
     } else if (!formData.material || formData.material !== CORRECT_DATA.material) {
       errors.push("material");
       localHint = "O material solicitado é MAT-SD-015.";
