@@ -37,43 +37,15 @@ const CORRECT_DATA = {
 function HugoAvatar({ className }: { className?: string }) {
   return (
     <div 
-      className={`rounded-2xl flex-shrink-0 flex items-center justify-center bg-indigo-100 border-2 border-indigo-500 shadow-md relative group overflow-hidden ${className}`}
+      className={`rounded-2xl flex-shrink-0 flex items-center justify-center border-2 border-indigo-500 shadow-sm relative group overflow-hidden ${className}`}
       role="img"
-      aria-label="Avatar do Chefe Hugo - Personagem Masculino Sorridente"
+      aria-label="Avatar do Chefe Hugo"
     >
-      <svg
-        viewBox="0 0 200 200"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="size-full"
-      >
-        {/* Background/Shirt */}
-        <rect width="200" height="200" fill="#E0E7FF" />
-        <path d="M40 190C40 160 70 140 100 140C130 140 160 160 160 190V200H40V190Z" fill="#3C52E3" />
-        
-        {/* Face/Neck */}
-        <rect x="90" y="130" width="20" height="20" fill="#EDB98A" />
-        <path d="M60 85C60 55 78 35 100 35C122 35 140 55 140 85C140 115 122 135 100 135C78 135 60 115 60 85Z" fill="#EDB98A" />
-        
-        {/* Hair */}
-        <path d="M60 75C60 45 80 30 100 30C120 30 140 45 140 75C140 65 130 40 100 40C70 40 60 65 60 75Z" fill="#4B2C20" />
-        <path d="M70 45C85 35 115 35 130 45C125 38 110 32 100 32C90 32 75 38 70 45Z" fill="#4B2C20" />
-        
-        {/* Eyes & Glasses */}
-        <rect x="75" y="78" width="20" height="15" rx="2" stroke="#1E293B" strokeWidth="2.5" />
-        <rect x="105" y="78" width="20" height="15" rx="2" stroke="#1E293B" strokeWidth="2.5" />
-        <path d="M95 85H105" stroke="#1E293B" strokeWidth="2.5" />
-        <circle cx="85" cy="85" r="2" fill="#1E293B" />
-        <circle cx="115" cy="85" r="2" fill="#1E293B" />
-        
-        {/* Smile */}
-        <path d="M85 108C90 115 110 115 115 108" stroke="#4B2C20" strokeWidth="2" strokeLinecap="round" />
-        
-        {/* Ears */}
-        <circle cx="60" cy="85" r="6" fill="#EDB98A" />
-        <circle cx="140" cy="85" r="6" fill="#EDB98A" />
-      </svg>
-
+      <img 
+        src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=256&q=80" 
+        alt="Chefe Hugo" 
+        className="size-full object-cover"
+      />
       <div 
         className="absolute -bottom-0.5 -right-0.5 size-3 bg-green-500 border-2 border-white dark:border-slate-800 rounded-full z-10 shadow-sm"
         aria-hidden="true"
@@ -81,6 +53,7 @@ function HugoAvatar({ className }: { className?: string }) {
     </div>
   );
 }
+
 
 
 function SAPSDQuestApp() {
