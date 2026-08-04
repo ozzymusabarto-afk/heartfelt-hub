@@ -85,27 +85,50 @@ function SAPSDQuestApp() {
   };
 
   const handleSubmit = () => {
+    const errors: string[] = [];
+    
     if (!selectedTransaction) {
-      setFeedbackState("error");
-      toast.error("Selecione uma transação!");
-      return;
+      errors.push("transaction");
+      setHintMessage("Ops! Você esqueceu de selecionar a transação correta. Qual código inicia uma Ordem de Venda?");
+    } else if (selectedTransaction !== CORRECT_DATA.transaction) {
+      errors.push("transaction");
+      setHintMessage(`A transação ${selectedTransaction} não é a correta para este processo. Tente a transação padrão de criação de ordens.`);
     }
 
-    const isCorrect = 
-      selectedTransaction === CORRECT_DATA.transaction &&
-      formData.orderType === CORRECT_DATA.orderType &&
-      formData.salesOrg === CORRECT_DATA.salesOrg &&
-      formData.customer === CORRECT_DATA.customer &&
-      formData.material === CORRECT_DATA.material;
+    if (!formData.orderType || formData.orderType !== CORRECT_DATA.orderType) {
+      errors.push("orderType");
+      if (!hintMessage) setHintMessage("O 'Tipo de Ordem' está incorreto. Geralmente usamos 'OR' para ordens standard.");
+    }
+    
+    if (!formData.salesOrg || formData.salesOrg !== CORRECT_DATA.salesOrg) {
+      errors.push("salesOrg");
+      if (!hintMessage) setHintMessage("Verifique a 'Org. de Vendas'. O cliente pertence à organização 1000.");
+    }
+    
+    if (!formData.customer || formData.customer !== CORRECT_DATA.customer) {
+      errors.push("customer");
+      if (!hintMessage) setHintMessage("O código do 'Cliente' está errado. Dica: ALFA DISTRIBUIDORA é o código 200015.");
+    }
+    
+    if (!formData.material || formData.material !== CORRECT_DATA.material) {
+      errors.push("material");
+      if (!hintMessage) setHintMessage("O 'Material' solicitado é o MAT-SD-015. Confira a digitação.");
+    }
 
-    if (isCorrect) {
+    setValidationErrors(errors);
+
+    if (errors.length === 0) {
       setFeedbackState("success");
-      toast.success("Ordem criada com sucesso!");
+      setHintMessage("🎉 Excelente, Adriana! A ordem de venda foi criada com sucesso!");
+      setXp(prev => Math.min(prev + 25, 500));
+      setCompletedMissions(prev => prev + 1);
+      toast.success("Ordem criada com sucesso! +25 XP");
     } else {
       setFeedbackState("error");
-      toast.error("Dados incorretos. Revise o formulário.");
+      toast.error("Dados incorretos. Chefe Hugo deixou uma dica para você.");
     }
   };
+
 
   const resetGame = () => {
     setFeedbackState("idle");
