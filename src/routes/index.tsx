@@ -81,7 +81,7 @@ function SAPSDQuestApp() {
     timestamp: number;
   }[]>([]);
 
-  // Auto-save & Load persistence
+  // Auto-save continuous progress in local storage
   useEffect(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {};
     window.addEventListener("beforeunload", handleBeforeUnload);
