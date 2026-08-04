@@ -262,29 +262,29 @@ function SAPSDQuestApp() {
           ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
         `}>
           <div className="space-y-6 h-full flex flex-col justify-between overflow-y-auto">
-            <div className="space-y-6">
-              <nav className="space-y-1">
+            <div className="space-y-4">
+              <nav className="space-y-0.5">
                 {[
-                  { icon: Target, label: "Trilha Principal", sub: "Sua carreira passo a passo", active: true },
+                  { icon: Target, label: "Trilha Principal", sub: "Carreira passo a passo", active: true },
                   { icon: Rocket, label: "Treino Rápido", sub: "Desafios aleatórios" },
                   { icon: BookOpen, label: "Módulos & Apostila", sub: "Estude por tópico" },
-                  { icon: Crown, label: "Modos Premium", sub: "Desbloqueie recursos" },
+                  { icon: Crown, label: "Modos Premium", sub: "Recursos exclusivos" },
                   { icon: BarChart3, label: "Estatísticas", sub: "Seu desempenho" },
                   { icon: Trophy, label: "Conquistas", sub: "Medalhas e troféus" },
-                  { icon: Settings, label: "Configurações", sub: "Conta e preferências" },
+                  { icon: Settings, label: "Configurações", sub: "Preferências" },
                 ].map((item) => (
                   <Button 
                     key={item.label} 
                     variant="ghost" 
-                    className={`w-full justify-start h-14 px-3 rounded-xl gap-4 group transition-all ${item.active ? "bg-indigo-50 text-primary border border-indigo-100" : "text-slate-500 hover:bg-slate-50"}`}
+                    className={`w-full justify-start h-11 px-3 rounded-xl gap-3 group transition-all ${item.active ? "bg-indigo-50 text-primary border border-indigo-100" : "text-slate-500 hover:bg-slate-50"}`}
                     onClick={() => setIsSidebarOpen(false)}
                   >
-                    <div className={`size-10 rounded-lg flex items-center justify-center transition-colors ${item.active ? "bg-primary text-white" : "bg-slate-100 text-slate-400 group-hover:bg-indigo-100 group-hover:text-primary"}`}>
-                      <item.icon className="size-5" />
+                    <div className={`size-8 rounded-lg flex items-center justify-center transition-colors ${item.active ? "bg-primary text-white" : "bg-slate-100 text-slate-400 group-hover:bg-indigo-100 group-hover:text-primary"}`}>
+                      <item.icon className="size-4" />
                     </div>
                     <div className="flex flex-col items-start text-left">
-                      <span className={`text-sm font-bold leading-tight ${item.active ? "text-primary" : "text-slate-700"}`}>{item.label}</span>
-                      <span className="text-[10px] font-medium text-slate-400">{item.sub}</span>
+                      <span className={`text-xs font-bold leading-tight ${item.active ? "text-primary" : "text-slate-700"}`}>{item.label}</span>
+                      <span className="text-[9px] font-medium text-slate-400">{item.sub}</span>
                     </div>
                   </Button>
                 ))}
