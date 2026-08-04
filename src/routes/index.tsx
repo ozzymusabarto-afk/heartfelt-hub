@@ -579,11 +579,11 @@ function SAPSDQuestApp() {
 
 
             <h3 className="font-bold text-slate-800 mb-1">Feedback do Chefe Hugo</h3>
-            <p className="text-xs text-slate-600 leading-relaxed mb-6">
+            <p className="text-xs text-slate-600 leading-relaxed mb-6" aria-live="polite">
               {feedbackState === "idle" && "Aguardando submissão do pedido. Selecione a transação, preencha os campos e clique em 'Conferir e Submeter'."}
-              {feedbackState === "success" && "🎉 Excelente, Adriana! A ordem de venda foi criada com sucesso!"}
-              {feedbackState === "error" && "Esse pedido ainda precisa de revisão antes de seguir para faturamento. Revise se a transação e os campos obrigatórios (Tipo, Org, Cliente, Material) estão corretos."}
+              {(feedbackState === "success" || feedbackState === "error") && hintMessage}
             </p>
+
 
             {feedbackState === "success" && (
               <div className="bg-white px-4 py-2 rounded-xl shadow-sm border border-green-100 flex items-center gap-2 mb-6 animate-bounce">
