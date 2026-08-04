@@ -720,8 +720,34 @@ function SAPSDQuestApp() {
             </Button>
           </Card>
 
-          {/* 2. Progress Tracker Card */}
+          {/* 2. Training History & Progress */}
           <div className="space-y-3 shrink-0">
+            <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest px-1">Histórico de Tentativas</h4>
+            <Card className="p-3 border-slate-200 shadow-sm rounded-2xl max-h-[160px] overflow-y-auto space-y-2">
+              {trainingHistory.length === 0 ? (
+                <p className="text-[10px] text-slate-400 text-center py-4 italic">Nenhuma tentativa registrada.</p>
+              ) : (
+                trainingHistory.map((item) => (
+                  <div key={item.id} className={`p-2 rounded-lg border text-[10px] flex flex-col gap-1 ${
+                    item.status === "success" ? "bg-green-50 border-green-100" : "bg-red-50 border-red-100"
+                  }`}>
+                    <div className="flex justify-between items-center">
+                      <span className="font-bold text-slate-700">{item.transaction}</span>
+                      <span className={`px-1.5 py-0.5 rounded-full text-[8px] font-black uppercase ${
+                        item.status === "success" ? "bg-green-500 text-white" : "bg-red-500 text-white"
+                      }`}>
+                        {item.status === "success" ? "Correto" : "Erro"}
+                      </span>
+                    </div>
+                    <p className="text-slate-600 line-clamp-2">{item.message}</p>
+                    <span className="text-[8px] text-slate-400 self-end">
+                      {new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    </span>
+                  </div>
+                ))
+              )}
+            </Card>
+
             <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest px-1">Seu Progresso</h4>
             <Card className="p-4 border-slate-200 shadow-sm rounded-2xl space-y-4">
               <div className="space-y-2">
