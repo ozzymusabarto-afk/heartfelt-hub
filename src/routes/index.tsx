@@ -35,10 +35,25 @@ const CORRECT_DATA = {
 };
 
 function HugoAvatar({ className }: { className?: string }) {
+  // Using a stable DiceBear persona that looks like a friendly male 3D/Memoji avatar
+  const dicebearUrl = "https://api.dicebear.com/7.x/avataaars/svg?seed=Hugo&hair=shortCombover&eyebrows=default&clothing=shirt&clothingColor=3c52e3&skinColor=edb98a";
+  
   return (
-    <div className={`bg-indigo-600 rounded-2xl flex-shrink-0 flex items-center justify-center text-white shadow-md relative group ${className}`}>
-      <UserCheck className="size-3/5 text-white" />
-      <div className="absolute -bottom-1 -right-1 size-3 bg-green-500 border-2 border-white rounded-full"></div>
+    <div 
+      className={`rounded-2xl flex-shrink-0 flex items-center justify-center bg-indigo-600 shadow-md relative group overflow-hidden ${className}`}
+      role="img"
+      aria-label="Avatar do Chefe Hugo - Status: Ativo"
+    >
+      <img 
+        src={dicebearUrl} 
+        alt="" 
+        className="size-full object-cover"
+        aria-hidden="true"
+      />
+      <div 
+        className="absolute -bottom-1 -right-1 size-3 bg-green-500 border-2 border-white dark:border-slate-800 rounded-full"
+        title="Status: Online"
+      ></div>
     </div>
   );
 }
@@ -127,11 +142,16 @@ function SAPSDQuestApp() {
     setValidationErrors(errors);
 
     if (errors.length === 0) {
-      setFeedbackState("success");
-      setHintMessage("🎉 Excelente, Adriana! A ordem de venda foi criada com sucesso!");
-      setXp(prev => Math.min(prev + 25, 500));
-      setCompletedMissions(prev => prev + 1);
-      toast.success("Ordem criada com sucesso! +25 XP");
+      if (feedbackState === "idle") {
+        setFeedbackState("review");
+        toast.info("Dados validados! Revise o resumo antes de enviar.");
+      } else {
+        setFeedbackState("success");
+        setHintMessage("🎉 Excelente, Adriana! A ordem de venda foi criada com sucesso!");
+        setXp(prev => Math.min(prev + 25, 500));
+        setCompletedMissions(prev => prev + 1);
+        toast.success("Ordem criada com sucesso! +25 XP");
+      }
     } else {
       setFeedbackState("error");
       toast.error("Dados incorretos. Chefe Hugo deixou uma dica para você.");
@@ -488,10 +508,10 @@ function SAPSDQuestApp() {
               </div>
 
               <Button 
-                onClick={() => setFeedbackState("review")}
+                onClick={handleSubmit}
                 className="w-full h-12 mt-8 bg-primary hover:bg-indigo-700 text-white font-bold rounded-xl shadow-md transition-all scale-100 active:scale-95 gap-2"
               >
-                📝 Revisar Pedido
+                📝 Validar e Revisar
               </Button>
 
             </Card>
