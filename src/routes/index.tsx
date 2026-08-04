@@ -307,7 +307,7 @@ function SAPSDQuestApp() {
         {/* CENTER CANVAS (Flexible Grid Main Content) */}
         <main className="bg-slate-50 p-4 md:p-6 lg:p-4 overflow-y-auto flex-1 space-y-4 lg:space-y-4">
           {/* 1. Chefe Hugo Order Banner */}
-          <Card className="p-4 md:p-6 border-slate-200 shadow-sm rounded-2xl flex flex-col md:flex-row items-center md:justify-between gap-4 md:gap-6">
+          <Card className="p-3 lg:p-4 border-slate-200 shadow-sm rounded-2xl flex flex-col md:flex-row items-center md:justify-between gap-3 md:gap-4">
             <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 text-center md:text-left">
               <HugoAvatar className="size-16 md:size-20" />
 
