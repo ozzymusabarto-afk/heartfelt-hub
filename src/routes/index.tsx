@@ -370,13 +370,13 @@ function SAPSDQuestApp() {
                 ].map((item) => (
                   <Label
                     key={item.id}
-                    className={`flex items-center gap-3 p-4 border rounded-xl cursor-pointer transition-all hover:bg-slate-50 min-h-[56px] focus-within:ring-2 focus-within:ring-primary ${
+                    className={`flex items-center gap-2 p-3 border rounded-xl cursor-pointer transition-all hover:bg-slate-50 min-h-[44px] focus-within:ring-2 focus-within:ring-primary ${
                       selectedTransaction === item.id ? "border-primary bg-indigo-50/50 ring-1 ring-primary" : 
                       validationErrors.includes("transaction") ? "border-red-400 bg-red-50/50 ring-1 ring-red-200" : "border-slate-100"
                     }`}
                   >
                     <RadioGroupItem value={item.id} className="text-primary border-slate-300" aria-label={item.label} />
-                    <span className={`font-bold text-sm ${selectedTransaction === item.id ? "text-primary" : "text-slate-700"}`}>
+                    <span className={`font-bold text-xs ${selectedTransaction === item.id ? "text-primary" : "text-slate-700"}`}>
                       {item.label}
                     </span>
                   </Label>
