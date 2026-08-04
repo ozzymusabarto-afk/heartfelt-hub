@@ -285,32 +285,37 @@ function SAPSDQuestApp() {
           <h1 className="font-display font-bold text-lg md:text-xl tracking-tight text-slate-800">SAP SD Quest</h1>
         </div>
 
-        <div className="hidden lg:flex items-center gap-4">
-          <Card className="flex items-center gap-3 px-3 py-1.5 border-slate-200 shadow-none rounded-xl">
-            <div className="size-8 bg-amber-100 rounded-full flex items-center justify-center text-amber-600">
-              <Shield className="size-5" />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-[10px] font-bold text-slate-400 leading-none uppercase">Nível 1</span>
-              <span className="text-xs font-bold text-slate-700">Trainee SD</span>
-            </div>
-          </Card>
-
-          <Card className="flex items-center gap-3 px-3 py-1.5 border-slate-200 shadow-none rounded-xl">
-            <div className="flex flex-col gap-1">
-              <div className="flex justify-between items-end gap-4">
-                <span className="text-[10px] font-bold text-slate-400 leading-none uppercase">XP</span>
-                <span className="text-[10px] font-bold text-slate-700 leading-none" aria-label={`XP atual: ${xp} de 500`}>{xp} / 500</span>
+        <div className="hidden lg:flex items-center gap-2">
+          <Card className="flex items-center gap-3 px-3 py-1.5 border-slate-200 shadow-none rounded-xl bg-slate-50/50">
+            <div className="flex items-center gap-4">
+              <div className="flex flex-col border-r pr-4 border-slate-200">
+                <span className="text-[9px] font-black text-slate-400 uppercase leading-none mb-1">Status Carreira</span>
+                <div className="flex items-center gap-2">
+                  <div className="size-6 bg-amber-100 rounded-full flex items-center justify-center text-amber-600">
+                    <Shield className="size-3.5" />
+                  </div>
+                  <span className="text-xs font-bold text-slate-700">Trainee SD (Nível 1)</span>
+                </div>
               </div>
-              <Progress value={(xp / 500) * 100} className="h-1.5 w-24 bg-slate-100" />
-            </div>
-          </Card>
+              
+              <div className="flex flex-col border-r pr-4 border-slate-200">
+                <span className="text-[9px] font-black text-slate-400 uppercase leading-none mb-1">Missões Concluídas</span>
+                <div className="flex items-center gap-2">
+                  <div className="size-6 bg-indigo-100 rounded-full flex items-center justify-center text-primary">
+                    <Target className="size-3.5" />
+                  </div>
+                  <span className="text-xs font-bold text-slate-700">{completedMissions} / 30</span>
+                </div>
+              </div>
 
-          <Card className="flex items-center gap-3 px-3 py-1.5 border-slate-200 shadow-none rounded-xl">
-            <div className="size-8 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600">
-              <Star className="size-5" />
+              <div className="flex flex-col min-w-[120px]">
+                <div className="flex justify-between items-center mb-1">
+                  <span className="text-[9px] font-black text-slate-400 uppercase leading-none">XP Atual ({xp})</span>
+                  <span className="text-[9px] font-bold text-slate-700 leading-none">{xp}/500</span>
+                </div>
+                <Progress value={(xp / 500) * 100} className="h-1.5 bg-slate-200" />
+              </div>
             </div>
-            <span className="text-xs font-bold text-slate-700">{xp}</span>
           </Card>
 
 
