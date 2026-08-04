@@ -91,6 +91,7 @@ function SAPSDQuestApp() {
     missionName?: string;
     progressAtTime?: number;
   }[]>([]);
+  const [historyPeriod, setHistoryPeriod] = useState<"all" | "7d" | "30d">("all");
   const [historySearch, setHistorySearch] = useState("");
   const [lastStateBeforeReset, setLastStateBeforeReset] = useState<any>(null);
   const [showUndoReset, setShowUndoReset] = useState(false);
