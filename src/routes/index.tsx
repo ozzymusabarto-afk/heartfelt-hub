@@ -977,7 +977,7 @@ function SAPSDQuestApp() {
                     <div>
                       <h4 className="text-[11px] font-bold text-slate-800">Criar Ordem (VA01)</h4>
                       <span className={`text-[9px] uppercase font-black ${completedMissions > 0 ? "text-emerald-600" : "text-indigo-600"}`}>
-                        {completedMissions > 0 ? "Concluído" : "Disponível / Em Aberto"}
+                        {completedMissions > 0 ? "Concluído" : "Disponível (AAM Corp)"}
                       </span>
                     </div>
                   </div>
