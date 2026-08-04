@@ -477,8 +477,10 @@ function SAPSDQuestApp() {
                     placeholder="Ex: MAT-SD-015" 
                     value={formData.material}
                     onChange={(e) => handleInputChange("material", e.target.value)}
-                    className="h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                    className={`h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700 focus:ring-2 focus:ring-primary ${validationErrors.includes("material") ? "border-red-400 bg-red-50/50" : ""}`}
+                    aria-label="Material"
                   />
+
                 </div>
               </div>
 
