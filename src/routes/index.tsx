@@ -58,7 +58,7 @@ function SAPSDQuestApp() {
   const [mode, setMode] = useState("standard");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [xp, setXp] = useState(0);
-  const [completedMissions, setCompletedMissions] = useState(12);
+  const [completedMissions, setCompletedMissions] = useState(0);
   const [formData, setFormData] = useState({
     orderType: "",
     orderDate: "",
