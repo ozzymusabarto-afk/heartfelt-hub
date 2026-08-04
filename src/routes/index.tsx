@@ -329,7 +329,7 @@ function SAPSDQuestApp() {
                 </p>
               </div>
             </div>
-            <Button variant="outline" className="w-full md:w-auto gap-2 border-slate-200 text-slate-600 font-bold rounded-xl whitespace-nowrap min-h-[44px]">
+            <Button variant="outline" className="w-full md:w-auto gap-2 border-slate-200 text-slate-600 font-bold rounded-xl whitespace-nowrap min-h-[36px] h-9">
               <HelpCircle className="size-4" /> Ajuda (F1)
             </Button>
           </Card>
