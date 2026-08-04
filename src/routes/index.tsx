@@ -392,11 +392,11 @@ function SAPSDQuestApp() {
                 ))}
               </RadioGroup>
 
-              <div className="mt-auto bg-slate-50 p-4 rounded-xl flex gap-3 border border-slate-100">
-                <HugoAvatar className="size-10 rounded-lg ring-0 shadow-none" />
+              <div className="mt-auto bg-slate-50 p-3 rounded-xl flex gap-3 border border-slate-100 shrink-0">
+                <HugoAvatar className="size-8 rounded-lg ring-0 shadow-none" />
 
-                <p className="text-[11px] text-slate-500 leading-relaxed italic">
-                  <span className="font-bold text-slate-700 block not-italic mb-0.5">Dica do Chefe Hugo:</span>
+                <p className="text-[10px] text-slate-500 leading-relaxed italic">
+                  <span className="font-bold text-slate-700 block not-italic mb-0.5 text-[11px]">Dica do Chefe Hugo:</span>
                   Pense: qual transação inicia o processo Order-to-Cash?
                 </p>
               </div>
