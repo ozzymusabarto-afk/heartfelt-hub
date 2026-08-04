@@ -309,7 +309,7 @@ function SAPSDQuestApp() {
           {/* 1. Chefe Hugo Order Banner */}
           <Card className="p-3 lg:p-4 border-slate-200 shadow-sm rounded-2xl flex flex-col md:flex-row items-center md:justify-between gap-3 md:gap-4">
             <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 text-center md:text-left">
-              <HugoAvatar className="size-16 md:size-20" />
+              <HugoAvatar className="size-14 lg:size-16" />
 
               <div>
                 <div className="flex items-center justify-center md:justify-start gap-2 mb-1">
