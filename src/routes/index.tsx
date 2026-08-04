@@ -401,7 +401,7 @@ function SAPSDQuestApp() {
 
             <Card className={`p-4 bg-white flex flex-col ${!selectedTransaction ? "opacity-50 pointer-events-none" : ""}`}>
               <h3 className="font-semibold text-slate-800 mb-3 text-sm">Dados do Pedido</h3>
-              <div className="grid grid-cols-2 gap-3 overflow-y-auto pr-1">
+              <div className="grid grid-cols-2 gap-3 pr-1">
                 {[
                   { id: "orderType", label: "Tipo", type: "select", options: ["OR", "QT"] },
                   { id: "orderDate", label: "Data Pedido" },
