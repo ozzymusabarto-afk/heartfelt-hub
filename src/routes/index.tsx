@@ -390,7 +390,7 @@ function SAPSDQuestApp() {
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Tipo de Ordem</Label>
                   <Select value={formData.orderType} onValueChange={(v) => handleInputChange("orderType", v)}>
-                    <SelectTrigger className="h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700">
+                    <SelectTrigger className={`h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700 focus:ring-2 focus:ring-primary ${validationErrors.includes("orderType") ? "border-red-400 bg-red-50/50" : ""}`} aria-label="Tipo de Ordem">
                       <SelectValue placeholder="Selecione..." />
                     </SelectTrigger>
                     <SelectContent>
@@ -398,6 +398,7 @@ function SAPSDQuestApp() {
                       <SelectItem value="QT">QT - Cotação</SelectItem>
                     </SelectContent>
                   </Select>
+
                 </div>
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Data do Pedido</Label>
