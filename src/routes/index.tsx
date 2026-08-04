@@ -351,7 +351,7 @@ function SAPSDQuestApp() {
         </div>
       </header>
 
-      <div className="flex-1 flex flex-col md:grid md:grid-cols-[260px_1fr] lg:grid-cols-[260px_1fr_300px] overflow-hidden relative">
+      <div className="flex-1 flex flex-col md:grid md:grid-cols-[260px_1fr] lg:grid-cols-[260px_1fr_300px] relative">
         <aside className={`fixed inset-y-0 left-0 z-40 w-[260px] bg-card border-r p-6 transform transition-transform md:relative md:translate-x-0 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
           <nav className="space-y-1">
             {[
