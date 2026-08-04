@@ -405,32 +405,62 @@ function SAPSDQuestApp() {
         </aside>
 
         <main className="bg-slate-50 p-4 flex-1 flex flex-col gap-4">
-          <Card className="p-3 border-slate-200 shadow-sm rounded-2xl flex items-center gap-4 shrink-0">
-            <HugoAvatar className="size-12" />
-            <div>
-              <h3 className="font-semibold text-slate-800 text-sm">Chefe Hugo 👋</h3>
-              <p className="text-xs text-slate-600">Adriana, crie uma ordem de venda urgente para a <b>ALFA DISTRIBUIDORA</b>.</p>
+          <Card className="p-0 border-slate-200 shadow-sm rounded-2xl overflow-hidden shrink-0">
+            <div className="p-4 flex items-center justify-between gap-4 bg-white">
+              <div className="flex items-center gap-4">
+                <HugoAvatar className="size-14" />
+                <div>
+                  <h3 className="font-bold text-slate-800 text-sm">Chefe Hugo 👋</h3>
+                  <p className="text-xs text-slate-600">Adriana, crie uma ordem de venda urgente para a <b>ALFA DISTRIBUIDORA</b>.</p>
+                </div>
+              </div>
+              <Button variant="outline" size="sm" className="h-8 text-[10px] font-bold text-slate-500 gap-1.5 border-slate-200 rounded-lg">
+                <HelpCircle className="size-3" /> AJUDA DO CAMPO [F1]
+              </Button>
+            </div>
+            
+            {/* Stepper de 4 passos */}
+            <div className="bg-slate-50 px-4 py-3 border-t border-slate-100 flex items-center justify-between">
+              {[
+                { n: "1", label: "Contexto", color: "bg-emerald-500", text: "text-emerald-700", bg: "bg-emerald-50" },
+                { n: "2", label: "Transação", color: "bg-indigo-600", text: "text-indigo-700", bg: "bg-indigo-50", active: true },
+                { n: "3", label: "Preencher Dados", color: "bg-slate-200", text: "text-slate-400", bg: "bg-slate-100" },
+                { n: "4", label: "Revisar & Enviar", color: "bg-slate-200", text: "text-slate-400", bg: "bg-slate-100" },
+              ].map((step, i) => (
+                <div key={i} className="flex items-center gap-2 flex-1 group">
+                  <div className={`size-6 rounded-full flex items-center justify-center text-[10px] font-black text-white ${step.color} shadow-sm`}>
+                    {step.n}
+                  </div>
+                  <span className={`text-[10px] font-bold ${step.text} uppercase tracking-wider`}>{step.label}</span>
+                  {i < 3 && <div className="h-px bg-slate-200 flex-1 mx-4" />}
+                </div>
+              ))}
             </div>
           </Card>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <Card className="p-4 flex flex-col bg-white">
-              <h3 className="font-semibold text-slate-800 mb-3 text-sm">Transação</h3>
+            <Card className="p-4 flex flex-col bg-white border-slate-200 shadow-sm rounded-2xl">
+              <h3 className="font-bold text-slate-800 mb-3 text-sm flex items-center gap-2">
+                <Dices className="size-4 text-indigo-600" /> Transação
+              </h3>
               <RadioGroup value={selectedTransaction} onValueChange={setSelectedTransaction} className="space-y-2 pr-1">
                 {["VA01 - Criar Ordem", "BP - Parceiro", "VL01N - Entrega", "VF01 - Faturar"].map((label) => {
                   const id = label.split(" ")[0];
                   if (!id) return null;
                   return (
-                    <Label key={id} className={`flex items-center gap-2 p-2 border rounded-xl cursor-pointer hover:bg-slate-50 ${selectedTransaction === id ? "border-primary bg-indigo-50" : "border-slate-100"}`}>
-                      <RadioGroupItem value={id} id={id} /> <span className="text-xs font-bold text-slate-700">{label}</span>
+                    <Label key={id} className={`flex items-center gap-2 p-3 border rounded-xl cursor-pointer transition-all ${selectedTransaction === id ? "border-indigo-600 bg-indigo-50/50 ring-1 ring-indigo-600" : "border-slate-100 hover:bg-slate-50"}`}>
+                      <RadioGroupItem value={id} id={id} className="text-indigo-600" /> 
+                      <span className={`text-xs font-bold ${selectedTransaction === id ? "text-indigo-700" : "text-slate-600"}`}>{label}</span>
                     </Label>
                   );
                 })}
               </RadioGroup>
             </Card>
 
-            <Card className={`p-4 bg-white flex flex-col ${!selectedTransaction ? "opacity-50 pointer-events-none" : ""}`}>
-              <h3 className="font-semibold text-slate-800 mb-3 text-sm">Dados do Pedido</h3>
+            <Card className={`p-4 bg-white border-slate-200 shadow-sm rounded-2xl flex flex-col ${!selectedTransaction ? "opacity-50 pointer-events-none" : ""}`}>
+              <h3 className="font-bold text-slate-800 mb-3 text-sm flex items-center gap-2">
+                <Target className="size-4 text-indigo-600" /> Dados do Pedido
+              </h3>
               <div className="grid grid-cols-2 gap-3 pr-1">
                 {[
                   { id: "orderType", label: "Tipo", type: "select", options: ["OR", "QT"] },
@@ -448,77 +478,97 @@ function SAPSDQuestApp() {
                   const fieldId = field.id as keyof typeof formData;
                   return (
                     <div key={field.id} className={`space-y-1`}>
-                      <Label className="text-[10px] font-bold text-slate-500 uppercase">{field.label}</Label>
+                      <Label className="text-[9px] font-black text-slate-400 uppercase tracking-wider">{field.label}</Label>
                       {field.type === "select" ? (
                         <Select value={formData[fieldId] || ""} onValueChange={(v) => handleInputChange(field.id, v)}>
-                          <SelectTrigger className="h-9 rounded-lg"><SelectValue placeholder="-" /></SelectTrigger>
-                          <SelectContent>{field.options?.map(o => <SelectItem key={o} value={o}>{o}</SelectItem>)}</SelectContent>
+                          <SelectTrigger className="h-9 rounded-lg border-slate-200 text-xs"><SelectValue placeholder="-" /></SelectTrigger>
+                          <SelectContent>{field.options?.map(o => <SelectItem key={o} value={o} className="text-xs">{o}</SelectItem>)}</SelectContent>
                         </Select>
                       ) : (
                         <Input 
                           disabled={field.disabled}
                           value={formData[fieldId] || ""} 
                           onChange={(e) => handleInputChange(field.id, e.target.value)} 
-                          className={`h-9 rounded-lg ${validationErrors.includes(field.id) ? "border-red-400" : ""}`}
+                          className={`h-9 rounded-lg border-slate-200 text-xs placeholder:text-slate-300 focus:ring-indigo-600 ${validationErrors.includes(field.id) ? "border-red-400 ring-1 ring-red-400" : ""}`}
                         />
                       )}
                     </div>
                   );
                 })}
               </div>
-              <Button onClick={handleSubmit} className="w-full h-10 mt-4 bg-primary text-white font-bold rounded-xl">📝 Submeter Ordem</Button>
+              <Button 
+                onClick={handleSubmit} 
+                className="w-full h-10 mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg shadow-indigo-200 transition-all active:scale-[0.98]"
+              >
+                📝 CONFERIR E SUBMETER
+              </Button>
             </Card>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Card className="p-4 bg-white shadow-sm border-slate-200 rounded-2xl">
-              <h3 className="font-semibold text-slate-800 mb-3 text-sm flex items-center gap-2">
-                <Target className="size-4 text-indigo-500" /> Missões Recentes
-              </h3>
-              <div className="space-y-2">
-                {[
-                  { name: "Criação de Ordem Standard", status: "Em andamento", xp: "+25" },
-                  { name: "Verificação de Estoque (ATP)", status: "Bloqueado", xp: "+50" },
-                  { name: "Fluxo Completo OTC", status: "Bloqueado", xp: "+150" },
-                ].map((m, i) => (
-                  <div key={i} className="flex justify-between items-center p-2 rounded-xl border border-slate-50 hover:bg-slate-50 transition-colors">
-                    <div className="flex flex-col">
-                      <span className="text-xs font-bold text-slate-700">{m.name}</span>
-                      <span className="text-[10px] text-slate-400">{m.status}</span>
-                    </div>
-                    <Badge variant="outline" className="text-[10px] font-bold text-indigo-600 border-indigo-100 bg-indigo-50/30">
-                      {m.xp} XP
-                    </Badge>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div className="flex flex-col gap-3">
+              <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Tópico Atual</h3>
+              <Card className="p-4 bg-white shadow-sm border-indigo-100 rounded-2xl border-l-4 border-l-indigo-600 relative overflow-hidden group">
+                <div className="relative z-10">
+                  <span className="inline-block px-2 py-0.5 bg-indigo-50 text-indigo-600 text-[9px] font-black rounded-md mb-2">MODULO 01</span>
+                  <h4 className="font-bold text-slate-800 text-sm mb-1">Processo Order-to-Cash</h4>
+                  <p className="text-[11px] text-slate-500 leading-relaxed mb-3">
+                    Aprenda e pratique todo o fluxo de pedido à fatura.
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-bold text-slate-700 bg-slate-100 px-2 py-1 rounded-lg">[4 / 8 Missões]</span>
+                    <Button variant="ghost" size="sm" className="h-7 text-indigo-600 text-[10px] font-bold hover:bg-indigo-50">VER DETALHES</Button>
                   </div>
-                ))}
-              </div>
-            </Card>
+                </div>
+                <Rocket className="absolute -right-4 -top-4 size-16 text-indigo-50 -rotate-12 group-hover:scale-110 transition-transform" />
+              </Card>
+            </div>
 
-            <Card className="p-4 bg-white shadow-sm border-slate-200 rounded-2xl">
-              <h3 className="font-semibold text-slate-800 mb-3 text-sm flex items-center gap-2">
-                <Shield className="size-4 text-emerald-500" /> Parceiros & Processos OTC
-              </h3>
-              <div className="grid grid-cols-2 gap-2">
-                <div className="p-2 rounded-xl bg-slate-50 border border-slate-100 flex flex-col items-center text-center">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase">Processos OTC</span>
-                  <span className="text-xs font-bold text-slate-700 mt-1">1 / 12</span>
-                  <div className="w-full bg-slate-200 h-1 rounded-full mt-2">
-                    <div className="bg-emerald-500 h-full rounded-full" style={{ width: '8%' }}></div>
+            <div className="flex flex-col gap-3">
+              <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Missões Recentes</h3>
+              <div className="grid grid-cols-1 gap-2">
+                <Card className="p-3 bg-white border-slate-200 shadow-sm rounded-xl flex items-center justify-between group hover:border-indigo-200 transition-colors">
+                  <div className="flex items-center gap-3">
+                    <div className="size-8 bg-emerald-50 text-emerald-600 rounded-lg flex items-center justify-center">
+                      <CheckCircle2 className="size-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-[11px] font-bold text-slate-800">Criar Ordem (VA01)</h4>
+                      <span className="text-[9px] text-slate-400 uppercase font-black">Concluído</span>
+                    </div>
                   </div>
-                </div>
-                <div className="p-2 rounded-xl bg-slate-50 border border-slate-100 flex flex-col items-center text-center">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase">Parceiros BP</span>
-                  <span className="text-xs font-bold text-slate-700 mt-1">2 / 45</span>
-                  <div className="w-full bg-slate-200 h-1 rounded-full mt-2">
-                    <div className="bg-indigo-500 h-full rounded-full" style={{ width: '4%' }}></div>
+                  <ArrowRight className="size-4 text-slate-200 group-hover:text-indigo-600 transition-all" />
+                </Card>
+                
+                <Card className="p-3 bg-white border-slate-200 shadow-sm rounded-xl flex items-center justify-between group hover:border-indigo-200 transition-colors">
+                  <div className="flex items-center gap-3">
+                    <div className="size-8 bg-amber-50 text-amber-600 rounded-lg flex items-center justify-center">
+                      <BarChart3 className="size-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-[11px] font-bold text-slate-800">Parceiros BP</h4>
+                      <div className="w-20 h-1 bg-slate-100 rounded-full mt-1">
+                        <div className="bg-amber-500 h-full rounded-full" style={{ width: '60%' }}></div>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                  <span className="text-[9px] font-bold text-amber-600">60%</span>
+                </Card>
+
+                <Card className="p-3 bg-white border-slate-100/50 shadow-sm rounded-xl flex items-center justify-between opacity-60 bg-slate-50/30">
+                  <div className="flex items-center gap-3">
+                    <div className="size-8 bg-slate-100 text-slate-400 rounded-lg flex items-center justify-center">
+                      <X className="size-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-[11px] font-bold text-slate-500">Cadastros Incompletos</h4>
+                      <span className="text-[9px] text-slate-400 uppercase font-black">Bloqueado</span>
+                    </div>
+                  </div>
+                  <Settings className="size-4 text-slate-200" />
+                </Card>
               </div>
-              <div className="mt-3 p-2 rounded-xl border border-dashed border-slate-200 flex items-center justify-between group cursor-pointer hover:border-indigo-300">
-                <span className="text-[10px] font-bold text-slate-500">Documentação SD Wiki</span>
-                <ArrowRight className="size-3 text-slate-300 group-hover:text-indigo-500 transition-colors" />
-              </div>
-            </Card>
+            </div>
           </div>
         </main>
 
