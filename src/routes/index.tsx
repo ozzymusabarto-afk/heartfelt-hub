@@ -4,7 +4,7 @@ import {
   Rocket, Target, BookOpen, Crown, BarChart3, Trophy, Settings, 
   ChevronRight, HelpCircle, CheckCircle2, Flame, Star, Shield,
   Search, Bell, Plus, MoreHorizontal, ArrowRight, Check, Menu, X,
-  Gamepad2, Dices, User
+  Gamepad2, Dices, User, UserCheck
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -35,18 +35,10 @@ const CORRECT_DATA = {
 };
 
 function HugoAvatar({ className }: { className?: string }) {
-  const avatarUrl = "https://api.dicebear.com/7.x/avataaars/svg?seed=Hugo&hair=shortCombover&eyebrows=default&clothing=shirt&clothingColor=3c52e3";
-  
   return (
-    <div className={`bg-blue-100 rounded-2xl overflow-hidden ring-4 ring-blue-50 flex-shrink-0 flex items-center justify-center ${className}`}>
-      <img 
-        src={avatarUrl} 
-        alt="Chefe Hugo" 
-        className="size-full object-cover"
-        onError={(e) => {
-          (e.target as HTMLImageElement).src = "https://api.dicebear.com/7.x/bottts-neutral/svg?seed=Hugo";
-        }}
-      />
+    <div className={`bg-indigo-600 rounded-2xl flex-shrink-0 flex items-center justify-center text-white shadow-md relative group ${className}`}>
+      <UserCheck className="size-3/5 text-white" />
+      <div className="absolute -bottom-1 -right-1 size-3 bg-green-500 border-2 border-white rounded-full"></div>
     </div>
   );
 }
