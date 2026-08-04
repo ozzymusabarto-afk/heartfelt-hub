@@ -606,8 +606,8 @@ function SAPSDQuestApp() {
                   <p><strong>Material:</strong> {formData.material}</p>
                   <p><strong>Org. Vendas:</strong> {formData.salesOrg}</p>
                   
-                  <div className="pt-4 flex flex-col gap-2">
-                    <Button onClick={handleSubmit} className="w-full bg-green-600 hover:bg-green-700 text-white">
+                  <div className="pt-2 flex flex-col gap-2 shrink-0">
+                    <Button onClick={handleSubmit} className="w-full bg-green-600 hover:bg-green-700 text-white h-9">
                       Confirmar e Enviar 🚀
                     </Button>
                     <Button variant="ghost" onClick={() => setFeedbackState("idle")} className="w-full text-xs text-slate-500">
