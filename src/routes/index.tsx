@@ -357,9 +357,10 @@ function SAPSDQuestApp() {
               <RadioGroup value={selectedTransaction} onValueChange={setSelectedTransaction} className="space-y-2 overflow-y-auto pr-1">
                 {["VA01 - Criar Ordem", "BP - Parceiro", "VL01N - Entrega", "VF01 - Faturar"].map((label) => {
                   const id = label.split(" ")[0];
+                  if (!id) return null;
                   return (
                     <Label key={id} className={`flex items-center gap-2 p-2 border rounded-xl cursor-pointer hover:bg-slate-50 ${selectedTransaction === id ? "border-primary bg-indigo-50" : "border-slate-100"}`}>
-                      <RadioGroupItem value={id} id={id as string} /> <span className="text-xs font-bold text-slate-700">{label}</span>
+                      <RadioGroupItem value={id} id={id} /> <span className="text-xs font-bold text-slate-700">{label}</span>
                     </Label>
                   );
                 })}
