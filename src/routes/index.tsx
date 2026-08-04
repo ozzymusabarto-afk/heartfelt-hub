@@ -80,6 +80,7 @@ function SAPSDQuestApp() {
     message: string;
     timestamp: number;
   }[]>([]);
+  const [historyPeriod, setHistoryPeriod] = useState<"all" | "7d" | "30d">("all");
 
   // Auto-save continuous progress in local storage
   useEffect(() => {
