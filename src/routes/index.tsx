@@ -290,77 +290,86 @@ function SAPSDQuestApp() {
           <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
             {isSidebarOpen ? <X /> : <Menu />}
           </Button>
-          <div className="size-10 bg-indigo-100 rounded-lg flex items-center justify-center text-primary">
+          <div className="size-10 bg-indigo-600 rounded-lg flex items-center justify-center text-white shadow-lg shadow-indigo-200">
             <Rocket className="size-6" />
           </div>
           <h1 className="font-display font-bold text-lg md:text-xl tracking-tight text-slate-800">SAP SD Quest</h1>
         </div>
 
         <div className="hidden lg:flex items-center gap-2">
-          <Card className="flex items-center gap-3 px-3 py-1.5 border-slate-200 shadow-none rounded-xl bg-slate-50/50">
-            <div className="flex items-center gap-4">
-              <div className="flex flex-col border-r pr-4 border-slate-200 text-xs font-bold text-slate-700">
-                <span className="text-[9px] font-black text-slate-400 uppercase mb-1">Status</span>
-                <div className="flex items-center gap-2">
-                  <Shield className="size-3.5 text-amber-600" /> Trainee SD
-                </div>
+          <div className="flex items-center gap-2">
+            {/* Escudo: Nível 1 - Trainee SD */}
+            <Card className="flex items-center gap-2 px-3 py-1.5 border-slate-200 shadow-none rounded-xl bg-slate-50/50">
+              <Shield className="size-4 text-indigo-600" />
+              <div className="flex flex-col">
+                <span className="text-[9px] font-black text-slate-400 uppercase leading-none mb-0.5">Status</span>
+                <span className="text-[11px] font-bold text-slate-700 leading-none">Nível 1 - Trainee SD</span>
               </div>
-              <div className="flex flex-col border-r pr-4 border-slate-200 text-xs font-bold text-slate-700">
-                <span className="text-[9px] font-black text-slate-400 uppercase mb-1">Missões</span>
-                {completedMissions} / 30
-              </div>
-              <div className="flex flex-col min-w-[120px]">
-                <div className="flex justify-between text-[9px] font-black text-slate-400 uppercase mb-1">
-                  <span>XP ({xp})</span> <span>{xp}/500</span>
-                </div>
-                <Progress value={(xp / 500) * 100} className="h-1.5" />
-              </div>
-            </div>
-          </Card>
+            </Card>
 
-          <div className="flex items-center bg-slate-100 p-1 rounded-full ml-2">
-            {["standard", "practice", "tax"].map((m) => (
-              <Button 
-                key={m}
-                variant={mode === m ? "default" : "ghost"} 
-                size="sm" 
-                className={`rounded-full h-8 text-[11px] font-bold px-4 ${mode === m ? "bg-primary text-white" : "text-slate-500"}`}
-                onClick={() => setMode(m)}
-              >
-                {m === "practice" && <EyeOff className="size-3 mr-1" />}
-                {m.toUpperCase()}
-              </Button>
-            ))}
+            {/* Barra de progresso: XP (350 / 500 XP) */}
+            <Card className="flex items-center gap-3 px-3 py-1.5 border-slate-200 shadow-none rounded-xl bg-slate-50/50 min-w-[160px]">
+              <div className="flex flex-col w-full">
+                <div className="flex justify-between items-end mb-1">
+                  <span className="text-[9px] font-black text-slate-400 uppercase leading-none">Progresso XP</span>
+                  <span className="text-[10px] font-bold text-indigo-600 leading-none">{xp} / 500 XP</span>
+                </div>
+                <Progress value={(xp / 500) * 100} className="h-1.5 bg-indigo-100" />
+              </div>
+            </Card>
+
+            {/* Estrela Amarela: Pontos 1.250 */}
+            <Card className="flex items-center gap-2 px-3 py-1.5 border-slate-200 shadow-none rounded-xl bg-slate-50/50">
+              <Star className="size-4 text-amber-500 fill-amber-500" />
+              <div className="flex flex-col">
+                <span className="text-[9px] font-black text-slate-400 uppercase leading-none mb-0.5">Pontos</span>
+                <span className="text-[11px] font-bold text-slate-700 leading-none">1.250</span>
+              </div>
+            </Card>
+
+            {/* Chama Laranja: Sequência 7 dias */}
+            <Card className="flex items-center gap-2 px-3 py-1.5 border-slate-200 shadow-none rounded-xl bg-slate-50/50">
+              <Flame className="size-4 text-orange-500 fill-orange-500" />
+              <div className="flex flex-col">
+                <span className="text-[9px] font-black text-slate-400 uppercase leading-none mb-0.5">Sequência</span>
+                <span className="text-[11px] font-bold text-slate-700 leading-none">7 dias</span>
+              </div>
+            </Card>
+
+            {/* Select/Badges: Modo [SD Standard] e Localização Brasil (TAX) */}
+            <div className="flex items-center bg-slate-100 p-1 rounded-xl ml-1 gap-1">
+              <Badge className="bg-indigo-600 hover:bg-indigo-700 text-white border-none rounded-lg px-2 py-0.5 text-[10px] font-bold">SD Standard</Badge>
+              <Badge variant="outline" className="border-slate-300 text-slate-600 rounded-lg px-2 py-0.5 text-[10px] font-bold bg-white">Brasil (TAX)</Badge>
+            </div>
           </div>
 
-          <div className="flex items-center gap-1 border-l pl-2 border-slate-200">
-            <Button variant="ghost" size="icon" className="size-8 text-slate-500" onClick={exportState} title="Exportar">
+          <div className="flex items-center gap-1 border-l ml-2 pl-2 border-slate-200">
+            <Button variant="ghost" size="icon" className="size-8 text-slate-500 hover:text-indigo-600" onClick={exportState} title="Exportar">
               <Download className="size-4" />
             </Button>
             <div className="relative">
               <Input type="file" accept=".json" onChange={importState} className="hidden" id="import-state" />
-              <Label htmlFor="import-state" className="size-8 flex items-center justify-center rounded-md hover:bg-slate-100 cursor-pointer text-slate-500" title="Importar">
+              <Label htmlFor="import-state" className="size-8 flex items-center justify-center rounded-md hover:bg-slate-100 cursor-pointer text-slate-500 hover:text-indigo-600" title="Importar">
                 <Upload className="size-4" />
               </Label>
             </div>
             <Button 
               variant="outline" 
               size="sm" 
-              className="ml-2 h-8 text-[11px] font-bold border-indigo-200 text-indigo-600 hover:bg-indigo-50 gap-1.5"
+              className="ml-2 h-8 text-[11px] font-bold border-indigo-200 text-indigo-600 hover:bg-indigo-50 gap-1.5 rounded-lg"
               onClick={() => toast.info("Sincronização na nuvem estará disponível em breve! Por enquanto, use Exportar/Importar.")}
             >
               <LogIn className="size-3" /> LOGIN
             </Button>
           </div>
-
         </div>
       </header>
 
       <div className="flex-1 flex flex-col md:flex-row relative">
-        <aside className={`fixed inset-y-0 left-0 z-40 w-[260px] bg-card border-r p-6 transform transition-transform md:relative md:translate-x-0 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} h-screen md:h-auto`}>
-          <nav className="space-y-1">
+        <aside className={`fixed inset-y-0 left-0 z-40 w-[260px] bg-card border-r p-6 transform transition-transform md:relative md:translate-x-0 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} h-screen md:h-auto flex flex-col`}>
+          <nav className="space-y-1 flex-1">
             {[
-              { icon: Target, label: "Trilha Principal", sub: "Carreira passo a passo", active: true },
+              { icon: Gamepad2, label: "Trilha Principal", sub: "Carreira passo a passo", active: true },
               { icon: Rocket, label: "Treino Rápido", sub: "Desafios aleatórios" },
               { icon: BookOpen, label: "Módulos & Apostila", sub: "Estude por tópico" },
               { icon: Crown, label: "Modos Premium", sub: "Recursos exclusivos" },
@@ -368,44 +377,90 @@ function SAPSDQuestApp() {
               { icon: Trophy, label: "Conquistas", sub: "Medalhas e troféus" },
               { icon: Settings, label: "Configurações", sub: "Conta e preferências" },
             ].map((item) => (
-              <Button key={item.label} variant="ghost" className={`w-full justify-start h-10 px-3 py-1.5 rounded-xl gap-3 ${item.label === "Trilha Principal" ? "bg-indigo-50 text-primary" : "text-slate-500 hover:bg-slate-50"}`}>
-                <item.icon className="size-4" />
+              <Button key={item.label} variant="ghost" className={`w-full justify-start h-12 px-3 py-2 rounded-xl gap-3 ${item.label === "Trilha Principal" ? "bg-indigo-600 text-white shadow-md shadow-indigo-100" : "text-slate-500 hover:bg-indigo-50 hover:text-indigo-600"}`}>
+                <item.icon className={`size-5 ${item.label === "Trilha Principal" ? "text-white" : ""}`} />
                 <div className="flex flex-col items-start text-left">
                   <span className="text-xs font-bold leading-tight">{item.label}</span>
-                  <span className="text-[9px] text-slate-400">{item.sub}</span>
+                  <span className={`text-[9px] ${item.label === "Trilha Principal" ? "text-indigo-100" : "text-slate-400"}`}>{item.sub}</span>
                 </div>
               </Button>
             ))}
           </nav>
+
+          <Card className="mt-8 p-4 bg-indigo-50 border-indigo-100 rounded-2xl relative overflow-hidden group cursor-pointer hover:bg-indigo-100 transition-colors">
+            <div className="relative z-10">
+              <div className="flex items-center gap-2 mb-2">
+                <Crown className="size-4 text-indigo-600" />
+                <span className="text-[10px] font-black text-indigo-600 uppercase tracking-wider">Premium</span>
+              </div>
+              <p className="text-[11px] font-bold text-slate-700 leading-snug mb-3">
+                Quer acelerar sua carreira? Desbloqueie tudo no SAP SD Quest Premium!
+              </p>
+              <Button size="sm" className="w-full h-8 bg-indigo-600 text-white text-[10px] font-bold rounded-lg gap-2">
+                ASSINAR AGORA <ArrowRight className="size-3" />
+              </Button>
+            </div>
+            <Crown className="absolute -right-4 -bottom-4 size-20 text-indigo-200/50 -rotate-12 group-hover:scale-110 transition-transform" />
+          </Card>
         </aside>
 
         <main className="bg-slate-50 p-4 flex-1 flex flex-col gap-4">
-          <Card className="p-3 border-slate-200 shadow-sm rounded-2xl flex items-center gap-4 shrink-0">
-            <HugoAvatar className="size-12" />
-            <div>
-              <h3 className="font-semibold text-slate-800 text-sm">Chefe Hugo 👋</h3>
-              <p className="text-xs text-slate-600">Adriana, crie uma ordem de venda urgente para a <b>ALFA DISTRIBUIDORA</b>.</p>
+          <Card className="p-0 border-slate-200 shadow-sm rounded-2xl overflow-hidden shrink-0">
+            <div className="p-4 flex items-center justify-between gap-4 bg-white">
+              <div className="flex items-center gap-4">
+                <HugoAvatar className="size-14" />
+                <div>
+                  <h3 className="font-bold text-slate-800 text-sm">Chefe Hugo 👋</h3>
+                  <p className="text-xs text-slate-600">Adriana, crie uma ordem de venda urgente para a <b>ALFA DISTRIBUIDORA</b>.</p>
+                </div>
+              </div>
+              <Button variant="outline" size="sm" className="h-8 text-[10px] font-bold text-slate-500 gap-1.5 border-slate-200 rounded-lg">
+                <HelpCircle className="size-3" /> AJUDA DO CAMPO [F1]
+              </Button>
+            </div>
+            
+            {/* Stepper de 4 passos */}
+            <div className="bg-slate-50 px-4 py-3 border-t border-slate-100 flex items-center justify-between">
+              {[
+                { n: "1", label: "Contexto", color: "bg-emerald-500", text: "text-emerald-700", bg: "bg-emerald-50" },
+                { n: "2", label: "Transação", color: "bg-indigo-600", text: "text-indigo-700", bg: "bg-indigo-50", active: true },
+                { n: "3", label: "Preencher Dados", color: "bg-slate-200", text: "text-slate-400", bg: "bg-slate-100" },
+                { n: "4", label: "Revisar & Enviar", color: "bg-slate-200", text: "text-slate-400", bg: "bg-slate-100" },
+              ].map((step, i) => (
+                <div key={i} className="flex items-center gap-2 flex-1 group">
+                  <div className={`size-6 rounded-full flex items-center justify-center text-[10px] font-black text-white ${step.color} shadow-sm`}>
+                    {step.n}
+                  </div>
+                  <span className={`text-[10px] font-bold ${step.text} uppercase tracking-wider`}>{step.label}</span>
+                  {i < 3 && <div className="h-px bg-slate-200 flex-1 mx-4" />}
+                </div>
+              ))}
             </div>
           </Card>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <Card className="p-4 flex flex-col bg-white">
-              <h3 className="font-semibold text-slate-800 mb-3 text-sm">Transação</h3>
+            <Card className="p-4 flex flex-col bg-white border-slate-200 shadow-sm rounded-2xl">
+              <h3 className="font-bold text-slate-800 mb-3 text-sm flex items-center gap-2">
+                <Dices className="size-4 text-indigo-600" /> Transação
+              </h3>
               <RadioGroup value={selectedTransaction} onValueChange={setSelectedTransaction} className="space-y-2 pr-1">
                 {["VA01 - Criar Ordem", "BP - Parceiro", "VL01N - Entrega", "VF01 - Faturar"].map((label) => {
                   const id = label.split(" ")[0];
                   if (!id) return null;
                   return (
-                    <Label key={id} className={`flex items-center gap-2 p-2 border rounded-xl cursor-pointer hover:bg-slate-50 ${selectedTransaction === id ? "border-primary bg-indigo-50" : "border-slate-100"}`}>
-                      <RadioGroupItem value={id} id={id} /> <span className="text-xs font-bold text-slate-700">{label}</span>
+                    <Label key={id} className={`flex items-center gap-2 p-3 border rounded-xl cursor-pointer transition-all ${selectedTransaction === id ? "border-indigo-600 bg-indigo-50/50 ring-1 ring-indigo-600" : "border-slate-100 hover:bg-slate-50"}`}>
+                      <RadioGroupItem value={id} id={id} className="text-indigo-600" /> 
+                      <span className={`text-xs font-bold ${selectedTransaction === id ? "text-indigo-700" : "text-slate-600"}`}>{label}</span>
                     </Label>
                   );
                 })}
               </RadioGroup>
             </Card>
 
-            <Card className={`p-4 bg-white flex flex-col ${!selectedTransaction ? "opacity-50 pointer-events-none" : ""}`}>
-              <h3 className="font-semibold text-slate-800 mb-3 text-sm">Dados do Pedido</h3>
+            <Card className={`p-4 bg-white border-slate-200 shadow-sm rounded-2xl flex flex-col ${!selectedTransaction ? "opacity-50 pointer-events-none" : ""}`}>
+              <h3 className="font-bold text-slate-800 mb-3 text-sm flex items-center gap-2">
+                <Target className="size-4 text-indigo-600" /> Dados do Pedido
+              </h3>
               <div className="grid grid-cols-2 gap-3 pr-1">
                 {[
                   { id: "orderType", label: "Tipo", type: "select", options: ["OR", "QT"] },
@@ -423,126 +478,163 @@ function SAPSDQuestApp() {
                   const fieldId = field.id as keyof typeof formData;
                   return (
                     <div key={field.id} className={`space-y-1`}>
-                      <Label className="text-[10px] font-bold text-slate-500 uppercase">{field.label}</Label>
+                      <Label className="text-[9px] font-black text-slate-400 uppercase tracking-wider">{field.label}</Label>
                       {field.type === "select" ? (
                         <Select value={formData[fieldId] || ""} onValueChange={(v) => handleInputChange(field.id, v)}>
-                          <SelectTrigger className="h-9 rounded-lg"><SelectValue placeholder="-" /></SelectTrigger>
-                          <SelectContent>{field.options?.map(o => <SelectItem key={o} value={o}>{o}</SelectItem>)}</SelectContent>
+                          <SelectTrigger className="h-9 rounded-lg border-slate-200 text-xs"><SelectValue placeholder="-" /></SelectTrigger>
+                          <SelectContent>{field.options?.map(o => <SelectItem key={o} value={o} className="text-xs">{o}</SelectItem>)}</SelectContent>
                         </Select>
                       ) : (
                         <Input 
                           disabled={field.disabled}
                           value={formData[fieldId] || ""} 
                           onChange={(e) => handleInputChange(field.id, e.target.value)} 
-                          className={`h-9 rounded-lg ${validationErrors.includes(field.id) ? "border-red-400" : ""}`}
+                          className={`h-9 rounded-lg border-slate-200 text-xs placeholder:text-slate-300 focus:ring-indigo-600 ${validationErrors.includes(field.id) ? "border-red-400 ring-1 ring-red-400" : ""}`}
                         />
                       )}
                     </div>
                   );
                 })}
               </div>
-              <Button onClick={handleSubmit} className="w-full h-10 mt-4 bg-primary text-white font-bold rounded-xl">📝 Submeter Ordem</Button>
+              <Button 
+                onClick={handleSubmit} 
+                className="w-full h-10 mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg shadow-indigo-200 transition-all active:scale-[0.98]"
+              >
+                📝 CONFERIR E SUBMETER
+              </Button>
             </Card>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Card className="p-4 bg-white shadow-sm border-slate-200 rounded-2xl">
-              <h3 className="font-semibold text-slate-800 mb-3 text-sm flex items-center gap-2">
-                <Target className="size-4 text-indigo-500" /> Missões Recentes
-              </h3>
-              <div className="space-y-2">
-                {[
-                  { name: "Criação de Ordem Standard", status: "Em andamento", xp: "+25" },
-                  { name: "Verificação de Estoque (ATP)", status: "Bloqueado", xp: "+50" },
-                  { name: "Fluxo Completo OTC", status: "Bloqueado", xp: "+150" },
-                ].map((m, i) => (
-                  <div key={i} className="flex justify-between items-center p-2 rounded-xl border border-slate-50 hover:bg-slate-50 transition-colors">
-                    <div className="flex flex-col">
-                      <span className="text-xs font-bold text-slate-700">{m.name}</span>
-                      <span className="text-[10px] text-slate-400">{m.status}</span>
-                    </div>
-                    <Badge variant="outline" className="text-[10px] font-bold text-indigo-600 border-indigo-100 bg-indigo-50/30">
-                      {m.xp} XP
-                    </Badge>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div className="flex flex-col gap-3">
+              <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Tópico Atual</h3>
+              <Card className="p-4 bg-white shadow-sm border-indigo-100 rounded-2xl border-l-4 border-l-indigo-600 relative overflow-hidden group">
+                <div className="relative z-10">
+                  <span className="inline-block px-2 py-0.5 bg-indigo-50 text-indigo-600 text-[9px] font-black rounded-md mb-2">MODULO 01</span>
+                  <h4 className="font-bold text-slate-800 text-sm mb-1">Processo Order-to-Cash</h4>
+                  <p className="text-[11px] text-slate-500 leading-relaxed mb-3">
+                    Aprenda e pratique todo o fluxo de pedido à fatura.
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-bold text-slate-700 bg-slate-100 px-2 py-1 rounded-lg">[4 / 8 Missões]</span>
+                    <Button variant="ghost" size="sm" className="h-7 text-indigo-600 text-[10px] font-bold hover:bg-indigo-50">VER DETALHES</Button>
                   </div>
-                ))}
-              </div>
-            </Card>
+                </div>
+                <Rocket className="absolute -right-4 -top-4 size-16 text-indigo-50 -rotate-12 group-hover:scale-110 transition-transform" />
+              </Card>
+            </div>
 
-            <Card className="p-4 bg-white shadow-sm border-slate-200 rounded-2xl">
-              <h3 className="font-semibold text-slate-800 mb-3 text-sm flex items-center gap-2">
-                <Shield className="size-4 text-emerald-500" /> Parceiros & Processos OTC
-              </h3>
-              <div className="grid grid-cols-2 gap-2">
-                <div className="p-2 rounded-xl bg-slate-50 border border-slate-100 flex flex-col items-center text-center">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase">Processos OTC</span>
-                  <span className="text-xs font-bold text-slate-700 mt-1">1 / 12</span>
-                  <div className="w-full bg-slate-200 h-1 rounded-full mt-2">
-                    <div className="bg-emerald-500 h-full rounded-full" style={{ width: '8%' }}></div>
+            <div className="flex flex-col gap-3">
+              <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Missões Recentes</h3>
+              <div className="grid grid-cols-1 gap-2">
+                <Card className="p-3 bg-white border-slate-200 shadow-sm rounded-xl flex items-center justify-between group hover:border-indigo-200 transition-colors">
+                  <div className="flex items-center gap-3">
+                    <div className="size-8 bg-emerald-50 text-emerald-600 rounded-lg flex items-center justify-center">
+                      <CheckCircle2 className="size-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-[11px] font-bold text-slate-800">Criar Ordem (VA01)</h4>
+                      <span className="text-[9px] text-slate-400 uppercase font-black">Concluído</span>
+                    </div>
                   </div>
-                </div>
-                <div className="p-2 rounded-xl bg-slate-50 border border-slate-100 flex flex-col items-center text-center">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase">Parceiros BP</span>
-                  <span className="text-xs font-bold text-slate-700 mt-1">2 / 45</span>
-                  <div className="w-full bg-slate-200 h-1 rounded-full mt-2">
-                    <div className="bg-indigo-500 h-full rounded-full" style={{ width: '4%' }}></div>
+                  <ArrowRight className="size-4 text-slate-200 group-hover:text-indigo-600 transition-all" />
+                </Card>
+                
+                <Card className="p-3 bg-white border-slate-200 shadow-sm rounded-xl flex items-center justify-between group hover:border-indigo-200 transition-colors">
+                  <div className="flex items-center gap-3">
+                    <div className="size-8 bg-amber-50 text-amber-600 rounded-lg flex items-center justify-center">
+                      <BarChart3 className="size-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-[11px] font-bold text-slate-800">Parceiros BP</h4>
+                      <div className="w-20 h-1 bg-slate-100 rounded-full mt-1">
+                        <div className="bg-amber-500 h-full rounded-full" style={{ width: '60%' }}></div>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                  <span className="text-[9px] font-bold text-amber-600">60%</span>
+                </Card>
+
+                <Card className="p-3 bg-white border-slate-100/50 shadow-sm rounded-xl flex items-center justify-between opacity-60 bg-slate-50/30">
+                  <div className="flex items-center gap-3">
+                    <div className="size-8 bg-slate-100 text-slate-400 rounded-lg flex items-center justify-center">
+                      <X className="size-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-[11px] font-bold text-slate-500">Cadastros Incompletos</h4>
+                      <span className="text-[9px] text-slate-400 uppercase font-black">Bloqueado</span>
+                    </div>
+                  </div>
+                  <Settings className="size-4 text-slate-200" />
+                </Card>
               </div>
-              <div className="mt-3 p-2 rounded-xl border border-dashed border-slate-200 flex items-center justify-between group cursor-pointer hover:border-indigo-300">
-                <span className="text-[10px] font-bold text-slate-500">Documentação SD Wiki</span>
-                <ArrowRight className="size-3 text-slate-300 group-hover:text-indigo-500 transition-colors" />
-              </div>
-            </Card>
+            </div>
           </div>
         </main>
 
-        <aside className="hidden lg:flex w-[300px] border-l bg-card p-5 flex-col gap-4">
-          <Card className={`p-4 border shadow-sm rounded-2xl flex flex-col items-center text-center ${feedbackState === "success" ? "bg-green-50" : feedbackState === "error" ? "bg-red-50" : "bg-white"}`}>
-            <HugoAvatar className="size-16 mb-4" />
-            <h3 className="font-semibold text-xs mb-1">Feedback do Hugo</h3>
-            <p className="text-[10px] text-slate-600 mb-4" aria-live="polite">
-              {feedbackState === "idle" ? "Selecione a transação e preencha os dados." : hintMessage}
+        <aside className="hidden lg:flex w-[320px] border-l bg-card p-5 flex-col gap-6">
+          <Card className={`p-4 border shadow-sm rounded-2xl flex flex-col items-center text-center relative overflow-hidden ${feedbackState === "success" ? "bg-emerald-50 border-emerald-200" : feedbackState === "error" ? "bg-red-50 border-red-200" : "bg-white border-slate-200"}`}>
+            <HugoAvatar className="size-20 mb-4" />
+            <h3 className="font-bold text-xs mb-1 text-slate-800">Feedback do Chefe Hugo</h3>
+            <p className={`text-[11px] font-medium mb-4 leading-relaxed ${feedbackState === "success" ? "text-emerald-700" : feedbackState === "error" ? "text-red-700" : "text-slate-500"}`} aria-live="polite">
+              {feedbackState === "idle" ? "Selecione a transação e preencha os dados do pedido para começar." : hintMessage}
             </p>
-            {feedbackState === "success" && <Button onClick={resetGame} className="w-full text-xs h-9">Próximo Pedido</Button>}
+            {feedbackState === "success" && (
+              <div className="w-full space-y-2">
+                <div className="bg-emerald-100 text-emerald-700 font-black text-xs py-2 rounded-xl mb-2">+25 XP</div>
+                <Button onClick={resetGame} className="w-full text-xs h-10 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl gap-2">
+                  PRÓXIMO PEDIDO <ArrowRight className="size-4" />
+                </Button>
+              </div>
+            )}
+            {feedbackState === "error" && <Button onClick={() => setFeedbackState("idle")} variant="outline" className="w-full text-xs h-9 rounded-xl border-red-200 text-red-600 hover:bg-red-50">TENTAR NOVAMENTE</Button>}
           </Card>
 
-          <div className="space-y-3 shrink-0">
-            <div className="flex justify-between items-center px-1 text-[10px] font-bold text-slate-400 uppercase">
-              <span>Desempenho</span> 
-              <Select value={historyPeriod} onValueChange={(v: any) => setHistoryPeriod(v)}>
-                <SelectTrigger className="h-5 w-20 text-[9px] border-none bg-transparent shadow-none p-0 focus:ring-0">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all" className="text-[9px]">Tudo</SelectItem>
-                  <SelectItem value="7d" className="text-[9px]">7 dias</SelectItem>
-                  <SelectItem value="30d" className="text-[9px]">30 dias</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="flex justify-between px-1 text-[10px] font-bold text-indigo-600 mb-1">
-              <span>Taxa de Acerto</span>
-              <span>{successRate}%</span>
-            </div>
-            <Card className="p-2 max-h-[140px] overflow-y-auto space-y-1">
-              {filteredHistory.map(h => (
-                <div key={h.id} className={`p-1.5 rounded-lg border text-[9px] flex justify-between items-center ${h.status === "success" ? "bg-green-50" : "bg-red-50"}`}>
-                  <span className="font-bold">{h.transaction}</span>
-                  <span className="text-slate-500">{new Date(h.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+          <div className="space-y-4">
+            <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Seu Progresso</h3>
+            <Card className="p-4 bg-white border-slate-200 shadow-sm rounded-2xl space-y-4">
+              <div className="flex justify-between items-center text-[11px] font-bold text-slate-700">
+                <span className="text-slate-400 uppercase text-[9px] font-black">Missões Concluídas</span>
+                <span>12 / 30</span>
+              </div>
+              <div className="flex justify-between items-center text-[11px] font-bold text-slate-700">
+                <span className="text-slate-400 uppercase text-[9px] font-black">XP Neste Nível</span>
+                <span>{xp} / 500</span>
+              </div>
+              <Progress value={(xp/500)*100} className="h-2 bg-slate-100" />
+              
+              <div className="pt-2 border-t border-slate-50 flex items-center gap-3">
+                <div className="size-10 bg-slate-100 rounded-xl flex items-center justify-center">
+                  <Plus className="size-5 text-slate-400" />
                 </div>
-              ))}
-              {filteredHistory.length === 0 && <p className="text-[9px] text-slate-400 text-center py-2">Nenhum registro</p>}
+                <div>
+                  <h4 className="text-[11px] font-bold text-slate-800">Próxima promoção</h4>
+                  <p className="text-[10px] text-slate-500">Faltam {500 - xp} XP para Consultor SD Júnior</p>
+                </div>
+              </div>
             </Card>
 
-            <div className="space-y-2 text-[10px] font-bold text-slate-400 uppercase">
-              <span>Progresso Real</span>
-              <div className="flex justify-between items-center text-indigo-600 mb-1">
-                <span>XP</span>
-                <span>{xp}/500</span>
+            <Card className="p-4 bg-indigo-600 border-none shadow-lg shadow-indigo-100 rounded-2xl relative overflow-hidden group">
+              <div className="relative z-10">
+                <h4 className="text-white font-bold text-sm mb-3">Desbloqueie o Modo Premium</h4>
+                <ul className="space-y-2 mb-4">
+                  {[
+                    "Acesso a todas as transações",
+                    "Simulados de certificação",
+                    "Suporte prioritário do Hugo",
+                    "Dashboard avançado"
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-center gap-2 text-[10px] text-indigo-100 font-medium">
+                      <Check className="size-3 text-indigo-300" /> {item}
+                    </li>
+                  ))}
+                </ul>
+                <Button className="w-full h-9 bg-white text-indigo-600 hover:bg-slate-50 text-[10px] font-bold rounded-xl">
+                  QUERO DESBLOQUEAR!
+                </Button>
               </div>
-              <Progress value={(xp/500)*100} className="h-1.5" />
-            </div>
+              <Crown className="absolute -right-6 -bottom-6 size-24 text-indigo-500/30 -rotate-12 group-hover:scale-110 transition-transform" />
+            </Card>
           </div>
         </aside>
       </div>
