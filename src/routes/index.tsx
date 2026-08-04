@@ -304,9 +304,9 @@ function SAPSDQuestApp() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Tipo de Ordem</Label>
-                  <Select defaultValue="OR">
+                  <Select value={formData.orderType} onValueChange={(v) => handleInputChange("orderType", v)}>
                     <SelectTrigger className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700">
-                      <SelectValue placeholder="Selecione" />
+                      <SelectValue placeholder="Selecione..." />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="OR">OR - Ordem Standard</SelectItem>
@@ -316,25 +316,45 @@ function SAPSDQuestApp() {
                 </div>
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Data do Pedido</Label>
-                  <Input type="text" defaultValue="17.05.2024" className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" />
+                  <Input 
+                    placeholder="Ex: 17.05.2024" 
+                    value={formData.orderDate}
+                    onChange={(e) => handleInputChange("orderDate", e.target.value)}
+                    className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                  />
                 </div>
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Org. de Vendas</Label>
-                  <Input defaultValue="1000" className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" />
+                  <Input 
+                    placeholder="Ex: 1000" 
+                    value={formData.salesOrg}
+                    onChange={(e) => handleInputChange("salesOrg", e.target.value)}
+                    className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                  />
                 </div>
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Data de Entrega</Label>
-                  <Input defaultValue="24.05.2024" className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" />
+                  <Input 
+                    placeholder="Ex: 24.05.2024" 
+                    value={formData.deliveryDate}
+                    onChange={(e) => handleInputChange("deliveryDate", e.target.value)}
+                    className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                  />
                 </div>
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Canal de Distr.</Label>
-                  <Input defaultValue="10" className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" />
+                  <Input 
+                    placeholder="Ex: 10" 
+                    value={formData.distChannel}
+                    onChange={(e) => handleInputChange("distChannel", e.target.value)}
+                    className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                  />
                 </div>
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Condição Pagto.</Label>
-                  <Select defaultValue="ZF30">
+                  <Select value={formData.paymentCond} onValueChange={(v) => handleInputChange("paymentCond", v)}>
                     <SelectTrigger className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700">
-                      <SelectValue placeholder="Selecione" />
+                      <SelectValue placeholder="Selecione..." />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="ZF30">ZF30 - 30 dias</SelectItem>
@@ -344,19 +364,37 @@ function SAPSDQuestApp() {
                 </div>
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Cliente</Label>
-                  <Input defaultValue="200015" className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" />
+                  <Input 
+                    placeholder="Ex: 200015" 
+                    value={formData.customer}
+                    onChange={(e) => handleInputChange("customer", e.target.value)}
+                    className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                  />
                 </div>
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Preço Líquido</Label>
-                  <Input defaultValue="150,00 BRL" className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" />
+                  <Input 
+                    placeholder="Ex: 150,00 BRL" 
+                    value={formData.price}
+                    onChange={(e) => handleInputChange("price", e.target.value)}
+                    className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                  />
                 </div>
                 <div className="col-span-2 space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Material</Label>
-                  <Input defaultValue="MAT-SD-015" className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" />
+                  <Input 
+                    placeholder="Ex: MAT-SD-015" 
+                    value={formData.material}
+                    onChange={(e) => handleInputChange("material", e.target.value)}
+                    className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                  />
                 </div>
               </div>
 
-              <Button className="w-full h-12 mt-8 bg-primary hover:bg-indigo-700 text-white font-bold rounded-xl shadow-md transition-all scale-100 active:scale-95 gap-2">
+              <Button 
+                onClick={handleSubmit}
+                className="w-full h-12 mt-8 bg-primary hover:bg-indigo-700 text-white font-bold rounded-xl shadow-md transition-all scale-100 active:scale-95 gap-2"
+              >
                 🚀 Conferir e Submeter
               </Button>
             </Card>
