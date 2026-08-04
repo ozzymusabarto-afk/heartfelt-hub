@@ -344,7 +344,7 @@ function SAPSDQuestApp() {
               { id: 3, label: "Preencher Dados", status: "pending" },
               { id: 4, label: "Revisar & Enviar", status: "pending" },
             ].map((step, idx) => (
-              <div key={step.id} className="flex flex-col items-center gap-1.5 relative z-10 bg-slate-50 px-4">
+              <div key={step.id} className="flex flex-col items-center gap-1 relative z-10 bg-slate-50 px-3">
                 <div className={`size-8 rounded-full flex items-center justify-center font-bold text-[10px] transition-all shadow-sm ${
                   step.status === "active" ? "bg-primary text-white scale-110 ring-2 ring-indigo-100" : 
                   step.status === "complete" ? "bg-green-500 text-white" : "bg-white text-slate-400 border border-slate-200"
