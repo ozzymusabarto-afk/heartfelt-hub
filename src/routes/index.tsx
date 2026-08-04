@@ -672,7 +672,7 @@ function SAPSDQuestApp() {
           </div>
 
           {/* 3. Upgrade Banner Card */}
-          <Card className="p-6 border-none bg-gradient-to-br from-indigo-600 to-purple-700 text-white rounded-2xl relative overflow-hidden group">
+          <Card className="p-4 border-none bg-gradient-to-br from-indigo-600 to-purple-700 text-white rounded-2xl relative overflow-hidden group shrink-0">
             <div className="absolute -top-4 -right-4 size-24 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-all"></div>
             <div className="flex items-center gap-3 mb-4">
               <div className="size-10 bg-amber-400 rounded-xl flex items-center justify-center text-indigo-900 shadow-lg">
