@@ -37,14 +37,14 @@ const CORRECT_DATA = {
 function HugoAvatar({ className }: { className?: string }) {
   return (
     <div 
-      className={`rounded-2xl flex-shrink-0 flex items-center justify-center border-2 border-indigo-500 shadow-sm relative group overflow-hidden ${className}`}
+      className={`rounded-2xl flex-shrink-0 flex items-center justify-center bg-indigo-100 border-2 border-indigo-500 shadow-sm relative group overflow-hidden p-1 ${className}`}
       role="img"
       aria-label="Avatar do Chefe Hugo"
     >
       <img 
-        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QA/wD/AP+gvaeTAAAAB3RJTUUH5QgKCgMCAwMCAAAA8UlEQVR42u3BAQ0AAAABIP6v7WF7CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAO4M55IAAf9S2YkAAAAASUVORK5CYII=" 
+        src="https://api.dicebear.com/7.x/notionists/svg?seed=Hugo&glasses=variant02" 
         alt="Chefe Hugo" 
-        className="size-full object-cover"
+        className="size-full object-contain"
       />
       <div 
         className="absolute -bottom-0.5 -right-0.5 size-3 bg-green-500 border-2 border-white dark:border-slate-800 rounded-full z-10 shadow-sm"
