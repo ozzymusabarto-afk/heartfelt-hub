@@ -69,6 +69,9 @@ function SAPSDQuestApp() {
     customer: "",
     price: "",
     material: "",
+    incoterms: "",
+    division: "",
+    poNumber: "",
   });
   const [feedbackState, setFeedbackState] = useState<"idle" | "review" | "success" | "error">("idle");
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
