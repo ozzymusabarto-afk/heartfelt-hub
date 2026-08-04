@@ -383,7 +383,7 @@ function SAPSDQuestApp() {
             </div>
           </Card>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 flex-1">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <Card className="p-4 flex flex-col bg-white">
               <h3 className="font-semibold text-slate-800 mb-3 text-sm">Transação</h3>
               <RadioGroup value={selectedTransaction} onValueChange={setSelectedTransaction} className="space-y-2 pr-1">
