@@ -362,7 +362,7 @@ function SAPSDQuestApp() {
           {/* 3. Dual Interactive Workspace */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4 flex-1 overflow-hidden">
             {/* Left Box */}
-            <Card className="p-4 lg:p-5 border-slate-200 shadow-sm rounded-2xl flex flex-col h-full bg-white">
+            <Card className="p-4 lg:p-4 border-slate-200 shadow-sm rounded-2xl flex flex-col h-full bg-white overflow-hidden">
               <div className="mb-4">
                 <h3 className="font-semibold text-slate-800 text-lg">Passo 2 de 4: Escolha a Transação</h3>
                 <p className="text-sm text-slate-500">Qual transação você deve utilizar?</p>
