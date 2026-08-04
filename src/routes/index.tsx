@@ -270,7 +270,7 @@ function SAPSDQuestApp() {
           ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
         `}>
           <div className="space-y-6 h-full flex flex-col justify-between overflow-y-auto">
-            <div className="space-y-4">
+            <div className="space-y-3 shrink-0">
               <nav className="space-y-0.5">
                 {[
                   { icon: Target, label: "Trilha Principal", sub: "Carreira passo a passo", active: true },
