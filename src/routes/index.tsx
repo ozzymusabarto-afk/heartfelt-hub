@@ -404,12 +404,12 @@ function SAPSDQuestApp() {
 
             {/* Right Box */}
             <Card className={`p-4 lg:p-4 border-slate-200 shadow-sm rounded-2xl bg-white transition-opacity flex flex-col h-full overflow-hidden ${!selectedTransaction ? "opacity-50 pointer-events-none select-none" : "opacity-100"}`}>
-              <div className="mb-4">
-                <h3 className="font-semibold text-slate-800 text-lg">Passo 3 de 4: Preencha os dados</h3>
-                {!selectedTransaction && <p className="text-xs text-amber-600 font-medium">Selecione uma transação no Passo 2 para liberar este formulário.</p>}
+              <div className="mb-3">
+                <h3 className="font-semibold text-slate-800 text-lg">Passo 3 de 4: Dados</h3>
+                {!selectedTransaction && <p className="text-[10px] text-amber-600 font-medium">Selecione uma transação no Passo 2.</p>}
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 overflow-y-auto pr-1">
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Tipo de Ordem</Label>
                   <Select value={formData.orderType} onValueChange={(v) => handleInputChange("orderType", v)}>
