@@ -38,6 +38,8 @@ function SAPSDQuestApp() {
   const [selectedTransaction, setSelectedTransaction] = useState("");
   const [mode, setMode] = useState("standard");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [xp, setXp] = useState(350);
+  const [completedMissions, setCompletedMissions] = useState(12);
   const [formData, setFormData] = useState({
     orderType: "",
     orderDate: "",
@@ -50,6 +52,31 @@ function SAPSDQuestApp() {
     material: "",
   });
   const [feedbackState, setFeedbackState] = useState<"idle" | "success" | "error">("idle");
+  const [validationErrors, setValidationErrors] = useState<string[]>([]);
+  const [hintMessage, setHintMessage] = useState("");
+
+  // Auto-save & Load persistence
+  useEffect(() => {
+    const savedData = localStorage.getItem("sap-quest-data");
+    if (savedData) {
+      const parsed = JSON.parse(savedData);
+      setFormData(parsed.formData || {});
+      setSelectedTransaction(parsed.selectedTransaction || "");
+      setXp(parsed.xp || 350);
+      setCompletedMissions(parsed.completedMissions || 12);
+    }
+  }, []);
+
+  useEffect(() => {
+    const dataToSave = {
+      formData,
+      selectedTransaction,
+      xp,
+      completedMissions
+    };
+    localStorage.setItem("sap-quest-data", JSON.stringify(dataToSave));
+  }, [formData, selectedTransaction, xp, completedMissions]);
+
 
   const avatarUrl = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=256&q=80";
 
