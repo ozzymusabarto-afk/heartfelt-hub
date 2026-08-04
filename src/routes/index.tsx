@@ -457,8 +457,10 @@ function SAPSDQuestApp() {
                     placeholder="Ex: 200015" 
                     value={formData.customer}
                     onChange={(e) => handleInputChange("customer", e.target.value)}
-                    className="h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                    className={`h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700 focus:ring-2 focus:ring-primary ${validationErrors.includes("customer") ? "border-red-400 bg-red-50/50" : ""}`}
+                    aria-label="Cliente"
                   />
+
                 </div>
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Preço Líquido</Label>
