@@ -538,7 +538,7 @@ function SAPSDQuestApp() {
               </div>
             </Card>
 
-            <div className="md:col-span-1 lg:col-span-2 space-y-3">
+            <div className="md:col-span-1 lg:col-span-2 space-y-2">
               <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest px-1">Missões Recentes</h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
                 {[
