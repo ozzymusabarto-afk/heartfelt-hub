@@ -283,6 +283,12 @@ function SAPSDQuestApp() {
     } else if (!formData.material || formData.material !== CORRECT_DATA.material) {
       errors.push("material");
       localHint = "O material solicitado é MAT-SD-015.";
+    } else if (!formData.incoterms || formData.incoterms !== "FOB") {
+      errors.push("incoterms");
+      localHint = "Para este exercício, utilize Incoterms FOB.";
+    } else if (!formData.distChannel || formData.distChannel !== "10") {
+      errors.push("distChannel");
+      localHint = "Canal de Distribuição deve ser 10 (Venda Direta).";
     }
 
     setValidationErrors(errors);
