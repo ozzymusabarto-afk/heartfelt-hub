@@ -164,13 +164,28 @@ function SAPSDQuestApp() {
         toast.info("Dados validados! Revise o resumo antes de enviar.");
       } else {
         setFeedbackState("success");
-        setHintMessage("🎉 Excelente, Adriana! A ordem de venda foi criada com sucesso!");
+        const successMsg = "🎉 Excelente, Adriana! A ordem de venda foi criada com sucesso!";
+        setHintMessage(successMsg);
         setXp(prev => Math.min(prev + 25, 500));
         setCompletedMissions(prev => prev + 1);
+        setTrainingHistory(prev => [{
+          id: Math.random().toString(36).substr(2, 9),
+          status: "success",
+          transaction: selectedTransaction,
+          message: "Fluxo concluído corretamente.",
+          timestamp: Date.now()
+        }, ...prev].slice(0, 10));
         toast.success("Parabéns! Desafio concluído corretamente. +25 XP");
       }
     } else {
       setFeedbackState("error");
+      setTrainingHistory(prev => [{
+        id: Math.random().toString(36).substr(2, 9),
+        status: "error",
+        transaction: selectedTransaction || "N/A",
+        message: hintMessage || "Dados incorretos no formulário.",
+        timestamp: Date.now()
+      }, ...prev].slice(0, 10));
       toast.error("Ops! Verifique os dados. Erros não geram XP.");
     }
   };
