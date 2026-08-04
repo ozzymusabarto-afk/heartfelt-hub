@@ -37,17 +37,16 @@ const CORRECT_DATA = {
 function HugoAvatar({ className }: { className?: string }) {
   return (
     <div 
-      className={`rounded-2xl flex-shrink-0 flex items-center justify-center bg-white border-2 border-indigo-500 shadow-md relative group overflow-hidden p-1 ${className}`}
+      className={`rounded-2xl flex-shrink-0 flex items-center justify-center bg-gradient-to-tr from-indigo-600 to-blue-500 border-2 border-indigo-400 shadow-md relative group overflow-hidden ${className}`}
       role="img"
-      aria-label="Avatar do Chefe Hugo 3D"
+      aria-label="Avatar do Chefe Hugo"
     >
-      <img 
-        src="https://api.multiavatar.com/hugo.svg" 
-        alt="Chefe Hugo 3D" 
-        className="size-full object-contain"
-      />
+      <div className="flex flex-col items-center justify-center text-white">
+        <UserCheck className="size-8 text-white" />
+        <span className="text-[10px] font-bold tracking-wider leading-none mt-0.5">CH</span>
+      </div>
       <div 
-        className="absolute -bottom-0.5 -right-0.5 size-3 bg-green-500 border-2 border-white dark:border-slate-800 rounded-full z-10 shadow-sm"
+        className="absolute -bottom-1 -right-1 size-4 bg-emerald-500 border-2 border-white dark:border-slate-800 rounded-full z-10 shadow-sm"
         aria-hidden="true"
       ></div>
     </div>
