@@ -406,7 +406,7 @@ function SAPSDQuestApp() {
           </div>
 
           {/* 3. Dual Interactive Workspace */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4 flex-1 overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4 flex-1 lg:overflow-hidden">
             {/* Left Box */}
             <Card className="p-4 lg:p-4 border-slate-200 shadow-sm rounded-2xl flex flex-col h-full bg-white overflow-hidden">
               <div className="mb-3">
