@@ -522,10 +522,10 @@ function SAPSDQuestApp() {
                   <p className="text-[11px] text-slate-400">Aprenda todo o fluxo.</p>
                 </div>
               </div>
-              <div className="space-y-1.5">
-                <div className="flex justify-between text-[11px] font-bold">
+              <div className="space-y-1">
+                <div className="flex justify-between text-[10px] font-bold">
                   <span className="text-slate-500">Progresso</span>
-                  <span className="text-primary">4 / 8 missões</span>
+                  <span className="text-primary">{completedMissions} / 30 missões</span>
                 </div>
                 <Progress value={50} className="h-1.5 bg-slate-100" />
               </div>
