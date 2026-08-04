@@ -84,6 +84,9 @@ function SAPSDQuestApp() {
     transaction: string;
     message: string;
     timestamp: number;
+    xpEarned?: number;
+    missionName?: string;
+    progressAtTime?: number;
   }[]>([]);
   const [historyPeriod, setHistoryPeriod] = useState<"all" | "7d" | "30d">("all");
   const helpCloseRef = useRef<HTMLButtonElement>(null);
