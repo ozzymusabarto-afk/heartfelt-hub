@@ -19,14 +19,78 @@ import {
   SelectValue 
 } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/")({
   component: SAPSDQuestApp,
 });
 
+const CORRECT_DATA = {
+  transaction: "VA01",
+  orderType: "OR",
+  salesOrg: "1000",
+  customer: "200015",
+  material: "MAT-SD-015",
+};
+
 function SAPSDQuestApp() {
-  const [selectedTransaction, setSelectedTransaction] = useState("VA01");
+  const [selectedTransaction, setSelectedTransaction] = useState("");
   const [mode, setMode] = useState("standard");
+  const [formData, setFormData] = useState({
+    orderType: "",
+    orderDate: "",
+    salesOrg: "",
+    deliveryDate: "",
+    distChannel: "",
+    paymentCond: "",
+    customer: "",
+    price: "",
+    material: "",
+  });
+  const [feedbackState, setFeedbackState] = useState<"idle" | "success" | "error">("idle");
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = () => {
+    if (!selectedTransaction) {
+      setFeedbackState("error");
+      toast.error("Selecione uma transação!");
+      return;
+    }
+
+    const isCorrect = 
+      selectedTransaction === CORRECT_DATA.transaction &&
+      formData.orderType === CORRECT_DATA.orderType &&
+      formData.salesOrg === CORRECT_DATA.salesOrg &&
+      formData.customer === CORRECT_DATA.customer &&
+      formData.material === CORRECT_DATA.material;
+
+    if (isCorrect) {
+      setFeedbackState("success");
+      toast.success("Ordem criada com sucesso!");
+    } else {
+      setFeedbackState("error");
+      toast.error("Dados incorretos. Revise o formulário.");
+    }
+  };
+
+  const resetGame = () => {
+    setFeedbackState("idle");
+    setSelectedTransaction("");
+    setFormData({
+      orderType: "",
+      orderDate: "",
+      salesOrg: "",
+      deliveryDate: "",
+      distChannel: "",
+      paymentCond: "",
+      customer: "",
+      price: "",
+      material: "",
+    });
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans flex flex-col">
@@ -240,9 +304,9 @@ function SAPSDQuestApp() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Tipo de Ordem</Label>
-                  <Select defaultValue="OR">
+                  <Select value={formData.orderType} onValueChange={(v) => handleInputChange("orderType", v)}>
                     <SelectTrigger className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700">
-                      <SelectValue placeholder="Selecione" />
+                      <SelectValue placeholder="Selecione..." />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="OR">OR - Ordem Standard</SelectItem>
@@ -252,25 +316,45 @@ function SAPSDQuestApp() {
                 </div>
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Data do Pedido</Label>
-                  <Input type="text" defaultValue="17.05.2024" className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" />
+                  <Input 
+                    placeholder="Ex: 17.05.2024" 
+                    value={formData.orderDate}
+                    onChange={(e) => handleInputChange("orderDate", e.target.value)}
+                    className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                  />
                 </div>
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Org. de Vendas</Label>
-                  <Input defaultValue="1000" className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" />
+                  <Input 
+                    placeholder="Ex: 1000" 
+                    value={formData.salesOrg}
+                    onChange={(e) => handleInputChange("salesOrg", e.target.value)}
+                    className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                  />
                 </div>
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Data de Entrega</Label>
-                  <Input defaultValue="24.05.2024" className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" />
+                  <Input 
+                    placeholder="Ex: 24.05.2024" 
+                    value={formData.deliveryDate}
+                    onChange={(e) => handleInputChange("deliveryDate", e.target.value)}
+                    className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                  />
                 </div>
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Canal de Distr.</Label>
-                  <Input defaultValue="10" className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" />
+                  <Input 
+                    placeholder="Ex: 10" 
+                    value={formData.distChannel}
+                    onChange={(e) => handleInputChange("distChannel", e.target.value)}
+                    className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                  />
                 </div>
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Condição Pagto.</Label>
-                  <Select defaultValue="ZF30">
+                  <Select value={formData.paymentCond} onValueChange={(v) => handleInputChange("paymentCond", v)}>
                     <SelectTrigger className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700">
-                      <SelectValue placeholder="Selecione" />
+                      <SelectValue placeholder="Selecione..." />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="ZF30">ZF30 - 30 dias</SelectItem>
@@ -280,19 +364,37 @@ function SAPSDQuestApp() {
                 </div>
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Cliente</Label>
-                  <Input defaultValue="200015" className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" />
+                  <Input 
+                    placeholder="Ex: 200015" 
+                    value={formData.customer}
+                    onChange={(e) => handleInputChange("customer", e.target.value)}
+                    className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                  />
                 </div>
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Preço Líquido</Label>
-                  <Input defaultValue="150,00 BRL" className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" />
+                  <Input 
+                    placeholder="Ex: 150,00 BRL" 
+                    value={formData.price}
+                    onChange={(e) => handleInputChange("price", e.target.value)}
+                    className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                  />
                 </div>
                 <div className="col-span-2 space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Material</Label>
-                  <Input defaultValue="MAT-SD-015" className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" />
+                  <Input 
+                    placeholder="Ex: MAT-SD-015" 
+                    value={formData.material}
+                    onChange={(e) => handleInputChange("material", e.target.value)}
+                    className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                  />
                 </div>
               </div>
 
-              <Button className="w-full h-12 mt-8 bg-primary hover:bg-indigo-700 text-white font-bold rounded-xl shadow-md transition-all scale-100 active:scale-95 gap-2">
+              <Button 
+                onClick={handleSubmit}
+                className="w-full h-12 mt-8 bg-primary hover:bg-indigo-700 text-white font-bold rounded-xl shadow-md transition-all scale-100 active:scale-95 gap-2"
+              >
                 🚀 Conferir e Submeter
               </Button>
             </Card>
@@ -359,14 +461,22 @@ function SAPSDQuestApp() {
         {/* RIGHT SIDEBAR (Fixed Width: 300px) */}
         <aside className="border-l border-border bg-card p-6 flex flex-col gap-8 overflow-y-auto">
           {/* 1. Feedback Card */}
-          <Card className="p-6 border-green-200 bg-green-50/30 rounded-2xl relative overflow-hidden flex flex-col items-center text-center">
-            <div className="absolute top-0 right-0 p-2 text-green-100 opacity-20">
-              <Star className="size-16" />
+          <Card className={`p-6 border shadow-sm rounded-2xl relative overflow-hidden flex flex-col items-center text-center transition-all duration-500 ${
+            feedbackState === "success" ? "border-green-200 bg-green-50/30" : 
+            feedbackState === "error" ? "border-red-200 bg-red-50/30" : 
+            "border-slate-200 bg-white"
+          }`}>
+            <div className={`absolute top-0 right-0 p-2 opacity-20 transition-all ${
+              feedbackState === "success" ? "text-green-500" : feedbackState === "error" ? "text-red-500" : "text-slate-200"
+            }`}>
+              {feedbackState === "success" ? <Star className="size-16" /> : <Target className="size-16" />}
             </div>
             
-            <div className="size-20 bg-blue-100 rounded-3xl overflow-hidden mb-4 ring-4 ring-white shadow-md">
+            <div className={`size-20 rounded-3xl overflow-hidden mb-4 ring-4 ring-white shadow-md transition-all ${
+              feedbackState === "success" ? "bg-green-100 scale-110" : "bg-blue-100"
+            }`}>
               <img 
-                src="https://api.dicebear.com/7.x/avataaars/svg?seed=Hugo&style=circle&clothing=shirtBlue&mouth=smile" 
+                src={`https://api.dicebear.com/7.x/avataaars/svg?seed=Hugo&style=circle&clothing=shirtBlue&mouth=${feedbackState === "success" ? "smile" : feedbackState === "error" ? "serious" : "neutral"}`}
                 alt="Chefe Hugo Feedback" 
                 className="size-full object-cover"
               />
@@ -374,15 +484,24 @@ function SAPSDQuestApp() {
 
             <h3 className="font-bold text-slate-800 mb-1">Feedback do Chefe Hugo</h3>
             <p className="text-xs text-slate-600 leading-relaxed mb-6">
-              🎉 Excelente, Adriana! A ordem de venda foi criada com sucesso!
+              {feedbackState === "idle" && "Aguardando submissão do pedido. Selecione a transação, preencha os campos e clique em 'Conferir e Submeter'."}
+              {feedbackState === "success" && "🎉 Excelente, Adriana! A ordem de venda foi criada com sucesso!"}
+              {feedbackState === "error" && "Esse pedido ainda precisa de revisão antes de seguir para faturamento. Revise se a transação e os campos obrigatórios (Tipo, Org, Cliente, Material) estão corretos."}
             </p>
 
-            <div className="bg-white px-4 py-2 rounded-xl shadow-sm border border-green-100 flex items-center gap-2 mb-6 animate-pulse">
-              <Star className="size-4 text-yellow-500 fill-yellow-500" />
-              <span className="text-sm font-black text-slate-800">+25 XP</span>
-            </div>
+            {feedbackState === "success" && (
+              <div className="bg-white px-4 py-2 rounded-xl shadow-sm border border-green-100 flex items-center gap-2 mb-6 animate-bounce">
+                <Star className="size-4 text-yellow-500 fill-yellow-500" />
+                <span className="text-sm font-black text-slate-800">+25 XP</span>
+              </div>
+            )}
 
-            <Button className="w-full bg-primary hover:bg-indigo-700 text-white font-bold rounded-xl h-11 gap-2 shadow-md">
+            <Button 
+              onClick={feedbackState === "success" ? resetGame : undefined}
+              className={`w-full font-bold rounded-xl h-11 gap-2 shadow-md transition-all ${
+                feedbackState === "success" ? "bg-primary hover:bg-indigo-700 text-white" : "bg-slate-100 text-slate-400 cursor-not-allowed"
+              }`}
+            >
               Próximo Pedido <ArrowRight className="size-4" />
             </Button>
           </Card>
