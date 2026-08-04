@@ -344,10 +344,13 @@ function SAPSDQuestApp() {
             {[
               { icon: Target, label: "Trilha Principal", sub: "Carreira passo a passo", active: true },
               { icon: Rocket, label: "Treino Rápido", sub: "Desafios aleatórios" },
-              { icon: BookOpen, label: "Módulos", sub: "Estude por tópico" },
+              { icon: BookOpen, label: "Módulos & Apostila", sub: "Estude por tópico" },
+              { icon: Crown, label: "Modos Premium", sub: "Recursos exclusivos" },
               { icon: BarChart3, label: "Estatísticas", sub: "Seu desempenho" },
+              { icon: Trophy, label: "Conquistas", sub: "Medalhas e troféus" },
+              { icon: Settings, label: "Configurações", sub: "Conta e preferências" },
             ].map((item) => (
-              <Button key={item.label} variant="ghost" className={`w-full justify-start h-11 px-3 rounded-xl gap-3 ${item.active ? "bg-indigo-50 text-primary" : "text-slate-500"}`}>
+              <Button key={item.label} variant="ghost" className={`w-full justify-start h-10 px-3 py-1.5 rounded-xl gap-3 ${item.active ? "bg-indigo-50 text-primary" : "text-slate-500 hover:bg-slate-50"}`}>
                 <item.icon className="size-4" />
                 <div className="flex flex-col items-start text-left">
                   <span className="text-xs font-bold leading-tight">{item.label}</span>
