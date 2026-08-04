@@ -78,16 +78,24 @@ function SAPSDQuestApp() {
 
   // Auto-save & Load persistence
   useEffect(() => {
-    const savedData = localStorage.getItem("sap-quest-data");
-    if (savedData) {
-      const parsed = JSON.parse(savedData);
-      setFormData(parsed.formData || {});
-      setSelectedTransaction(parsed.selectedTransaction || "");
-      setXp(parsed.xp ?? 0);
-      setCompletedMissions(parsed.completedMissions ?? 0);
-      if (parsed.feedbackState) setFeedbackState(parsed.feedbackState);
-      if (parsed.mode) setMode(parsed.mode);
-    }
+    // Reset data on initialization for a clean start
+    localStorage.removeItem("sap-quest-data");
+    setFormData({
+      orderType: "",
+      orderDate: "",
+      salesOrg: "",
+      deliveryDate: "",
+      distChannel: "",
+      paymentCond: "",
+      customer: "",
+      price: "",
+      material: "",
+    });
+    setSelectedTransaction("");
+    setXp(0);
+    setCompletedMissions(0);
+    setFeedbackState("idle");
+    setMode("standard");
   }, []);
 
   useEffect(() => {
