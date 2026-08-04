@@ -386,7 +386,7 @@ function SAPSDQuestApp() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 flex-1">
             <Card className="p-4 flex flex-col bg-white">
               <h3 className="font-semibold text-slate-800 mb-3 text-sm">Transação</h3>
-              <RadioGroup value={selectedTransaction} onValueChange={setSelectedTransaction} className="space-y-2 overflow-y-auto pr-1">
+              <RadioGroup value={selectedTransaction} onValueChange={setSelectedTransaction} className="space-y-2 pr-1">
                 {["VA01 - Criar Ordem", "BP - Parceiro", "VL01N - Entrega", "VF01 - Faturar"].map((label) => {
                   const id = label.split(" ")[0];
                   if (!id) return null;
