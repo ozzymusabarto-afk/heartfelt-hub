@@ -658,7 +658,7 @@ function SAPSDQuestApp() {
                 <Progress value={(xp / 500) * 100} className="h-2 bg-slate-100" />
               </div>
 
-              <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 flex items-center gap-3">
+              <div className="bg-slate-50 p-3 rounded-xl border border-slate-100 flex items-center gap-3">
                 <div className="size-10 bg-indigo-100 rounded-lg flex items-center justify-center text-primary shrink-0">
                   <BookOpen className="size-5" />
                 </div>
