@@ -38,6 +38,8 @@ function SAPSDQuestApp() {
   const [selectedTransaction, setSelectedTransaction] = useState("");
   const [mode, setMode] = useState("standard");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [xp, setXp] = useState(350);
+  const [completedMissions, setCompletedMissions] = useState(12);
   const [formData, setFormData] = useState({
     orderType: "",
     orderDate: "",
@@ -50,6 +52,31 @@ function SAPSDQuestApp() {
     material: "",
   });
   const [feedbackState, setFeedbackState] = useState<"idle" | "success" | "error">("idle");
+  const [validationErrors, setValidationErrors] = useState<string[]>([]);
+  const [hintMessage, setHintMessage] = useState("");
+
+  // Auto-save & Load persistence
+  useEffect(() => {
+    const savedData = localStorage.getItem("sap-quest-data");
+    if (savedData) {
+      const parsed = JSON.parse(savedData);
+      setFormData(parsed.formData || {});
+      setSelectedTransaction(parsed.selectedTransaction || "");
+      setXp(parsed.xp || 350);
+      setCompletedMissions(parsed.completedMissions || 12);
+    }
+  }, []);
+
+  useEffect(() => {
+    const dataToSave = {
+      formData,
+      selectedTransaction,
+      xp,
+      completedMissions
+    };
+    localStorage.setItem("sap-quest-data", JSON.stringify(dataToSave));
+  }, [formData, selectedTransaction, xp, completedMissions]);
+
 
   const avatarUrl = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=256&q=80";
 
@@ -58,30 +85,55 @@ function SAPSDQuestApp() {
   };
 
   const handleSubmit = () => {
+    const errors: string[] = [];
+    
     if (!selectedTransaction) {
-      setFeedbackState("error");
-      toast.error("Selecione uma transação!");
-      return;
+      errors.push("transaction");
+      setHintMessage("Ops! Você esqueceu de selecionar a transação correta. Qual código inicia uma Ordem de Venda?");
+    } else if (selectedTransaction !== CORRECT_DATA.transaction) {
+      errors.push("transaction");
+      setHintMessage(`A transação ${selectedTransaction} não é a correta para este processo. Tente a transação padrão de criação de ordens.`);
     }
 
-    const isCorrect = 
-      selectedTransaction === CORRECT_DATA.transaction &&
-      formData.orderType === CORRECT_DATA.orderType &&
-      formData.salesOrg === CORRECT_DATA.salesOrg &&
-      formData.customer === CORRECT_DATA.customer &&
-      formData.material === CORRECT_DATA.material;
+    if (!formData.orderType || formData.orderType !== CORRECT_DATA.orderType) {
+      errors.push("orderType");
+      if (!hintMessage) setHintMessage("O 'Tipo de Ordem' está incorreto. Geralmente usamos 'OR' para ordens standard.");
+    }
+    
+    if (!formData.salesOrg || formData.salesOrg !== CORRECT_DATA.salesOrg) {
+      errors.push("salesOrg");
+      if (!hintMessage) setHintMessage("Verifique a 'Org. de Vendas'. O cliente pertence à organização 1000.");
+    }
+    
+    if (!formData.customer || formData.customer !== CORRECT_DATA.customer) {
+      errors.push("customer");
+      if (!hintMessage) setHintMessage("O código do 'Cliente' está errado. Dica: ALFA DISTRIBUIDORA é o código 200015.");
+    }
+    
+    if (!formData.material || formData.material !== CORRECT_DATA.material) {
+      errors.push("material");
+      if (!hintMessage) setHintMessage("O 'Material' solicitado é o MAT-SD-015. Confira a digitação.");
+    }
 
-    if (isCorrect) {
+    setValidationErrors(errors);
+
+    if (errors.length === 0) {
       setFeedbackState("success");
-      toast.success("Ordem criada com sucesso!");
+      setHintMessage("🎉 Excelente, Adriana! A ordem de venda foi criada com sucesso!");
+      setXp(prev => Math.min(prev + 25, 500));
+      setCompletedMissions(prev => prev + 1);
+      toast.success("Ordem criada com sucesso! +25 XP");
     } else {
       setFeedbackState("error");
-      toast.error("Dados incorretos. Revise o formulário.");
+      toast.error("Dados incorretos. Chefe Hugo deixou uma dica para você.");
     }
   };
 
+
   const resetGame = () => {
     setFeedbackState("idle");
+    setValidationErrors([]);
+    setHintMessage("");
     setSelectedTransaction("");
     setFormData({
       orderType: "",
@@ -95,6 +147,7 @@ function SAPSDQuestApp() {
       material: "",
     });
   };
+
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans flex flex-col pb-20 md:pb-0">
@@ -131,9 +184,9 @@ function SAPSDQuestApp() {
             <div className="flex flex-col gap-1">
               <div className="flex justify-between items-end gap-4">
                 <span className="text-[10px] font-bold text-slate-400 leading-none uppercase">XP</span>
-                <span className="text-[10px] font-bold text-slate-700 leading-none">350 / 500</span>
+                <span className="text-[10px] font-bold text-slate-700 leading-none" aria-label={`XP atual: ${xp} de 500`}>{xp} / 500</span>
               </div>
-              <Progress value={70} className="h-1.5 w-24 bg-slate-100" />
+              <Progress value={(xp / 500) * 100} className="h-1.5 w-24 bg-slate-100" />
             </div>
           </Card>
 
@@ -141,8 +194,9 @@ function SAPSDQuestApp() {
             <div className="size-8 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600">
               <Star className="size-5" />
             </div>
-            <span className="text-xs font-bold text-slate-700">1.250</span>
+            <span className="text-xs font-bold text-slate-700">{xp * 3}</span>
           </Card>
+
 
           <div className="flex items-center bg-slate-100 p-1 rounded-full">
             <Button 
@@ -166,9 +220,10 @@ function SAPSDQuestApp() {
         
         <div className="lg:hidden flex items-center gap-2">
            <Badge variant="outline" className="bg-amber-50 text-amber-600 border-amber-200">Lvl 1</Badge>
-           <Badge variant="outline" className="bg-indigo-50 text-primary border-indigo-200">350 XP</Badge>
+           <Badge variant="outline" className="bg-indigo-50 text-primary border-indigo-200">{xp} XP</Badge>
         </div>
       </header>
+
 
 
       <div className="flex-1 flex flex-col md:grid md:grid-cols-[260px_1fr] lg:grid-cols-[260px_1fr_300px] overflow-hidden relative">
@@ -300,15 +355,17 @@ function SAPSDQuestApp() {
                 ].map((item) => (
                   <Label
                     key={item.id}
-                    className={`flex items-center gap-3 p-4 border rounded-xl cursor-pointer transition-all hover:bg-slate-50 min-h-[56px] ${
-                      selectedTransaction === item.id ? "border-primary bg-indigo-50/50 ring-1 ring-primary" : "border-slate-100"
+                    className={`flex items-center gap-3 p-4 border rounded-xl cursor-pointer transition-all hover:bg-slate-50 min-h-[56px] focus-within:ring-2 focus-within:ring-primary ${
+                      selectedTransaction === item.id ? "border-primary bg-indigo-50/50 ring-1 ring-primary" : 
+                      validationErrors.includes("transaction") ? "border-red-400 bg-red-50/50 ring-1 ring-red-200" : "border-slate-100"
                     }`}
                   >
-                    <RadioGroupItem value={item.id} className="text-primary border-slate-300" />
+                    <RadioGroupItem value={item.id} className="text-primary border-slate-300" aria-label={item.label} />
                     <span className={`font-bold text-sm ${selectedTransaction === item.id ? "text-primary" : "text-slate-700"}`}>
                       {item.label}
                     </span>
                   </Label>
+
                 ))}
               </RadioGroup>
 
@@ -333,7 +390,7 @@ function SAPSDQuestApp() {
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Tipo de Ordem</Label>
                   <Select value={formData.orderType} onValueChange={(v) => handleInputChange("orderType", v)}>
-                    <SelectTrigger className="h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700">
+                    <SelectTrigger className={`h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700 focus:ring-2 focus:ring-primary ${validationErrors.includes("orderType") ? "border-red-400 bg-red-50/50" : ""}`} aria-label="Tipo de Ordem">
                       <SelectValue placeholder="Selecione..." />
                     </SelectTrigger>
                     <SelectContent>
@@ -341,6 +398,7 @@ function SAPSDQuestApp() {
                       <SelectItem value="QT">QT - Cotação</SelectItem>
                     </SelectContent>
                   </Select>
+
                 </div>
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Data do Pedido</Label>
@@ -357,8 +415,10 @@ function SAPSDQuestApp() {
                     placeholder="Ex: 1000" 
                     value={formData.salesOrg}
                     onChange={(e) => handleInputChange("salesOrg", e.target.value)}
-                    className="h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                    className={`h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700 focus:ring-2 focus:ring-primary ${validationErrors.includes("salesOrg") ? "border-red-400 bg-red-50/50" : ""}`}
+                    aria-label="Org. de Vendas"
                   />
+
                 </div>
 
                 <div className="space-y-1.5">
@@ -397,8 +457,10 @@ function SAPSDQuestApp() {
                     placeholder="Ex: 200015" 
                     value={formData.customer}
                     onChange={(e) => handleInputChange("customer", e.target.value)}
-                    className="h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                    className={`h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700 focus:ring-2 focus:ring-primary ${validationErrors.includes("customer") ? "border-red-400 bg-red-50/50" : ""}`}
+                    aria-label="Cliente"
                   />
+
                 </div>
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Preço Líquido</Label>
@@ -415,8 +477,10 @@ function SAPSDQuestApp() {
                     placeholder="Ex: MAT-SD-015" 
                     value={formData.material}
                     onChange={(e) => handleInputChange("material", e.target.value)}
-                    className="h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                    className={`h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700 focus:ring-2 focus:ring-primary ${validationErrors.includes("material") ? "border-red-400 bg-red-50/50" : ""}`}
+                    aria-label="Material"
                   />
+
                 </div>
               </div>
 
@@ -515,11 +579,11 @@ function SAPSDQuestApp() {
 
 
             <h3 className="font-bold text-slate-800 mb-1">Feedback do Chefe Hugo</h3>
-            <p className="text-xs text-slate-600 leading-relaxed mb-6">
+            <p className="text-xs text-slate-600 leading-relaxed mb-6" aria-live="polite">
               {feedbackState === "idle" && "Aguardando submissão do pedido. Selecione a transação, preencha os campos e clique em 'Conferir e Submeter'."}
-              {feedbackState === "success" && "🎉 Excelente, Adriana! A ordem de venda foi criada com sucesso!"}
-              {feedbackState === "error" && "Esse pedido ainda precisa de revisão antes de seguir para faturamento. Revise se a transação e os campos obrigatórios (Tipo, Org, Cliente, Material) estão corretos."}
+              {(feedbackState === "success" || feedbackState === "error") && hintMessage}
             </p>
+
 
             {feedbackState === "success" && (
               <div className="bg-white px-4 py-2 rounded-xl shadow-sm border border-green-100 flex items-center gap-2 mb-6 animate-bounce">
@@ -545,17 +609,17 @@ function SAPSDQuestApp() {
               <div className="space-y-2">
                 <div className="flex justify-between text-xs font-bold">
                   <span className="text-slate-500">Missões concluídas</span>
-                  <span className="text-slate-800">12 / 30</span>
+                  <span className="text-slate-800" aria-label={`Missões concluídas: ${completedMissions} de 30`}>{completedMissions} / 30</span>
                 </div>
-                <Progress value={40} className="h-2 bg-slate-100" />
+                <Progress value={(completedMissions / 30) * 100} className="h-2 bg-slate-100" />
               </div>
 
               <div className="space-y-2">
                 <div className="flex justify-between text-xs font-bold">
                   <span className="text-slate-500">XP neste nível</span>
-                  <span className="text-slate-800">350 / 500</span>
+                  <span className="text-slate-800" aria-label={`XP atual: ${xp} de 500`}>{xp} / 500</span>
                 </div>
-                <Progress value={70} className="h-2 bg-slate-100" />
+                <Progress value={(xp / 500) * 100} className="h-2 bg-slate-100" />
               </div>
 
               <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 flex items-center gap-3">
@@ -564,8 +628,9 @@ function SAPSDQuestApp() {
                 </div>
                 <div className="flex flex-col">
                   <span className="text-[10px] font-bold text-slate-400 uppercase">Próxima Promoção</span>
-                  <span className="text-[11px] font-bold text-slate-700">Faltam 150 XP para Júnior</span>
+                  <span className="text-[11px] font-bold text-slate-700">Faltam {500 - xp} XP para Júnior</span>
                 </div>
+
               </div>
             </Card>
           </div>
