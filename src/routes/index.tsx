@@ -58,7 +58,7 @@ function SAPSDQuestApp() {
   const [mode, setMode] = useState("standard");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [xp, setXp] = useState(0);
-  const [completedMissions, setCompletedMissions] = useState(12);
+  const [completedMissions, setCompletedMissions] = useState(0);
   const [formData, setFormData] = useState({
     orderType: "",
     orderDate: "",
@@ -92,31 +92,45 @@ function SAPSDQuestApp() {
     
     // Recovery logic
     const saved = localStorage.getItem("sap-quest-data");
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        if (parsed.formData) setFormData(parsed.formData);
-        if (parsed.selectedTransaction) setSelectedTransaction(parsed.selectedTransaction);
-        if (parsed.xp !== undefined) setXp(parsed.xp);
-        if (parsed.completedMissions !== undefined) setCompletedMissions(parsed.completedMissions);
-        if (parsed.feedbackState) setFeedbackState(parsed.feedbackState);
-        if (parsed.mode) setMode(parsed.mode);
-      } catch (e) {
-        console.error("Failed to load data", e);
-      }
-    }
-
     const savedHistory = localStorage.getItem("sap-quest-history");
-    if (savedHistory) {
-      try {
-        setTrainingHistory(JSON.parse(savedHistory));
-      } catch (e) {
-        console.error("Failed to parse history", e);
-      }
-    }
     
     if (!hasStarted) {
+      // Force reset for new session
+      localStorage.removeItem("sap-quest-data");
+      localStorage.removeItem("sap-quest-history");
+      setFormData({
+        orderType: "", orderDate: "", salesOrg: "", deliveryDate: "",
+        distChannel: "", paymentCond: "", customer: "", price: "", material: "",
+        incoterms: "", division: "", poNumber: "",
+      });
+      setSelectedTransaction("");
+      setXp(0);
+      setCompletedMissions(0);
+      setTrainingHistory([]);
+      setFeedbackState("idle");
       sessionStorage.setItem("sap-quest-session-started", "true");
+    } else {
+      // Load saved state if session already started
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (parsed.formData) setFormData(parsed.formData);
+          if (parsed.selectedTransaction) setSelectedTransaction(parsed.selectedTransaction);
+          if (parsed.xp !== undefined) setXp(parsed.xp);
+          if (parsed.completedMissions !== undefined) setCompletedMissions(parsed.completedMissions);
+          if (parsed.feedbackState) setFeedbackState(parsed.feedbackState);
+          if (parsed.mode) setMode(parsed.mode);
+        } catch (e) {
+          console.error("Failed to load data", e);
+        }
+      }
+      if (savedHistory) {
+        try {
+          setTrainingHistory(JSON.parse(savedHistory));
+        } catch (e) {
+          console.error("Failed to parse history", e);
+        }
+      }
     }
   }, []);
 
@@ -538,7 +552,7 @@ function SAPSDQuestApp() {
                     Aprenda e pratique todo o fluxo de pedido à fatura.
                   </p>
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-bold text-slate-700 bg-slate-100 px-2 py-1 rounded-lg">[4 / 8 Missões]</span>
+                    <span className="text-[10px] font-bold text-slate-700 bg-slate-100 px-2 py-1 rounded-lg">[{completedMissions} / 8 Missões]</span>
                     <Button variant="ghost" size="sm" className="h-7 text-indigo-600 text-[10px] font-bold hover:bg-indigo-50">VER DETALHES</Button>
                   </div>
                 </div>
@@ -549,41 +563,41 @@ function SAPSDQuestApp() {
             <div className="flex flex-col gap-3">
               <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Missões Recentes</h3>
               <div className="grid grid-cols-1 gap-2">
-                <Card className="p-3 bg-white border-slate-200 shadow-sm rounded-xl flex items-center justify-between group hover:border-indigo-200 transition-colors">
+                <Card className={`p-3 bg-white border-slate-200 shadow-sm rounded-xl flex items-center justify-between group hover:border-indigo-200 transition-colors ${completedMissions > 0 ? "" : "border-indigo-200 bg-indigo-50/10"}`}>
                   <div className="flex items-center gap-3">
-                    <div className="size-8 bg-emerald-50 text-emerald-600 rounded-lg flex items-center justify-center">
-                      <CheckCircle2 className="size-5" />
+                    <div className={`size-8 rounded-lg flex items-center justify-center ${completedMissions > 0 ? "bg-emerald-50 text-emerald-600" : "bg-indigo-50 text-indigo-600"}`}>
+                      {completedMissions > 0 ? <CheckCircle2 className="size-5" /> : <Rocket className="size-5" />}
                     </div>
                     <div>
                       <h4 className="text-[11px] font-bold text-slate-800">Criar Ordem (VA01)</h4>
-                      <span className="text-[9px] text-slate-400 uppercase font-black">Concluído</span>
+                      <span className={`text-[9px] uppercase font-black ${completedMissions > 0 ? "text-emerald-600" : "text-indigo-600"}`}>
+                        {completedMissions > 0 ? "Concluído" : "Disponível / Em Aberto"}
+                      </span>
                     </div>
                   </div>
-                  <ArrowRight className="size-4 text-slate-200 group-hover:text-indigo-600 transition-all" />
+                  <ArrowRight className={`size-4 ${completedMissions > 0 ? "text-emerald-500" : "text-indigo-600"}`} />
                 </Card>
                 
-                <Card className="p-3 bg-white border-slate-200 shadow-sm rounded-xl flex items-center justify-between group hover:border-indigo-200 transition-colors">
+                <Card className="p-3 bg-white border-slate-100/50 shadow-sm rounded-xl flex items-center justify-between opacity-60 bg-slate-50/30">
                   <div className="flex items-center gap-3">
-                    <div className="size-8 bg-amber-50 text-amber-600 rounded-lg flex items-center justify-center">
+                    <div className="size-8 bg-slate-100 text-slate-400 rounded-lg flex items-center justify-center">
                       <BarChart3 className="size-5" />
                     </div>
                     <div>
-                      <h4 className="text-[11px] font-bold text-slate-800">Parceiros BP</h4>
-                      <div className="w-20 h-1 bg-slate-100 rounded-full mt-1">
-                        <div className="bg-amber-500 h-full rounded-full" style={{ width: '60%' }}></div>
-                      </div>
+                      <h4 className="text-[11px] font-bold text-slate-500">Parceiros BP</h4>
+                      <span className="text-[9px] text-slate-400 uppercase font-black">Bloqueado</span>
                     </div>
                   </div>
-                  <span className="text-[9px] font-bold text-amber-600">60%</span>
+                  <Settings className="size-4 text-slate-200" />
                 </Card>
-
+ 
                 <Card className="p-3 bg-white border-slate-100/50 shadow-sm rounded-xl flex items-center justify-between opacity-60 bg-slate-50/30">
                   <div className="flex items-center gap-3">
                     <div className="size-8 bg-slate-100 text-slate-400 rounded-lg flex items-center justify-center">
                       <X className="size-5" />
                     </div>
                     <div>
-                      <h4 className="text-[11px] font-bold text-slate-500">Cadastros Incompletos</h4>
+                      <h4 className="text-[11px] font-bold text-slate-500">Fluxo de Entrega</h4>
                       <span className="text-[9px] text-slate-400 uppercase font-black">Bloqueado</span>
                     </div>
                   </div>
