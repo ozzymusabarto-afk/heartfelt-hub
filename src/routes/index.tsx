@@ -471,7 +471,151 @@ function SAPSDQuestApp() {
     : 0;
 
   return (
+  if (!isAuth) {
+    return (
+      <div className="min-h-screen bg-[#f4f7fc] flex flex-col items-center justify-center p-4 font-sans">
+        <Card className="w-full max-w-[400px] p-8 border-slate-200 shadow-2xl rounded-3xl bg-white overflow-hidden relative">
+          <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-indigo-600 to-blue-500" />
+          
+          <div className="flex flex-col items-center mb-8">
+            <div className="size-16 bg-indigo-600 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-indigo-100 mb-4 rotate-3">
+              <Rocket className="size-10" />
+            </div>
+            <h1 className="font-display font-black text-2xl tracking-tight text-slate-800">SAP SD Quest</h1>
+            <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mt-1">AAM LOGÍSTICA LTDA</p>
+          </div>
+
+          <form onSubmit={handleLogin} className="space-y-5">
+            <div className="space-y-2">
+              <Label className="text-[10px] font-black text-slate-400 uppercase tracking-wider ml-1">Nome do Consultor(a)</Label>
+              <div className="relative">
+                <User className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-slate-400" />
+                <Input 
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
+                  placeholder="Seu nome"
+                  className="h-12 pl-10 rounded-xl border-slate-200 focus:ring-indigo-600 bg-slate-50/50"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label className="text-[10px] font-black text-slate-400 uppercase tracking-wider ml-1">Senha de Acesso</Label>
+              <div className="relative">
+                <Shield className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-slate-400" />
+                <Input 
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  className="h-12 pl-10 rounded-xl border-slate-200 focus:ring-indigo-600 bg-slate-50/50"
+                />
+              </div>
+            </div>
+
+            <Button type="submit" className="w-full h-12 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg shadow-indigo-100 transition-all active:scale-[0.98] mt-2">
+              ENTRAR NO SISTEMA SAP <ArrowRight className="ml-2 size-4" />
+            </Button>
+          </form>
+
+          <div className="mt-10 pt-6 border-t border-slate-100 text-center">
+            <p className="text-[10px] font-bold text-slate-400 tracking-wide uppercase">
+              Desenvolvido por <span className="text-indigo-600">Adriana Martins</span> | SAP SD Quest
+            </p>
+          </div>
+        </Card>
+      </div>
+    );
+  }
+
+  return (
     <div className="min-h-screen bg-background text-foreground font-sans flex flex-col pb-20 md:pb-0 overflow-y-auto">
+      {showOnboarding && (
+        <div className="fixed inset-0 z-[100] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-300">
+          <Card className="w-full max-w-[500px] border-none shadow-2xl rounded-3xl overflow-hidden bg-white animate-in zoom-in-95 duration-300">
+            <div className="h-2 w-full bg-slate-100">
+              <div 
+                className="h-full bg-indigo-600 transition-all duration-500" 
+                style={{ width: `${((onboardingStep + 1) / 3) * 100}%` }}
+              />
+            </div>
+            
+            <div className="p-8">
+              {onboardingStep === 0 && (
+                <div className="space-y-6 animate-in slide-in-from-right-4 duration-300">
+                  <div className="size-16 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center">
+                    <Trophy className="size-8" />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-black text-slate-800 tracking-tight mb-2">A Contratação</h2>
+                    <p className="text-slate-600 leading-relaxed">
+                      Parabéns, <b>{userName}</b>! Você acaba de ser contratado(a) como Trainee de SAP SD na <b>AAM Corp</b>! 
+                      Dedique-se para alcançar novos níveis e evoluir na sua carreira. Contamos com você!
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {onboardingStep === 1 && (
+                <div className="space-y-6 animate-in slide-in-from-right-4 duration-300">
+                  <div className="size-16 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center">
+                    <HugoAvatar className="size-12" />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-black text-slate-800 tracking-tight mb-2">O Mentor</h2>
+                    <p className="text-slate-600 leading-relaxed">
+                      Conheça o <b>Chefe Hugo</b>! Ele será seu líder direto e enviará demandas reais do fluxo <b>Order-to-Cash</b>. 
+                      Leia atentamente as solicitações dele no painel lateral.
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {onboardingStep === 2 && (
+                <div className="space-y-6 animate-in slide-in-from-right-4 duration-300">
+                  <div className="size-16 bg-amber-50 text-amber-500 rounded-2xl flex items-center justify-center">
+                    <Star className="size-8" />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-black text-slate-800 tracking-tight mb-2">Regras do Jogo</h2>
+                    <p className="text-slate-600 leading-relaxed">
+                      Preencha as transações corretamente para ganhar <b>+25 XP</b>, subir na hierarquia da empresa e acumular pontos. 
+                      Em caso de dúvidas nos campos, utilize a <b>Ajuda (F1)</b>.
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              <div className="flex items-center gap-3 mt-10">
+                <Button 
+                  variant="ghost" 
+                  className="font-bold text-slate-400"
+                  onClick={finishOnboarding}
+                >
+                  PULAR
+                </Button>
+                <div className="flex-1" />
+                {onboardingStep < 2 ? (
+                  <Button 
+                    className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-8 rounded-xl"
+                    onClick={() => setOnboardingStep(onboardingStep + 1)}
+                  >
+                    AVANÇAR
+                  </Button>
+                ) : (
+                  <Button 
+                    className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-8 rounded-xl shadow-lg shadow-indigo-100"
+                    onClick={finishOnboarding}
+                  >
+                    INICIAR MINHA JORNADA NA AAM CORP
+                  </Button>
+                )}
+              </div>
+            </div>
+          </Card>
+        </div>
+      )}
+
       <header className="sticky top-0 z-50 w-full border-b border-border bg-card shadow-sm px-4 md:px-6 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
