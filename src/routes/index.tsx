@@ -352,6 +352,18 @@ function SAPSDQuestApp() {
     });
   };
 
+  const fullReset = () => {
+    if (confirm("Tem certeza que deseja reiniciar TODO o seu progresso? Isso limpará seu XP e histórico de missões.")) {
+      setXp(0);
+      setCompletedMissions(0);
+      setTrainingHistory([]);
+      resetGame();
+      localStorage.removeItem("sap-quest-data");
+      localStorage.removeItem("sap-quest-history");
+      toast.success("Progresso reiniciado com sucesso!");
+    }
+  };
+
   const filteredHistory = trainingHistory.filter(h => {
     if (historyPeriod === "all") return true;
     const days = historyPeriod === "7d" ? 7 : 30;
