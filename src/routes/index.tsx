@@ -290,69 +290,78 @@ function SAPSDQuestApp() {
           <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
             {isSidebarOpen ? <X /> : <Menu />}
           </Button>
-          <div className="size-10 bg-indigo-100 rounded-lg flex items-center justify-center text-primary">
+          <div className="size-10 bg-indigo-600 rounded-lg flex items-center justify-center text-white shadow-lg shadow-indigo-200">
             <Rocket className="size-6" />
           </div>
           <h1 className="font-display font-bold text-lg md:text-xl tracking-tight text-slate-800">SAP SD Quest</h1>
         </div>
 
         <div className="hidden lg:flex items-center gap-2">
-          <Card className="flex items-center gap-3 px-3 py-1.5 border-slate-200 shadow-none rounded-xl bg-slate-50/50">
-            <div className="flex items-center gap-4">
-              <div className="flex flex-col border-r pr-4 border-slate-200 text-xs font-bold text-slate-700">
-                <span className="text-[9px] font-black text-slate-400 uppercase mb-1">Status</span>
-                <div className="flex items-center gap-2">
-                  <Shield className="size-3.5 text-amber-600" /> Trainee SD
-                </div>
+          <div className="flex items-center gap-2">
+            {/* Escudo: Nível 1 - Trainee SD */}
+            <Card className="flex items-center gap-2 px-3 py-1.5 border-slate-200 shadow-none rounded-xl bg-slate-50/50">
+              <Shield className="size-4 text-indigo-600" />
+              <div className="flex flex-col">
+                <span className="text-[9px] font-black text-slate-400 uppercase leading-none mb-0.5">Status</span>
+                <span className="text-[11px] font-bold text-slate-700 leading-none">Nível 1 - Trainee SD</span>
               </div>
-              <div className="flex flex-col border-r pr-4 border-slate-200 text-xs font-bold text-slate-700">
-                <span className="text-[9px] font-black text-slate-400 uppercase mb-1">Missões</span>
-                {completedMissions} / 30
-              </div>
-              <div className="flex flex-col min-w-[120px]">
-                <div className="flex justify-between text-[9px] font-black text-slate-400 uppercase mb-1">
-                  <span>XP ({xp})</span> <span>{xp}/500</span>
-                </div>
-                <Progress value={(xp / 500) * 100} className="h-1.5" />
-              </div>
-            </div>
-          </Card>
+            </Card>
 
-          <div className="flex items-center bg-slate-100 p-1 rounded-full ml-2">
-            {["standard", "practice", "tax"].map((m) => (
-              <Button 
-                key={m}
-                variant={mode === m ? "default" : "ghost"} 
-                size="sm" 
-                className={`rounded-full h-8 text-[11px] font-bold px-4 ${mode === m ? "bg-primary text-white" : "text-slate-500"}`}
-                onClick={() => setMode(m)}
-              >
-                {m === "practice" && <EyeOff className="size-3 mr-1" />}
-                {m.toUpperCase()}
-              </Button>
-            ))}
+            {/* Barra de progresso: XP (350 / 500 XP) */}
+            <Card className="flex items-center gap-3 px-3 py-1.5 border-slate-200 shadow-none rounded-xl bg-slate-50/50 min-w-[160px]">
+              <div className="flex flex-col w-full">
+                <div className="flex justify-between items-end mb-1">
+                  <span className="text-[9px] font-black text-slate-400 uppercase leading-none">Progresso XP</span>
+                  <span className="text-[10px] font-bold text-indigo-600 leading-none">{xp} / 500 XP</span>
+                </div>
+                <Progress value={(xp / 500) * 100} className="h-1.5 bg-indigo-100" />
+              </div>
+            </Card>
+
+            {/* Estrela Amarela: Pontos 1.250 */}
+            <Card className="flex items-center gap-2 px-3 py-1.5 border-slate-200 shadow-none rounded-xl bg-slate-50/50">
+              <Star className="size-4 text-amber-500 fill-amber-500" />
+              <div className="flex flex-col">
+                <span className="text-[9px] font-black text-slate-400 uppercase leading-none mb-0.5">Pontos</span>
+                <span className="text-[11px] font-bold text-slate-700 leading-none">1.250</span>
+              </div>
+            </Card>
+
+            {/* Chama Laranja: Sequência 7 dias */}
+            <Card className="flex items-center gap-2 px-3 py-1.5 border-slate-200 shadow-none rounded-xl bg-slate-50/50">
+              <Flame className="size-4 text-orange-500 fill-orange-500" />
+              <div className="flex flex-col">
+                <span className="text-[9px] font-black text-slate-400 uppercase leading-none mb-0.5">Sequência</span>
+                <span className="text-[11px] font-bold text-slate-700 leading-none">7 dias</span>
+              </div>
+            </Card>
+
+            {/* Select/Badges: Modo [SD Standard] e Localização Brasil (TAX) */}
+            <div className="flex items-center bg-slate-100 p-1 rounded-xl ml-1 gap-1">
+              <Badge className="bg-indigo-600 hover:bg-indigo-700 text-white border-none rounded-lg px-2 py-0.5 text-[10px] font-bold">SD Standard</Badge>
+              <Badge variant="outline" className="border-slate-300 text-slate-600 rounded-lg px-2 py-0.5 text-[10px] font-bold bg-white">Brasil (TAX)</Badge>
+            </div>
           </div>
 
-          <div className="flex items-center gap-1 border-l pl-2 border-slate-200">
-            <Button variant="ghost" size="icon" className="size-8 text-slate-500" onClick={exportState} title="Exportar">
+          <div className="flex items-center gap-1 border-l ml-2 pl-2 border-slate-200">
+            <Button variant="ghost" size="icon" className="size-8 text-slate-500 hover:text-indigo-600" onClick={exportState} title="Exportar">
               <Download className="size-4" />
             </Button>
             <div className="relative">
               <Input type="file" accept=".json" onChange={importState} className="hidden" id="import-state" />
-              <Label htmlFor="import-state" className="size-8 flex items-center justify-center rounded-md hover:bg-slate-100 cursor-pointer text-slate-500" title="Importar">
+              <Label htmlFor="import-state" className="size-8 flex items-center justify-center rounded-md hover:bg-slate-100 cursor-pointer text-slate-500 hover:text-indigo-600" title="Importar">
                 <Upload className="size-4" />
               </Label>
             </div>
             <Button 
               variant="outline" 
               size="sm" 
-              className="ml-2 h-8 text-[11px] font-bold border-indigo-200 text-indigo-600 hover:bg-indigo-50 gap-1.5"
+              className="ml-2 h-8 text-[11px] font-bold border-indigo-200 text-indigo-600 hover:bg-indigo-50 gap-1.5 rounded-lg"
               onClick={() => toast.info("Sincronização na nuvem estará disponível em breve! Por enquanto, use Exportar/Importar.")}
             >
               <LogIn className="size-3" /> LOGIN
             </Button>
           </div>
-
         </div>
       </header>
 
