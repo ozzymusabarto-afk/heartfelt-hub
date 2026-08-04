@@ -84,39 +84,52 @@ function SAPSDQuestApp() {
 
   // Auto-save continuous progress in local storage
   useEffect(() => {
-    const handleBeforeUnload = (e: BeforeUnloadEvent) => {};
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    const hasBeenReset = sessionStorage.getItem("sap-quest-session-reset");
-    if (!hasBeenReset) {
-      if (confirm("Deseja iniciar um novo treino? Os dados anteriores serão zerados para esta sessão.")) {
-        localStorage.removeItem("sap-quest-data");
-        resetGame();
-        setXp(0);
-        setCompletedMissions(0);
-        setMode("standard");
-        sessionStorage.setItem("sap-quest-session-reset", "true");
-        toast.success("Sessão resetada com sucesso.");
-      } else {
-        const saved = localStorage.getItem("sap-quest-data");
-        if (saved) {
-          try {
-            const parsed = JSON.parse(saved);
-            setFormData(parsed.formData);
-            setSelectedTransaction(parsed.selectedTransaction);
-            setXp(parsed.xp);
-            setCompletedMissions(parsed.completedMissions);
-            setFeedbackState(parsed.feedbackState);
-            setMode(parsed.mode);
-          } catch (e) {
-            console.error("Failed to load data", e);
-          }
+    // Force reset on FIRST LOAD ONLY if no explicit "keep" flag
+    const hasStarted = sessionStorage.getItem("sap-quest-session-started");
+    
+    if (!hasStarted) {
+      // Clear storage to ensure clean state on fresh load
+      localStorage.removeItem("sap-quest-data");
+      localStorage.removeItem("sap-quest-history");
+      
+      setXp(0);
+      setCompletedMissions(0);
+      setTrainingHistory([]);
+      setFormData({
+        orderType: "", orderDate: "", salesOrg: "", deliveryDate: "",
+        distChannel: "", paymentCond: "", customer: "", price: "", material: "",
+      });
+      setSelectedTransaction("");
+      setFeedbackState("idle");
+      
+      sessionStorage.setItem("sap-quest-session-started", "true");
+      toast.info("Bem-vindo ao SAP SD Quest! Dados zerados.");
+    } else {
+      // Restore if already started in this session
+      const saved = localStorage.getItem("sap-quest-data");
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          setFormData(parsed.formData || {});
+          setSelectedTransaction(parsed.selectedTransaction || "");
+          setXp(parsed.xp || 0);
+          setCompletedMissions(parsed.completedMissions || 0);
+          setFeedbackState(parsed.feedbackState || "idle");
+          setMode(parsed.mode || "standard");
+        } catch (e) {
+          console.error("Failed to load data", e);
         }
-        sessionStorage.setItem("sap-quest-session-reset", "true");
+      }
+      
+      const savedHistory = localStorage.getItem("sap-quest-history");
+      if (savedHistory) {
+        try {
+          setTrainingHistory(JSON.parse(savedHistory));
+        } catch (e) {
+          console.error("Failed to parse history", e);
+        }
       }
     }
-
-    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
   }, []);
 
   useEffect(() => {
@@ -266,7 +279,7 @@ function SAPSDQuestApp() {
     : 0;
 
   return (
-    <div className="min-h-screen lg:h-screen lg:max-h-screen lg:overflow-hidden bg-background text-foreground font-sans flex flex-col pb-20 md:pb-0">
+    <div className="min-h-screen bg-background text-foreground font-sans flex flex-col pb-20 md:pb-0">
       <header className="sticky top-0 z-50 w-full border-b border-border bg-card shadow-sm px-4 md:px-6 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
@@ -338,8 +351,8 @@ function SAPSDQuestApp() {
         </div>
       </header>
 
-      <div className="flex-1 flex flex-col md:grid md:grid-cols-[260px_1fr] lg:grid-cols-[260px_1fr_300px] overflow-hidden relative">
-        <aside className={`fixed inset-y-0 left-0 z-40 w-[260px] bg-card border-r p-6 transform transition-transform md:relative md:translate-x-0 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
+      <div className="flex-1 flex flex-col md:grid md:grid-cols-[260px_1fr] lg:grid-cols-[260px_1fr_300px] relative">
+        <aside className={`fixed inset-y-0 left-0 z-40 w-[260px] bg-card border-r p-6 transform transition-transform md:relative md:translate-x-0 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} h-screen md:h-auto overflow-y-auto`}>
           <nav className="space-y-1">
             {[
               { icon: Target, label: "Trilha Principal", sub: "Carreira passo a passo", active: true },
@@ -350,7 +363,7 @@ function SAPSDQuestApp() {
               { icon: Trophy, label: "Conquistas", sub: "Medalhas e troféus" },
               { icon: Settings, label: "Configurações", sub: "Conta e preferências" },
             ].map((item) => (
-              <Button key={item.label} variant="ghost" className={`w-full justify-start h-10 px-3 py-1.5 rounded-xl gap-3 ${item.active ? "bg-indigo-50 text-primary" : "text-slate-500 hover:bg-slate-50"}`}>
+              <Button key={item.label} variant="ghost" className={`w-full justify-start h-10 px-3 py-1.5 rounded-xl gap-3 ${item.label === "Trilha Principal" ? "bg-indigo-50 text-primary" : "text-slate-500 hover:bg-slate-50"}`}>
                 <item.icon className="size-4" />
                 <div className="flex flex-col items-start text-left">
                   <span className="text-xs font-bold leading-tight">{item.label}</span>
@@ -361,7 +374,7 @@ function SAPSDQuestApp() {
           </nav>
         </aside>
 
-        <main className="bg-slate-50 p-4 overflow-y-auto lg:overflow-hidden flex-1 flex flex-col gap-4">
+        <main className="bg-slate-50 p-4 overflow-y-auto flex-1 flex flex-col gap-4">
           <Card className="p-3 border-slate-200 shadow-sm rounded-2xl flex items-center gap-4 shrink-0">
             <HugoAvatar className="size-12" />
             <div>
@@ -370,10 +383,10 @@ function SAPSDQuestApp() {
             </div>
           </Card>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 flex-1 lg:overflow-hidden">
-            <Card className="p-4 flex flex-col h-full bg-white lg:overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 flex-1">
+            <Card className="p-4 flex flex-col bg-white">
               <h3 className="font-semibold text-slate-800 mb-3 text-sm">Transação</h3>
-              <RadioGroup value={selectedTransaction} onValueChange={setSelectedTransaction} className="space-y-2 overflow-y-auto pr-1">
+              <RadioGroup value={selectedTransaction} onValueChange={setSelectedTransaction} className="space-y-2 pr-1">
                 {["VA01 - Criar Ordem", "BP - Parceiro", "VL01N - Entrega", "VF01 - Faturar"].map((label) => {
                   const id = label.split(" ")[0];
                   if (!id) return null;
@@ -386,9 +399,9 @@ function SAPSDQuestApp() {
               </RadioGroup>
             </Card>
 
-            <Card className={`p-4 bg-white flex flex-col h-full lg:overflow-hidden ${!selectedTransaction ? "opacity-50 pointer-events-none" : ""}`}>
+            <Card className={`p-4 bg-white flex flex-col ${!selectedTransaction ? "opacity-50 pointer-events-none" : ""}`}>
               <h3 className="font-semibold text-slate-800 mb-3 text-sm">Dados do Pedido</h3>
-              <div className="grid grid-cols-2 gap-3 overflow-y-auto pr-1">
+              <div className="grid grid-cols-2 gap-3 pr-1">
                 {[
                   { id: "orderType", label: "Tipo", type: "select", options: ["OR", "QT"] },
                   { id: "orderDate", label: "Data Pedido" },
@@ -462,8 +475,11 @@ function SAPSDQuestApp() {
 
             <div className="space-y-2 text-[10px] font-bold text-slate-400 uppercase">
               <span>Progresso Real</span>
-              <Progress value={(completedMissions/30)*100} className="h-1.5" />
-              <div className="flex justify-between"><span>XP {xp}/500</span></div>
+              <div className="flex justify-between items-center text-indigo-600 mb-1">
+                <span>XP</span>
+                <span>{xp}/500</span>
+              </div>
+              <Progress value={(xp/500)*100} className="h-1.5" />
             </div>
           </div>
         </aside>
