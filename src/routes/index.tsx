@@ -5,8 +5,11 @@ import {
   ChevronRight, HelpCircle, CheckCircle2, Flame, Star, Shield,
   Search, Bell, Plus, MoreHorizontal, ArrowRight, Check, Menu, X,
   Gamepad2, Dices, User, UserCheck, Download, Upload, Eye, EyeOff, LogIn,
-  FileText
+  FileText, Undo2
 } from "lucide-react";
+import { 
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area 
+} from 'recharts';
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Card } from "@/components/ui/card";
@@ -89,7 +92,11 @@ function SAPSDQuestApp() {
     progressAtTime?: number;
   }[]>([]);
   const [historyPeriod, setHistoryPeriod] = useState<"all" | "7d" | "30d">("all");
+  const [historySearch, setHistorySearch] = useState("");
+  const [lastStateBeforeReset, setLastStateBeforeReset] = useState<any>(null);
+  const [showUndoReset, setShowUndoReset] = useState(false);
   const helpCloseRef = useRef<HTMLButtonElement>(null);
+  const undoTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const generatePDFReport = () => {
     toast.info("Gerando relatório...");
@@ -354,17 +361,45 @@ function SAPSDQuestApp() {
 
   const fullReset = () => {
     if (confirm("Tem certeza que deseja reiniciar TODO o seu progresso? Isso limpará seu XP e histórico de missões.")) {
+      // Salva estado para desfazer
+      const currentState = { xp, completedMissions, trainingHistory };
+      setLastStateBeforeReset(currentState);
+      setShowUndoReset(true);
+
+      // Limpa dados
       setXp(0);
       setCompletedMissions(0);
       setTrainingHistory([]);
       resetGame();
       localStorage.removeItem("sap-quest-data");
       localStorage.removeItem("sap-quest-history");
-      toast.success("Progresso reiniciado com sucesso!");
+      toast.success("Progresso reiniciado!");
+
+      // Inicia timeout para ocultar botão de desfazer
+      if (undoTimeoutRef.current) clearTimeout(undoTimeoutRef.current);
+      undoTimeoutRef.current = setTimeout(() => {
+        setShowUndoReset(false);
+        setLastStateBeforeReset(null);
+      }, 10000); // 10 segundos
+    }
+  };
+
+  const undoReset = () => {
+    if (lastStateBeforeReset) {
+      setXp(lastStateBeforeReset.xp);
+      setCompletedMissions(lastStateBeforeReset.completedMissions);
+      setTrainingHistory(lastStateBeforeReset.trainingHistory);
+      setShowUndoReset(false);
+      setLastStateBeforeReset(null);
+      if (undoTimeoutRef.current) clearTimeout(undoTimeoutRef.current);
+      toast.success("Reinício desfeito com sucesso!");
     }
   };
 
   const filteredHistory = trainingHistory.filter(h => {
+    const matchesSearch = (h.missionName || h.transaction || "").toLowerCase().includes(historySearch.toLowerCase());
+    if (!matchesSearch) return false;
+    
     if (historyPeriod === "all") return true;
     const days = historyPeriod === "7d" ? 7 : 30;
     return (Date.now() - h.timestamp) < (days * 24 * 60 * 60 * 1000);
@@ -399,6 +434,7 @@ function SAPSDQuestApp() {
             </Card>
 
             {/* Barra de progresso: XP (350 / 500 XP) */}
+            {/* Barra de progresso: XP (350 / 500 XP) */}
             <Card className="flex items-center gap-3 px-3 py-1.5 border-slate-200 shadow-none rounded-xl bg-slate-50/50 min-w-[160px]">
               <div className="flex flex-col w-full">
                 <div className="flex justify-between items-end mb-1">
@@ -414,7 +450,7 @@ function SAPSDQuestApp() {
               <Star className="size-4 text-amber-500 fill-amber-500" />
               <div className="flex flex-col">
                 <span className="text-[9px] font-black text-slate-400 uppercase leading-none mb-0.5">Pontos</span>
-                <span className="text-[11px] font-bold text-slate-700 leading-none">1.250</span>
+                <span className="text-[11px] font-bold text-slate-700 leading-none">{xp * 5}</span>
               </div>
             </Card>
 
@@ -722,15 +758,25 @@ function SAPSDQuestApp() {
             </Card>
 
             <div className="space-y-2">
-              <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Histórico de Submissões</h3>
+              <div className="flex items-center justify-between pl-1">
+                <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Histórico</h3>
+                <div className="relative">
+                  <Input 
+                    placeholder="Buscar..." 
+                    value={historySearch}
+                    onChange={(e) => setHistorySearch(e.target.value)}
+                    className="h-6 w-24 text-[9px] bg-slate-50 border-none rounded-md"
+                  />
+                </div>
+              </div>
               <Card className="bg-white border-slate-200 shadow-sm rounded-2xl overflow-hidden">
-                <div className="max-h-[200px] overflow-y-auto divide-y divide-slate-50">
-                  {trainingHistory.length === 0 ? (
+                <div className="max-h-[180px] overflow-y-auto divide-y divide-slate-50">
+                  {filteredHistory.length === 0 ? (
                     <div className="p-4 text-center text-[10px] text-slate-400 italic">
-                      Nenhuma submissão realizada.
+                      {historySearch ? "Nenhum resultado." : "Nenhuma submissão."}
                     </div>
                   ) : (
-                    trainingHistory.map((h) => (
+                    filteredHistory.map((h) => (
                       <div key={h.id} className="p-3 hover:bg-slate-50 transition-colors">
                         <div className="flex justify-between items-start mb-1">
                           <span className={`text-[9px] font-black uppercase ${h.status === 'success' ? 'text-emerald-600' : 'text-red-500'}`}>
@@ -744,7 +790,7 @@ function SAPSDQuestApp() {
                         {h.status === 'success' && (
                           <div className="flex items-center justify-between mt-1 text-[8px] text-slate-500 font-semibold">
                             <span>+{h.xpEarned} XP</span>
-                            <span>Progresso: {h.progressAtTime}%</span>
+                            <span>{h.progressAtTime}%</span>
                           </div>
                         )}
                       </div>
@@ -754,14 +800,26 @@ function SAPSDQuestApp() {
               </Card>
             </div>
 
-            <Button 
-              variant="outline" 
-              size="sm" 
-              className="w-full h-8 text-[10px] font-bold text-red-500 hover:text-red-600 hover:bg-red-50 border-red-100 rounded-xl gap-2 transition-all active:scale-[0.98]"
-              onClick={fullReset}
-            >
-              <X className="size-3" /> REINICIAR PROGRESSO
-            </Button>
+            <div className="space-y-2">
+              {showUndoReset && (
+                <Button 
+                  variant="default" 
+                  size="sm" 
+                  className="w-full h-8 text-[10px] font-bold bg-amber-500 hover:bg-amber-600 text-white rounded-xl gap-2 animate-bounce"
+                  onClick={undoReset}
+                >
+                  <Undo2 className="size-3" /> DESFAZER REINÍCIO
+                </Button>
+              )}
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="w-full h-8 text-[10px] font-bold text-red-500 hover:text-red-600 hover:bg-red-50 border-red-100 rounded-xl gap-2 transition-all active:scale-[0.98]"
+                onClick={fullReset}
+              >
+                <X className="size-3" /> REINICIAR PROGRESSO
+              </Button>
+            </div>
 
           <div className="space-y-4">
             <div className="flex items-center justify-between pl-1">
@@ -784,10 +842,32 @@ function SAPSDQuestApp() {
                 <span className="text-slate-400 uppercase text-[9px] font-black">XP Neste Nível</span>
                 <span>{xp} / 500</span>
               </div>
+              <div className="h-32 w-full mt-2">
+                <ResponsiveContainer width="100%" height="100%">
+                  <AreaChart data={trainingHistory.filter(h => h.status === 'success').reverse().map((h, i) => ({
+                    name: i + 1,
+                    xp: h.xpEarned || 0,
+                    total: trainingHistory.filter(hs => hs.status === 'success').reverse().slice(0, i + 1).reduce((acc, curr) => acc + (curr.xpEarned || 0), 0)
+                  }))}>
+                    <defs>
+                      <linearGradient id="colorTotal" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#4f46e5" stopOpacity={0.3}/>
+                        <stop offset="95%" stopColor="#4f46e5" stopOpacity={0}/>
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                    <Tooltip 
+                      contentStyle={{ fontSize: '10px', borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+                      labelStyle={{ display: 'none' }}
+                    />
+                    <Area type="monotone" dataKey="total" stroke="#4f46e5" fillOpacity={1} fill="url(#colorTotal)" strokeWidth={2} />
+                  </AreaChart>
+                </ResponsiveContainer>
+              </div>
+              
               <div className="space-y-1">
                 <div className="flex items-center justify-between text-[8px] font-black text-slate-300 uppercase">
-                  <span>VA01: +25 XP</span>
-                  <span>BP: +40 XP</span>
+                  <span>Desempenho (Acumulado)</span>
                 </div>
                 <div className="flex justify-between items-center text-[10px] text-emerald-600 font-bold">
                   <span>Progresso Total</span>
