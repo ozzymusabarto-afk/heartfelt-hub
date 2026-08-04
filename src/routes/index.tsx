@@ -491,10 +491,22 @@ function SAPSDQuestApp() {
                 </Button>
                 
                 {isHelpOpen && (
-                  <Card className="absolute right-0 top-10 w-64 p-4 z-50 shadow-xl border-indigo-100 animate-in fade-in zoom-in duration-200">
+                  <Card 
+                    className="absolute right-0 top-10 w-64 p-4 z-50 shadow-xl border-indigo-100 animate-in fade-in zoom-in duration-200"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-labelledby="help-title"
+                  >
                     <div className="flex justify-between items-center mb-2">
-                      <h4 className="text-xs font-bold text-indigo-600 uppercase">Ajuda Contextual</h4>
-                      <Button variant="ghost" size="icon" className="size-5 h-5 w-5" onClick={() => setIsHelpOpen(false)}>
+                      <h4 id="help-title" className="text-xs font-bold text-indigo-600 uppercase">Ajuda Contextual</h4>
+                      <Button 
+                        variant="ghost" 
+                        size="icon" 
+                        className="size-5 h-5 w-5 hover:bg-slate-100 rounded-md ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600" 
+                        onClick={() => setIsHelpOpen(false)}
+                        ref={helpCloseRef}
+                        aria-label="Fechar ajuda"
+                      >
                         <X className="size-3" />
                       </Button>
                     </div>
