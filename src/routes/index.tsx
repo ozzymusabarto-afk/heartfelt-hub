@@ -421,17 +421,33 @@ function SAPSDQuestApp() {
           </Card>
 
           <div className="space-y-3 shrink-0">
-            <div className="flex justify-between px-1 text-[10px] font-bold text-slate-400 uppercase">
-              <span>Desempenho</span> <span className="text-indigo-600">{successRate}% Acerto</span>
+            <div className="flex justify-between items-center px-1 text-[10px] font-bold text-slate-400 uppercase">
+              <span>Desempenho</span> 
+              <Select value={historyPeriod} onValueChange={(v: any) => setHistoryPeriod(v)}>
+                <SelectTrigger className="h-5 w-20 text-[9px] border-none bg-transparent shadow-none p-0 focus:ring-0">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all" className="text-[9px]">Tudo</SelectItem>
+                  <SelectItem value="7d" className="text-[9px]">7 dias</SelectItem>
+                  <SelectItem value="30d" className="text-[9px]">30 dias</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="flex justify-between px-1 text-[10px] font-bold text-indigo-600 mb-1">
+              <span>Taxa de Acerto</span>
+              <span>{successRate}%</span>
             </div>
             <Card className="p-2 max-h-[140px] overflow-y-auto space-y-1">
-              {trainingHistory.map(h => (
+              {filteredHistory.map(h => (
                 <div key={h.id} className={`p-1.5 rounded-lg border text-[9px] flex justify-between items-center ${h.status === "success" ? "bg-green-50" : "bg-red-50"}`}>
                   <span className="font-bold">{h.transaction}</span>
                   <span className="text-slate-500">{new Date(h.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                 </div>
               ))}
+              {filteredHistory.length === 0 && <p className="text-[9px] text-slate-400 text-center py-2">Nenhum registro</p>}
             </Card>
+
             <div className="space-y-2 text-[10px] font-bold text-slate-400 uppercase">
               <span>Progresso Real</span>
               <Progress value={(completedMissions/30)*100} className="h-1.5" />
