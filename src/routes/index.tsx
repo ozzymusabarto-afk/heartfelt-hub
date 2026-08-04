@@ -1,10 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { 
   Rocket, Target, BookOpen, Crown, BarChart3, Trophy, Settings, 
   ChevronRight, HelpCircle, CheckCircle2, Flame, Star, Shield,
   Search, Bell, Plus, MoreHorizontal, ArrowRight, Check, Menu, X,
-  Gamepad2, Dices, User, UserCheck, Download, Upload, Eye, EyeOff, LogIn
+  Gamepad2, Dices, User, UserCheck, Download, Upload, Eye, EyeOff, LogIn,
+  FileText
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -85,6 +86,30 @@ function SAPSDQuestApp() {
     timestamp: number;
   }[]>([]);
   const [historyPeriod, setHistoryPeriod] = useState<"all" | "7d" | "30d">("all");
+  const helpCloseRef = useRef<HTMLButtonElement>(null);
+
+  const generatePDFReport = () => {
+    toast.info("Gerando relatório...");
+    // Mock PDF generation logic
+    const content = `
+      RELATÓRIO DE TREINAMENTO SAP SD QUEST
+      Data: ${new Date().toLocaleDateString()}
+      -------------------------------------
+      Status: Nível 1 - Trainee SD
+      XP Total: ${xp} / 500
+      Missões Concluídas: ${completedMissions} / 30
+      Taxa de Sucesso: ${successRate}%
+      -------------------------------------
+      Missão Atual: Criar Ordem (VA01) - ${completedMissions > 0 ? "CONCLUÍDO" : "DISPONÍVEL"}
+    `;
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `relatorio_sap_sd_${Date.now()}.txt`;
+    link.click();
+    toast.success("Relatório baixado com sucesso!");
+  };
 
   // Auto-save continuous progress and draft form
   useEffect(() => {
@@ -134,7 +159,7 @@ function SAPSDQuestApp() {
     }
   }, []);
 
-  // Continuous auto-save
+  // Continuous auto-save and tab sync
   useEffect(() => {
     const dataToSave = {
       formData,
@@ -145,9 +170,26 @@ function SAPSDQuestApp() {
       mode
     };
     localStorage.setItem("sap-quest-data", JSON.stringify(dataToSave));
+
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === "sap-quest-data" && e.newValue) {
+        try {
+          const parsed = JSON.parse(e.newValue);
+          if (parsed.xp !== undefined) setXp(parsed.xp);
+          if (parsed.completedMissions !== undefined) setCompletedMissions(parsed.completedMissions);
+          // Only update feedback if it changed to keep UI consistent
+          if (parsed.feedbackState && parsed.feedbackState !== feedbackState) setFeedbackState(parsed.feedbackState);
+        } catch (err) {
+          console.error("Tab sync error", err);
+        }
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
   }, [formData, selectedTransaction, xp, completedMissions, feedbackState, mode]);
 
-  // Shortcut for F1 Help
+  // Shortcut for F1 Help and Keyboard Access
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "F1") {
@@ -160,6 +202,12 @@ function SAPSDQuestApp() {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isHelpOpen]);
+
+  useEffect(() => {
+    if (isHelpOpen && helpCloseRef.current) {
+      helpCloseRef.current.focus();
+    }
   }, [isHelpOpen]);
 
   useEffect(() => {
@@ -235,6 +283,12 @@ function SAPSDQuestApp() {
     } else if (!formData.material || formData.material !== CORRECT_DATA.material) {
       errors.push("material");
       localHint = "O material solicitado é MAT-SD-015.";
+    } else if (!formData.incoterms || formData.incoterms !== "FOB") {
+      errors.push("incoterms");
+      localHint = "Para este exercício, utilize Incoterms FOB.";
+    } else if (!formData.distChannel || formData.distChannel !== "10") {
+      errors.push("distChannel");
+      localHint = "Canal de Distribuição deve ser 10 (Venda Direta).";
     }
 
     setValidationErrors(errors);
@@ -437,10 +491,22 @@ function SAPSDQuestApp() {
                 </Button>
                 
                 {isHelpOpen && (
-                  <Card className="absolute right-0 top-10 w-64 p-4 z-50 shadow-xl border-indigo-100 animate-in fade-in zoom-in duration-200">
+                  <Card 
+                    className="absolute right-0 top-10 w-64 p-4 z-50 shadow-xl border-indigo-100 animate-in fade-in zoom-in duration-200"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-labelledby="help-title"
+                  >
                     <div className="flex justify-between items-center mb-2">
-                      <h4 className="text-xs font-bold text-indigo-600 uppercase">Ajuda Contextual</h4>
-                      <Button variant="ghost" size="icon" className="size-5 h-5 w-5" onClick={() => setIsHelpOpen(false)}>
+                      <h4 id="help-title" className="text-xs font-bold text-indigo-600 uppercase">Ajuda Contextual</h4>
+                      <Button 
+                        variant="ghost" 
+                        size="icon" 
+                        className="size-5 h-5 w-5 hover:bg-slate-100 rounded-md ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600" 
+                        onClick={() => setIsHelpOpen(false)}
+                        ref={helpCloseRef}
+                        aria-label="Fechar ajuda"
+                      >
                         <X className="size-3" />
                       </Button>
                     </div>
@@ -618,7 +684,11 @@ function SAPSDQuestApp() {
             {feedbackState === "success" && (
               <div className="w-full space-y-2">
                 <div className="bg-emerald-100 text-emerald-700 font-black text-xs py-2 rounded-xl mb-2">+25 XP</div>
-                <Button onClick={resetGame} className="w-full text-xs h-10 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl gap-2">
+                <Button 
+                  onClick={resetGame} 
+                  disabled={completedMissions === 0}
+                  className="w-full text-xs h-10 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
                   PRÓXIMO PEDIDO <ArrowRight className="size-4" />
                 </Button>
               </div>
@@ -627,7 +697,17 @@ function SAPSDQuestApp() {
           </Card>
 
           <div className="space-y-4">
-            <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Seu Progresso</h3>
+            <div className="flex items-center justify-between pl-1">
+              <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Seu Progresso</h3>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="h-6 px-2 text-[9px] font-bold text-indigo-600 hover:bg-indigo-50 gap-1 rounded-md"
+                onClick={generatePDFReport}
+              >
+                <FileText className="size-3" /> RELATÓRIO
+              </Button>
+            </div>
             <Card className="p-4 bg-white border-slate-200 shadow-sm rounded-2xl space-y-4">
               <div className="flex justify-between items-center text-[11px] font-bold text-slate-700">
                 <span className="text-slate-400 uppercase text-[9px] font-black">Missões Concluídas</span>
@@ -637,9 +717,15 @@ function SAPSDQuestApp() {
                 <span className="text-slate-400 uppercase text-[9px] font-black">XP Neste Nível</span>
                 <span>{xp} / 500</span>
               </div>
-              <div className="flex justify-between items-center text-[10px] text-emerald-600 font-bold -mt-3">
-                <span>Progresso Total</span>
-                <span>{Math.round((completedMissions / 30) * 100)}%</span>
+              <div className="space-y-1">
+                <div className="flex items-center justify-between text-[8px] font-black text-slate-300 uppercase">
+                  <span>VA01: +25 XP</span>
+                  <span>BP: +40 XP</span>
+                </div>
+                <div className="flex justify-between items-center text-[10px] text-emerald-600 font-bold">
+                  <span>Progresso Total</span>
+                  <span>{Math.round((completedMissions / 30) * 100)}%</span>
+                </div>
               </div>
               <Progress value={(xp/500)*100} className="h-2 bg-slate-100" />
               
