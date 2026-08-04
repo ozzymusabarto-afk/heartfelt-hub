@@ -577,9 +577,9 @@ function SAPSDQuestApp() {
 
 
         {/* RIGHT SIDEBAR (Fixed Width: 300px) */}
-        <aside className="hidden lg:flex border-l border-border bg-card p-4 lg:p-5 flex-col gap-6 overflow-y-auto">
+        <aside className="hidden lg:flex border-l border-border bg-card p-4 lg:p-5 flex-col gap-4 overflow-y-auto">
           {/* 1. Feedback Card */}
-          <Card className={`p-6 border shadow-sm rounded-2xl relative overflow-hidden flex flex-col items-center text-center transition-all duration-500 ${
+          <Card className={`p-4 border shadow-sm rounded-2xl relative overflow-hidden flex flex-col items-center text-center transition-all duration-500 shrink-0 ${
             feedbackState === "success" ? "border-green-200 bg-green-50/30" : 
             feedbackState === "error" ? "border-red-200 bg-red-50/30" : 
             "border-slate-200 bg-white"
