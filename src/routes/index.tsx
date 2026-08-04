@@ -223,7 +223,7 @@ function SAPSDQuestApp() {
         }
         setTrainingHistory(prev => [{
           id: Math.random().toString(36).substr(2, 9),
-          status: "success",
+          status: "success" as const,
           transaction: selectedTransaction,
           message: "Concluído com sucesso.",
           timestamp: Date.now()
@@ -234,7 +234,7 @@ function SAPSDQuestApp() {
       setFeedbackState("error");
       setTrainingHistory(prev => [{
         id: Math.random().toString(36).substr(2, 9),
-        status: "error",
+        status: "error" as const,
         transaction: selectedTransaction || "N/A",
         message: localHint || "Dados incorretos.",
         timestamp: Date.now()
@@ -379,7 +379,7 @@ function SAPSDQuestApp() {
                   <div key={field.id} className={`space-y-1 ${field.span ? "col-span-2" : ""}`}>
                     <Label className="text-[10px] font-bold text-slate-500 uppercase">{field.label}</Label>
                     {field.type === "select" ? (
-                      <Select value={formData[field.id as keyof typeof formData]} onValueChange={(v) => handleInputChange(field.id, v)}>
+                      <Select value={formData[field.id as keyof typeof formData] || ""} onValueChange={(v) => handleInputChange(field.id, v)}>
                         <SelectTrigger className="h-9 rounded-lg"><SelectValue placeholder="Selecione" /></SelectTrigger>
                         <SelectContent>{field.options?.map(o => <SelectItem key={o} value={o}>{o}</SelectItem>)}</SelectContent>
                       </Select>
