@@ -132,6 +132,8 @@ function SAPSDQuestApp() {
 
   const resetGame = () => {
     setFeedbackState("idle");
+    setValidationErrors([]);
+    setHintMessage("");
     setSelectedTransaction("");
     setFormData({
       orderType: "",
@@ -145,6 +147,7 @@ function SAPSDQuestApp() {
       material: "",
     });
   };
+
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans flex flex-col pb-20 md:pb-0">
