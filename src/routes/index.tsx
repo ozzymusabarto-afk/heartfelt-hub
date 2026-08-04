@@ -617,11 +617,15 @@ function SAPSDQuestApp() {
             <Card className="p-4 bg-white border-slate-200 shadow-sm rounded-2xl space-y-4">
               <div className="flex justify-between items-center text-[11px] font-bold text-slate-700">
                 <span className="text-slate-400 uppercase text-[9px] font-black">Missões Concluídas</span>
-                <span>12 / 30</span>
+                <span>{completedMissions} / 30</span>
               </div>
               <div className="flex justify-between items-center text-[11px] font-bold text-slate-700">
                 <span className="text-slate-400 uppercase text-[9px] font-black">XP Neste Nível</span>
                 <span>{xp} / 500</span>
+              </div>
+              <div className="flex justify-between items-center text-[10px] text-emerald-600 font-bold -mt-3">
+                <span>Progresso Total</span>
+                <span>{Math.round((completedMissions / 30) * 100)}%</span>
               </div>
               <Progress value={(xp/500)*100} className="h-2 bg-slate-100" />
               
