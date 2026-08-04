@@ -352,15 +352,15 @@ function SAPSDQuestApp() {
           </div>
 
           {/* 3. Dual Interactive Workspace */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
             {/* Left Box */}
-            <Card className="p-6 md:p-8 border-slate-200 shadow-sm rounded-2xl flex flex-col h-full bg-white">
-              <div className="mb-6">
+            <Card className="p-4 lg:p-5 border-slate-200 shadow-sm rounded-2xl flex flex-col h-full bg-white">
+              <div className="mb-4">
                 <h3 className="font-semibold text-slate-800 text-lg">Passo 2 de 4: Escolha a Transação</h3>
                 <p className="text-sm text-slate-500">Qual transação você deve utilizar?</p>
               </div>
 
-              <RadioGroup value={selectedTransaction} onValueChange={setSelectedTransaction} className="space-y-3 mb-8">
+              <RadioGroup value={selectedTransaction} onValueChange={setSelectedTransaction} className="space-y-2 mb-4">
                 {[
                   { id: "VA01", label: "VA01 - Criar Ordem de Venda" },
                   { id: "BP", label: "BP - Criar / Alterar Cliente" },
