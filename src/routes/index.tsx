@@ -189,7 +189,7 @@ function SAPSDQuestApp() {
     return () => window.removeEventListener("storage", handleStorageChange);
   }, [formData, selectedTransaction, xp, completedMissions, feedbackState, mode]);
 
-  // Shortcut for F1 Help
+  // Shortcut for F1 Help and Keyboard Access
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "F1") {
@@ -202,6 +202,12 @@ function SAPSDQuestApp() {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isHelpOpen]);
+
+  useEffect(() => {
+    if (isHelpOpen && helpCloseRef.current) {
+      helpCloseRef.current.focus();
+    }
   }, [isHelpOpen]);
 
   useEffect(() => {
