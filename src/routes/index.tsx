@@ -92,31 +92,45 @@ function SAPSDQuestApp() {
     
     // Recovery logic
     const saved = localStorage.getItem("sap-quest-data");
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        if (parsed.formData) setFormData(parsed.formData);
-        if (parsed.selectedTransaction) setSelectedTransaction(parsed.selectedTransaction);
-        if (parsed.xp !== undefined) setXp(parsed.xp);
-        if (parsed.completedMissions !== undefined) setCompletedMissions(parsed.completedMissions);
-        if (parsed.feedbackState) setFeedbackState(parsed.feedbackState);
-        if (parsed.mode) setMode(parsed.mode);
-      } catch (e) {
-        console.error("Failed to load data", e);
-      }
-    }
-
     const savedHistory = localStorage.getItem("sap-quest-history");
-    if (savedHistory) {
-      try {
-        setTrainingHistory(JSON.parse(savedHistory));
-      } catch (e) {
-        console.error("Failed to parse history", e);
-      }
-    }
     
     if (!hasStarted) {
+      // Force reset for new session
+      localStorage.removeItem("sap-quest-data");
+      localStorage.removeItem("sap-quest-history");
+      setFormData({
+        orderType: "", orderDate: "", salesOrg: "", deliveryDate: "",
+        distChannel: "", paymentCond: "", customer: "", price: "", material: "",
+        incoterms: "", division: "", poNumber: "",
+      });
+      setSelectedTransaction("");
+      setXp(0);
+      setCompletedMissions(0);
+      setTrainingHistory([]);
+      setFeedbackState("idle");
       sessionStorage.setItem("sap-quest-session-started", "true");
+    } else {
+      // Load saved state if session already started
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (parsed.formData) setFormData(parsed.formData);
+          if (parsed.selectedTransaction) setSelectedTransaction(parsed.selectedTransaction);
+          if (parsed.xp !== undefined) setXp(parsed.xp);
+          if (parsed.completedMissions !== undefined) setCompletedMissions(parsed.completedMissions);
+          if (parsed.feedbackState) setFeedbackState(parsed.feedbackState);
+          if (parsed.mode) setMode(parsed.mode);
+        } catch (e) {
+          console.error("Failed to load data", e);
+        }
+      }
+      if (savedHistory) {
+        try {
+          setTrainingHistory(JSON.parse(savedHistory));
+        } catch (e) {
+          console.error("Failed to parse history", e);
+        }
+      }
     }
   }, []);
 
