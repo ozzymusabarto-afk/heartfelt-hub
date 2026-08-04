@@ -313,9 +313,19 @@ function SAPSDQuestApp() {
           status: "success" as const,
           transaction: selectedTransaction,
           message: "Concluído com sucesso.",
-          timestamp: Date.now()
+          timestamp: Date.now(),
+          xpEarned: mode !== "practice" ? 25 : 0,
+          missionName: "Criar Ordem (VA01)",
+          progressAtTime: Math.round(((completedMissions + (mode !== "practice" ? 1 : 0)) / 30) * 100)
         }, ...prev].slice(0, 10));
-        toast.success(mode === "practice" ? "Sucesso (Modo Prática)" : "Parabéns! +25 XP");
+        
+        if (mode !== "practice") {
+          toast.success("Missão Concluída!", {
+            description: "Você ganhou +25 XP! Próximo objetivo: Parceiros BP.",
+          });
+        } else {
+          toast.success("Sucesso (Modo Prática)");
+        }
       }
     } else {
       setFeedbackState("error");
