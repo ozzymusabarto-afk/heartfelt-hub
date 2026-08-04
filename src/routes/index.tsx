@@ -4,7 +4,7 @@ import {
   Rocket, Target, BookOpen, Crown, BarChart3, Trophy, Settings, 
   ChevronRight, HelpCircle, CheckCircle2, Flame, Star, Shield,
   Search, Bell, Plus, MoreHorizontal, ArrowRight, Check, Menu, X,
-  Gamepad2, Dices, User, UserCheck
+  Gamepad2, Dices, User, UserCheck, Download, Upload, Eye, EyeOff
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -150,6 +150,47 @@ function SAPSDQuestApp() {
       localStorage.setItem("sap-quest-data", JSON.stringify(dataToSave));
     }
   }, [formData, selectedTransaction, xp, completedMissions, feedbackState, mode]);
+154: 
+155:   const exportState = () => {
+156:     const state = {
+157:       formData,
+158:       selectedTransaction,
+159:       xp,
+160:       completedMissions,
+161:       mode,
+162:       trainingHistory
+163:     };
+164:     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state));
+165:     const downloadAnchorNode = document.createElement('a');
+166:     downloadAnchorNode.setAttribute("href",     dataStr);
+167:     downloadAnchorNode.setAttribute("download", "sap_sd_quest_state.json");
+168:     document.body.appendChild(downloadAnchorNode);
+169:     downloadAnchorNode.click();
+170:     downloadAnchorNode.remove();
+171:     toast.success("Estado exportado com sucesso!");
+172:   };
+173: 
+174:   const importState = (e: React.ChangeEvent<HTMLInputElement>) => {
+175:     const file = e.target.files?.[0];
+176:     if (!file) return;
+177: 
+178:     const reader = new FileReader();
+179:     reader.onload = (event) => {
+180:       try {
+181:         const json = JSON.parse(event.target?.result as string);
+182:         if (json.xp !== undefined) setXp(json.xp);
+183:         if (json.completedMissions !== undefined) setCompletedMissions(json.completedMissions);
+184:         if (json.formData) setFormData(json.formData);
+185:         if (json.selectedTransaction) setSelectedTransaction(json.selectedTransaction);
+186:         if (json.mode) setMode(json.mode);
+187:         if (json.trainingHistory) setTrainingHistory(json.trainingHistory);
+188:         toast.success("Dados importados com sucesso!");
+189:       } catch (err) {
+190:         toast.error("Erro ao importar arquivo. Formato inválido.");
+191:       }
+192:     };
+193:     reader.readAsText(file);
+194:   };
 
   // Load history from localStorage
   useEffect(() => {
