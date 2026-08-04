@@ -535,11 +535,11 @@ function SAPSDQuestApp() {
               <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest px-1">Missões Recentes</h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
                 {[
-                  { label: "Criar Ordem - VA01", status: completedMissions > 0 ? "complete" : "locked" },
-                  { label: "Criar Entrega - VL01N", status: "locked" },
-                  { label: "Faturar - VF01", status: "locked" },
-                  { label: "Parceiros BP", status: "locked" },
-                  { label: "Dados Incompletos", status: "locked" },
+                  { label: "Criar Ordem - VA01", status: completedMissions > 0 ? "complete" : "locked", value: 0 },
+                  { label: "Criar Entrega - VL01N", status: "locked", value: 0 },
+                  { label: "Faturar - VF01", status: "locked", value: 0 },
+                  { label: "Parceiros BP", status: "locked", value: 0 },
+                  { label: "Dados Incompletos", status: "locked", value: 0 },
                 ].map((mission, idx) => (
                   <Card key={idx} className={`p-3 border shadow-none rounded-xl flex items-center gap-3 transition-all hover:border-slate-300 min-h-[56px] ${
                     mission.status === "complete" ? "bg-green-50/50 border-green-100" : 
