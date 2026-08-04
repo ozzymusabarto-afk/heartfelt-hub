@@ -351,7 +351,7 @@ function SAPSDQuestApp() {
                 }`}>
                   {step.status === "complete" ? <Check className="size-4" /> : step.id}
                 </div>
-                <span className={`text-[9px] font-bold uppercase tracking-wider ${
+                <span className={`text-[8px] font-bold uppercase tracking-wider ${
                   step.status === "active" ? "text-primary" : "text-slate-400"
                 }`}>{step.label}</span>
               </div>
