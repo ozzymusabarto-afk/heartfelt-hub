@@ -150,11 +150,11 @@ function SAPSDQuestApp() {
         setHintMessage("🎉 Excelente, Adriana! A ordem de venda foi criada com sucesso!");
         setXp(prev => Math.min(prev + 25, 500));
         setCompletedMissions(prev => prev + 1);
-        toast.success("Ordem criada com sucesso! +25 XP");
+        toast.success("Parabéns! Desafio concluído corretamente. +25 XP");
       }
     } else {
       setFeedbackState("error");
-      toast.error("Dados incorretos. Chefe Hugo deixou uma dica para você.");
+      toast.error("Ops! Verifique os dados. Erros não geram XP.");
     }
   };
 
@@ -223,7 +223,7 @@ function SAPSDQuestApp() {
             <div className="size-8 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600">
               <Star className="size-5" />
             </div>
-            <span className="text-xs font-bold text-slate-700">{xp * 3}</span>
+            <span className="text-xs font-bold text-slate-700">{xp}</span>
           </Card>
 
 
