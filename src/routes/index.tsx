@@ -431,29 +431,29 @@ function SAPSDQuestApp() {
 
 
           {/* 4. Bottom Grid Dashboard */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <Card className="p-6 border-slate-200 shadow-sm rounded-2xl flex flex-col gap-4">
               <div className="flex items-center gap-3">
                 <div className="size-10 bg-indigo-100 rounded-xl flex items-center justify-center text-primary">
                   <Shield className="size-5" />
                 </div>
                 <div className="flex flex-col">
-                  <h4 className="text-sm font-bold text-slate-800">Processo Order-to-Cash</h4>
-                  <p className="text-[11px] text-slate-400">Aprenda e pratique todo o fluxo.</p>
+                  <h4 className="text-sm font-bold text-slate-800">Processo OTC</h4>
+                  <p className="text-[11px] text-slate-400">Aprenda todo o fluxo.</p>
                 </div>
               </div>
               <div className="space-y-1.5">
                 <div className="flex justify-between text-[11px] font-bold">
-                  <span className="text-slate-500">Progresso do Tópico</span>
+                  <span className="text-slate-500">Progresso</span>
                   <span className="text-primary">4 / 8 missões</span>
                 </div>
                 <Progress value={50} className="h-1.5 bg-slate-100" />
               </div>
             </Card>
 
-            <div className="md:col-span-2 space-y-3">
+            <div className="md:col-span-1 lg:col-span-2 space-y-3">
               <h4 className="text-xs font-bold text-slate-500 uppercase tracking-widest px-1">Missões Recentes</h4>
-              <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {[
                   { label: "Criar Ordem - VA01", status: "complete" },
                   { label: "Criar Entrega - VL01N", status: "complete" },
@@ -461,7 +461,7 @@ function SAPSDQuestApp() {
                   { label: "Parceiros BP", status: "progress", value: 60 },
                   { label: "Dados Incompletos", status: "locked" },
                 ].map((mission, idx) => (
-                  <Card key={idx} className={`p-3 border shadow-none rounded-xl flex items-center gap-3 transition-all hover:border-slate-300 ${
+                  <Card key={idx} className={`p-3 border shadow-none rounded-xl flex items-center gap-3 transition-all hover:border-slate-300 min-h-[56px] ${
                     mission.status === "complete" ? "bg-green-50/50 border-green-100" : 
                     mission.status === "progress" ? "bg-white border-slate-200" : "bg-slate-50 border-slate-100 opacity-60"
                   }`}>
@@ -487,6 +487,7 @@ function SAPSDQuestApp() {
             </div>
           </div>
         </main>
+
 
         {/* RIGHT SIDEBAR (Fixed Width: 300px) */}
         <aside className="border-l border-border bg-card p-6 flex flex-col gap-8 overflow-y-auto">
