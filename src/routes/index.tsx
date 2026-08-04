@@ -415,8 +415,10 @@ function SAPSDQuestApp() {
                     placeholder="Ex: 1000" 
                     value={formData.salesOrg}
                     onChange={(e) => handleInputChange("salesOrg", e.target.value)}
-                    className="h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                    className={`h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700 focus:ring-2 focus:ring-primary ${validationErrors.includes("salesOrg") ? "border-red-400 bg-red-50/50" : ""}`}
+                    aria-label="Org. de Vendas"
                   />
+
                 </div>
 
                 <div className="space-y-1.5">
