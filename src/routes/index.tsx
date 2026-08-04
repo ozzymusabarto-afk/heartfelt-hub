@@ -515,11 +515,14 @@ function SAPSDQuestApp() {
                   <Input 
                     placeholder="Ex: 1000" 
                     value={formData.salesOrg}
+                    disabled={!formData.orderType || !formData.orderDate}
                     onChange={(e) => handleInputChange("salesOrg", e.target.value)}
-                    className={`h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700 focus:ring-2 focus:ring-primary ${validationErrors.includes("salesOrg") ? "border-red-400 bg-red-50/50" : ""}`}
+                    className={`h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700 focus:ring-2 focus:ring-primary ${validationErrors.includes("salesOrg") ? "border-red-400 bg-red-50/50" : ""} disabled:opacity-50`}
                     aria-label="Org. de Vendas"
                   />
-
+                  {(!formData.orderType || !formData.orderDate) && (
+                    <p className="text-[9px] text-amber-600 font-medium">Preencha o Tipo e Data acima.</p>
+                  )}
                 </div>
 
                 <div className="space-y-1.5">
