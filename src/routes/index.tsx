@@ -119,7 +119,24 @@ function SAPSDQuestApp() {
     }
   }, [formData, selectedTransaction, xp, completedMissions, feedbackState, mode]);
 
+  // Load history from localStorage
+  useEffect(() => {
+    const savedData = localStorage.getItem("sap-quest-history");
+    if (savedData) {
+      try {
+        setTrainingHistory(JSON.parse(savedData));
+      } catch (e) {
+        console.error("Failed to parse history", e);
+      }
+    }
+  }, []);
 
+  // Save history to localStorage
+  useEffect(() => {
+    if (trainingHistory.length > 0) {
+      localStorage.setItem("sap-quest-history", JSON.stringify(trainingHistory));
+    }
+  }, [trainingHistory]);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
