@@ -374,7 +374,7 @@ function SAPSDQuestApp() {
           </nav>
         </aside>
 
-        <main className="bg-slate-50 p-4 overflow-y-auto lg:overflow-hidden flex-1 flex flex-col gap-4">
+        <main className="bg-slate-50 p-4 overflow-y-auto flex-1 flex flex-col gap-4">
           <Card className="p-3 border-slate-200 shadow-sm rounded-2xl flex items-center gap-4 shrink-0">
             <HugoAvatar className="size-12" />
             <div>
