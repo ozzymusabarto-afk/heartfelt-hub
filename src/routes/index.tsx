@@ -104,6 +104,7 @@ function SAPSDQuestApp() {
   const [lastStateBeforeReset, setLastStateBeforeReset] = useState<any>(null);
   const [showUndoReset, setShowUndoReset] = useState(false);
   const helpCloseRef = useRef<HTMLButtonElement>(null);
+  const helpContainerRef = useRef<HTMLDivElement>(null);
   const undoTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const generatePDFReport = () => {
