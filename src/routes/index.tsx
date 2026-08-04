@@ -78,7 +78,7 @@ function SAPSDQuestApp() {
   }, [formData, selectedTransaction, xp, completedMissions]);
 
 
-  const avatarUrl = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=256&q=80";
+  const avatarUrl = "https://api.dicebear.com/7.x/avataaars/svg?seed=Hugo&hair=shortCombover&eyebrows=default&clothing=shirt&clothingColor=3c52e3";
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -341,7 +341,7 @@ function SAPSDQuestApp() {
             {/* Left Box */}
             <Card className="p-6 md:p-8 border-slate-200 shadow-sm rounded-2xl flex flex-col h-full bg-white">
               <div className="mb-6">
-                <h3 className="font-bold text-slate-800 text-lg">Passo 2 de 4: Escolha a Transação</h3>
+                <h3 className="font-semibold text-slate-800 text-lg">Passo 2 de 4: Escolha a Transação</h3>
                 <p className="text-sm text-slate-500">Qual transação você deve utilizar?</p>
               </div>
 
@@ -383,7 +383,7 @@ function SAPSDQuestApp() {
             {/* Right Box */}
             <Card className="p-6 md:p-8 border-slate-200 shadow-sm rounded-2xl bg-white">
               <div className="mb-6">
-                <h3 className="font-bold text-slate-800 text-lg">Passo 3 de 4: Preencha os dados</h3>
+                <h3 className="font-semibold text-slate-800 text-lg">Passo 3 de 4: Preencha os dados</h3>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -578,7 +578,7 @@ function SAPSDQuestApp() {
             </div>
 
 
-            <h3 className="font-bold text-slate-800 mb-1">Feedback do Chefe Hugo</h3>
+            <h3 className="font-semibold text-slate-800 mb-1">Feedback do Chefe Hugo</h3>
             <p className="text-xs text-slate-600 leading-relaxed mb-6" aria-live="polite">
               {feedbackState === "idle" && "Aguardando submissão do pedido. Selecione a transação, preencha os campos e clique em 'Conferir e Submeter'."}
               {(feedbackState === "success" || feedbackState === "error") && hintMessage}
