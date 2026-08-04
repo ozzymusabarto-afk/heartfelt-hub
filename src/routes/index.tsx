@@ -490,7 +490,7 @@ function SAPSDQuestApp() {
 
 
         {/* RIGHT SIDEBAR (Fixed Width: 300px) */}
-        <aside className="border-l border-border bg-card p-6 flex flex-col gap-8 overflow-y-auto">
+        <aside className="hidden lg:flex border-l border-border bg-card p-6 flex-col gap-8 overflow-y-auto">
           {/* 1. Feedback Card */}
           <Card className={`p-6 border shadow-sm rounded-2xl relative overflow-hidden flex flex-col items-center text-center transition-all duration-500 ${
             feedbackState === "success" ? "border-green-200 bg-green-50/30" : 
@@ -507,11 +507,12 @@ function SAPSDQuestApp() {
               feedbackState === "success" ? "bg-green-100 scale-110" : "bg-blue-100"
             }`}>
               <img 
-                src={`https://api.dicebear.com/7.x/avataaars/svg?seed=Hugo&style=circle&clothing=shirtBlue&mouth=${feedbackState === "success" ? "smile" : feedbackState === "error" ? "serious" : "neutral"}`}
+                src={avatarUrl}
                 alt="Chefe Hugo Feedback" 
                 className="size-full object-cover"
               />
             </div>
+
 
             <h3 className="font-bold text-slate-800 mb-1">Feedback do Chefe Hugo</h3>
             <p className="text-xs text-slate-600 leading-relaxed mb-6">
