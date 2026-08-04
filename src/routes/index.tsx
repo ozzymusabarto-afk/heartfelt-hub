@@ -572,52 +572,69 @@ function SAPSDQuestApp() {
           </div>
         </main>
 
-        <aside className="hidden lg:flex w-[300px] border-l bg-card p-5 flex-col gap-4">
-          <Card className={`p-4 border shadow-sm rounded-2xl flex flex-col items-center text-center ${feedbackState === "success" ? "bg-green-50" : feedbackState === "error" ? "bg-red-50" : "bg-white"}`}>
-            <HugoAvatar className="size-16 mb-4" />
-            <h3 className="font-semibold text-xs mb-1">Feedback do Hugo</h3>
-            <p className="text-[10px] text-slate-600 mb-4" aria-live="polite">
-              {feedbackState === "idle" ? "Selecione a transação e preencha os dados." : hintMessage}
+        <aside className="hidden lg:flex w-[320px] border-l bg-card p-5 flex-col gap-6">
+          <Card className={`p-4 border shadow-sm rounded-2xl flex flex-col items-center text-center relative overflow-hidden ${feedbackState === "success" ? "bg-emerald-50 border-emerald-200" : feedbackState === "error" ? "bg-red-50 border-red-200" : "bg-white border-slate-200"}`}>
+            <HugoAvatar className="size-20 mb-4" />
+            <h3 className="font-bold text-xs mb-1 text-slate-800">Feedback do Chefe Hugo</h3>
+            <p className={`text-[11px] font-medium mb-4 leading-relaxed ${feedbackState === "success" ? "text-emerald-700" : feedbackState === "error" ? "text-red-700" : "text-slate-500"}`} aria-live="polite">
+              {feedbackState === "idle" ? "Selecione a transação e preencha os dados do pedido para começar." : hintMessage}
             </p>
-            {feedbackState === "success" && <Button onClick={resetGame} className="w-full text-xs h-9">Próximo Pedido</Button>}
+            {feedbackState === "success" && (
+              <div className="w-full space-y-2">
+                <div className="bg-emerald-100 text-emerald-700 font-black text-xs py-2 rounded-xl mb-2">+25 XP</div>
+                <Button onClick={resetGame} className="w-full text-xs h-10 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl gap-2">
+                  PRÓXIMO PEDIDO <ArrowRight className="size-4" />
+                </Button>
+              </div>
+            )}
+            {feedbackState === "error" && <Button onClick={() => setFeedbackState("idle")} variant="outline" className="w-full text-xs h-9 rounded-xl border-red-200 text-red-600 hover:bg-red-50">TENTAR NOVAMENTE</Button>}
           </Card>
 
-          <div className="space-y-3 shrink-0">
-            <div className="flex justify-between items-center px-1 text-[10px] font-bold text-slate-400 uppercase">
-              <span>Desempenho</span> 
-              <Select value={historyPeriod} onValueChange={(v: any) => setHistoryPeriod(v)}>
-                <SelectTrigger className="h-5 w-20 text-[9px] border-none bg-transparent shadow-none p-0 focus:ring-0">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all" className="text-[9px]">Tudo</SelectItem>
-                  <SelectItem value="7d" className="text-[9px]">7 dias</SelectItem>
-                  <SelectItem value="30d" className="text-[9px]">30 dias</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="flex justify-between px-1 text-[10px] font-bold text-indigo-600 mb-1">
-              <span>Taxa de Acerto</span>
-              <span>{successRate}%</span>
-            </div>
-            <Card className="p-2 max-h-[140px] overflow-y-auto space-y-1">
-              {filteredHistory.map(h => (
-                <div key={h.id} className={`p-1.5 rounded-lg border text-[9px] flex justify-between items-center ${h.status === "success" ? "bg-green-50" : "bg-red-50"}`}>
-                  <span className="font-bold">{h.transaction}</span>
-                  <span className="text-slate-500">{new Date(h.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+          <div className="space-y-4">
+            <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Seu Progresso</h3>
+            <Card className="p-4 bg-white border-slate-200 shadow-sm rounded-2xl space-y-4">
+              <div className="flex justify-between items-center text-[11px] font-bold text-slate-700">
+                <span className="text-slate-400 uppercase text-[9px] font-black">Missões Concluídas</span>
+                <span>12 / 30</span>
+              </div>
+              <div className="flex justify-between items-center text-[11px] font-bold text-slate-700">
+                <span className="text-slate-400 uppercase text-[9px] font-black">XP Neste Nível</span>
+                <span>{xp} / 500</span>
+              </div>
+              <Progress value={(xp/500)*100} className="h-2 bg-slate-100" />
+              
+              <div className="pt-2 border-t border-slate-50 flex items-center gap-3">
+                <div className="size-10 bg-slate-100 rounded-xl flex items-center justify-center">
+                  <Plus className="size-5 text-slate-400" />
                 </div>
-              ))}
-              {filteredHistory.length === 0 && <p className="text-[9px] text-slate-400 text-center py-2">Nenhum registro</p>}
+                <div>
+                  <h4 className="text-[11px] font-bold text-slate-800">Próxima promoção</h4>
+                  <p className="text-[10px] text-slate-500">Faltam {500 - xp} XP para Consultor SD Júnior</p>
+                </div>
+              </div>
             </Card>
 
-            <div className="space-y-2 text-[10px] font-bold text-slate-400 uppercase">
-              <span>Progresso Real</span>
-              <div className="flex justify-between items-center text-indigo-600 mb-1">
-                <span>XP</span>
-                <span>{xp}/500</span>
+            <Card className="p-4 bg-indigo-600 border-none shadow-lg shadow-indigo-100 rounded-2xl relative overflow-hidden group">
+              <div className="relative z-10">
+                <h4 className="text-white font-bold text-sm mb-3">Desbloqueie o Modo Premium</h4>
+                <ul className="space-y-2 mb-4">
+                  {[
+                    "Acesso a todas as transações",
+                    "Simulados de certificação",
+                    "Suporte prioritário do Hugo",
+                    "Dashboard avançado"
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-center gap-2 text-[10px] text-indigo-100 font-medium">
+                      <Check className="size-3 text-indigo-300" /> {item}
+                    </li>
+                  ))}
+                </ul>
+                <Button className="w-full h-9 bg-white text-indigo-600 hover:bg-slate-50 text-[10px] font-bold rounded-xl">
+                  QUERO DESBLOQUEAR!
+                </Button>
               </div>
-              <Progress value={(xp/500)*100} className="h-1.5" />
-            </div>
+              <Crown className="absolute -right-6 -bottom-6 size-24 text-indigo-500/30 -rotate-12 group-hover:scale-110 transition-transform" />
+            </Card>
           </div>
         </aside>
       </div>
