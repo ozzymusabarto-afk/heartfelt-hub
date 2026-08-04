@@ -435,7 +435,7 @@ function SAPSDQuestApp() {
           </div>
         </main>
 
-        <aside className="hidden lg:flex border-l bg-card p-5 flex-col gap-4 overflow-y-auto">
+        <aside className="hidden lg:flex w-[300px] border-l bg-card p-5 flex-col gap-4">
           <Card className={`p-4 border shadow-sm rounded-2xl flex flex-col items-center text-center ${feedbackState === "success" ? "bg-green-50" : feedbackState === "error" ? "bg-red-50" : "bg-white"}`}>
             <HugoAvatar className="size-16 mb-4" />
             <h3 className="font-semibold text-xs mb-1">Feedback do Hugo</h3>
