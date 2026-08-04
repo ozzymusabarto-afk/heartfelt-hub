@@ -470,7 +470,6 @@ function SAPSDQuestApp() {
     ? Math.round((filteredHistory.filter(h => h.status === "success").length / filteredHistory.length) * 100)
     : 0;
 
-  return (
   if (!isAuth) {
     return (
       <div className="min-h-screen bg-[#f4f7fc] flex flex-col items-center justify-center p-4 font-sans">
