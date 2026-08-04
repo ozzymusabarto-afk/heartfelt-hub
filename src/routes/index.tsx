@@ -291,16 +291,7 @@ function SAPSDQuestApp() {
               </nav>
             </div>
 
-            <Card className="bg-indigo-50 border-indigo-100 p-5 rounded-2xl relative overflow-hidden group mt-4">
-              <div className="absolute top-0 right-0 p-2 text-indigo-200">
-                <Rocket className="size-16 -rotate-12 opacity-20" />
-              </div>
-              <h3 className="text-sm font-bold text-slate-800 mb-1 relative z-10">Premium?</h3>
-              <p className="text-[11px] text-slate-500 mb-4 relative z-10">Desbloqueie tudo!</p>
-              <Button size="sm" className="w-full bg-primary hover:bg-indigo-700 text-white font-bold rounded-xl shadow-sm transition-all group-hover:scale-[1.02]">
-                Upgrade
-              </Button>
-            </Card>
+            {/* Removed Upgrade Card */}
           </div>
         </aside>
 
