@@ -527,7 +527,7 @@ function SAPSDQuestApp() {
                   <span className="text-slate-500">Progresso</span>
                   <span className="text-primary">{completedMissions} / 30 missões</span>
                 </div>
-                <Progress value={50} className="h-1.5 bg-slate-100" />
+                <Progress value={(completedMissions / 30) * 100} className="h-1 bg-slate-100" />
               </div>
             </Card>
 
