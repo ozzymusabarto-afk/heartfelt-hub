@@ -367,7 +367,7 @@ function SAPSDQuestApp() {
                     placeholder="Ex: 24.05.2024" 
                     value={formData.deliveryDate}
                     onChange={(e) => handleInputChange("deliveryDate", e.target.value)}
-                    className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                    className="h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -376,13 +376,13 @@ function SAPSDQuestApp() {
                     placeholder="Ex: 10" 
                     value={formData.distChannel}
                     onChange={(e) => handleInputChange("distChannel", e.target.value)}
-                    className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                    className="h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
                   />
                 </div>
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Condição Pagto.</Label>
                   <Select value={formData.paymentCond} onValueChange={(v) => handleInputChange("paymentCond", v)}>
-                    <SelectTrigger className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700">
+                    <SelectTrigger className="h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700">
                       <SelectValue placeholder="Selecione..." />
                     </SelectTrigger>
                     <SelectContent>
@@ -397,7 +397,7 @@ function SAPSDQuestApp() {
                     placeholder="Ex: 200015" 
                     value={formData.customer}
                     onChange={(e) => handleInputChange("customer", e.target.value)}
-                    className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                    className="h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -406,16 +406,16 @@ function SAPSDQuestApp() {
                     placeholder="Ex: 150,00 BRL" 
                     value={formData.price}
                     onChange={(e) => handleInputChange("price", e.target.value)}
-                    className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                    className="h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
                   />
                 </div>
-                <div className="col-span-2 space-y-1.5">
+                <div className="col-span-1 sm:col-span-2 space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Material</Label>
                   <Input 
                     placeholder="Ex: MAT-SD-015" 
                     value={formData.material}
                     onChange={(e) => handleInputChange("material", e.target.value)}
-                    className="h-10 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
+                    className="h-11 rounded-xl border-slate-200 bg-slate-50/50 font-bold text-slate-700" 
                   />
                 </div>
               </div>
@@ -428,6 +428,7 @@ function SAPSDQuestApp() {
               </Button>
             </Card>
           </div>
+
 
           {/* 4. Bottom Grid Dashboard */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
