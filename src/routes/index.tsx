@@ -375,24 +375,27 @@ function SAPSDQuestApp() {
                   { id: "salesOrg", label: "Org. Vendas", disabled: !formData.orderType },
                   { id: "customer", label: "Cliente" },
                   { id: "material", label: "Material", span: true }
-                ].map((field) => (
-                  <div key={field.id} className={`space-y-1 ${field.span ? "col-span-2" : ""}`}>
-                    <Label className="text-[10px] font-bold text-slate-500 uppercase">{field.label}</Label>
-                    {field.type === "select" ? (
-                      <Select value={formData[field.id as keyof typeof formData] || ""} onValueChange={(v) => handleInputChange(field.id, v)}>
-                        <SelectTrigger className="h-9 rounded-lg"><SelectValue placeholder="Selecione" /></SelectTrigger>
-                        <SelectContent>{field.options?.map(o => <SelectItem key={o} value={o}>{o}</SelectItem>)}</SelectContent>
-                      </Select>
-                    ) : (
-                      <Input 
-                        disabled={field.disabled}
-                        value={formData[field.id as keyof typeof formData]} 
-                        onChange={(e) => handleInputChange(field.id, e.target.value)} 
-                        className={`h-9 rounded-lg ${validationErrors.includes(field.id) ? "border-red-400" : ""}`}
-                      />
-                    )}
-                  </div>
-                ))}
+                ].map((field) => {
+                  const fieldId = field.id as keyof typeof formData;
+                  return (
+                    <div key={field.id} className={`space-y-1 ${field.span ? "col-span-2" : ""}`}>
+                      <Label className="text-[10px] font-bold text-slate-500 uppercase">{field.label}</Label>
+                      {field.type === "select" ? (
+                        <Select value={formData[fieldId] || ""} onValueChange={(v) => handleInputChange(field.id, v)}>
+                          <SelectTrigger className="h-9 rounded-lg"><SelectValue placeholder="Selecione" /></SelectTrigger>
+                          <SelectContent>{field.options?.map(o => <SelectItem key={o} value={o}>{o}</SelectItem>)}</SelectContent>
+                        </Select>
+                      ) : (
+                        <Input 
+                          disabled={field.disabled}
+                          value={formData[fieldId] || ""} 
+                          onChange={(e) => handleInputChange(field.id, e.target.value)} 
+                          className={`h-9 rounded-lg ${validationErrors.includes(field.id) ? "border-red-400" : ""}`}
+                        />
+                      )}
+                    </div>
+                  );
+                })}
               </div>
               <Button onClick={handleSubmit} className="w-full h-10 mt-4 bg-primary text-white font-bold rounded-xl">📝 Submeter</Button>
             </Card>
