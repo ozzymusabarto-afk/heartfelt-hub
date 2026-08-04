@@ -78,28 +78,38 @@ function SAPSDQuestApp() {
 
   // Auto-save & Load persistence
   useEffect(() => {
-    const savedData = localStorage.getItem("sap-quest-data");
-    if (savedData) {
-      const parsed = JSON.parse(savedData);
-      setFormData(parsed.formData || {});
-      setSelectedTransaction(parsed.selectedTransaction || "");
-      setXp(parsed.xp ?? 0);
-      setCompletedMissions(parsed.completedMissions ?? 0);
-      if (parsed.feedbackState) setFeedbackState(parsed.feedbackState);
-      if (parsed.mode) setMode(parsed.mode);
-    }
+    // Reset data on initialization for a clean start
+    localStorage.removeItem("sap-quest-data");
+    setFormData({
+      orderType: "",
+      orderDate: "",
+      salesOrg: "",
+      deliveryDate: "",
+      distChannel: "",
+      paymentCond: "",
+      customer: "",
+      price: "",
+      material: "",
+    });
+    setSelectedTransaction("");
+    setXp(0);
+    setCompletedMissions(0);
+    setFeedbackState("idle");
+    setMode("standard");
   }, []);
 
   useEffect(() => {
-    const dataToSave = {
-      formData,
-      selectedTransaction,
-      xp,
-      completedMissions,
-      feedbackState,
-      mode // Persisting the mode (SD/TAX) as part of the theme/state
-    };
-    localStorage.setItem("sap-quest-data", JSON.stringify(dataToSave));
+    if (xp > 0 || completedMissions > 0 || selectedTransaction !== "" || feedbackState !== "idle") {
+      const dataToSave = {
+        formData,
+        selectedTransaction,
+        xp,
+        completedMissions,
+        feedbackState,
+        mode
+      };
+      localStorage.setItem("sap-quest-data", JSON.stringify(dataToSave));
+    }
   }, [formData, selectedTransaction, xp, completedMissions, feedbackState, mode]);
 
 
@@ -262,7 +272,7 @@ function SAPSDQuestApp() {
           ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
         `}>
           <div className="space-y-6 h-full flex flex-col justify-between overflow-y-auto">
-            <div className="space-y-4">
+            <div className="space-y-3 shrink-0">
               <nav className="space-y-0.5">
                 {[
                   { icon: Target, label: "Trilha Principal", sub: "Carreira passo a passo", active: true },
@@ -305,11 +315,11 @@ function SAPSDQuestApp() {
 
 
         {/* CENTER CANVAS (Flexible Grid Main Content) */}
-        <main className="bg-slate-50 p-4 md:p-6 lg:p-4 overflow-y-auto flex-1 space-y-4 lg:space-y-4">
+        <main className="bg-slate-50 p-3 md:p-4 lg:p-4 overflow-hidden flex-1 flex flex-col space-y-3 lg:space-y-3">
           {/* 1. Chefe Hugo Order Banner */}
-          <Card className="p-3 lg:p-4 border-slate-200 shadow-sm rounded-2xl flex flex-col md:flex-row items-center md:justify-between gap-3 md:gap-4">
-            <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 text-center md:text-left">
-              <HugoAvatar className="size-14 lg:size-16" />
+          <Card className="p-2 lg:p-3 border-slate-200 shadow-sm rounded-2xl flex flex-col md:flex-row items-center md:justify-between gap-3 md:gap-4 shrink-0">
+            <div className="flex flex-col md:flex-row items-center gap-3 md:gap-4 text-center md:text-left">
+              <HugoAvatar className="size-12 lg:size-14" />
 
               <div>
                 <div className="flex items-center justify-center md:justify-start gap-2 mb-1">
@@ -317,18 +327,17 @@ function SAPSDQuestApp() {
                   <span className="animate-bounce">👋</span>
                 </div>
                 <p className="text-sm text-slate-600 leading-relaxed max-w-2xl">
-                  Adriana, recebemos um pedido urgente do cliente <span className="font-bold text-primary">ALFA DISTRIBUIDORA LTDA</span>. 
-                  Precisamos criar uma ordem de venda com os dados informados. <span className="underline decoration-indigo-300 decoration-2 underline-offset-2">Atenção aos detalhes!</span>
+                  Adriana, crie uma ordem de venda urgente para a <span className="font-bold text-primary">ALFA DISTRIBUIDORA LTDA</span>.
                 </p>
               </div>
             </div>
-            <Button variant="outline" className="w-full md:w-auto gap-2 border-slate-200 text-slate-600 font-bold rounded-xl whitespace-nowrap min-h-[44px]">
+            <Button variant="outline" className="w-full md:w-auto gap-2 border-slate-200 text-slate-600 font-bold rounded-xl whitespace-nowrap min-h-[36px] h-9">
               <HelpCircle className="size-4" /> Ajuda (F1)
             </Button>
           </Card>
 
           {/* 2. Progress Stepper Bar */}
-          <div className="hidden lg:flex items-center justify-between px-10 relative py-2">
+          <div className="hidden lg:flex items-center justify-between px-10 relative py-1 shrink-0">
 
             <div className="absolute h-0.5 top-1/2 left-10 right-10 -translate-y-1/2 bg-slate-200 z-0"></div>
             {[
@@ -337,14 +346,14 @@ function SAPSDQuestApp() {
               { id: 3, label: "Preencher Dados", status: "pending" },
               { id: 4, label: "Revisar & Enviar", status: "pending" },
             ].map((step, idx) => (
-              <div key={step.id} className="flex flex-col items-center gap-1.5 relative z-10 bg-slate-50 px-4">
-                <div className={`size-8 rounded-full flex items-center justify-center font-bold text-[10px] transition-all shadow-sm ${
+              <div key={step.id} className="flex flex-col items-center gap-1 relative z-10 bg-slate-50 px-3">
+                <div className={`size-7 rounded-full flex items-center justify-center font-bold text-[10px] transition-all shadow-sm ${
                   step.status === "active" ? "bg-primary text-white scale-110 ring-2 ring-indigo-100" : 
                   step.status === "complete" ? "bg-green-500 text-white" : "bg-white text-slate-400 border border-slate-200"
                 }`}>
                   {step.status === "complete" ? <Check className="size-4" /> : step.id}
                 </div>
-                <span className={`text-[9px] font-bold uppercase tracking-wider ${
+                <span className={`text-[8px] font-bold uppercase tracking-wider ${
                   step.status === "active" ? "text-primary" : "text-slate-400"
                 }`}>{step.label}</span>
               </div>
@@ -352,15 +361,15 @@ function SAPSDQuestApp() {
           </div>
 
           {/* 3. Dual Interactive Workspace */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4 flex-1 overflow-hidden">
             {/* Left Box */}
-            <Card className="p-4 lg:p-5 border-slate-200 shadow-sm rounded-2xl flex flex-col h-full bg-white">
-              <div className="mb-4">
-                <h3 className="font-semibold text-slate-800 text-lg">Passo 2 de 4: Escolha a Transação</h3>
-                <p className="text-sm text-slate-500">Qual transação você deve utilizar?</p>
+            <Card className="p-4 lg:p-4 border-slate-200 shadow-sm rounded-2xl flex flex-col h-full bg-white overflow-hidden">
+              <div className="mb-3">
+                <h3 className="font-semibold text-slate-800 text-lg">Passo 2 de 4: Transação</h3>
+                <p className="text-xs text-slate-500">Qual código inicia o processo?</p>
               </div>
 
-              <RadioGroup value={selectedTransaction} onValueChange={setSelectedTransaction} className="space-y-2 mb-4">
+              <RadioGroup value={selectedTransaction} onValueChange={setSelectedTransaction} className="space-y-1.5 mb-3 overflow-y-auto pr-1">
                 {[
                   { id: "VA01", label: "VA01 - Criar Ordem de Venda" },
                   { id: "BP", label: "BP - Criar / Alterar Cliente" },
@@ -370,7 +379,7 @@ function SAPSDQuestApp() {
                 ].map((item) => (
                   <Label
                     key={item.id}
-                    className={`flex items-center gap-2 p-3 border rounded-xl cursor-pointer transition-all hover:bg-slate-50 min-h-[44px] focus-within:ring-2 focus-within:ring-primary ${
+                    className={`flex items-center gap-2 p-2 border rounded-xl cursor-pointer transition-all hover:bg-slate-50 min-h-[36px] focus-within:ring-2 focus-within:ring-primary ${
                       selectedTransaction === item.id ? "border-primary bg-indigo-50/50 ring-1 ring-primary" : 
                       validationErrors.includes("transaction") ? "border-red-400 bg-red-50/50 ring-1 ring-red-200" : "border-slate-100"
                     }`}
@@ -384,24 +393,24 @@ function SAPSDQuestApp() {
                 ))}
               </RadioGroup>
 
-              <div className="mt-auto bg-slate-50 p-4 rounded-xl flex gap-3 border border-slate-100">
-                <HugoAvatar className="size-10 rounded-lg ring-0 shadow-none" />
+              <div className="mt-auto bg-slate-50 p-3 rounded-xl flex gap-3 border border-slate-100 shrink-0">
+                <HugoAvatar className="size-8 rounded-lg ring-0 shadow-none" />
 
-                <p className="text-[11px] text-slate-500 leading-relaxed italic">
-                  <span className="font-bold text-slate-700 block not-italic mb-0.5">Dica do Chefe Hugo:</span>
+                <p className="text-[10px] text-slate-500 leading-relaxed italic">
+                  <span className="font-bold text-slate-700 block not-italic mb-0.5 text-[11px]">Dica do Chefe Hugo:</span>
                   Pense: qual transação inicia o processo Order-to-Cash?
                 </p>
               </div>
             </Card>
 
             {/* Right Box */}
-            <Card className={`p-4 lg:p-5 border-slate-200 shadow-sm rounded-2xl bg-white transition-opacity ${!selectedTransaction ? "opacity-50 pointer-events-none select-none" : "opacity-100"}`}>
-              <div className="mb-4">
-                <h3 className="font-semibold text-slate-800 text-lg">Passo 3 de 4: Preencha os dados</h3>
-                {!selectedTransaction && <p className="text-xs text-amber-600 font-medium">Selecione uma transação no Passo 2 para liberar este formulário.</p>}
+            <Card className={`p-4 lg:p-4 border-slate-200 shadow-sm rounded-2xl bg-white transition-opacity flex flex-col h-full overflow-hidden ${!selectedTransaction ? "opacity-50 pointer-events-none select-none" : "opacity-100"}`}>
+              <div className="mb-3">
+                <h3 className="font-semibold text-slate-800 text-lg">Passo 3 de 4: Dados</h3>
+                {!selectedTransaction && <p className="text-[10px] text-amber-600 font-medium">Selecione uma transação no Passo 2.</p>}
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 overflow-y-auto pr-1">
                 <div className="space-y-1.5">
                   <Label className="text-[11px] font-bold text-slate-500 uppercase">Tipo de Ordem</Label>
                   <Select value={formData.orderType} onValueChange={(v) => handleInputChange("orderType", v)}>
@@ -531,7 +540,7 @@ function SAPSDQuestApp() {
               </div>
             </Card>
 
-            <div className="md:col-span-1 lg:col-span-2 space-y-3">
+            <div className="md:col-span-1 lg:col-span-2 space-y-2">
               <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest px-1">Missões Recentes</h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
                 {[
@@ -570,9 +579,9 @@ function SAPSDQuestApp() {
 
 
         {/* RIGHT SIDEBAR (Fixed Width: 300px) */}
-        <aside className="hidden lg:flex border-l border-border bg-card p-4 lg:p-5 flex-col gap-6 overflow-y-auto">
+        <aside className="hidden lg:flex border-l border-border bg-card p-4 lg:p-5 flex-col gap-4 overflow-y-auto">
           {/* 1. Feedback Card */}
-          <Card className={`p-6 border shadow-sm rounded-2xl relative overflow-hidden flex flex-col items-center text-center transition-all duration-500 ${
+          <Card className={`p-4 border shadow-sm rounded-2xl relative overflow-hidden flex flex-col items-center text-center transition-all duration-500 shrink-0 ${
             feedbackState === "success" ? "border-green-200 bg-green-50/30" : 
             feedbackState === "error" ? "border-red-200 bg-red-50/30" : 
             "border-slate-200 bg-white"
@@ -599,11 +608,11 @@ function SAPSDQuestApp() {
                   <p><strong>Material:</strong> {formData.material}</p>
                   <p><strong>Org. Vendas:</strong> {formData.salesOrg}</p>
                   
-                  <div className="pt-4 flex flex-col gap-2">
-                    <Button onClick={handleSubmit} className="w-full bg-green-600 hover:bg-green-700 text-white">
+                  <div className="pt-2 flex flex-col gap-2 shrink-0">
+                    <Button onClick={handleSubmit} className="w-full bg-green-600 hover:bg-green-700 text-white h-9">
                       Confirmar e Enviar 🚀
                     </Button>
-                    <Button variant="ghost" onClick={() => setFeedbackState("idle")} className="w-full text-xs text-slate-500">
+                    <Button variant="ghost" onClick={() => setFeedbackState("idle")} className="w-full text-[10px] text-slate-500 h-8">
                       Voltar e Editar
                     </Button>
                   </div>
@@ -632,9 +641,9 @@ function SAPSDQuestApp() {
           </Card>
 
           {/* 2. Progress Tracker Card */}
-          <div className="space-y-4">
+          <div className="space-y-3 shrink-0">
             <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest px-1">Seu Progresso</h4>
-            <Card className="p-5 border-slate-200 shadow-sm rounded-2xl space-y-6">
+            <Card className="p-4 border-slate-200 shadow-sm rounded-2xl space-y-4">
               <div className="space-y-2">
                 <div className="flex justify-between text-xs font-bold">
                   <span className="text-slate-500">Missões concluídas</span>
@@ -651,8 +660,8 @@ function SAPSDQuestApp() {
                 <Progress value={(xp / 500) * 100} className="h-2 bg-slate-100" />
               </div>
 
-              <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 flex items-center gap-3">
-                <div className="size-10 bg-indigo-100 rounded-lg flex items-center justify-center text-primary shrink-0">
+              <div className="bg-slate-50 p-3 rounded-xl border border-slate-100 flex items-center gap-3">
+                <div className="size-8 bg-indigo-100 rounded-lg flex items-center justify-center text-primary shrink-0">
                   <BookOpen className="size-5" />
                 </div>
                 <div className="flex flex-col">
@@ -665,7 +674,7 @@ function SAPSDQuestApp() {
           </div>
 
           {/* 3. Upgrade Banner Card */}
-          <Card className="p-6 border-none bg-gradient-to-br from-indigo-600 to-purple-700 text-white rounded-2xl relative overflow-hidden group">
+          <Card className="p-4 border-none bg-gradient-to-br from-indigo-600 to-purple-700 text-white rounded-2xl relative overflow-hidden group shrink-0">
             <div className="absolute -top-4 -right-4 size-24 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-all"></div>
             <div className="flex items-center gap-3 mb-4">
               <div className="size-10 bg-amber-400 rounded-xl flex items-center justify-center text-indigo-900 shadow-lg">
@@ -686,7 +695,7 @@ function SAPSDQuestApp() {
                 </li>
               ))}
             </ul>
-            <Button className="w-full bg-white hover:bg-slate-100 text-indigo-900 font-black rounded-xl h-10 shadow-xl">
+            <Button className="w-full bg-white hover:bg-slate-100 text-indigo-900 font-black rounded-xl h-9 shadow-xl text-xs">
               Ativar Modo Premium
             </Button>
           </Card>
