@@ -279,7 +279,7 @@ function SAPSDQuestApp() {
     : 0;
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans flex flex-col pb-20 md:pb-0">
+    <div className="min-h-screen bg-background text-foreground font-sans flex flex-col pb-20 md:pb-0 overflow-y-auto">
       <header className="sticky top-0 z-50 w-full border-b border-border bg-card shadow-sm px-4 md:px-6 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
@@ -351,8 +351,8 @@ function SAPSDQuestApp() {
         </div>
       </header>
 
-      <div className="flex-1 flex flex-col md:grid md:grid-cols-[260px_1fr] lg:grid-cols-[260px_1fr_300px] relative">
-        <aside className={`fixed inset-y-0 left-0 z-40 w-[260px] bg-card border-r p-6 transform transition-transform md:relative md:translate-x-0 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} h-screen md:h-auto overflow-y-auto`}>
+      <div className="flex-1 flex flex-col md:flex-row relative">
+        <aside className={`fixed inset-y-0 left-0 z-40 w-[260px] bg-card border-r p-6 transform transition-transform md:relative md:translate-x-0 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} h-screen md:h-auto`}>
           <nav className="space-y-1">
             {[
               { icon: Target, label: "Trilha Principal", sub: "Carreira passo a passo", active: true },
@@ -374,7 +374,7 @@ function SAPSDQuestApp() {
           </nav>
         </aside>
 
-        <main className="bg-slate-50 p-4 overflow-y-auto flex-1 flex flex-col gap-4">
+        <main className="bg-slate-50 p-4 flex-1 flex flex-col gap-4">
           <Card className="p-3 border-slate-200 shadow-sm rounded-2xl flex items-center gap-4 shrink-0">
             <HugoAvatar className="size-12" />
             <div>
@@ -383,7 +383,7 @@ function SAPSDQuestApp() {
             </div>
           </Card>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 flex-1">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <Card className="p-4 flex flex-col bg-white">
               <h3 className="font-semibold text-slate-800 mb-3 text-sm">Transação</h3>
               <RadioGroup value={selectedTransaction} onValueChange={setSelectedTransaction} className="space-y-2 pr-1">
@@ -435,7 +435,7 @@ function SAPSDQuestApp() {
           </div>
         </main>
 
-        <aside className="hidden lg:flex border-l bg-card p-5 flex-col gap-4 overflow-y-auto">
+        <aside className="hidden lg:flex w-[300px] border-l bg-card p-5 flex-col gap-4">
           <Card className={`p-4 border shadow-sm rounded-2xl flex flex-col items-center text-center ${feedbackState === "success" ? "bg-green-50" : feedbackState === "error" ? "bg-red-50" : "bg-white"}`}>
             <HugoAvatar className="size-16 mb-4" />
             <h3 className="font-semibold text-xs mb-1">Feedback do Hugo</h3>
