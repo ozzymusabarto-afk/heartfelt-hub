@@ -93,6 +93,7 @@ function SAPSDQuestApp() {
       setSelectedTransaction(parsed.selectedTransaction || "");
       setXp(parsed.xp || 350);
       setCompletedMissions(parsed.completedMissions || 12);
+      if (parsed.feedbackState) setFeedbackState(parsed.feedbackState);
     }
   }, []);
 
@@ -101,10 +102,11 @@ function SAPSDQuestApp() {
       formData,
       selectedTransaction,
       xp,
-      completedMissions
+      completedMissions,
+      feedbackState
     };
     localStorage.setItem("sap-quest-data", JSON.stringify(dataToSave));
-  }, [formData, selectedTransaction, xp, completedMissions]);
+  }, [formData, selectedTransaction, xp, completedMissions, feedbackState]);
 
 
 
