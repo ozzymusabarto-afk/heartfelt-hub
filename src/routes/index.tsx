@@ -461,14 +461,22 @@ function SAPSDQuestApp() {
         {/* RIGHT SIDEBAR (Fixed Width: 300px) */}
         <aside className="border-l border-border bg-card p-6 flex flex-col gap-8 overflow-y-auto">
           {/* 1. Feedback Card */}
-          <Card className="p-6 border-green-200 bg-green-50/30 rounded-2xl relative overflow-hidden flex flex-col items-center text-center">
-            <div className="absolute top-0 right-0 p-2 text-green-100 opacity-20">
-              <Star className="size-16" />
+          <Card className={`p-6 border shadow-sm rounded-2xl relative overflow-hidden flex flex-col items-center text-center transition-all duration-500 ${
+            feedbackState === "success" ? "border-green-200 bg-green-50/30" : 
+            feedbackState === "error" ? "border-red-200 bg-red-50/30" : 
+            "border-slate-200 bg-white"
+          }`}>
+            <div className={`absolute top-0 right-0 p-2 opacity-20 transition-all ${
+              feedbackState === "success" ? "text-green-500" : feedbackState === "error" ? "text-red-500" : "text-slate-200"
+            }`}>
+              {feedbackState === "success" ? <Star className="size-16" /> : <Target className="size-16" />}
             </div>
             
-            <div className="size-20 bg-blue-100 rounded-3xl overflow-hidden mb-4 ring-4 ring-white shadow-md">
+            <div className={`size-20 rounded-3xl overflow-hidden mb-4 ring-4 ring-white shadow-md transition-all ${
+              feedbackState === "success" ? "bg-green-100 scale-110" : "bg-blue-100"
+            }`}>
               <img 
-                src="https://api.dicebear.com/7.x/avataaars/svg?seed=Hugo&style=circle&clothing=shirtBlue&mouth=smile" 
+                src={`https://api.dicebear.com/7.x/avataaars/svg?seed=Hugo&style=circle&clothing=shirtBlue&mouth=${feedbackState === "success" ? "smile" : feedbackState === "error" ? "serious" : "neutral"}`}
                 alt="Chefe Hugo Feedback" 
                 className="size-full object-cover"
               />
@@ -476,15 +484,24 @@ function SAPSDQuestApp() {
 
             <h3 className="font-bold text-slate-800 mb-1">Feedback do Chefe Hugo</h3>
             <p className="text-xs text-slate-600 leading-relaxed mb-6">
-              🎉 Excelente, Adriana! A ordem de venda foi criada com sucesso!
+              {feedbackState === "idle" && "Aguardando submissão do pedido. Selecione a transação, preencha os campos e clique em 'Conferir e Submeter'."}
+              {feedbackState === "success" && "🎉 Excelente, Adriana! A ordem de venda foi criada com sucesso!"}
+              {feedbackState === "error" && "Esse pedido ainda precisa de revisão antes de seguir para faturamento. Revise se a transação e os campos obrigatórios (Tipo, Org, Cliente, Material) estão corretos."}
             </p>
 
-            <div className="bg-white px-4 py-2 rounded-xl shadow-sm border border-green-100 flex items-center gap-2 mb-6 animate-pulse">
-              <Star className="size-4 text-yellow-500 fill-yellow-500" />
-              <span className="text-sm font-black text-slate-800">+25 XP</span>
-            </div>
+            {feedbackState === "success" && (
+              <div className="bg-white px-4 py-2 rounded-xl shadow-sm border border-green-100 flex items-center gap-2 mb-6 animate-bounce">
+                <Star className="size-4 text-yellow-500 fill-yellow-500" />
+                <span className="text-sm font-black text-slate-800">+25 XP</span>
+              </div>
+            )}
 
-            <Button className="w-full bg-primary hover:bg-indigo-700 text-white font-bold rounded-xl h-11 gap-2 shadow-md">
+            <Button 
+              onClick={feedbackState === "success" ? resetGame : undefined}
+              className={`w-full font-bold rounded-xl h-11 gap-2 shadow-md transition-all ${
+                feedbackState === "success" ? "bg-primary hover:bg-indigo-700 text-white" : "bg-slate-100 text-slate-400 cursor-not-allowed"
+              }`}
+            >
               Próximo Pedido <ArrowRight className="size-4" />
             </Button>
           </Card>
