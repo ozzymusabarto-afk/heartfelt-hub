@@ -1050,6 +1050,13 @@ function SAPSDQuestApp() {
                 >
                   PRÓXIMO PEDIDO <ArrowRight className="size-4" />
                 </Button>
+                <Button 
+                  variant="outline"
+                  onClick={generatePDFReport}
+                  className="w-full h-10 border-indigo-200 text-indigo-600 hover:bg-indigo-50 font-bold rounded-xl flex items-center justify-center gap-2 animate-in fade-in zoom-in-95 duration-300 text-xs"
+                >
+                  <FileText className="size-4" /> BAIXAR RESUMO PDF
+                </Button>
               </div>
             )}
             {feedbackState === "error" && <Button onClick={() => setFeedbackState("idle")} variant="outline" className="w-full text-xs h-9 rounded-xl border-red-200 text-red-600 hover:bg-red-50">TENTAR NOVAMENTE</Button>}
