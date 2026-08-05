@@ -5,7 +5,7 @@ import {
   ChevronRight, HelpCircle, CheckCircle2, Flame, Star, Shield,
   Search, Bell, Plus, MoreHorizontal, ArrowRight, Check, Menu, X,
   Gamepad2, Dices, User, UserCheck, Download, Upload, Eye, EyeOff, LogIn,
-  FileText, Undo2, ChevronDown
+  FileText, Undo2, ChevronDown, LogOut
 } from "lucide-react";
 import { 
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area 
@@ -124,9 +124,19 @@ function SAPSDQuestApp() {
       Status: Nível 1 - Trainee SD
       XP Total: ${xp} / 500
       Missões Concluídas: ${completedMissions} / 30
-      Taxa de Sucesso: ${successRate}%
+      Taxa de Sucesso: ${Math.round((trainingHistory.filter(h => h.status === 'success').length / Math.max(trainingHistory.length, 1)) * 100)}%
       -------------------------------------
-      Missão Atual: Criar Ordem (VA01) - ${completedMissions > 0 ? "CONCLUÍDO" : "DISPONÍVEL"}
+      Última Missão: ${trainingHistory[0]?.missionName || 'Nenhuma'}
+      Resultado: ${trainingHistory[0]?.status === 'success' ? 'SUCESSO' : 'ERRO'}
+      
+      DADOS TÉCNICOS DA MISSÃO:
+      Transação: ${trainingHistory[0]?.transaction || 'N/A'}
+      Mensagem Hugo: ${trainingHistory[0]?.message || 'N/A'}
+      
+      FEEDBACK ESTRATÉGICO:
+      ${trainingHistory[0]?.status === 'success' 
+        ? "Excelente execução! Com a criação correta desta ordem, a AAM LOGÍSTICA LTDA garante a reserva automática no estoque (MM) e o fluxo logístico sem gargalos." 
+        : "Atenção necessária! O erro cometido pode impactar a expedição e causar rejeições na SEFAZ. Revise os conceitos na Ajuda F1."}
     `;
     const blob = new Blob([content], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
@@ -135,6 +145,14 @@ function SAPSDQuestApp() {
     link.download = `relatorio_sap_sd_${Date.now()}.txt`;
     link.click();
     toast.success("Relatório baixado com sucesso!");
+  };
+
+  const handleLogout = () => {
+    if (confirm("Deseja sair do sistema?")) {
+      setIsAuth(false);
+      localStorage.removeItem("sap-quest-username");
+      toast.info("Sessão encerrada.");
+    }
   };
 
   const handleLogin = (e: React.FormEvent) => {
@@ -676,23 +694,22 @@ function SAPSDQuestApp() {
             </div>
           </div>
 
-          <div className="flex items-center gap-1 border-l ml-2 pl-2 border-slate-200">
-            <Button variant="ghost" size="icon" className="size-8 text-slate-500 hover:text-indigo-600" onClick={exportState} title="Exportar">
-              <Download className="size-4" />
-            </Button>
-            <div className="relative">
-              <Input type="file" accept=".json" onChange={importState} className="hidden" id="import-state" />
-              <Label htmlFor="import-state" className="size-8 flex items-center justify-center rounded-md hover:bg-slate-100 cursor-pointer text-slate-500 hover:text-indigo-600" title="Importar">
-                <Upload className="size-4" />
-              </Label>
-            </div>
+          <div className="flex items-center gap-2 border-l ml-3 pl-3 border-slate-200">
+            <Badge variant="outline" className="h-9 px-3 border-slate-200 bg-slate-50/50 text-slate-600 rounded-xl flex items-center gap-2 group cursor-default">
+              <div className="size-5 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 font-black text-[9px]">
+                {userName.charAt(0).toUpperCase()}
+              </div>
+              <span className="text-[10px] font-bold">Consultor: {userName}</span>
+            </Badge>
+            
             <Button 
-              variant="outline" 
-              size="sm" 
-              className="ml-2 h-8 text-[11px] font-bold border-indigo-200 text-indigo-600 hover:bg-indigo-50 gap-1.5 rounded-lg"
-              onClick={() => toast.info("Sincronização na nuvem estará disponível em breve! Por enquanto, use Exportar/Importar.")}
+              variant="ghost" 
+              size="icon" 
+              className="size-9 rounded-xl text-slate-400 hover:text-red-500 hover:bg-red-50 transition-colors"
+              onClick={handleLogout}
+              title="Sair do Sistema"
             >
-              <LogIn className="size-3" /> LOGIN
+              <LogOut className="size-4" />
             </Button>
           </div>
         </div>
