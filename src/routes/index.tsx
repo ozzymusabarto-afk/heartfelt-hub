@@ -4,7 +4,7 @@ import {
   Rocket, Target, BookOpen, Crown, BarChart3, Trophy, Settings, 
   ChevronRight, HelpCircle, CheckCircle2, Flame, Star, Shield,
   Search, Bell, Plus, MoreHorizontal, ArrowRight, Check, Menu, X,
-  Gamepad2, Dices, User, UserCheck, Download, Upload, Eye, EyeOff, LogIn,
+  Gamepad2, Dices, User, UserCheck, Eye, EyeOff, LogIn,
   FileText, Undo2, ChevronDown, LogOut
 } from "lucide-react";
 import { 
@@ -213,14 +213,14 @@ function SAPSDQuestApp() {
           if (parsed.feedbackState) setFeedbackState(parsed.feedbackState);
           if (parsed.mode) setMode(parsed.mode);
         } catch (e) {
-          console.error("Failed to load data", e);
+          // Error loading data silently
         }
       }
       if (savedHistory) {
         try {
           setTrainingHistory(JSON.parse(savedHistory));
         } catch (e) {
-          console.error("Failed to parse history", e);
+          // Error parsing history silently
         }
       }
     }
@@ -247,7 +247,7 @@ function SAPSDQuestApp() {
           // Only update feedback if it changed to keep UI consistent
           if (parsed.feedbackState && parsed.feedbackState !== feedbackState) setFeedbackState(parsed.feedbackState);
         } catch (err) {
-          console.error("Tab sync error", err);
+          // Tab sync error silently
         }
       }
     };
@@ -305,7 +305,7 @@ function SAPSDQuestApp() {
       try {
         setTrainingHistory(JSON.parse(savedData));
       } catch (e) {
-        console.error("Failed to parse history", e);
+        // Silently handle parse error
       }
     }
   }, []);
@@ -315,39 +315,6 @@ function SAPSDQuestApp() {
       localStorage.setItem("sap-quest-history", JSON.stringify(trainingHistory));
     }
   }, [trainingHistory]);
-
-  const exportState = () => {
-    const state = { formData, selectedTransaction, xp, completedMissions, mode, trainingHistory };
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state));
-    const downloadAnchorNode = document.createElement('a');
-    downloadAnchorNode.setAttribute("href", dataStr);
-    downloadAnchorNode.setAttribute("download", "sap_sd_quest_state.json");
-    document.body.appendChild(downloadAnchorNode);
-    downloadAnchorNode.click();
-    downloadAnchorNode.remove();
-    toast.success("Estado exportado!");
-  };
-
-  const importState = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      try {
-        const json = JSON.parse(event.target?.result as string);
-        if (json.xp !== undefined) setXp(json.xp);
-        if (json.completedMissions !== undefined) setCompletedMissions(json.completedMissions);
-        if (json.formData) setFormData(json.formData);
-        if (json.selectedTransaction) setSelectedTransaction(json.selectedTransaction);
-        if (json.mode) setMode(json.mode);
-        if (json.trainingHistory) setTrainingHistory(json.trainingHistory);
-        toast.success("Dados importados!");
-      } catch (err) {
-        toast.error("Erro ao importar.");
-      }
-    };
-    reader.readAsText(file);
-  };
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -647,61 +614,28 @@ function SAPSDQuestApp() {
         </div>
 
         <div className="hidden lg:flex items-center gap-2">
-          <div className="flex items-center gap-2">
-            {/* Escudo: Nível 1 - Trainee SD */}
-            <Card className="flex items-center gap-2 px-3 py-1.5 border-slate-200 shadow-none rounded-xl bg-slate-50/50">
-              <Shield className="size-4 text-indigo-600" />
-              <div className="flex flex-col">
-                <span className="text-[9px] font-black text-slate-400 uppercase leading-none mb-0.5">Status</span>
+          <Badge variant="outline" className="h-9 px-3 border-slate-200 bg-slate-50/50 text-slate-600 rounded-xl flex items-center gap-2 group cursor-default">
+            <div className="size-5 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 font-black text-[9px]">
+              {userName.charAt(0).toUpperCase()}
+            </div>
+            <span className="text-[10px] font-bold">Consultor: {userName}</span>
+          </Badge>
+
+          <div className="flex items-center gap-2 border-l ml-3 pl-3 border-slate-200">
+            <div className="flex items-center gap-2">
+              <Card className="flex items-center gap-2 px-3 py-1.5 border-slate-200 shadow-none rounded-xl bg-slate-50/50">
+                <Shield className="size-4 text-indigo-600" />
                 <span className="text-[11px] font-bold text-slate-700 leading-none">Nível 1 - Trainee SD</span>
-              </div>
-            </Card>
+              </Card>
 
-            {/* Barra de progresso: XP (350 / 500 XP) */}
-            {/* Barra de progresso: XP (350 / 500 XP) */}
-            <Card className="flex items-center gap-3 px-3 py-1.5 border-slate-200 shadow-none rounded-xl bg-slate-50/50 min-w-[160px]">
-              <div className="flex flex-col w-full">
-                <div className="flex justify-between items-end mb-1">
-                  <span className="text-[9px] font-black text-slate-400 uppercase leading-none">Progresso XP</span>
-                  <span className="text-[10px] font-bold text-indigo-600 leading-none">{xp} / 500 XP</span>
-                </div>
-                <Progress value={(xp / 500) * 100} className="h-1.5 bg-indigo-100" />
-              </div>
-            </Card>
-
-            {/* Estrela Amarela: Pontos 1.250 */}
-            <Card className="flex items-center gap-2 px-3 py-1.5 border-slate-200 shadow-none rounded-xl bg-slate-50/50">
-              <Star className="size-4 text-amber-500 fill-amber-500" />
-              <div className="flex flex-col">
-                <span className="text-[9px] font-black text-slate-400 uppercase leading-none mb-0.5">Pontos</span>
-                <span className="text-[11px] font-bold text-slate-700 leading-none">{xp * 5}</span>
-              </div>
-            </Card>
-
-            {/* Chama Laranja: Sequência 7 dias */}
-            <Card className="flex items-center gap-2 px-3 py-1.5 border-slate-200 shadow-none rounded-xl bg-slate-50/50">
-              <Flame className="size-4 text-orange-500 fill-orange-500" />
-              <div className="flex flex-col">
-                <span className="text-[9px] font-black text-slate-400 uppercase leading-none mb-0.5">Sequência</span>
-                <span className="text-[11px] font-bold text-slate-700 leading-none">7 dias</span>
-              </div>
-            </Card>
-
-            {/* Select/Badges: Modo [SD Standard] e Localização Brasil (TAX) */}
-            <div className="flex items-center bg-slate-100 p-1 rounded-xl ml-1 gap-1">
-              <Badge className="bg-indigo-600 hover:bg-indigo-700 text-white border-none rounded-lg px-2 py-0.5 text-[10px] font-bold">SD Standard</Badge>
-              <Badge variant="outline" className="border-slate-300 text-slate-600 rounded-lg px-2 py-0.5 text-[10px] font-bold bg-white">Brasil (TAX)</Badge>
+              <Card className="flex items-center gap-2 px-3 py-1.5 border-slate-200 shadow-none rounded-xl bg-slate-50/50">
+                <Star className="size-4 text-amber-500 fill-amber-500" />
+                <span className="text-[11px] font-bold text-slate-700 leading-none">{xp * 5} pts</span>
+              </Card>
             </div>
           </div>
 
           <div className="flex items-center gap-2 border-l ml-3 pl-3 border-slate-200">
-            <Badge variant="outline" className="h-9 px-3 border-slate-200 bg-slate-50/50 text-slate-600 rounded-xl flex items-center gap-2 group cursor-default">
-              <div className="size-5 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 font-black text-[9px]">
-                {userName.charAt(0).toUpperCase()}
-              </div>
-              <span className="text-[10px] font-bold">Consultor: {userName}</span>
-            </Badge>
-            
             <Button 
               variant="ghost" 
               size="icon" 
