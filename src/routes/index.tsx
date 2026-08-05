@@ -197,6 +197,7 @@ function SAPSDQuestApp() {
       setSelectedTransaction("");
       setXp(0);
       setCompletedMissions(0);
+      setCurrentMissionIndex(0);
       setTrainingHistory([]);
       setFeedbackState("idle");
       sessionStorage.setItem("sap-quest-session-started", "true");
