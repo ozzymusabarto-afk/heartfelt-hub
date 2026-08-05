@@ -709,7 +709,8 @@ function SAPSDQuestApp() {
                 <HugoAvatar className="size-14" />
                 <div>
                   <h3 className="font-bold text-slate-800 text-sm">Chefe Hugo 👋</h3>
-                  <p className="text-xs text-slate-600">{userName}, crie uma ordem de venda urgente para a <b>AAM LOGÍSTICA LTDA</b>.</p>
+                  <p className="text-xs text-slate-600">{userName}, sua missão [{currentMissionIndex + 1}/{missions.length}]: <b>{currentMission.name}</b>.</p>
+                  <p className="text-[10px] text-slate-400 mt-0.5 italic">{currentMission.description}</p>
                 </div>
               </div>
               <div className="relative">
