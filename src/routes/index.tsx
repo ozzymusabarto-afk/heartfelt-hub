@@ -430,13 +430,14 @@ function SAPSDQuestApp() {
   const fullReset = () => {
     if (confirm("Tem certeza que deseja reiniciar TODO o seu progresso? Isso limpará seu XP e histórico de missões.")) {
       // Salva estado para desfazer
-      const currentState = { xp, completedMissions, trainingHistory };
+      const currentState = { xp, completedMissions, currentMissionIndex, trainingHistory };
       setLastStateBeforeReset(currentState);
       setShowUndoReset(true);
 
       // Limpa dados
       setXp(0);
       setCompletedMissions(0);
+      setCurrentMissionIndex(0);
       setTrainingHistory([]);
       resetGame();
       localStorage.removeItem("sap-quest-data");
