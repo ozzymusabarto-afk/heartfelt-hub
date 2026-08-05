@@ -110,6 +110,89 @@ function SAPSDQuestApp() {
   const helpCloseRef = useRef<HTMLButtonElement>(null);
   const helpContainerRef = useRef<HTMLDivElement>(null);
   const undoTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [isCustomerSearchOpen, setIsCustomerSearchOpen] = useState(false);
+  const [customerSearchTerm, setHistorySearchTerm] = useState(""); // Reusing generic search term logic if needed, but let's keep it separate
+  const [isF1ModalOpen, setIsF1ModalOpen] = useState(false);
+  const [f1ActiveField, setF1ActiveField] = useState<{
+    label: string;
+    table: string;
+    concept: string;
+    impact: string;
+  } | null>(null);
+
+  const CUSTOMER_MASTER = [
+    { code: "208015", name: "AAM LOGÍSTICA LTDA", uf: "SP", canal: "10" },
+    { code: "208016", name: "NORTEL DISTRIBUIDORA", uf: "RJ", canal: "20" },
+    { code: "208017", name: "MERCADO LIVRE", uf: "SP", canal: "10" },
+    { code: "208018", name: "LOGGI TECNOLOGIA", uf: "PR", canal: "20" },
+    { code: "208019", name: "MAGAZINE LUIZA", uf: "MG", canal: "10" },
+  ];
+
+  const FIELD_METADATA: Record<string, { label: string; table: string; concept: string; impact: string }> = {
+    orderType: { 
+      label: "Tipo de Ordem", 
+      table: "VBAK-AUART", 
+      concept: "Define a categoria do documento comercial (Venda, Devolução, etc).", 
+      impact: "Determina o fluxo de documentos e a numeração da nota fiscal." 
+    },
+    salesOrg: { 
+      label: "Org. Vendas", 
+      table: "VBAK-VKORG", 
+      concept: "Unidade organizacional responsável pelas vendas e contratos.", 
+      impact: "Define a origem do faturamento e a base de cálculo de impostos estaduais." 
+    },
+    customer: { 
+      label: "Emissor (Cliente)", 
+      table: "KNA1-KUNNR", 
+      concept: "O parceiro de negócios que solicita a mercadoria.", 
+      impact: "Determina o endereço de entrega e as alíquotas de ICMS/Substituição Tributária." 
+    },
+    material: { 
+      label: "Material", 
+      table: "VBAP-MATNR", 
+      concept: "Código único do produto no mestre de materiais.", 
+      impact: "Define a NCM, alíquota de IPI e o peso para cálculo do frete." 
+    },
+    quantity: { 
+      label: "Quantidade", 
+      table: "VBAP-KWMENG", 
+      concept: "Volume solicitado pelo cliente para o item.", 
+      impact: "Impacta a disponibilidade de estoque e o valor total da NF-e." 
+    },
+    incoterms: { 
+      label: "Incoterms", 
+      table: "VBAK-INCO1", 
+      concept: "Termos internacionais de comércio (CIF/FOB).", 
+      impact: "Determina quem paga o frete e como ele é informado no XML da NF-e." 
+    },
+    distChannel: { 
+      label: "Canal de Distribuição", 
+      table: "VBAK-VTWEG", 
+      concept: "Meio pelo qual o produto chega ao cliente (Varejo/Atacado).", 
+      impact: "Pode alterar a precificação e a incidência de PIS/COFINS." 
+    },
+    paymentCond: { 
+      label: "Condição de Pagamento", 
+      table: "VBAK-ZTERM", 
+      concept: "Regras de vencimento e parcelamento acordadas.", 
+      impact: "Define as datas de vencimento das duplicatas no financeiro." 
+    },
+    division: { 
+      label: "Setor de Atividade", 
+      table: "VBAK-SPART", 
+      concept: "Agrupamento de produtos (Peças, Serviços).", 
+      impact: "Usado para determinar o setor fiscal de saída dos produtos." 
+    }
+  };
+
+  const openF1ForField = (field: string) => {
+    const meta = FIELD_METADATA[field];
+    if (meta) {
+      setF1ActiveField(meta);
+      setIsF1ModalOpen(true);
+    }
+  };
+
 
   const generatePDFReport = () => {
     toast.info("Gerando relatório...");
@@ -369,7 +452,11 @@ function SAPSDQuestApp() {
         toast.info("Validação OK! Revise antes de enviar.");
       } else {
         setFeedbackState("success");
-        setHintMessage(`🎉 ${currentMission.successFeedback}`);
+        const docNum = Math.floor(450000000 + Math.random() * 999999);
+        const successMsg = `Ordem de Venda Standard ${docNum} gerada com sucesso!`;
+        setHintMessage(`🎉 ${successMsg} \n\n${currentMission.successFeedback}`);
+        toast.success(successMsg);
+
         if (mode !== "practice") {
           setXp(prev => Math.min(prev + 25, 500));
           setCompletedMissions(prev => prev + 1);
@@ -727,9 +814,12 @@ function SAPSDQuestApp() {
                 <div>
                   <h3 className="font-bold text-slate-800 text-sm">Chefe Hugo 👋</h3>
                   <p className="text-xs text-slate-600">{userName}, sua missão [{currentMissionIndex + 1}/{missions.length}]: <b>{currentMission.title}</b>.</p>
-                  <p className="text-[10px] text-slate-400 mt-0.5 italic">{currentMission.chefeHugoDialog}</p>
+                  <p className="text-[10px] text-slate-400 mt-0.5 italic">
+                    "{currentMission.chefeHugoDialog.replace("AAM LOGÍSTICA", "AAM LOGÍSTICA LTDA (Cód: 208015)")}"
+                  </p>
                 </div>
               </div>
+
               <div className="relative">
                 <Button 
                   variant="outline" 
@@ -881,7 +971,7 @@ function SAPSDQuestApp() {
                   { id: "salesOrg", label: "Org. Vendas" },
                   { id: "distChannel", label: "Canal Dist.", type: "select", options: ["10", "20"] },
                   { id: "division", label: "Setor Ativ.", type: "select", options: ["00", "01"] },
-                  { id: "customer", label: "Emissor" },
+                  { id: "customer", label: "Emissor", hasSearch: true },
                   { id: "poNumber", label: "Nº Pedido" },
                   { id: "material", label: "Material" },
                   { id: "quantity", label: "Quantidade" },
@@ -890,25 +980,49 @@ function SAPSDQuestApp() {
                 ].map((field) => {
                   const fieldId = field.id as keyof typeof formData;
                   return (
-                    <div key={field.id} className={`space-y-1`}>
-                      <Label className="text-[9px] font-black text-slate-400 uppercase tracking-wider">{field.label}</Label>
+                    <div key={field.id} className="space-y-1">
+                      <div className="flex items-center justify-between">
+                        <Label className="text-[9px] font-black text-slate-400 uppercase tracking-wider">{field.label}</Label>
+                        <Button 
+                          variant="ghost" 
+                          size="icon" 
+                          className="size-4 h-4 w-4 p-0 text-slate-300 hover:text-indigo-600 transition-colors"
+                          onClick={() => openF1ForField(field.id)}
+                          title="Ajuda F1"
+                        >
+                          <HelpCircle className="size-2.5" />
+                        </Button>
+                      </div>
                       {field.type === "select" ? (
                         <Select value={formData[fieldId] || ""} onValueChange={(v) => handleInputChange(field.id, v)}>
-                          <SelectTrigger className="h-9 rounded-lg border-slate-200 text-xs"><SelectValue placeholder="-" /></SelectTrigger>
+                          <SelectTrigger className={`h-9 rounded-lg border-slate-200 text-xs ${validationErrors.includes(field.id) ? "border-red-400 ring-1 ring-red-400" : ""}`}><SelectValue placeholder="-" /></SelectTrigger>
                           <SelectContent>{field.options?.map(o => <SelectItem key={o} value={o} className="text-xs">{o}</SelectItem>)}</SelectContent>
                         </Select>
                       ) : (
-                        <Input 
-
-                          value={formData[fieldId] || ""} 
-                          onChange={(e) => handleInputChange(field.id, e.target.value)} 
-                          className={`h-9 rounded-lg border-slate-200 text-xs placeholder:text-slate-300 focus:ring-indigo-600 ${validationErrors.includes(field.id) ? "border-red-400 ring-1 ring-red-400" : ""}`}
-                        />
+                        <div className="relative group">
+                          <Input 
+                            value={formData[fieldId] || ""} 
+                            onChange={(e) => handleInputChange(field.id, e.target.value)} 
+                            className={`h-9 rounded-lg border-slate-200 text-xs placeholder:text-slate-300 focus:ring-indigo-600 ${field.hasSearch ? "pr-8" : ""} ${validationErrors.includes(field.id) ? "border-red-400 ring-1 ring-red-400" : ""}`}
+                          />
+                          {field.hasSearch && (
+                            <Button
+                              size="icon"
+                              variant="ghost"
+                              className="absolute right-0 top-0 h-9 w-8 text-slate-400 hover:text-indigo-600"
+                              onClick={() => setIsCustomerSearchOpen(true)}
+                              title="Busca F4 (Matchcode)"
+                            >
+                              <Search className="size-3" />
+                            </Button>
+                          )}
+                        </div>
                       )}
                     </div>
                   );
                 })}
               </div>
+
               <Button 
                 onClick={handleSubmit} 
                 className="w-full h-10 mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg shadow-indigo-200 transition-all active:scale-[0.98]"
@@ -1152,6 +1266,115 @@ function SAPSDQuestApp() {
           </div>
         </aside>
       </div>
+
+      {/* Modal Busca F4 Clientes */}
+      {isCustomerSearchOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200">
+          <Card className="w-full max-w-lg shadow-2xl overflow-hidden border-slate-200 animate-in zoom-in-95 duration-200">
+            <div className="bg-slate-50 px-6 py-4 border-b border-slate-200 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Search className="size-5 text-indigo-600" />
+                <h3 className="font-bold text-slate-800">Matchcode: Carteira de Clientes AAM Corp</h3>
+              </div>
+              <Button variant="ghost" size="icon" onClick={() => setIsCustomerSearchOpen(false)} className="hover:bg-slate-200 rounded-full size-8">
+                <X className="size-5" />
+              </Button>
+            </div>
+            <div className="p-0 max-h-[400px] overflow-y-auto">
+              <table className="w-full text-sm text-left">
+                <thead className="bg-slate-100 text-slate-600 font-semibold sticky top-0">
+                  <tr>
+                    <th className="px-6 py-3 border-b">Código</th>
+                    <th className="px-6 py-3 border-b">Razão Social</th>
+                    <th className="px-6 py-3 border-b">UF</th>
+                    <th className="px-6 py-3 border-b">Canal</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {CUSTOMER_MASTER.map((c) => (
+                    <tr 
+                      key={c.code} 
+                      className="hover:bg-indigo-50 cursor-pointer transition-colors group"
+                      onClick={() => {
+                        handleInputChange("customer", c.code);
+                        setIsCustomerSearchOpen(false);
+                        toast.success(`Cliente ${c.name} selecionado.`);
+                      }}
+                    >
+                      <td className="px-6 py-4 font-mono text-indigo-600 font-semibold">{c.code}</td>
+                      <td className="px-6 py-4 font-medium text-slate-800">{c.name}</td>
+                      <td className="px-6 py-4 text-slate-500">{c.uf}</td>
+                      <td className="px-6 py-4 text-slate-500">{c.canal}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="bg-slate-50 px-6 py-3 border-t border-slate-200 text-right">
+              <Button variant="outline" size="sm" onClick={() => setIsCustomerSearchOpen(false)}>Cancelar</Button>
+            </div>
+          </Card>
+        </div>
+      )}
+
+      {/* Modal F1 Ajuda do Campo */}
+      {isF1ModalOpen && f1ActiveField && (
+        <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200">
+          <Card className="w-full max-w-md shadow-2xl overflow-hidden border-slate-200 animate-in zoom-in-95 duration-200">
+            <div className="bg-indigo-600 px-6 py-4 flex items-center justify-between text-white">
+              <div className="flex items-center gap-2">
+                <HelpCircle className="size-5" />
+                <h3 className="font-bold">Ajuda SAP GUI [F1]</h3>
+              </div>
+              <Button variant="ghost" size="icon" onClick={() => setIsF1ModalOpen(false)} className="text-indigo-100 hover:text-white hover:bg-indigo-700 rounded-full size-8">
+                <X className="size-5" />
+              </Button>
+            </div>
+            <div className="p-6 space-y-6">
+              <div>
+                <h4 className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest mb-1">Nome do Campo</h4>
+                <p className="text-xl font-bold text-slate-800">{f1ActiveField.label}</p>
+              </div>
+              
+              <div className="flex items-center gap-2 bg-slate-50 p-3 rounded-lg border border-slate-100">
+                <div className="p-1.5 bg-indigo-100 rounded-md">
+                  <FileText className="size-4 text-indigo-600" />
+                </div>
+                <div>
+                  <h4 className="text-[9px] font-bold text-slate-500 uppercase leading-none">Tabela/Campo SAP</h4>
+                  <p className="font-mono text-sm font-semibold text-slate-700">{f1ActiveField.table}</p>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <div className="space-y-1">
+                  <h4 className="text-xs font-bold text-slate-900 flex items-center gap-2">
+                    <span className="size-1.5 rounded-full bg-indigo-500"></span>
+                    Conceito de Negócio
+                  </h4>
+                  <p className="text-sm text-slate-600 leading-relaxed pl-3.5">
+                    {f1ActiveField.concept}
+                  </p>
+                </div>
+
+                <div className="space-y-1">
+                  <h4 className="text-xs font-bold text-slate-900 flex items-center gap-2">
+                    <span className="size-1.5 rounded-full bg-amber-500"></span>
+                    Impacto Fiscal (Brasil)
+                  </h4>
+                  <p className="text-sm text-slate-600 leading-relaxed pl-3.5">
+                    {f1ActiveField.impact}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-slate-50 px-6 py-4 border-t border-slate-200 flex justify-end">
+              <Button onClick={() => setIsF1ModalOpen(false)} className="bg-indigo-600 hover:bg-indigo-700">Fechar Ajuda</Button>
+            </div>
+          </Card>
+        </div>
+      )}
     </div>
   );
 }
+
