@@ -614,61 +614,28 @@ function SAPSDQuestApp() {
         </div>
 
         <div className="hidden lg:flex items-center gap-2">
-          <div className="flex items-center gap-2">
-            {/* Escudo: Nível 1 - Trainee SD */}
-            <Card className="flex items-center gap-2 px-3 py-1.5 border-slate-200 shadow-none rounded-xl bg-slate-50/50">
-              <Shield className="size-4 text-indigo-600" />
-              <div className="flex flex-col">
-                <span className="text-[9px] font-black text-slate-400 uppercase leading-none mb-0.5">Status</span>
+          <Badge variant="outline" className="h-9 px-3 border-slate-200 bg-slate-50/50 text-slate-600 rounded-xl flex items-center gap-2 group cursor-default">
+            <div className="size-5 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 font-black text-[9px]">
+              {userName.charAt(0).toUpperCase()}
+            </div>
+            <span className="text-[10px] font-bold">Consultor: {userName}</span>
+          </Badge>
+
+          <div className="flex items-center gap-2 border-l ml-3 pl-3 border-slate-200">
+            <div className="flex items-center gap-2">
+              <Card className="flex items-center gap-2 px-3 py-1.5 border-slate-200 shadow-none rounded-xl bg-slate-50/50">
+                <Shield className="size-4 text-indigo-600" />
                 <span className="text-[11px] font-bold text-slate-700 leading-none">Nível 1 - Trainee SD</span>
-              </div>
-            </Card>
+              </Card>
 
-            {/* Barra de progresso: XP (350 / 500 XP) */}
-            {/* Barra de progresso: XP (350 / 500 XP) */}
-            <Card className="flex items-center gap-3 px-3 py-1.5 border-slate-200 shadow-none rounded-xl bg-slate-50/50 min-w-[160px]">
-              <div className="flex flex-col w-full">
-                <div className="flex justify-between items-end mb-1">
-                  <span className="text-[9px] font-black text-slate-400 uppercase leading-none">Progresso XP</span>
-                  <span className="text-[10px] font-bold text-indigo-600 leading-none">{xp} / 500 XP</span>
-                </div>
-                <Progress value={(xp / 500) * 100} className="h-1.5 bg-indigo-100" />
-              </div>
-            </Card>
-
-            {/* Estrela Amarela: Pontos 1.250 */}
-            <Card className="flex items-center gap-2 px-3 py-1.5 border-slate-200 shadow-none rounded-xl bg-slate-50/50">
-              <Star className="size-4 text-amber-500 fill-amber-500" />
-              <div className="flex flex-col">
-                <span className="text-[9px] font-black text-slate-400 uppercase leading-none mb-0.5">Pontos</span>
-                <span className="text-[11px] font-bold text-slate-700 leading-none">{xp * 5}</span>
-              </div>
-            </Card>
-
-            {/* Chama Laranja: Sequência 7 dias */}
-            <Card className="flex items-center gap-2 px-3 py-1.5 border-slate-200 shadow-none rounded-xl bg-slate-50/50">
-              <Flame className="size-4 text-orange-500 fill-orange-500" />
-              <div className="flex flex-col">
-                <span className="text-[9px] font-black text-slate-400 uppercase leading-none mb-0.5">Sequência</span>
-                <span className="text-[11px] font-bold text-slate-700 leading-none">7 dias</span>
-              </div>
-            </Card>
-
-            {/* Select/Badges: Modo [SD Standard] e Localização Brasil (TAX) */}
-            <div className="flex items-center bg-slate-100 p-1 rounded-xl ml-1 gap-1">
-              <Badge className="bg-indigo-600 hover:bg-indigo-700 text-white border-none rounded-lg px-2 py-0.5 text-[10px] font-bold">SD Standard</Badge>
-              <Badge variant="outline" className="border-slate-300 text-slate-600 rounded-lg px-2 py-0.5 text-[10px] font-bold bg-white">Brasil (TAX)</Badge>
+              <Card className="flex items-center gap-2 px-3 py-1.5 border-slate-200 shadow-none rounded-xl bg-slate-50/50">
+                <Star className="size-4 text-amber-500 fill-amber-500" />
+                <span className="text-[11px] font-bold text-slate-700 leading-none">{xp * 5} pts</span>
+              </Card>
             </div>
           </div>
 
           <div className="flex items-center gap-2 border-l ml-3 pl-3 border-slate-200">
-            <Badge variant="outline" className="h-9 px-3 border-slate-200 bg-slate-50/50 text-slate-600 rounded-xl flex items-center gap-2 group cursor-default">
-              <div className="size-5 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 font-black text-[9px]">
-                {userName.charAt(0).toUpperCase()}
-              </div>
-              <span className="text-[10px] font-bold">Consultor: {userName}</span>
-            </Badge>
-            
             <Button 
               variant="ghost" 
               size="icon" 
