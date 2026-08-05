@@ -762,45 +762,45 @@ function SAPSDQuestApp() {
                     >
                       {[
                         { 
-                          id: "VA01", 
-                          title: "Transação VA01", 
-                          icon: Rocket, 
-                          content: "Utilizada no SAP para a criação de ordens de venda. É o ponto de entrada para o processo Order-to-Cash (O2C).",
+                          id: "MISSION_OBJ", 
+                          title: "Objetivo Atual", 
+                          icon: Target, 
+                          content: currentMission.objective,
                           variant: "indigo"
                         },
                         { 
-                          id: "OR", 
-                          title: "Tipo de Ordem (OR)", 
+                          id: "TRANS_HELP", 
+                          title: "Transação", 
+                          icon: Rocket, 
+                          content: currentMission.hints.transaction,
+                          variant: "slate"
+                        },
+                        { 
+                          id: "ORDER_TYPE_HELP", 
+                          title: "Tipo de Ordem", 
                           icon: FileText, 
-                          content: "O código 'OR' (Standard Order) define o fluxo comercial padrão para vendas de produtos em estoque.",
+                          content: currentMission.hints.orderType,
                           variant: "slate"
                         },
                         { 
-                          id: "ORG", 
-                          title: "Organização de Vendas", 
-                          icon: Target, 
-                          content: "Define a unidade responsável pela comercialização. No exercício, utilize o código 1000.",
-                          variant: "slate"
-                        },
-                        { 
-                          id: "CHANNELS", 
-                          title: "Canais e Setores", 
-                          icon: BarChart3, 
-                          content: "Canal 10: Venda Direta. Setor 00: Divisão de produtos padrão.",
-                          variant: "slate"
-                        },
-                        { 
-                          id: "INCO", 
-                          title: "Incoterms & Pagamento", 
+                          id: "SALES_ORG_HELP", 
+                          title: "Org. Vendas", 
                           icon: Shield, 
-                          content: "Utilize FOB (Free On Board) para frete e 0001 para pagamento imediato.",
+                          content: currentMission.hints.salesOrg,
                           variant: "slate"
                         },
                         { 
-                          id: "HINT", 
-                          title: "Dica de Mestre", 
-                          icon: Star, 
-                          content: "Certifique-se de que o emissor da ordem (Sold-to Party) seja o código 200015.",
+                          id: "CUSTOMER_HELP", 
+                          title: "Cliente / Material", 
+                          icon: UserCheck, 
+                          content: `${currentMission.hints.customer} | ${currentMission.hints.material}`,
+                          variant: "slate"
+                        },
+                        { 
+                          id: "EXTRA_HELP", 
+                          title: "Dicas de Campo", 
+                          icon: HelpCircle, 
+                          content: `${currentMission.hints.incoterms} | ${currentMission.hints.distChannel}`,
                           variant: "amber"
                         }
                       ].map((section) => (
