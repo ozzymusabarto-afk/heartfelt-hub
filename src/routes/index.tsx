@@ -956,7 +956,7 @@ function SAPSDQuestApp() {
                         {idx < completedMissions ? <CheckCircle2 className="size-5" /> : idx === currentMissionIndex ? <Rocket className="size-5 animate-pulse" /> : <Shield className="size-5" />}
                       </div>
                       <div>
-                        <h4 className="text-[11px] font-bold text-slate-800">{m.name}</h4>
+                        <h4 className="text-[11px] font-bold text-slate-800">{m.title}</h4>
                         <span className={`text-[9px] uppercase font-black ${idx < completedMissions ? "text-emerald-600" : "text-indigo-600"}`}>
                           {idx < completedMissions ? "Concluído" : idx === currentMissionIndex ? "Em Andamento" : "Bloqueado"}
                         </span>
