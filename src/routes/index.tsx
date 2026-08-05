@@ -207,7 +207,10 @@ function SAPSDQuestApp() {
           if (parsed.formData) setFormData(parsed.formData);
           if (parsed.selectedTransaction) setSelectedTransaction(parsed.selectedTransaction);
           if (parsed.xp !== undefined) setXp(parsed.xp);
-          if (parsed.completedMissions !== undefined) setCompletedMissions(parsed.completedMissions);
+          if (parsed.completedMissions !== undefined) {
+            setCompletedMissions(parsed.completedMissions);
+            setCurrentMissionIndex(parsed.completedMissions);
+          }
           if (parsed.feedbackState) setFeedbackState(parsed.feedbackState);
           if (parsed.mode) setMode(parsed.mode);
         } catch (e) {
