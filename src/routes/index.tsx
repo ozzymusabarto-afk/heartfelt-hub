@@ -1112,7 +1112,7 @@ function SAPSDQuestApp() {
                 </div>
                 <div className="flex justify-between items-center text-[10px] text-emerald-600 font-bold">
                   <span>Progresso Total</span>
-                  <span>{Math.round((completedMissions / 30) * 100)}%</span>
+                  <span>{Math.round((completedMissions / missions.length) * 100)}%</span>
                 </div>
               </div>
               <Progress value={(xp/500)*100} className="h-2 bg-slate-100" />
