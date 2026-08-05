@@ -899,7 +899,7 @@ function SAPSDQuestApp() {
                         </Select>
                       ) : (
                         <Input 
-                          disabled={field.disabled}
+
                           value={formData[fieldId] || ""} 
                           onChange={(e) => handleInputChange(field.id, e.target.value)} 
                           className={`h-9 rounded-lg border-slate-200 text-xs placeholder:text-slate-300 focus:ring-indigo-600 ${validationErrors.includes(field.id) ? "border-red-400 ring-1 ring-red-400" : ""}`}
