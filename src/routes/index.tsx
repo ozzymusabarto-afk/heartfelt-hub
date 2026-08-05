@@ -322,27 +322,27 @@ function SAPSDQuestApp() {
     const errors: string[] = [];
     let localHint = "";
     
-    if (!selectedTransaction || selectedTransaction !== CORRECT_DATA.transaction) {
+    if (!selectedTransaction || selectedTransaction !== currentMission.correctData.transaction) {
       errors.push("transaction");
-      localHint = "Opa! Para criar uma ordem de venda, precisamos da transação correta (VA01). Se errarmos isso, o sistema nem abre a tela de vendas, travando todo o faturamento da AAM Corp.";
-    } else if (!formData.orderType || formData.orderType !== CORRECT_DATA.orderType) {
+      localHint = currentMission.hints.transaction;
+    } else if (!formData.orderType || formData.orderType !== currentMission.correctData.orderType) {
       errors.push("orderType");
-      localHint = "O 'Tipo de Ordem' define como o sistema tratará o preço e o estoque. Usar o tipo errado pode travar a reserva de crédito do cliente ou gerar cobranças indevidas.";
-    } else if (!formData.salesOrg || formData.salesOrg !== CORRECT_DATA.salesOrg) {
+      localHint = currentMission.hints.orderType;
+    } else if (!formData.salesOrg || formData.salesOrg !== currentMission.correctData.salesOrg) {
       errors.push("salesOrg");
-      localHint = "A Org. Vendas 1000 é a responsável legal pela AAM Corp. Se usar outra, a nota fiscal será rejeitada pela SEFAZ por erro de jurisdição.";
-    } else if (!formData.customer || formData.customer !== CORRECT_DATA.customer) {
+      localHint = currentMission.hints.salesOrg;
+    } else if (!formData.customer || formData.customer !== currentMission.correctData.customer) {
       errors.push("customer");
-      localHint = "Atenção! O cliente AAM LOGÍSTICA é o 200015. Entregar para o cliente errado gera custos logísticos de devolução e multas contratuais pesadas.";
-    } else if (!formData.material || formData.material !== CORRECT_DATA.material) {
+      localHint = currentMission.hints.customer;
+    } else if (!formData.material || formData.material !== currentMission.correctData.material) {
       errors.push("material");
-      localHint = "O material MAT-SD-015 é o que temos em estoque para pronta entrega. Solicitar outro material sem saldo causará atraso na expedição e insatisfação do cliente.";
-    } else if (!formData.incoterms || formData.incoterms !== "FOB") {
+      localHint = currentMission.hints.material;
+    } else if (!formData.incoterms || formData.incoterms !== currentMission.correctData.incoterms) {
       errors.push("incoterms");
-      localHint = "O Incoterm FOB define que o cliente retira a carga. Se colocar CIF por erro, a AAM Corp pagará um frete que não estava previsto no orçamento, reduzindo nossa margem.";
-    } else if (!formData.distChannel || formData.distChannel !== "10") {
+      localHint = currentMission.hints.incoterms;
+    } else if (!formData.distChannel || formData.distChannel !== currentMission.correctData.distChannel) {
       errors.push("distChannel");
-      localHint = "O Canal 10 (Venda Direta) garante que a política de preços seja aplicada corretamente. Sem isso, o desconto comercial do cliente não será calculado.";
+      localHint = currentMission.hints.distChannel;
     }
 
     setValidationErrors(errors);
@@ -354,7 +354,7 @@ function SAPSDQuestApp() {
         toast.info("Validação OK! Revise antes de enviar.");
       } else {
         setFeedbackState("success");
-        setHintMessage("🎉 Excelente! Ordem criada com sucesso! Com isso, o estoque foi reservado automaticamente no módulo MM, a logística já recebeu o alerta para separação e a NF-e será emitida sem erros.");
+        setHintMessage(`🎉 ${currentMission.businessImpact.success}`);
         if (mode !== "practice") {
           setXp(prev => Math.min(prev + 25, 500));
           setCompletedMissions(prev => prev + 1);
@@ -363,16 +363,16 @@ function SAPSDQuestApp() {
           id: Math.random().toString(36).substr(2, 9),
           status: "success" as const,
           transaction: selectedTransaction,
-          message: "Ordem Processada: Integração com Logística e MM concluída.",
+          message: currentMission.objective,
           timestamp: Date.now(),
           xpEarned: mode !== "practice" ? 25 : 0,
-          missionName: "Criar Ordem (VA01)",
-          progressAtTime: Math.round(((completedMissions + (mode !== "practice" ? 1 : 0)) / 30) * 100)
+          missionName: currentMission.name,
+          progressAtTime: Math.round(((completedMissions + (mode !== "practice" ? 1 : 0)) / missions.length) * 100)
         }, ...prev].slice(0, 10));
         
         if (mode !== "practice") {
           toast.success("Missão Concluída!", {
-            description: "Reserva de estoque efetuada! Você ganhou +25 XP.",
+            description: "Você ganhou +25 XP e desbloqueou a próxima etapa.",
           });
         } else {
           toast.success("Sucesso (Modo Prática)");
@@ -380,16 +380,28 @@ function SAPSDQuestApp() {
       }
     } else {
       setFeedbackState("error");
+      setHintMessage(currentMission.businessImpact.error + " " + localHint);
       setTrainingHistory(prev => [{
         id: Math.random().toString(36).substr(2, 9),
         status: "error" as const,
         transaction: selectedTransaction || "N/A",
         message: localHint || "Erro de validação operacional.",
-        timestamp: Date.now()
+        timestamp: Date.now(),
+        missionName: currentMission.name
       }, ...prev].slice(0, 10));
       toast.error("Erro Crítico de Negócio", {
-        description: "O impacto desse erro pode atrasar a expedição. Verifique as dicas do Chefe Hugo.",
+        description: "Verifique as orientações do Chefe Hugo.",
       });
+    }
+  };
+
+  const nextMission = () => {
+    if (currentMissionIndex < missions.length - 1) {
+      setCurrentMissionIndex(prev => prev + 1);
+      resetGame();
+      toast.info(`Carregando Missão ${currentMissionIndex + 2}: ${missions[currentMissionIndex + 1].name}`);
+    } else {
+      toast.success("Parabéns! Você concluiu todas as missões disponíveis na AAM Corp!");
     }
   };
 
