@@ -10,7 +10,7 @@ import {
 import { 
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area 
 } from 'recharts';
-import { missions } from "@/data/missions";
+import { MISSIONS as missions, type Mission } from "@/data/missions";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Card } from "@/components/ui/card";
