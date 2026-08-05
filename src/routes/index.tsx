@@ -457,6 +457,7 @@ function SAPSDQuestApp() {
     if (lastStateBeforeReset) {
       setXp(lastStateBeforeReset.xp);
       setCompletedMissions(lastStateBeforeReset.completedMissions);
+      setCurrentMissionIndex(lastStateBeforeReset.currentMissionIndex || 0);
       setTrainingHistory(lastStateBeforeReset.trainingHistory);
       setShowUndoReset(false);
       setLastStateBeforeReset(null);
