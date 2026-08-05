@@ -993,9 +993,8 @@ function SAPSDQuestApp() {
               <div className="w-full space-y-2">
                 <div className="bg-emerald-100 text-emerald-700 font-black text-xs py-2 rounded-xl mb-2">+25 XP</div>
                 <Button 
-                  onClick={resetGame} 
-                  disabled={completedMissions === 0}
-                  className="w-full text-xs h-10 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  onClick={nextMission} 
+                  className="w-full text-xs h-10 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl gap-2 shadow-lg shadow-emerald-100"
                 >
                   PRÓXIMO PEDIDO <ArrowRight className="size-4" />
                 </Button>
