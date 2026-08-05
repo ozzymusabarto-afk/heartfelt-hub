@@ -60,7 +60,7 @@ function SAPSDQuestApp() {
   const [onboardingStep, setOnboardingStep] = useState(0);
 
   const [currentMissionIndex, setCurrentMissionIndex] = useState(0);
-  const currentMission = useMemo(() => missions[currentMissionIndex] || missions[0], [currentMissionIndex]);
+  const currentMission = missions[currentMissionIndex] || missions[0];
 
   const [selectedTransaction, setSelectedTransaction] = useState("");
   const [mode, setMode] = useState("standard");
