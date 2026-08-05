@@ -191,7 +191,7 @@ function SAPSDQuestApp() {
       localStorage.removeItem("sap-quest-history");
       setFormData({
         orderType: "", orderDate: "", salesOrg: "", deliveryDate: "",
-        distChannel: "", paymentCond: "", customer: "", price: "", material: "",
+        distChannel: "", paymentCond: "", customer: "", quantity: "", material: "",
         incoterms: "", division: "", poNumber: "",
       });
       setSelectedTransaction("");
