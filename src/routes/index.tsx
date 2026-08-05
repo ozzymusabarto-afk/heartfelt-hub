@@ -75,7 +75,7 @@ function SAPSDQuestApp() {
     distChannel: "",
     paymentCond: "",
     customer: "",
-    price: "",
+    quantity: "",
     material: "",
     incoterms: "",
     division: "",
