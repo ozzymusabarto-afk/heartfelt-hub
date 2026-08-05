@@ -453,8 +453,9 @@ function SAPSDQuestApp() {
       } else {
         setFeedbackState("success");
         const isVL01N = currentMission.transaction === "VL01N";
-        const docPrefix = isVL01N ? "Remessa de Entrega" : "Ordem de Venda Standard";
-        const docNum = isVL01N ? Math.floor(80000000 + Math.random() * 999999) : Math.floor(450000000 + Math.random() * 999999);
+        const isVF01 = currentMission.transaction === "VF01";
+        const docPrefix = isVL01N ? "Remessa de Entrega" : isVF01 ? "Fatura de Venda (NF-e)" : "Ordem de Venda Standard";
+        const docNum = isVL01N ? Math.floor(80000000 + Math.random() * 999999) : isVF01 ? Math.floor(90000000 + Math.random() * 999999) : Math.floor(450000000 + Math.random() * 999999);
         const successMsg = `${docPrefix} ${docNum} gerada com sucesso!`;
         setHintMessage(`🎉 ${successMsg} \n\n${currentMission.successFeedback}`);
         toast.success(successMsg);
