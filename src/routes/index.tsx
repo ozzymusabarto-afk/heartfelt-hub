@@ -121,7 +121,7 @@ function SAPSDQuestApp() {
       Empresa: AAM Corp
       Status: Nível 1 - Trainee SD
       XP Total: ${xp} / 500
-      Missões Concluídas: ${completedMissions} / 30
+      Missões Concluídas: ${completedMissions} / ${missions.length}
       Taxa de Sucesso: ${Math.round((trainingHistory.filter(h => h.status === 'success').length / Math.max(trainingHistory.length, 1)) * 100)}%
       -------------------------------------
       Última Missão: ${trainingHistory[0]?.missionName || 'Nenhuma'}
