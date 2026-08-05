@@ -31,13 +31,7 @@ export const Route = createFileRoute("/")({
   component: SAPSDQuestApp,
 });
 
-const CORRECT_DATA = {
-  transaction: "VA01",
-  orderType: "OR",
-  salesOrg: "1000",
-  customer: "200015",
-  material: "MAT-SD-015",
-};
+// Correct data is now handled per mission from missions.ts
 
 function HugoAvatar({ className }: { className?: string }) {
   return (
