@@ -397,9 +397,13 @@ function SAPSDQuestApp() {
 
   const nextMission = () => {
     if (currentMissionIndex < missions.length - 1) {
-      setCurrentMissionIndex(prev => prev + 1);
+      const nextIdx = currentMissionIndex + 1;
+      const nextM = missions[nextIdx];
+      setCurrentMissionIndex(nextIdx);
       resetGame();
-      toast.info(`Carregando Missão ${currentMissionIndex + 2}: ${missions[currentMissionIndex + 1].name}`);
+      if (nextM) {
+        toast.info(`Carregando Missão ${nextIdx + 1}: ${nextM.name}`);
+      }
     } else {
       toast.success("Parabéns! Você concluiu todas as missões disponíveis na AAM Corp!");
     }
