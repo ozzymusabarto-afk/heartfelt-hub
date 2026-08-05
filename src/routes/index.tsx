@@ -876,17 +876,17 @@ function SAPSDQuestApp() {
               </h3>
               <div className="grid grid-cols-2 gap-3 pr-1">
                 {[
-                  { id: "orderType", label: "Tipo", type: "select", options: ["OR", "QT"] },
+                  { id: "orderType", label: "Tipo", type: "select", options: ["OR", "QT", "ZBN", "RE"] },
                   { id: "orderDate", label: "Data Pedido" },
-                  { id: "salesOrg", label: "Org. Vendas", disabled: !formData.orderType },
+                  { id: "salesOrg", label: "Org. Vendas" },
                   { id: "distChannel", label: "Canal Dist.", type: "select", options: ["10", "20"] },
                   { id: "division", label: "Setor Ativ.", type: "select", options: ["00", "01"] },
                   { id: "customer", label: "Emissor" },
                   { id: "poNumber", label: "Nº Pedido" },
                   { id: "material", label: "Material" },
-                  { id: "price", label: "Preço" },
+                  { id: "quantity", label: "Quantidade" },
                   { id: "incoterms", label: "Incoterms", type: "select", options: ["FOB", "CIF"] },
-                  { id: "paymentCond", label: "Cond. Pagto.", type: "select", options: ["0001", "NT30"] },
+                  { id: "paymentCond", label: "Cond. Pagto.", type: "select", options: ["ZF30", "ZB00", "ZF60", "0001"] },
                 ].map((field) => {
                   const fieldId = field.id as keyof typeof formData;
                   return (
