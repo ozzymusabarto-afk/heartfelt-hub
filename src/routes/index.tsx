@@ -814,9 +814,12 @@ function SAPSDQuestApp() {
                 <div>
                   <h3 className="font-bold text-slate-800 text-sm">Chefe Hugo 👋</h3>
                   <p className="text-xs text-slate-600">{userName}, sua missão [{currentMissionIndex + 1}/{missions.length}]: <b>{currentMission.title}</b>.</p>
-                  <p className="text-[10px] text-slate-400 mt-0.5 italic">{currentMission.chefeHugoDialog}</p>
+                  <p className="text-[10px] text-slate-400 mt-0.5 italic">
+                    "{currentMission.chefeHugoDialog.replace("AAM LOGÍSTICA", "AAM LOGÍSTICA LTDA (Cód: 208015)")}"
+                  </p>
                 </div>
               </div>
+
               <div className="relative">
                 <Button 
                   variant="outline" 
@@ -968,7 +971,7 @@ function SAPSDQuestApp() {
                   { id: "salesOrg", label: "Org. Vendas" },
                   { id: "distChannel", label: "Canal Dist.", type: "select", options: ["10", "20"] },
                   { id: "division", label: "Setor Ativ.", type: "select", options: ["00", "01"] },
-                  { id: "customer", label: "Emissor" },
+                  { id: "customer", label: "Emissor", hasSearch: true },
                   { id: "poNumber", label: "Nº Pedido" },
                   { id: "material", label: "Material" },
                   { id: "quantity", label: "Quantidade" },
@@ -977,25 +980,49 @@ function SAPSDQuestApp() {
                 ].map((field) => {
                   const fieldId = field.id as keyof typeof formData;
                   return (
-                    <div key={field.id} className={`space-y-1`}>
-                      <Label className="text-[9px] font-black text-slate-400 uppercase tracking-wider">{field.label}</Label>
+                    <div key={field.id} className="space-y-1">
+                      <div className="flex items-center justify-between">
+                        <Label className="text-[9px] font-black text-slate-400 uppercase tracking-wider">{field.label}</Label>
+                        <Button 
+                          variant="ghost" 
+                          size="icon" 
+                          className="size-4 h-4 w-4 p-0 text-slate-300 hover:text-indigo-600 transition-colors"
+                          onClick={() => openF1ForField(field.id)}
+                          title="Ajuda F1"
+                        >
+                          <HelpCircle className="size-2.5" />
+                        </Button>
+                      </div>
                       {field.type === "select" ? (
                         <Select value={formData[fieldId] || ""} onValueChange={(v) => handleInputChange(field.id, v)}>
-                          <SelectTrigger className="h-9 rounded-lg border-slate-200 text-xs"><SelectValue placeholder="-" /></SelectTrigger>
+                          <SelectTrigger className={`h-9 rounded-lg border-slate-200 text-xs ${validationErrors.includes(field.id) ? "border-red-400 ring-1 ring-red-400" : ""}`}><SelectValue placeholder="-" /></SelectTrigger>
                           <SelectContent>{field.options?.map(o => <SelectItem key={o} value={o} className="text-xs">{o}</SelectItem>)}</SelectContent>
                         </Select>
                       ) : (
-                        <Input 
-
-                          value={formData[fieldId] || ""} 
-                          onChange={(e) => handleInputChange(field.id, e.target.value)} 
-                          className={`h-9 rounded-lg border-slate-200 text-xs placeholder:text-slate-300 focus:ring-indigo-600 ${validationErrors.includes(field.id) ? "border-red-400 ring-1 ring-red-400" : ""}`}
-                        />
+                        <div className="relative group">
+                          <Input 
+                            value={formData[fieldId] || ""} 
+                            onChange={(e) => handleInputChange(field.id, e.target.value)} 
+                            className={`h-9 rounded-lg border-slate-200 text-xs placeholder:text-slate-300 focus:ring-indigo-600 ${field.hasSearch ? "pr-8" : ""} ${validationErrors.includes(field.id) ? "border-red-400 ring-1 ring-red-400" : ""}`}
+                          />
+                          {field.hasSearch && (
+                            <Button
+                              size="icon"
+                              variant="ghost"
+                              className="absolute right-0 top-0 h-9 w-8 text-slate-400 hover:text-indigo-600"
+                              onClick={() => setIsCustomerSearchOpen(true)}
+                              title="Busca F4 (Matchcode)"
+                            >
+                              <Search className="size-3" />
+                            </Button>
+                          )}
+                        </div>
                       )}
                     </div>
                   );
                 })}
               </div>
+
               <Button 
                 onClick={handleSubmit} 
                 className="w-full h-10 mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg shadow-indigo-200 transition-all active:scale-[0.98]"
