@@ -452,8 +452,10 @@ function SAPSDQuestApp() {
         toast.info("Validação OK! Revise antes de enviar.");
       } else {
         setFeedbackState("success");
-        const docNum = Math.floor(450000000 + Math.random() * 999999);
-        const successMsg = `Ordem de Venda Standard ${docNum} gerada com sucesso!`;
+        const isVL01N = currentMission.transaction === "VL01N";
+        const docPrefix = isVL01N ? "Remessa de Entrega" : "Ordem de Venda Standard";
+        const docNum = isVL01N ? Math.floor(80000000 + Math.random() * 999999) : Math.floor(450000000 + Math.random() * 999999);
+        const successMsg = `${docPrefix} ${docNum} gerada com sucesso!`;
         setHintMessage(`🎉 ${successMsg} \n\n${currentMission.successFeedback}`);
         toast.success(successMsg);
 
