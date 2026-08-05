@@ -213,14 +213,14 @@ function SAPSDQuestApp() {
           if (parsed.feedbackState) setFeedbackState(parsed.feedbackState);
           if (parsed.mode) setMode(parsed.mode);
         } catch (e) {
-          console.error("Failed to load data", e);
+          // Error loading data silently
         }
       }
       if (savedHistory) {
         try {
           setTrainingHistory(JSON.parse(savedHistory));
         } catch (e) {
-          console.error("Failed to parse history", e);
+          // Error parsing history silently
         }
       }
     }
@@ -247,7 +247,7 @@ function SAPSDQuestApp() {
           // Only update feedback if it changed to keep UI consistent
           if (parsed.feedbackState && parsed.feedbackState !== feedbackState) setFeedbackState(parsed.feedbackState);
         } catch (err) {
-          console.error("Tab sync error", err);
+          // Tab sync error silently
         }
       }
     };
@@ -305,7 +305,7 @@ function SAPSDQuestApp() {
       try {
         setTrainingHistory(JSON.parse(savedData));
       } catch (e) {
-        console.error("Failed to parse history", e);
+        // Silently handle parse error
       }
     }
   }, []);
