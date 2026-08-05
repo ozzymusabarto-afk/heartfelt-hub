@@ -234,6 +234,7 @@ function SAPSDQuestApp() {
       selectedTransaction,
       xp,
       completedMissions,
+      currentMissionIndex,
       feedbackState,
       mode
     };
