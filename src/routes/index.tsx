@@ -118,7 +118,7 @@ function SAPSDQuestApp() {
       Data: ${new Date().toLocaleDateString()}
       Consultor(a): ${userName}
       -------------------------------------
-      Empresa: AAM Corp
+      Empresa: AAM LOGÍSTICA LTDA
       Status: Nível 1 - Trainee SD
       XP Total: ${xp} / 500
       Missões Concluídas: ${completedMissions} / ${missions.length}
