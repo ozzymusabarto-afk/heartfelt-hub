@@ -10,7 +10,7 @@ import {
 import { 
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area 
 } from 'recharts';
-import { missions } from "@/data/missions";
+import { MISSIONS as missions, type Mission } from "@/data/missions";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Card } from "@/components/ui/card";
@@ -75,7 +75,7 @@ function SAPSDQuestApp() {
     distChannel: "",
     paymentCond: "",
     customer: "",
-    price: "",
+    quantity: "",
     material: "",
     incoterms: "",
     division: "",
@@ -118,7 +118,7 @@ function SAPSDQuestApp() {
       Data: ${new Date().toLocaleDateString()}
       Consultor(a): ${userName}
       -------------------------------------
-      Empresa: AAM Corp
+      Empresa: AAM LOGÍSTICA LTDA
       Status: Nível 1 - Trainee SD
       XP Total: ${xp} / 500
       Missões Concluídas: ${completedMissions} / ${missions.length}
@@ -191,7 +191,7 @@ function SAPSDQuestApp() {
       localStorage.removeItem("sap-quest-history");
       setFormData({
         orderType: "", orderDate: "", salesOrg: "", deliveryDate: "",
-        distChannel: "", paymentCond: "", customer: "", price: "", material: "",
+        distChannel: "", paymentCond: "", customer: "", quantity: "", material: "",
         incoterms: "", division: "", poNumber: "",
       });
       setSelectedTransaction("");
@@ -328,27 +328,36 @@ function SAPSDQuestApp() {
     const errors: string[] = [];
     let localHint = "";
     
-    if (!selectedTransaction || selectedTransaction !== currentMission.correctData.transaction) {
+    if (!selectedTransaction || selectedTransaction !== currentMission.transaction) {
       errors.push("transaction");
-      localHint = currentMission.hints.transaction;
-    } else if (!formData.orderType || formData.orderType !== currentMission.correctData.orderType) {
+      localHint = `Transação incorreta. O Chefe Hugo pediu ${currentMission.transaction}.`;
+    } else if (!formData.orderType || formData.orderType !== currentMission.expectedData.tipoOrdem) {
       errors.push("orderType");
-      localHint = currentMission.hints.orderType;
-    } else if (!formData.salesOrg || formData.salesOrg !== currentMission.correctData.salesOrg) {
+      localHint = `Tipo de ordem incorreto. Esperado: ${currentMission.expectedData.tipoOrdem}`;
+    } else if (!formData.salesOrg || formData.salesOrg !== currentMission.expectedData.orgVendas) {
       errors.push("salesOrg");
-      localHint = currentMission.hints.salesOrg;
-    } else if (!formData.customer || formData.customer !== currentMission.correctData.customer) {
+      localHint = `Org. Vendas incorreta. Esperado: ${currentMission.expectedData.orgVendas}`;
+    } else if (!formData.customer || formData.customer !== currentMission.expectedData.cliente) {
       errors.push("customer");
-      localHint = currentMission.hints.customer;
-    } else if (!formData.material || formData.material !== currentMission.correctData.material) {
+      localHint = `Cliente incorreto. Esperado: ${currentMission.expectedData.cliente}`;
+    } else if (!formData.material || formData.material !== currentMission.expectedData.material) {
       errors.push("material");
-      localHint = currentMission.hints.material;
-    } else if (!formData.incoterms || formData.incoterms !== currentMission.correctData.incoterms) {
+      localHint = `Material incorreto. Esperado: ${currentMission.expectedData.material}`;
+    } else if (!formData.incoterms || formData.incoterms !== currentMission.expectedData.incoterms) {
       errors.push("incoterms");
-      localHint = currentMission.hints.incoterms;
-    } else if (!formData.distChannel || formData.distChannel !== currentMission.correctData.distChannel) {
+      localHint = `Incoterms incorreto. Esperado: ${currentMission.expectedData.incoterms}`;
+    } else if (!formData.distChannel || formData.distChannel !== currentMission.expectedData.canalDist) {
       errors.push("distChannel");
-      localHint = currentMission.hints.distChannel;
+      localHint = `Canal de Distribuição incorreto. Esperado: ${currentMission.expectedData.canalDist}`;
+    } else if (!formData.quantity || formData.quantity !== currentMission.expectedData.quantidade) {
+      errors.push("quantity");
+      localHint = `Quantidade incorreta. Esperado: ${currentMission.expectedData.quantidade}`;
+    } else if (!formData.division || formData.division !== currentMission.expectedData.setorAtiv) {
+      errors.push("division");
+      localHint = `Setor de Atividade incorreto. Esperado: ${currentMission.expectedData.setorAtiv}`;
+    } else if (!formData.paymentCond || formData.paymentCond !== currentMission.expectedData.condPagto) {
+      errors.push("paymentCond");
+      localHint = `Condição de Pagamento incorreta. Esperado: ${currentMission.expectedData.condPagto}`;
     }
 
     setValidationErrors(errors);
@@ -360,7 +369,7 @@ function SAPSDQuestApp() {
         toast.info("Validação OK! Revise antes de enviar.");
       } else {
         setFeedbackState("success");
-        setHintMessage(`🎉 ${currentMission.businessImpact.success}`);
+        setHintMessage(`🎉 ${currentMission.successFeedback}`);
         if (mode !== "practice") {
           setXp(prev => Math.min(prev + 25, 500));
           setCompletedMissions(prev => prev + 1);
@@ -369,10 +378,10 @@ function SAPSDQuestApp() {
           id: Math.random().toString(36).substr(2, 9),
           status: "success" as const,
           transaction: selectedTransaction,
-          message: currentMission.objective,
+          message: currentMission.chefeHugoDialog,
           timestamp: Date.now(),
           xpEarned: mode !== "practice" ? 25 : 0,
-          missionName: currentMission.name,
+          missionName: currentMission.title,
           progressAtTime: Math.round(((completedMissions + (mode !== "practice" ? 1 : 0)) / missions.length) * 100)
         }, ...prev].slice(0, 10));
         
@@ -386,14 +395,14 @@ function SAPSDQuestApp() {
       }
     } else {
       setFeedbackState("error");
-      setHintMessage(currentMission.businessImpact.error + " " + localHint);
+      setHintMessage(currentMission.errorFeedback + " " + localHint);
       setTrainingHistory(prev => [{
         id: Math.random().toString(36).substr(2, 9),
         status: "error" as const,
         transaction: selectedTransaction || "N/A",
         message: localHint || "Erro de validação operacional.",
         timestamp: Date.now(),
-        missionName: currentMission.name
+        missionName: currentMission.title
       }, ...prev].slice(0, 10));
       toast.error("Erro Crítico de Negócio", {
         description: "Verifique as orientações do Chefe Hugo.",
@@ -408,7 +417,7 @@ function SAPSDQuestApp() {
       setCurrentMissionIndex(nextIdx);
       resetGame();
       if (nextM) {
-        toast.info(`Carregando Missão ${nextIdx + 1}: ${nextM.name}`);
+        toast.info(`Carregando Missão ${nextIdx + 1}: ${nextM.title}`);
       }
     } else {
       toast.success("Parabéns! Você concluiu todas as missões disponíveis na AAM Corp!");
@@ -422,7 +431,7 @@ function SAPSDQuestApp() {
     setSelectedTransaction("");
     setFormData({
       orderType: "", orderDate: "", salesOrg: "", deliveryDate: "",
-      distChannel: "", paymentCond: "", customer: "", price: "", material: "",
+      distChannel: "", paymentCond: "", customer: "", quantity: "", material: "",
       incoterms: "", division: "", poNumber: "",
     });
   };
@@ -717,8 +726,8 @@ function SAPSDQuestApp() {
                 <HugoAvatar className="size-14" />
                 <div>
                   <h3 className="font-bold text-slate-800 text-sm">Chefe Hugo 👋</h3>
-                  <p className="text-xs text-slate-600">{userName}, sua missão [{currentMissionIndex + 1}/{missions.length}]: <b>{currentMission.name}</b>.</p>
-                  <p className="text-[10px] text-slate-400 mt-0.5 italic">{currentMission.description}</p>
+                  <p className="text-xs text-slate-600">{userName}, sua missão [{currentMissionIndex + 1}/{missions.length}]: <b>{currentMission.title}</b>.</p>
+                  <p className="text-[10px] text-slate-400 mt-0.5 italic">{currentMission.chefeHugoDialog}</p>
                 </div>
               </div>
               <div className="relative">
@@ -763,45 +772,31 @@ function SAPSDQuestApp() {
                       {[
                         { 
                           id: "MISSION_OBJ", 
-                          title: "Objetivo Atual", 
+                          title: currentMission.f1Help.title, 
                           icon: Target, 
-                          content: currentMission.objective,
+                          content: currentMission.f1Help.concept,
                           variant: "indigo"
                         },
                         { 
-                          id: "TRANS_HELP", 
-                          title: "Transação", 
-                          icon: Rocket, 
-                          content: currentMission.hints.transaction,
+                          id: "IMPACT", 
+                          title: "Impacto no Negócio", 
+                          icon: BarChart3, 
+                          content: currentMission.f1Help.businessImpact,
                           variant: "slate"
                         },
                         { 
-                          id: "ORDER_TYPE_HELP", 
-                          title: "Tipo de Ordem", 
-                          icon: FileText, 
-                          content: currentMission.hints.orderType,
-                          variant: "slate"
-                        },
-                        { 
-                          id: "SALES_ORG_HELP", 
-                          title: "Org. Vendas", 
+                          id: "BRAZIL_RULE", 
+                          title: "Regra Brasil (Localização)", 
                           icon: Shield, 
-                          content: currentMission.hints.salesOrg,
-                          variant: "slate"
-                        },
-                        { 
-                          id: "CUSTOMER_HELP", 
-                          title: "Cliente / Material", 
-                          icon: UserCheck, 
-                          content: `${currentMission.hints.customer} | ${currentMission.hints.material}`,
-                          variant: "slate"
-                        },
-                        { 
-                          id: "EXTRA_HELP", 
-                          title: "Dicas de Campo", 
-                          icon: HelpCircle, 
-                          content: `${currentMission.hints.incoterms} | ${currentMission.hints.distChannel}`,
+                          content: currentMission.f1Help.brazilRule,
                           variant: "amber"
+                        },
+                        { 
+                          id: "TRANS_HELP", 
+                          title: "Transação Requerida", 
+                          icon: Rocket, 
+                          content: `Utilize a transação ${currentMission.transaction} para esta operação.`,
+                          variant: "slate"
                         }
                       ].map((section) => (
                         <div key={section.id} className="border border-slate-200 rounded-xl overflow-hidden bg-white shadow-sm">
@@ -881,17 +876,17 @@ function SAPSDQuestApp() {
               </h3>
               <div className="grid grid-cols-2 gap-3 pr-1">
                 {[
-                  { id: "orderType", label: "Tipo", type: "select", options: ["OR", "QT"] },
+                  { id: "orderType", label: "Tipo", type: "select", options: ["OR", "QT", "ZBN", "RE"] },
                   { id: "orderDate", label: "Data Pedido" },
-                  { id: "salesOrg", label: "Org. Vendas", disabled: !formData.orderType },
+                  { id: "salesOrg", label: "Org. Vendas" },
                   { id: "distChannel", label: "Canal Dist.", type: "select", options: ["10", "20"] },
                   { id: "division", label: "Setor Ativ.", type: "select", options: ["00", "01"] },
                   { id: "customer", label: "Emissor" },
                   { id: "poNumber", label: "Nº Pedido" },
                   { id: "material", label: "Material" },
-                  { id: "price", label: "Preço" },
+                  { id: "quantity", label: "Quantidade" },
                   { id: "incoterms", label: "Incoterms", type: "select", options: ["FOB", "CIF"] },
-                  { id: "paymentCond", label: "Cond. Pagto.", type: "select", options: ["0001", "NT30"] },
+                  { id: "paymentCond", label: "Cond. Pagto.", type: "select", options: ["ZF30", "ZB00", "ZF60", "0001"] },
                 ].map((field) => {
                   const fieldId = field.id as keyof typeof formData;
                   return (
@@ -904,7 +899,7 @@ function SAPSDQuestApp() {
                         </Select>
                       ) : (
                         <Input 
-                          disabled={field.disabled}
+
                           value={formData[fieldId] || ""} 
                           onChange={(e) => handleInputChange(field.id, e.target.value)} 
                           className={`h-9 rounded-lg border-slate-200 text-xs placeholder:text-slate-300 focus:ring-indigo-600 ${validationErrors.includes(field.id) ? "border-red-400 ring-1 ring-red-400" : ""}`}
@@ -934,7 +929,7 @@ function SAPSDQuestApp() {
                     Aprenda e pratique todo o fluxo de pedido à fatura.
                   </p>
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-bold text-slate-700 bg-slate-100 px-2 py-1 rounded-lg">[{completedMissions} / 8 Missões]</span>
+                    <span className="text-[10px] font-bold text-slate-700 bg-slate-100 px-2 py-1 rounded-lg">[{completedMissions} / {missions.length} Missões]</span>
                     <Button variant="ghost" size="sm" className="h-7 text-indigo-600 text-[10px] font-bold hover:bg-indigo-50">VER DETALHES</Button>
                   </div>
                 </div>
@@ -961,7 +956,7 @@ function SAPSDQuestApp() {
                         {idx < completedMissions ? <CheckCircle2 className="size-5" /> : idx === currentMissionIndex ? <Rocket className="size-5 animate-pulse" /> : <Shield className="size-5" />}
                       </div>
                       <div>
-                        <h4 className="text-[11px] font-bold text-slate-800">{m.name}</h4>
+                        <h4 className="text-[11px] font-bold text-slate-800">{m.title}</h4>
                         <span className={`text-[9px] uppercase font-black ${idx < completedMissions ? "text-emerald-600" : "text-indigo-600"}`}>
                           {idx < completedMissions ? "Concluído" : idx === currentMissionIndex ? "Em Andamento" : "Bloqueado"}
                         </span>
@@ -1117,7 +1112,7 @@ function SAPSDQuestApp() {
                 </div>
                 <div className="flex justify-between items-center text-[10px] text-emerald-600 font-bold">
                   <span>Progresso Total</span>
-                  <span>{Math.round((completedMissions / 30) * 100)}%</span>
+                  <span>{Math.round((completedMissions / missions.length) * 100)}%</span>
                 </div>
               </div>
               <Progress value={(xp/500)*100} className="h-2 bg-slate-100" />
