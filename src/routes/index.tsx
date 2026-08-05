@@ -328,27 +328,36 @@ function SAPSDQuestApp() {
     const errors: string[] = [];
     let localHint = "";
     
-    if (!selectedTransaction || selectedTransaction !== currentMission.correctData.transaction) {
+    if (!selectedTransaction || selectedTransaction !== currentMission.transaction) {
       errors.push("transaction");
-      localHint = currentMission.hints.transaction;
-    } else if (!formData.orderType || formData.orderType !== currentMission.correctData.orderType) {
+      localHint = `Transação incorreta. O Chefe Hugo pediu ${currentMission.transaction}.`;
+    } else if (!formData.orderType || formData.orderType !== currentMission.expectedData.tipoOrdem) {
       errors.push("orderType");
-      localHint = currentMission.hints.orderType;
-    } else if (!formData.salesOrg || formData.salesOrg !== currentMission.correctData.salesOrg) {
+      localHint = `Tipo de ordem incorreto. Esperado: ${currentMission.expectedData.tipoOrdem}`;
+    } else if (!formData.salesOrg || formData.salesOrg !== currentMission.expectedData.orgVendas) {
       errors.push("salesOrg");
-      localHint = currentMission.hints.salesOrg;
-    } else if (!formData.customer || formData.customer !== currentMission.correctData.customer) {
+      localHint = `Org. Vendas incorreta. Esperado: ${currentMission.expectedData.orgVendas}`;
+    } else if (!formData.customer || formData.customer !== currentMission.expectedData.cliente) {
       errors.push("customer");
-      localHint = currentMission.hints.customer;
-    } else if (!formData.material || formData.material !== currentMission.correctData.material) {
+      localHint = `Cliente incorreto. Esperado: ${currentMission.expectedData.cliente}`;
+    } else if (!formData.material || formData.material !== currentMission.expectedData.material) {
       errors.push("material");
-      localHint = currentMission.hints.material;
-    } else if (!formData.incoterms || formData.incoterms !== currentMission.correctData.incoterms) {
+      localHint = `Material incorreto. Esperado: ${currentMission.expectedData.material}`;
+    } else if (!formData.incoterms || formData.incoterms !== currentMission.expectedData.incoterms) {
       errors.push("incoterms");
-      localHint = currentMission.hints.incoterms;
-    } else if (!formData.distChannel || formData.distChannel !== currentMission.correctData.distChannel) {
+      localHint = `Incoterms incorreto. Esperado: ${currentMission.expectedData.incoterms}`;
+    } else if (!formData.distChannel || formData.distChannel !== currentMission.expectedData.canalDist) {
       errors.push("distChannel");
-      localHint = currentMission.hints.distChannel;
+      localHint = `Canal de Distribuição incorreto. Esperado: ${currentMission.expectedData.canalDist}`;
+    } else if (!formData.quantity || formData.quantity !== currentMission.expectedData.quantidade) {
+      errors.push("quantity");
+      localHint = `Quantidade incorreta. Esperado: ${currentMission.expectedData.quantidade}`;
+    } else if (!formData.division || formData.division !== currentMission.expectedData.setorAtiv) {
+      errors.push("division");
+      localHint = `Setor de Atividade incorreto. Esperado: ${currentMission.expectedData.setorAtiv}`;
+    } else if (!formData.paymentCond || formData.paymentCond !== currentMission.expectedData.condPagto) {
+      errors.push("paymentCond");
+      localHint = `Condição de Pagamento incorreta. Esperado: ${currentMission.expectedData.condPagto}`;
     }
 
     setValidationErrors(errors);
@@ -360,7 +369,7 @@ function SAPSDQuestApp() {
         toast.info("Validação OK! Revise antes de enviar.");
       } else {
         setFeedbackState("success");
-        setHintMessage(`🎉 ${currentMission.businessImpact.success}`);
+        setHintMessage(`🎉 ${currentMission.successFeedback}`);
         if (mode !== "practice") {
           setXp(prev => Math.min(prev + 25, 500));
           setCompletedMissions(prev => prev + 1);
@@ -369,10 +378,10 @@ function SAPSDQuestApp() {
           id: Math.random().toString(36).substr(2, 9),
           status: "success" as const,
           transaction: selectedTransaction,
-          message: currentMission.objective,
+          message: currentMission.chefeHugoDialog,
           timestamp: Date.now(),
           xpEarned: mode !== "practice" ? 25 : 0,
-          missionName: currentMission.name,
+          missionName: currentMission.title,
           progressAtTime: Math.round(((completedMissions + (mode !== "practice" ? 1 : 0)) / missions.length) * 100)
         }, ...prev].slice(0, 10));
         
@@ -386,14 +395,14 @@ function SAPSDQuestApp() {
       }
     } else {
       setFeedbackState("error");
-      setHintMessage(currentMission.businessImpact.error + " " + localHint);
+      setHintMessage(currentMission.errorFeedback + " " + localHint);
       setTrainingHistory(prev => [{
         id: Math.random().toString(36).substr(2, 9),
         status: "error" as const,
         transaction: selectedTransaction || "N/A",
         message: localHint || "Erro de validação operacional.",
         timestamp: Date.now(),
-        missionName: currentMission.name
+        missionName: currentMission.title
       }, ...prev].slice(0, 10));
       toast.error("Erro Crítico de Negócio", {
         description: "Verifique as orientações do Chefe Hugo.",
@@ -408,7 +417,7 @@ function SAPSDQuestApp() {
       setCurrentMissionIndex(nextIdx);
       resetGame();
       if (nextM) {
-        toast.info(`Carregando Missão ${nextIdx + 1}: ${nextM.name}`);
+        toast.info(`Carregando Missão ${nextIdx + 1}: ${nextM.title}`);
       }
     } else {
       toast.success("Parabéns! Você concluiu todas as missões disponíveis na AAM Corp!");
@@ -422,7 +431,7 @@ function SAPSDQuestApp() {
     setSelectedTransaction("");
     setFormData({
       orderType: "", orderDate: "", salesOrg: "", deliveryDate: "",
-      distChannel: "", paymentCond: "", customer: "", price: "", material: "",
+      distChannel: "", paymentCond: "", customer: "", quantity: "", material: "",
       incoterms: "", division: "", poNumber: "",
     });
   };
