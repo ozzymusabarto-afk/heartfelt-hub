@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { 
   Rocket, Target, BookOpen, Crown, BarChart3, Trophy, Settings, 
   ChevronRight, HelpCircle, CheckCircle2, Flame, Star, Shield,
@@ -10,6 +10,7 @@ import {
 import { 
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area 
 } from 'recharts';
+import { missions } from "@/data/missions";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Card } from "@/components/ui/card";
@@ -30,13 +31,7 @@ export const Route = createFileRoute("/")({
   component: SAPSDQuestApp,
 });
 
-const CORRECT_DATA = {
-  transaction: "VA01",
-  orderType: "OR",
-  salesOrg: "1000",
-  customer: "200015",
-  material: "MAT-SD-015",
-};
+// Correct data is now handled per mission from missions.ts
 
 function HugoAvatar({ className }: { className?: string }) {
   return (
@@ -63,6 +58,9 @@ function SAPSDQuestApp() {
   const [password, setPassword] = useState("");
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [onboardingStep, setOnboardingStep] = useState(0);
+
+  const [currentMissionIndex, setCurrentMissionIndex] = useState(0);
+  const currentMission = missions[currentMissionIndex]!;
 
   const [selectedTransaction, setSelectedTransaction] = useState("");
   const [mode, setMode] = useState("standard");
@@ -123,7 +121,7 @@ function SAPSDQuestApp() {
       Empresa: AAM Corp
       Status: Nível 1 - Trainee SD
       XP Total: ${xp} / 500
-      Missões Concluídas: ${completedMissions} / 30
+      Missões Concluídas: ${completedMissions} / ${missions.length}
       Taxa de Sucesso: ${Math.round((trainingHistory.filter(h => h.status === 'success').length / Math.max(trainingHistory.length, 1)) * 100)}%
       -------------------------------------
       Última Missão: ${trainingHistory[0]?.missionName || 'Nenhuma'}
@@ -199,6 +197,7 @@ function SAPSDQuestApp() {
       setSelectedTransaction("");
       setXp(0);
       setCompletedMissions(0);
+      setCurrentMissionIndex(0);
       setTrainingHistory([]);
       setFeedbackState("idle");
       sessionStorage.setItem("sap-quest-session-started", "true");
@@ -209,7 +208,10 @@ function SAPSDQuestApp() {
           if (parsed.formData) setFormData(parsed.formData);
           if (parsed.selectedTransaction) setSelectedTransaction(parsed.selectedTransaction);
           if (parsed.xp !== undefined) setXp(parsed.xp);
-          if (parsed.completedMissions !== undefined) setCompletedMissions(parsed.completedMissions);
+          if (parsed.completedMissions !== undefined) {
+            setCompletedMissions(parsed.completedMissions);
+            setCurrentMissionIndex(parsed.completedMissions);
+          }
           if (parsed.feedbackState) setFeedbackState(parsed.feedbackState);
           if (parsed.mode) setMode(parsed.mode);
         } catch (e) {
@@ -233,6 +235,7 @@ function SAPSDQuestApp() {
       selectedTransaction,
       xp,
       completedMissions,
+      currentMissionIndex,
       feedbackState,
       mode
     };
@@ -244,6 +247,7 @@ function SAPSDQuestApp() {
           const parsed = JSON.parse(e.newValue);
           if (parsed.xp !== undefined) setXp(parsed.xp);
           if (parsed.completedMissions !== undefined) setCompletedMissions(parsed.completedMissions);
+          if (parsed.currentMissionIndex !== undefined) setCurrentMissionIndex(parsed.currentMissionIndex);
           // Only update feedback if it changed to keep UI consistent
           if (parsed.feedbackState && parsed.feedbackState !== feedbackState) setFeedbackState(parsed.feedbackState);
         } catch (err) {
@@ -254,7 +258,7 @@ function SAPSDQuestApp() {
 
     window.addEventListener("storage", handleStorageChange);
     return () => window.removeEventListener("storage", handleStorageChange);
-  }, [formData, selectedTransaction, xp, completedMissions, feedbackState, mode]);
+  }, [formData, selectedTransaction, xp, completedMissions, currentMissionIndex, feedbackState, mode]);
 
   // Shortcut for F1 Help and Keyboard Access
   useEffect(() => {
@@ -324,27 +328,27 @@ function SAPSDQuestApp() {
     const errors: string[] = [];
     let localHint = "";
     
-    if (!selectedTransaction || selectedTransaction !== CORRECT_DATA.transaction) {
+    if (!selectedTransaction || selectedTransaction !== currentMission.correctData.transaction) {
       errors.push("transaction");
-      localHint = "Opa! Para criar uma ordem de venda, precisamos da transação correta (VA01). Se errarmos isso, o sistema nem abre a tela de vendas, travando todo o faturamento da AAM Corp.";
-    } else if (!formData.orderType || formData.orderType !== CORRECT_DATA.orderType) {
+      localHint = currentMission.hints.transaction;
+    } else if (!formData.orderType || formData.orderType !== currentMission.correctData.orderType) {
       errors.push("orderType");
-      localHint = "O 'Tipo de Ordem' define como o sistema tratará o preço e o estoque. Usar o tipo errado pode travar a reserva de crédito do cliente ou gerar cobranças indevidas.";
-    } else if (!formData.salesOrg || formData.salesOrg !== CORRECT_DATA.salesOrg) {
+      localHint = currentMission.hints.orderType;
+    } else if (!formData.salesOrg || formData.salesOrg !== currentMission.correctData.salesOrg) {
       errors.push("salesOrg");
-      localHint = "A Org. Vendas 1000 é a responsável legal pela AAM Corp. Se usar outra, a nota fiscal será rejeitada pela SEFAZ por erro de jurisdição.";
-    } else if (!formData.customer || formData.customer !== CORRECT_DATA.customer) {
+      localHint = currentMission.hints.salesOrg;
+    } else if (!formData.customer || formData.customer !== currentMission.correctData.customer) {
       errors.push("customer");
-      localHint = "Atenção! O cliente AAM LOGÍSTICA é o 200015. Entregar para o cliente errado gera custos logísticos de devolução e multas contratuais pesadas.";
-    } else if (!formData.material || formData.material !== CORRECT_DATA.material) {
+      localHint = currentMission.hints.customer;
+    } else if (!formData.material || formData.material !== currentMission.correctData.material) {
       errors.push("material");
-      localHint = "O material MAT-SD-015 é o que temos em estoque para pronta entrega. Solicitar outro material sem saldo causará atraso na expedição e insatisfação do cliente.";
-    } else if (!formData.incoterms || formData.incoterms !== "FOB") {
+      localHint = currentMission.hints.material;
+    } else if (!formData.incoterms || formData.incoterms !== currentMission.correctData.incoterms) {
       errors.push("incoterms");
-      localHint = "O Incoterm FOB define que o cliente retira a carga. Se colocar CIF por erro, a AAM Corp pagará um frete que não estava previsto no orçamento, reduzindo nossa margem.";
-    } else if (!formData.distChannel || formData.distChannel !== "10") {
+      localHint = currentMission.hints.incoterms;
+    } else if (!formData.distChannel || formData.distChannel !== currentMission.correctData.distChannel) {
       errors.push("distChannel");
-      localHint = "O Canal 10 (Venda Direta) garante que a política de preços seja aplicada corretamente. Sem isso, o desconto comercial do cliente não será calculado.";
+      localHint = currentMission.hints.distChannel;
     }
 
     setValidationErrors(errors);
@@ -356,7 +360,7 @@ function SAPSDQuestApp() {
         toast.info("Validação OK! Revise antes de enviar.");
       } else {
         setFeedbackState("success");
-        setHintMessage("🎉 Excelente! Ordem criada com sucesso! Com isso, o estoque foi reservado automaticamente no módulo MM, a logística já recebeu o alerta para separação e a NF-e será emitida sem erros.");
+        setHintMessage(`🎉 ${currentMission.businessImpact.success}`);
         if (mode !== "practice") {
           setXp(prev => Math.min(prev + 25, 500));
           setCompletedMissions(prev => prev + 1);
@@ -365,16 +369,16 @@ function SAPSDQuestApp() {
           id: Math.random().toString(36).substr(2, 9),
           status: "success" as const,
           transaction: selectedTransaction,
-          message: "Ordem Processada: Integração com Logística e MM concluída.",
+          message: currentMission.objective,
           timestamp: Date.now(),
           xpEarned: mode !== "practice" ? 25 : 0,
-          missionName: "Criar Ordem (VA01)",
-          progressAtTime: Math.round(((completedMissions + (mode !== "practice" ? 1 : 0)) / 30) * 100)
+          missionName: currentMission.name,
+          progressAtTime: Math.round(((completedMissions + (mode !== "practice" ? 1 : 0)) / missions.length) * 100)
         }, ...prev].slice(0, 10));
         
         if (mode !== "practice") {
           toast.success("Missão Concluída!", {
-            description: "Reserva de estoque efetuada! Você ganhou +25 XP.",
+            description: "Você ganhou +25 XP e desbloqueou a próxima etapa.",
           });
         } else {
           toast.success("Sucesso (Modo Prática)");
@@ -382,16 +386,32 @@ function SAPSDQuestApp() {
       }
     } else {
       setFeedbackState("error");
+      setHintMessage(currentMission.businessImpact.error + " " + localHint);
       setTrainingHistory(prev => [{
         id: Math.random().toString(36).substr(2, 9),
         status: "error" as const,
         transaction: selectedTransaction || "N/A",
         message: localHint || "Erro de validação operacional.",
-        timestamp: Date.now()
+        timestamp: Date.now(),
+        missionName: currentMission.name
       }, ...prev].slice(0, 10));
       toast.error("Erro Crítico de Negócio", {
-        description: "O impacto desse erro pode atrasar a expedição. Verifique as dicas do Chefe Hugo.",
+        description: "Verifique as orientações do Chefe Hugo.",
       });
+    }
+  };
+
+  const nextMission = () => {
+    if (currentMissionIndex < missions.length - 1) {
+      const nextIdx = currentMissionIndex + 1;
+      const nextM = missions[nextIdx];
+      setCurrentMissionIndex(nextIdx);
+      resetGame();
+      if (nextM) {
+        toast.info(`Carregando Missão ${nextIdx + 1}: ${nextM.name}`);
+      }
+    } else {
+      toast.success("Parabéns! Você concluiu todas as missões disponíveis na AAM Corp!");
     }
   };
 
@@ -410,13 +430,14 @@ function SAPSDQuestApp() {
   const fullReset = () => {
     if (confirm("Tem certeza que deseja reiniciar TODO o seu progresso? Isso limpará seu XP e histórico de missões.")) {
       // Salva estado para desfazer
-      const currentState = { xp, completedMissions, trainingHistory };
+      const currentState = { xp, completedMissions, currentMissionIndex, trainingHistory };
       setLastStateBeforeReset(currentState);
       setShowUndoReset(true);
 
       // Limpa dados
       setXp(0);
       setCompletedMissions(0);
+      setCurrentMissionIndex(0);
       setTrainingHistory([]);
       resetGame();
       localStorage.removeItem("sap-quest-data");
@@ -436,6 +457,7 @@ function SAPSDQuestApp() {
     if (lastStateBeforeReset) {
       setXp(lastStateBeforeReset.xp);
       setCompletedMissions(lastStateBeforeReset.completedMissions);
+      setCurrentMissionIndex(lastStateBeforeReset.currentMissionIndex || 0);
       setTrainingHistory(lastStateBeforeReset.trainingHistory);
       setShowUndoReset(false);
       setLastStateBeforeReset(null);
@@ -695,7 +717,8 @@ function SAPSDQuestApp() {
                 <HugoAvatar className="size-14" />
                 <div>
                   <h3 className="font-bold text-slate-800 text-sm">Chefe Hugo 👋</h3>
-                  <p className="text-xs text-slate-600">{userName}, crie uma ordem de venda urgente para a <b>AAM LOGÍSTICA LTDA</b>.</p>
+                  <p className="text-xs text-slate-600">{userName}, sua missão [{currentMissionIndex + 1}/{missions.length}]: <b>{currentMission.name}</b>.</p>
+                  <p className="text-[10px] text-slate-400 mt-0.5 italic">{currentMission.description}</p>
                 </div>
               </div>
               <div className="relative">
@@ -739,45 +762,45 @@ function SAPSDQuestApp() {
                     >
                       {[
                         { 
-                          id: "VA01", 
-                          title: "Transação VA01", 
-                          icon: Rocket, 
-                          content: "Utilizada no SAP para a criação de ordens de venda. É o ponto de entrada para o processo Order-to-Cash (O2C).",
+                          id: "MISSION_OBJ", 
+                          title: "Objetivo Atual", 
+                          icon: Target, 
+                          content: currentMission.objective,
                           variant: "indigo"
                         },
                         { 
-                          id: "OR", 
-                          title: "Tipo de Ordem (OR)", 
+                          id: "TRANS_HELP", 
+                          title: "Transação", 
+                          icon: Rocket, 
+                          content: currentMission.hints.transaction,
+                          variant: "slate"
+                        },
+                        { 
+                          id: "ORDER_TYPE_HELP", 
+                          title: "Tipo de Ordem", 
                           icon: FileText, 
-                          content: "O código 'OR' (Standard Order) define o fluxo comercial padrão para vendas de produtos em estoque.",
+                          content: currentMission.hints.orderType,
                           variant: "slate"
                         },
                         { 
-                          id: "ORG", 
-                          title: "Organização de Vendas", 
-                          icon: Target, 
-                          content: "Define a unidade responsável pela comercialização. No exercício, utilize o código 1000.",
-                          variant: "slate"
-                        },
-                        { 
-                          id: "CHANNELS", 
-                          title: "Canais e Setores", 
-                          icon: BarChart3, 
-                          content: "Canal 10: Venda Direta. Setor 00: Divisão de produtos padrão.",
-                          variant: "slate"
-                        },
-                        { 
-                          id: "INCO", 
-                          title: "Incoterms & Pagamento", 
+                          id: "SALES_ORG_HELP", 
+                          title: "Org. Vendas", 
                           icon: Shield, 
-                          content: "Utilize FOB (Free On Board) para frete e 0001 para pagamento imediato.",
+                          content: currentMission.hints.salesOrg,
                           variant: "slate"
                         },
                         { 
-                          id: "HINT", 
-                          title: "Dica de Mestre", 
-                          icon: Star, 
-                          content: "Certifique-se de que o emissor da ordem (Sold-to Party) seja o código 200015.",
+                          id: "CUSTOMER_HELP", 
+                          title: "Cliente / Material", 
+                          icon: UserCheck, 
+                          content: `${currentMission.hints.customer} | ${currentMission.hints.material}`,
+                          variant: "slate"
+                        },
+                        { 
+                          id: "EXTRA_HELP", 
+                          title: "Dicas de Campo", 
+                          icon: HelpCircle, 
+                          content: `${currentMission.hints.incoterms} | ${currentMission.hints.distChannel}`,
                           variant: "amber"
                         }
                       ].map((section) => (
@@ -922,46 +945,31 @@ function SAPSDQuestApp() {
             <div className="flex flex-col gap-3">
               <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Missões Recentes</h3>
               <div className="grid grid-cols-1 gap-2">
-                <Card className={`p-3 bg-white border-slate-200 shadow-sm rounded-xl flex items-center justify-between group hover:border-indigo-200 transition-colors ${completedMissions > 0 ? "" : "border-indigo-200 bg-indigo-50/10"}`}>
-                  <div className="flex items-center gap-3">
-                    <div className={`size-8 rounded-lg flex items-center justify-center ${completedMissions > 0 ? "bg-emerald-50 text-emerald-600" : "bg-indigo-50 text-indigo-600"}`}>
-                      {completedMissions > 0 ? <CheckCircle2 className="size-5" /> : <Rocket className="size-5" />}
+                {missions.map((m, idx) => (
+                  <Card 
+                    key={m.id} 
+                    onClick={() => {
+                      if (idx <= completedMissions) {
+                        setCurrentMissionIndex(idx);
+                        resetGame();
+                      }
+                    }}
+                    className={`p-3 bg-white border-slate-200 shadow-sm rounded-xl flex items-center justify-between group hover:border-indigo-200 transition-colors cursor-pointer ${idx === currentMissionIndex ? "border-indigo-600 bg-indigo-50/10 ring-1 ring-indigo-600" : idx > completedMissions ? "opacity-50 grayscale pointer-events-none" : ""}`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className={`size-8 rounded-lg flex items-center justify-center ${idx < completedMissions ? "bg-emerald-50 text-emerald-600" : "bg-indigo-50 text-indigo-600"}`}>
+                        {idx < completedMissions ? <CheckCircle2 className="size-5" /> : idx === currentMissionIndex ? <Rocket className="size-5 animate-pulse" /> : <Shield className="size-5" />}
+                      </div>
+                      <div>
+                        <h4 className="text-[11px] font-bold text-slate-800">{m.name}</h4>
+                        <span className={`text-[9px] uppercase font-black ${idx < completedMissions ? "text-emerald-600" : "text-indigo-600"}`}>
+                          {idx < completedMissions ? "Concluído" : idx === currentMissionIndex ? "Em Andamento" : "Bloqueado"}
+                        </span>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="text-[11px] font-bold text-slate-800">Criar Ordem (VA01)</h4>
-                      <span className={`text-[9px] uppercase font-black ${completedMissions > 0 ? "text-emerald-600" : "text-indigo-600"}`}>
-                        {completedMissions > 0 ? "Concluído" : "Disponível (AAM Corp)"}
-                      </span>
-                    </div>
-                  </div>
-                  <ArrowRight className={`size-4 ${completedMissions > 0 ? "text-emerald-500" : "text-indigo-600"}`} />
-                </Card>
-                
-                <Card className="p-3 bg-white border-slate-100/50 shadow-sm rounded-xl flex items-center justify-between opacity-60 bg-slate-50/30">
-                  <div className="flex items-center gap-3">
-                    <div className="size-8 bg-slate-100 text-slate-400 rounded-lg flex items-center justify-center">
-                      <BarChart3 className="size-5" />
-                    </div>
-                    <div>
-                      <h4 className="text-[11px] font-bold text-slate-500">Parceiros BP</h4>
-                      <span className="text-[9px] text-slate-400 uppercase font-black">Bloqueado</span>
-                    </div>
-                  </div>
-                  <Settings className="size-4 text-slate-200" />
-                </Card>
- 
-                <Card className="p-3 bg-white border-slate-100/50 shadow-sm rounded-xl flex items-center justify-between opacity-60 bg-slate-50/30">
-                  <div className="flex items-center gap-3">
-                    <div className="size-8 bg-slate-100 text-slate-400 rounded-lg flex items-center justify-center">
-                      <X className="size-5" />
-                    </div>
-                    <div>
-                      <h4 className="text-[11px] font-bold text-slate-500">Fluxo de Entrega</h4>
-                      <span className="text-[9px] text-slate-400 uppercase font-black">Bloqueado</span>
-                    </div>
-                  </div>
-                  <Settings className="size-4 text-slate-200" />
-                </Card>
+                    {idx <= completedMissions && <ArrowRight className={`size-4 ${idx < completedMissions ? "text-emerald-500" : "text-indigo-600"}`} />}
+                  </Card>
+                ))}
               </div>
             </div>
           </div>
@@ -978,9 +986,8 @@ function SAPSDQuestApp() {
               <div className="w-full space-y-2">
                 <div className="bg-emerald-100 text-emerald-700 font-black text-xs py-2 rounded-xl mb-2">+25 XP</div>
                 <Button 
-                  onClick={resetGame} 
-                  disabled={completedMissions === 0}
-                  className="w-full text-xs h-10 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  onClick={nextMission} 
+                  className="w-full text-xs h-10 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl gap-2 shadow-lg shadow-emerald-100"
                 >
                   PRÓXIMO PEDIDO <ArrowRight className="size-4" />
                 </Button>
@@ -1075,7 +1082,7 @@ function SAPSDQuestApp() {
             <Card className="p-4 bg-white border-slate-200 shadow-sm rounded-2xl space-y-4">
               <div className="flex justify-between items-center text-[11px] font-bold text-slate-700">
                 <span className="text-slate-400 uppercase text-[9px] font-black">Missões Concluídas</span>
-                <span>{completedMissions} / 30</span>
+                <span>{completedMissions} / {missions.length}</span>
               </div>
               <div className="flex justify-between items-center text-[11px] font-bold text-slate-700">
                 <span className="text-slate-400 uppercase text-[9px] font-black">XP Neste Nível</span>
