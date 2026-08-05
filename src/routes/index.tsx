@@ -4,7 +4,7 @@ import {
   Rocket, Target, BookOpen, Crown, BarChart3, Trophy, Settings, 
   ChevronRight, HelpCircle, CheckCircle2, Flame, Star, Shield,
   Search, Bell, Plus, MoreHorizontal, ArrowRight, Check, Menu, X,
-  Gamepad2, Dices, User, UserCheck, Download, Upload, Eye, EyeOff, LogIn,
+  Gamepad2, Dices, User, UserCheck, Eye, EyeOff, LogIn,
   FileText, Undo2, ChevronDown, LogOut
 } from "lucide-react";
 import { 
@@ -315,39 +315,6 @@ function SAPSDQuestApp() {
       localStorage.setItem("sap-quest-history", JSON.stringify(trainingHistory));
     }
   }, [trainingHistory]);
-
-  const exportState = () => {
-    const state = { formData, selectedTransaction, xp, completedMissions, mode, trainingHistory };
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state));
-    const downloadAnchorNode = document.createElement('a');
-    downloadAnchorNode.setAttribute("href", dataStr);
-    downloadAnchorNode.setAttribute("download", "sap_sd_quest_state.json");
-    document.body.appendChild(downloadAnchorNode);
-    downloadAnchorNode.click();
-    downloadAnchorNode.remove();
-    toast.success("Estado exportado!");
-  };
-
-  const importState = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      try {
-        const json = JSON.parse(event.target?.result as string);
-        if (json.xp !== undefined) setXp(json.xp);
-        if (json.completedMissions !== undefined) setCompletedMissions(json.completedMissions);
-        if (json.formData) setFormData(json.formData);
-        if (json.selectedTransaction) setSelectedTransaction(json.selectedTransaction);
-        if (json.mode) setMode(json.mode);
-        if (json.trainingHistory) setTrainingHistory(json.trainingHistory);
-        toast.success("Dados importados!");
-      } catch (err) {
-        toast.error("Erro ao importar.");
-      }
-    };
-    reader.readAsText(file);
-  };
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
