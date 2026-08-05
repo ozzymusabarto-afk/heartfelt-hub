@@ -475,25 +475,4 @@ export const MISSIONS: Mission[] = [
       brazilRule: "Sujeito à retenção na fonte de ISS e tributos federais (PIS/COFINS/CSLL/IRRF) conforme legislação municipal."
     }
   }
-    chefeHugoDialog: "O cliente TECH BRASIL S.A. (Cód: 208017) solicita o envio urgente do material MAT-SD-020, mas o pedido está retido por crédito. Tente gerar a remessa para verificar a mensagem de trava do SAP.",
-    successFeedback: "Trava de segurança acionada! O SAP impediu a geração da remessa devido ao bloqueio de crédito ativo no departamento financeiro.",
-    errorFeedback: "Selecione o cliente '208017' e confirme os dados para visualizar a validação de trava de crédito da transação.",
-    expectedData: {
-      tipoOrdem: "OR",
-      orgVendas: "1000",
-      canalDist: "10",
-      setorAtiv: "00",
-      cliente: "208017",
-      material: "MAT-SD-020",
-      quantidade: "80",
-      incoterms: "FOB",
-      condPagto: "ZF30"
-    },
-    f1Help: {
-      title: "Bloqueio de Remessa por Crédito (FSCM)",
-      concept: "Controle que impede a saída física de mercadorias para clientes com inadimplência ou limite estourado.",
-      businessImpact: "Protege o patrimônio da AAM Corp evitando perdas financeiras e entregas não autorizadas.",
-      brazilRule: "Evita o fato gerador do ICMS e emissão de NF-e para títulos com risco de não recebimento."
-    }
-  }
 ];
