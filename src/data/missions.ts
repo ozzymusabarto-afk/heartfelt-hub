@@ -324,5 +324,80 @@ export const MISSIONS: Mission[] = [
       businessImpact: "Pronto para avançar no ciclo Order-to-Cash para os módulos de Expedição (VL01N) e Faturamento (VF01).",
       brazilRule: "Capacitado para tratar as principais regras fiscais e comerciais de vendas no Brasil."
     }
+  },
+  {
+    id: "M13-VL01N-STD",
+    title: "13. Criar Remessa de Entrega Standard",
+    transaction: "VL01N",
+    chefeHugoDialog: "A ordem do cliente AAM LOGÍSTICA LTDA (Cód: 208015) foi aprovada! Acesse a transação VL01N para gerar a Remessa de Entrega a partir do Centro Fornecedor 1000 (SP).",
+    successFeedback: "Remessa gerada com sucesso! O documento de expedição foi enviado para a equipe de separação (Picking) no armazém.",
+    errorFeedback: "Atenção aos dados de expedição! Certifique-se de selecionar a transação 'VL01N', usar o Centro '1000' e o cliente '208015'.",
+    expectedData: {
+      tipoOrdem: "OR",
+      orgVendas: "1000",
+      canalDist: "10",
+      setorAtiv: "00",
+      cliente: "208015",
+      material: "MAT-SD-015",
+      quantidade: "99",
+      incoterms: "FOB",
+      condPagto: "ZF30"
+    },
+    f1Help: {
+      title: "Criar Remessa com Referência (VL01N)",
+      concept: "Transação logarítmica que inicia o processo de picking, embalagem e expedição de mercadorias no SAP SD/LES.",
+      businessImpact: "Reserva fisicamente os lotes no depósito e impede a alocação para outros pedidos.",
+      brazilRule: "Gera a lista de embarque necessária para a conferência de carga física do transporte rodoviário."
+    }
+  },
+  {
+    id: "M14-VL01N-PARCIAL",
+    title: "14. Remessa Parcial por Corte de Estoque",
+    transaction: "VL01N",
+    chefeHugoDialog: "Atenção, o armazém de SP só possui 50 unidades do MAT-SD-015 em estoque para o cliente NORTEL DISTRIBUIDORA (Cód: 208016). Gere a remessa parcial ajustando a quantidade fornecida para 50.",
+    successFeedback: "Remessa parcial registrada! O SAP manteve o saldo restante na ordem de venda aberto para posterior fornecimento.",
+    errorFeedback: "Para a remessa parcial da NORTEL, ajuste o campo Quantidade no pedido/fornecimento para '50'.",
+    expectedData: {
+      tipoOrdem: "OR",
+      orgVendas: "1000",
+      canalDist: "20",
+      setorAtiv: "00",
+      cliente: "208016",
+      material: "MAT-SD-015",
+      quantidade: "50",
+      incoterms: "FOB",
+      condPagto: "ZF30"
+    },
+    f1Help: {
+      title: "Fornecimento Parcial (Partial Delivery)",
+      concept: "Permite expedir uma quantidade menor do que a solicitada originalmente no pedido de venda.",
+      businessImpact: "Atende emergencialmente o cliente sem cancelar o saldo remanescente da ordem.",
+      brazilRule: "Exige que a Nota Fiscal seja emitida com o valor proporcional aos produtos efetivamente embarcados."
+    }
+  },
+  {
+    id: "M15-VL01N-BLOQ",
+    title: "15. Tentativa de Expedição com Bloqueio Financeiro",
+    transaction: "VL01N",
+    chefeHugoDialog: "O cliente TECH BRASIL S.A. (Cód: 208017) solicita o envio urgente do material MAT-SD-020, mas o pedido está retido por crédito. Tente gerar a remessa para verificar a mensagem de trava do SAP.",
+    successFeedback: "Trava de segurança acionada! O SAP impediu a geração da remessa devido ao bloqueio de crédito ativo no departamento financeiro.",
+    errorFeedback: "Selecione o cliente '208017' e confirme os dados para visualizar a validação de trava de crédito da transação.",
+    expectedData: {
+      tipoOrdem: "OR",
+      orgVendas: "1000",
+      canalDist: "10",
+      setorAtiv: "00",
+      cliente: "208017",
+      material: "MAT-SD-020",
+      quantidade: "80",
+      incoterms: "FOB",
+      condPagto: "ZF30"
+    },
+    f1Help: {
+      title: "Bloqueio de Remessa por Crédito (FSCM)",
+      concept: "Controle que impede a saída física de mercadorias para clientes com inadimplência ou limite estourado.",
+      businessImpact: "Protege o patrimônio da AAM Corp evitando perdas financeiras e entregas não autorizadas.",
+      brazilRule: "Evita o fato gerador do ICMS e emissão de NF-e para títulos com risco de não recebimento."
+    }
   }
 ];

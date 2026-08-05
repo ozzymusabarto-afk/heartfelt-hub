@@ -452,8 +452,10 @@ function SAPSDQuestApp() {
         toast.info("Validação OK! Revise antes de enviar.");
       } else {
         setFeedbackState("success");
-        const docNum = Math.floor(450000000 + Math.random() * 999999);
-        const successMsg = `Ordem de Venda Standard ${docNum} gerada com sucesso!`;
+        const isVL01N = currentMission.transaction === "VL01N";
+        const docPrefix = isVL01N ? "Remessa de Entrega" : "Ordem de Venda Standard";
+        const docNum = isVL01N ? Math.floor(80000000 + Math.random() * 999999) : Math.floor(450000000 + Math.random() * 999999);
+        const successMsg = `${docPrefix} ${docNum} gerada com sucesso!`;
         setHintMessage(`🎉 ${successMsg} \n\n${currentMission.successFeedback}`);
         toast.success(successMsg);
 
@@ -925,10 +927,10 @@ function SAPSDQuestApp() {
             {/* Stepper de 4 passos */}
             <div className="bg-slate-50 px-4 py-3 border-t border-slate-100 flex items-center justify-between">
               {[
-                { n: "1", label: "Contexto", color: "bg-emerald-500", text: "text-emerald-700", bg: "bg-emerald-50" },
-                { n: "2", label: "Transação", color: "bg-indigo-600", text: "text-indigo-700", bg: "bg-indigo-50", active: true },
-                { n: "3", label: "Preencher Dados", color: "bg-slate-200", text: "text-slate-400", bg: "bg-slate-100" },
-                { n: "4", label: "Revisar & Enviar", color: "bg-slate-200", text: "text-slate-400", bg: "bg-slate-100" },
+                { n: "1", label: "Contexto", color: completedMissions > currentMissionIndex ? "bg-emerald-500" : "bg-emerald-500", text: "text-emerald-700", bg: "bg-emerald-50" },
+                { n: "2", label: "Transação", color: selectedTransaction ? "bg-emerald-500" : "bg-indigo-600", text: selectedTransaction ? "text-emerald-700" : "text-indigo-700", bg: "bg-indigo-50", active: true },
+                { n: "3", label: "Preencher Dados", color: feedbackState !== "idle" ? "bg-emerald-500" : "bg-slate-200", text: feedbackState !== "idle" ? "text-emerald-700" : "text-slate-400", bg: "bg-slate-100" },
+                { n: "4", label: "Revisar & Enviar", color: feedbackState === "success" ? "bg-emerald-500" : "bg-slate-200", text: feedbackState === "success" ? "text-emerald-700" : "text-slate-400", bg: "bg-slate-100" },
               ].map((step, i) => (
                 <div key={i} className="flex items-center gap-2 flex-1 group">
                   <div className={`size-6 rounded-full flex items-center justify-center text-[10px] font-black text-white ${step.color} shadow-sm`}>
@@ -947,7 +949,7 @@ function SAPSDQuestApp() {
                 <Dices className="size-4 text-indigo-600" /> Transação
               </h3>
               <RadioGroup value={selectedTransaction} onValueChange={setSelectedTransaction} className="space-y-2 pr-1">
-                {["VA01 - Criar Ordem", "BP - Parceiro", "VL01N - Entrega", "VF01 - Faturar"].map((label) => {
+                {["VA01 - Criar Ordem", "BP - Parceiro", "VL01N - Entrega", "VF01 - Faturar", "VA02 - Modificar", "VA03 - Exibir"].map((label) => {
                   const id = label.split(" ")[0];
                   if (!id) return null;
                   return (
@@ -968,12 +970,12 @@ function SAPSDQuestApp() {
                 {[
                   { id: "orderType", label: "Tipo", type: "select", options: ["OR", "QT", "ZBN", "RE"] },
                   { id: "orderDate", label: "Data Pedido" },
-                  { id: "salesOrg", label: "Org. Vendas" },
+                  { id: "salesOrg", label: "Org. Vendas", type: "select", options: ["1000", "2000"] },
                   { id: "distChannel", label: "Canal Dist.", type: "select", options: ["10", "20"] },
                   { id: "division", label: "Setor Ativ.", type: "select", options: ["00", "01"] },
                   { id: "customer", label: "Emissor", hasSearch: true },
                   { id: "poNumber", label: "Nº Pedido" },
-                  { id: "material", label: "Material" },
+                  { id: "material", label: "Material", type: "select", options: ["MAT-SD-015", "MAT-SD-020", "MAT-SD-099"] },
                   { id: "quantity", label: "Quantidade" },
                   { id: "incoterms", label: "Incoterms", type: "select", options: ["FOB", "CIF"] },
                   { id: "paymentCond", label: "Cond. Pagto.", type: "select", options: ["ZF30", "ZB00", "ZF60", "0001"] },
