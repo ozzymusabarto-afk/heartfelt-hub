@@ -246,6 +246,7 @@ function SAPSDQuestApp() {
           const parsed = JSON.parse(e.newValue);
           if (parsed.xp !== undefined) setXp(parsed.xp);
           if (parsed.completedMissions !== undefined) setCompletedMissions(parsed.completedMissions);
+          if (parsed.currentMissionIndex !== undefined) setCurrentMissionIndex(parsed.currentMissionIndex);
           // Only update feedback if it changed to keep UI consistent
           if (parsed.feedbackState && parsed.feedbackState !== feedbackState) setFeedbackState(parsed.feedbackState);
         } catch (err) {
