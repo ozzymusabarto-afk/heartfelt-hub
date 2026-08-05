@@ -26,6 +26,156 @@ export interface Mission {
 
 export const MISSIONS: Mission[] = [
   {
+    id: "M19-BP-CLIENTE",
+    title: "19. Consulta de Parceiro Comercial (BP - Business Partner)",
+    transaction: "BP",
+    chefeHugoDialog: "Antes de fechar um grande contrato, precisamos validar se o cliente NORTEL DISTRIBUIDORA (Cód: 208016) possui a função de cliente SD ativa na Área de Vendas 1000/10/00. Acesse a transação BP para conferir.",
+    successFeedback: "Parceiro verificado com sucesso! Os dados fiscais (CNPJ e Inscrição Estadual) e a classificação de crédito estão ativos.",
+    errorFeedback: "Selecione a transação 'BP' e verifique os dados do cliente '208016'.",
+    expectedData: {
+      tipoOrdem: "OR",
+      orgVendas: "1000",
+      canalDist: "10",
+      setorAtiv: "00",
+      cliente: "208016",
+      material: "MAT-SD-015",
+      quantidade: "50",
+      incoterms: "FOB",
+      condPagto: "ZF30"
+    },
+    f1Help: {
+      title: "Parceiro Comercial (Transação BP)",
+      concept: "Conceito central no SAP S/4HANA que unifica cadastros de Clientes, Fornecedores e Pessoas Físicas em um único ID.",
+      businessImpact: "Garante a consistência de dados entre os módulos de Vendas (SD), Compras (MM) e Financeiro (FI).",
+      brazilRule: "Valida obrigatoriamente CNPJ/CPF, Inscrição Estadual e Regime Tributário para emissão de NF-e."
+    }
+  },
+  {
+    id: "M20-BP-FUNCOES",
+    title: "20. Determinação de Funções de Parceiro",
+    transaction: "BP",
+    chefeHugoDialog: "A AAM LOGÍSTICA LTDA (Cód: 208015) comprou um lote de produtos, mas solicitou que a entrega seja feita na filial de centro de distribuição (Recebedor da Mercadoria). Valide a função de parceiro na transação BP.",
+    successFeedback: "Função de parceiro validada! A regra de determinação atribuiu o endereço de entrega correto sem alterar o cliente faturado.",
+    errorFeedback: "Verifique os dados da transação 'BP' e do cliente '208015'.",
+    expectedData: {
+      tipoOrdem: "OR",
+      orgVendas: "1000",
+      canalDist: "10",
+      setorAtiv: "00",
+      cliente: "208015",
+      material: "MAT-SD-015",
+      quantidade: "99",
+      incoterms: "FOB",
+      condPagto: "ZF30"
+    },
+    f1Help: {
+      title: "Funções de Parceiro (Partner Functions)",
+      concept: "Define os papéis desempenhados na venda: Emissor (SP), Recebedor da Mercadoria (SH), Recebedor da Fatura (BP) e Pagador (PY).",
+      businessImpact: "Permite faturar para uma matriz e entregar em filiais logísticas distintas.",
+      brazilRule: "Determina o local do fato gerador do transporte e as alíquotas de ICMS interestadual."
+    }
+  },
+  {
+    id: "M21-V02-INCOMP",
+    title: "21. Análise de Log de Ordens Incompletas (V.02)",
+    transaction: "VA01",
+    chefeHugoDialog: "Uma ordem criada na VA01 ficou parada no sistema porque o vendedor esqueceu de preencher o Incoterm. Execute a análise na V.02 para identificar a pendência e liberar o documento.",
+    successFeedback: "Ordem localizada e corrigida com sucesso! O esquema de incompletude foi atendido e a ordem liberada para remessa.",
+    errorFeedback: "Atenção ao processo de correção! Verifique os dados do cliente '208015' e preencha os Incoterms como 'FOB'.",
+    expectedData: {
+      tipoOrdem: "OR",
+      orgVendas: "1000",
+      canalDist: "10",
+      setorAtiv: "00",
+      cliente: "208015",
+      material: "MAT-SD-015",
+      quantidade: "99",
+      incoterms: "FOB",
+      condPagto: "ZF30"
+    },
+    f1Help: {
+      title: "Esquema de Incompletude (Incompleteness Log)",
+      concept: "Mecanismo de controle do SAP que bloqueia documentos comercialmente incompletos.",
+      businessImpact: "Evita que pedidos sem dados essenciais (ex: condição de pagamento ou frete) sigam para expedição.",
+      brazilRule: "Impede a geração de NF-e com campos fiscais obrigatórios ausentes."
+    }
+  },
+  {
+    id: "M22-VA05-LISTA",
+    title: "22. Relatório de Lista de Ordens de Venda (VA05)",
+    transaction: "VA01",
+    chefeHugoDialog: "O Gerente Comercial solicitou uma posição de todas as ordens de venda em aberto da AAM Corp para o cliente TECH BRASIL S.A. (Cód: 208017). Acesse o relatório da VA05.",
+    successFeedback: "Relatório gerado com sucesso! A lista de ordens da carteira do cliente foi exportada com status de faturamento.",
+    errorFeedback: "Confirme a seleção para o cliente '208017' para listar as ordens correspondentes na VA05.",
+    expectedData: {
+      tipoOrdem: "OR",
+      orgVendas: "1000",
+      canalDist: "10",
+      setorAtiv: "00",
+      cliente: "208017",
+      material: "MAT-SD-020",
+      quantidade: "80",
+      incoterms: "FOB",
+      condPagto: "ZF30"
+    },
+    f1Help: {
+      title: "Lista de Ordens de Venda (VA05)",
+      concept: "Relatório analítico de acompanhamento da carteira de pedidos comerciais por cliente, material ou período.",
+      businessImpact: "Oferece visibilidade sobre o volume de vendas pendentes e entregas programadas.",
+      brazilRule: "Base para relatórios de compliance fiscal e previsão de arrecadação tributária."
+    }
+  },
+  {
+    id: "M23-VA02-ALTERAR",
+    title: "23. Modificar Ordem de Venda (VA02)",
+    transaction: "VA01",
+    chefeHugoDialog: "O cliente AAM LOGÍSTICA LTDA (Cód: 208015) pediu para alterar a condição de pagamento de 30 dias (ZF30) para 60 dias (ZF60) antes do faturamento. Acesse a VA02 e efetue a alteração.",
+    successFeedback: "Ordem alterada com sucesso! As novas datas de vencimento financeiro foram recalculadas para o faturamento.",
+    errorFeedback: "Na transação VA02, altere a Condição de Pagamento para 'ZF60'.",
+    expectedData: {
+      tipoOrdem: "OR",
+      orgVendas: "1000",
+      canalDist: "10",
+      setorAtiv: "00",
+      cliente: "208015",
+      material: "MAT-SD-015",
+      quantidade: "99",
+      incoterms: "FOB",
+      condPagto: "ZF60"
+    },
+    f1Help: {
+      title: "Modificar Documento de Venda (VA02)",
+      concept: "Transação usada para alterar dados operacionais, quantitativos ou comerciais em ordens já gravadas.",
+      businessImpact: "Permite ajustes contratuais antes que a remessa ou fatura sejam processadas.",
+      brazilRule: "Alterações nos valores antes do faturamento ajustam a base de cálculo tributária da futura NF-e."
+    }
+  },
+  {
+    id: "M24-VA03-EXIBIR",
+    title: "24. Auditar Fluxo do Documento (VA03)",
+    transaction: "VA01",
+    chefeHugoDialog: "O departamento de auditoria quer verificar a rastreabilidade do pedido do cliente NORTEL DISTRIBUIDORA (Cód: 208016). Acesse a VA03 e exiba o Fluxo do Documento.",
+    successFeedback: "Auditoria concluída! O fluxo completo (Ordem -> Remessa -> Fatura -> Documento Contábil) foi verificado sem inconsistências.",
+    errorFeedback: "Selecione a transação de exibição VA03 e confirme a verificação da ordem para o cliente '208016'.",
+    expectedData: {
+      tipoOrdem: "OR",
+      orgVendas: "1000",
+      canalDist: "20",
+      setorAtiv: "00",
+      cliente: "208016",
+      material: "MAT-SD-015",
+      quantidade: "50",
+      incoterms: "FOB",
+      condPagto: "ZF30"
+    },
+    f1Help: {
+      title: "Exibir Ordem e Fluxo do Documento (VA03)",
+      concept: "Transação de consulta que exibe a ordem de venda e a árvore do fluxo de documentos encadeados.",
+      businessImpact: "Garante a rastreabilidade total do processo Order-to-Cash para auditorias internas e externas.",
+      brazilRule: "Permite vincular o número da ordem ao protocolo de autorização do documento fiscal SEFAZ."
+    }
+  },
+  {
     id: "M1-VA01-STD",
     title: "01. Ordem Standard (OTC Padrão)",
     transaction: "VA01",
