@@ -257,7 +257,7 @@ function SAPSDQuestApp() {
 
     window.addEventListener("storage", handleStorageChange);
     return () => window.removeEventListener("storage", handleStorageChange);
-  }, [formData, selectedTransaction, xp, completedMissions, feedbackState, mode]);
+  }, [formData, selectedTransaction, xp, completedMissions, currentMissionIndex, feedbackState, mode]);
 
   // Shortcut for F1 Help and Keyboard Access
   useEffect(() => {
