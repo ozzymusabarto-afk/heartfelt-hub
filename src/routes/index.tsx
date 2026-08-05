@@ -1089,7 +1089,7 @@ function SAPSDQuestApp() {
             <Card className="p-4 bg-white border-slate-200 shadow-sm rounded-2xl space-y-4">
               <div className="flex justify-between items-center text-[11px] font-bold text-slate-700">
                 <span className="text-slate-400 uppercase text-[9px] font-black">Missões Concluídas</span>
-                <span>{completedMissions} / 30</span>
+                <span>{completedMissions} / {missions.length}</span>
               </div>
               <div className="flex justify-between items-center text-[11px] font-bold text-slate-700">
                 <span className="text-slate-400 uppercase text-[9px] font-black">XP Neste Nível</span>
