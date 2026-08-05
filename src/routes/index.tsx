@@ -772,45 +772,31 @@ function SAPSDQuestApp() {
                       {[
                         { 
                           id: "MISSION_OBJ", 
-                          title: "Objetivo Atual", 
+                          title: currentMission.f1Help.title, 
                           icon: Target, 
-                          content: currentMission.objective,
+                          content: currentMission.f1Help.concept,
                           variant: "indigo"
                         },
                         { 
-                          id: "TRANS_HELP", 
-                          title: "Transação", 
-                          icon: Rocket, 
-                          content: currentMission.hints.transaction,
+                          id: "IMPACT", 
+                          title: "Impacto no Negócio", 
+                          icon: BarChart3, 
+                          content: currentMission.f1Help.businessImpact,
                           variant: "slate"
                         },
                         { 
-                          id: "ORDER_TYPE_HELP", 
-                          title: "Tipo de Ordem", 
-                          icon: FileText, 
-                          content: currentMission.hints.orderType,
-                          variant: "slate"
-                        },
-                        { 
-                          id: "SALES_ORG_HELP", 
-                          title: "Org. Vendas", 
+                          id: "BRAZIL_RULE", 
+                          title: "Regra Brasil (Localização)", 
                           icon: Shield, 
-                          content: currentMission.hints.salesOrg,
-                          variant: "slate"
-                        },
-                        { 
-                          id: "CUSTOMER_HELP", 
-                          title: "Cliente / Material", 
-                          icon: UserCheck, 
-                          content: `${currentMission.hints.customer} | ${currentMission.hints.material}`,
-                          variant: "slate"
-                        },
-                        { 
-                          id: "EXTRA_HELP", 
-                          title: "Dicas de Campo", 
-                          icon: HelpCircle, 
-                          content: `${currentMission.hints.incoterms} | ${currentMission.hints.distChannel}`,
+                          content: currentMission.f1Help.brazilRule,
                           variant: "amber"
+                        },
+                        { 
+                          id: "TRANS_HELP", 
+                          title: "Transação Requerida", 
+                          icon: Rocket, 
+                          content: `Utilize a transação ${currentMission.transaction} para esta operação.`,
+                          variant: "slate"
                         }
                       ].map((section) => (
                         <div key={section.id} className="border border-slate-200 rounded-xl overflow-hidden bg-white shadow-sm">
