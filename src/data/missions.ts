@@ -399,5 +399,101 @@ export const MISSIONS: Mission[] = [
       businessImpact: "Protege o patrimônio da AAM Corp evitando perdas financeiras e entregas não autorizadas.",
       brazilRule: "Evita o fato gerador do ICMS e emissão de NF-e para títulos com risco de não recebimento."
     }
+  },
+  {
+    id: "M16-VF01-STD",
+    title: "16. Faturamento Standard de Remessa (NF-e)",
+    transaction: "VF01",
+    chefeHugoDialog: "A remessa da AAM LOGÍSTICA LTDA (Cód: 208015) foi entregue! Transição para a VF01 para processar o faturamento e emitir a Nota Fiscal Eletrônica (NF-e).",
+    successFeedback: "Fatura gerada com sucesso! A NF-e foi autorizada pela SEFAZ e o documento contábil de Contas a Receber foi criado no módulo FI.",
+    errorFeedback: "Para faturar a operação standard, selecione a transação 'VF01' e confirme os dados da ordem para o cliente '208015'.",
+    expectedData: {
+      tipoOrdem: "OR",
+      orgVendas: "1000",
+      canalDist: "10",
+      setorAtiv: "00",
+      cliente: "208015",
+      material: "MAT-SD-015",
+      quantidade: "99",
+      incoterms: "FOB",
+      condPagto: "ZF30"
+    },
+    f1Help: {
+      title: "Criar Fatura (VF01)",
+      concept: "Transação do módulo SD/FI que consolida os dados de vendas e expedição para gerar a cobrança ao cliente.",
+      businessImpact: "Gera o lançamento automático na conta de Clientes a Receber (FI-AR) e atualiza a receita bruta.",
+      brazilRule: "Dispara a comunicação via Schema XML com a SEFAZ para autorização do protocolo da NF-e e DANFE."
+    }
+  },
+  {
+    id: "M17-VF01-CANCL",
+    title: "17. Cancelamento / Estorno de Fatura (VF11)",
+    transaction: "VF01",
+    chefeHugoDialog: "Atenção! Houve divergência no valor do frete negociado com a NORTEL DISTRIBUIDORA (Cód: 208016). Crie o estorno do faturamento na transação de cancelamento (VF11).",
+    successFeedback: "Fatura cancelada com sucesso! A Nota Fiscal foi estornada na SEFAZ e o título financeiro foi baixado.",
+    errorFeedback: "Atenção à operação de cancelamento! Verifique a seleção da transação e os dados do cliente '208016'.",
+    expectedData: {
+      tipoOrdem: "OR",
+      orgVendas: "1000",
+      canalDist: "20",
+      setorAtiv: "00",
+      cliente: "208016",
+      material: "MAT-SD-015",
+      quantidade: "50",
+      incoterms: "FOB",
+      condPagto: "ZF30"
+    },
+    f1Help: {
+      title: "Estorno de Faturamento (VF11)",
+      concept: "Processo que anula os efeitos contábeis e fiscais de uma fatura emitida com divergência.",
+      businessImpact: "Reverte o lançamento de Contas a Receber e libera a remessa para re-faturamento correto.",
+      brazilRule: "Exige o envio do evento de Cancelamento de NF-e respeitando o prazo legal estabelecido pela SEFAZ."
+    }
+  },
+  {
+    id: "M18-VF01-SERVICO",
+    title: "18. Faturamento Direct Drive de Serviços (NFS-e)",
+    transaction: "VF01",
+    chefeHugoDialog: "A consultoria técnica prestada para a TECH BRASIL S.A. (Cód: 208017) foi concluída. Processe o faturamento direto da ordem de serviços (MAT-SD-099).",
+    successFeedback: "Fatura de Serviços emitida! A Nota Fiscal de Serviços Eletrônica (NFS-e) foi integrada à Prefeitura.",
+    errorFeedback: "Selecione o cliente '208017' e o material de serviços 'MAT-SD-099' para concluir o faturamento.",
+    expectedData: {
+      tipoOrdem: "OR",
+      orgVendas: "1000",
+      canalDist: "10",
+      setorAtiv: "00",
+      cliente: "208017",
+      material: "MAT-SD-099",
+      quantidade: "10",
+      incoterms: "FOB",
+      condPagto: "ZF30"
+    },
+    f1Help: {
+      title: "Faturamento de Serviços (NFS-e)",
+      concept: "Processamento de cobrança para itens intangíveis que não demandam movimentação física em estoque.",
+      businessImpact: "Gera a fatura direto a partir da ordem de venda sem passar pela etapa de remessa (VL01N).",
+      brazilRule: "Sujeito à retenção na fonte de ISS e tributos federais (PIS/COFINS/CSLL/IRRF) conforme legislação municipal."
+    }
+  }
+    chefeHugoDialog: "O cliente TECH BRASIL S.A. (Cód: 208017) solicita o envio urgente do material MAT-SD-020, mas o pedido está retido por crédito. Tente gerar a remessa para verificar a mensagem de trava do SAP.",
+    successFeedback: "Trava de segurança acionada! O SAP impediu a geração da remessa devido ao bloqueio de crédito ativo no departamento financeiro.",
+    errorFeedback: "Selecione o cliente '208017' e confirme os dados para visualizar a validação de trava de crédito da transação.",
+    expectedData: {
+      tipoOrdem: "OR",
+      orgVendas: "1000",
+      canalDist: "10",
+      setorAtiv: "00",
+      cliente: "208017",
+      material: "MAT-SD-020",
+      quantidade: "80",
+      incoterms: "FOB",
+      condPagto: "ZF30"
+    },
+    f1Help: {
+      title: "Bloqueio de Remessa por Crédito (FSCM)",
+      concept: "Controle que impede a saída física de mercadorias para clientes com inadimplência ou limite estourado.",
+      businessImpact: "Protege o patrimônio da AAM Corp evitando perdas financeiras e entregas não autorizadas.",
+      brazilRule: "Evita o fato gerador do ICMS e emissão de NF-e para títulos com risco de não recebimento."
+    }
   }
 ];
