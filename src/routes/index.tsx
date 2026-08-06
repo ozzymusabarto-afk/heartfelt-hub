@@ -81,10 +81,18 @@ const randomizeMissionData = (mission: Mission, name: string): Mission => {
   // Create a deep copy to avoid mutating the original mission
   const newMission = JSON.parse(JSON.stringify(mission));
   
-  newMission.expectedData.materialCode = randomValue(materials);
-  newMission.expectedData.headerIncoterms = randomValue(incoterms);
-  newMission.expectedData.partnerFunction = randomValue(paymentConds);
-  newMission.expectedData.quantidade = randomValue(quantities);
+  if (mission.expectedData.materialCode) {
+    newMission.expectedData.materialCode = randomValue(materials);
+  }
+  if (mission.expectedData.headerIncoterms) {
+    newMission.expectedData.headerIncoterms = randomValue(incoterms);
+  }
+  if (mission.expectedData.partnerFunction) {
+    newMission.expectedData.partnerFunction = randomValue(paymentConds);
+  }
+  if (mission.expectedData.quantidade) {
+    newMission.expectedData.quantidade = randomValue(quantities);
+  }
   
   // Randomize customer from master if not BP
   if (mission.transaction !== "BP") {
@@ -1380,6 +1388,12 @@ function SAPSDQuestApp() {
       } else if (!formData.salesOrg || formData.salesOrg !== currentMission.expectedData.orgVendas) {
         errors.push("salesOrg");
         localHint = `Organização de Vendas incorreta. Esperado: ${currentMission.expectedData.orgVendas}`;
+      } else if (currentMission.expectedData.canalDist && (!formData.distChannel || formData.distChannel !== currentMission.expectedData.canalDist)) {
+        errors.push("distChannel");
+        localHint = `Canal de Distribuição incorreto. Esperado: ${currentMission.expectedData.canalDist}`;
+      } else if (currentMission.expectedData.setorAtiv && (!formData.division || formData.division !== currentMission.expectedData.setorAtiv)) {
+        errors.push("division");
+        localHint = `Setor de Atividade incorreto. Esperado: ${currentMission.expectedData.setorAtiv}`;
       }
     } else if (selectedTransaction === "VL01N") {
       if (!formData.salesOrg || formData.salesOrg !== "1000") {

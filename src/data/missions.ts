@@ -29,7 +29,7 @@ export const MISSIONS: Mission[] = [
     "id": "M001-BP",
     "title": "01. Trainee - Cadastro de Parceiro (BP)",
     "transaction": "BP",
-    "chefeHugoDialog": "Olá Consultor(a)! A AAM LOGÍSTICA precisa cadastrar um novo Parceiro de Negócios (BP) no sistema. Por favor, valide o código do cliente 208015 para a Organização de Vendas 1000 com o material MAT-SD-015 (Qtd: 11). Garanta que os dados mestres estejam corretos.",
+    "chefeHugoDialog": "Olá Consultor(a)! A AAM LOGÍSTICA precisa cadastrar um novo Parceiro de Negócios (BP) no sistema. Por favor, valide o código do cliente 208015 para a Organização de Vendas 1000. Garanta que os dados mestres estejam corretos.",
     "successFeedback": "Excelente trabalho! O Parceiro de Negócios (BP) foi validado e estendido para as áreas de vendas corretamente. Esse é o primeiro passo para o fluxo de vendas.",
     "errorFeedback": "Atenção! O código do cliente ou os dados da área de vendas não coincidem com o mestre. Verifique se usou o Cliente 208015 e a Org. Vendas 1000.",
     "expectedData": {
@@ -38,8 +38,8 @@ export const MISSIONS: Mission[] = [
         "canalDist": "10",
         "setorAtiv": "00",
         "partnerCode": "208015",
-        "materialCode": "MAT-SD-015",
-        "quantidade": "11",
+        "materialCode": "",
+        "quantidade": "",
         "headerIncoterms": "FOB",
         "partnerFunction": "ZF30"
     },
