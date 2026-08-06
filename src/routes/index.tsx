@@ -2145,7 +2145,7 @@ function SAPSDQuestApp() {
                   </button>
                   
                   {/* Item tab logic: enabled if mission has material or is standard VA01 */}
-                  {(currentMission.expectedData.material || selectedTransaction.startsWith("VA")) && (
+                  {(currentMission.expectedData.materialCode || selectedTransaction.startsWith("VA")) && (
                     <button 
                       className={`px-3 py-2 text-[10px] font-black uppercase tracking-wider border-b-2 transition-all flex items-center gap-2 ${formTab === 'items' ? 'border-indigo-600 text-indigo-600 bg-indigo-50/30' : 'border-transparent text-slate-400 hover:text-slate-600'}`}
                       onClick={() => setFormTab('items')}
