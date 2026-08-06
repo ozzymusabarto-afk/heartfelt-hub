@@ -30,9 +30,22 @@ function AdminPage() {
   const [isSuperAdmin, setIsSuperAdmin] = useState(false);
 
   useEffect(() => {
+    // Check if current user is an admin
+    const userData = localStorage.getItem("sap-quest-data");
+    const userProfile = userData ? JSON.parse(userData) : {};
+    const isAdmin = userProfile.isAdmin === true;
+    
     const adminSession = localStorage.getItem("sap-quest-admin-session");
-    if (adminSession === "true") {
+    
+    // Authorization Check:
+    // User must either have a valid admin session OR have isAdmin: true in their profile
+    if (adminSession === "true" || isAdmin) {
       setIsAdminAuth(true);
+    } else {
+      // Redirect unauthorized users to home
+      toast.error("Acesso restrito a administradores");
+      navigate({ to: "/" });
+      return;
     }
 
     const superAdminStatus = localStorage.getItem("sap-quest-super-admin");
@@ -41,7 +54,6 @@ function AdminPage() {
     }
 
     // Load users from localStorage or use mock data
-    const savedData = localStorage.getItem("sap-quest-data");
     const savedHistory = localStorage.getItem("sap-quest-history");
     const currentUser = localStorage.getItem("sap-quest-username");
 
@@ -49,16 +61,16 @@ function AdminPage() {
       { 
         name: currentUser || "Consultor Atual", 
         date: new Date().toLocaleDateString(), 
-        missions: JSON.parse(savedData || "{}").completedMissions || 0, 
-        xp: JSON.parse(savedData || "{}").xp || 0, 
-        isPremium: false 
+        missions: userProfile.completedMissions || 0, 
+        xp: userProfile.xp || 0, 
+        isPremium: userProfile.isPremium || false 
       },
       { name: "João Silva", date: "01/08/2026", missions: 12, xp: 1250, isPremium: true },
       { name: "Maria Oliveira", date: "03/08/2026", missions: 5, xp: 450, isPremium: false },
       { name: "Carlos Souza", date: "05/08/2026", missions: 18, xp: 2100, isPremium: true },
     ];
     setUsers(mockUsers);
-  }, []);
+  }, [navigate]);
 
   const handleAuth = (e: React.FormEvent) => {
     e.preventDefault();
