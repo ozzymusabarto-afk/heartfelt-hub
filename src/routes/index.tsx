@@ -110,6 +110,7 @@ function SAPSDQuestApp() {
     missionName?: string;
     progressAtTime?: number;
   }[]>([]);
+  const [reinforcementQueue, setReinforcementQueue] = useState<string[]>([]);
   const [historyPeriod, setHistoryPeriod] = useState<"all" | "7d" | "30d">("all");
   const [historySearch, setHistorySearch] = useState("");
   const [lastStateBeforeReset, setLastStateBeforeReset] = useState<any>(null);
