@@ -853,13 +853,13 @@ function SAPSDQuestApp() {
               {onboardingStep === 0 && (
                 <div className="space-y-6 animate-in slide-in-from-right-4 duration-300">
                   <div className="size-16 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center">
-                    <Trophy className="size-8" />
+                    <Rocket className="size-8" />
                   </div>
                   <div>
-                    <h2 className="text-2xl font-black text-slate-800 tracking-tight mb-2">A Contratação</h2>
+                    <h2 className="text-2xl font-black text-slate-800 tracking-tight mb-2">Treinamento SAP SD</h2>
                     <p className="text-slate-600 leading-relaxed">
-                      Parabéns, <b>{userName}</b>! Você acaba de ser contratado(a) como Trainee de SAP SD na <b>AAM Corp</b>! 
-                      Dedique-se para alcançar novos níveis e evoluir na sua carreira. Contamos com você!
+                      Bem-vindo ao <b>SAP SD Quest</b>! Esta plataforma foi criada para oferecer um <b>treinamento prático e gamificado</b> dos processos comerciais no SAP S/4HANA. 
+                      Aqui você aprenderá executando demandas reais do dia a dia de um consultor ou analista funcional.
                     </p>
                   </div>
                 </div>
@@ -871,10 +871,11 @@ function SAPSDQuestApp() {
                     <HugoAvatar className="size-12" />
                   </div>
                   <div>
-                    <h2 className="text-2xl font-black text-slate-800 tracking-tight mb-2">O Mentor</h2>
+                    <h2 className="text-2xl font-black text-slate-800 tracking-tight mb-2">Público e Dinâmica</h2>
                     <p className="text-slate-600 leading-relaxed">
-                      Conheça o <b>Chefe Hugo</b>! Ele será seu líder direto e enviará demandas reais do fluxo <b>Order-to-Cash</b>. 
-                      Leia atentamente as solicitações dele no painel lateral.
+                      Se você deseja dominar o fluxo <b>Order-to-Cash (OTC)</b>, está no lugar certo. 
+                      Seu mentor, o <b>Chefe Hugo</b>, enviará solicitações que exigem atenção aos dados fiscais, logísticos e comerciais. 
+                      Acerte as missões para subir na hierarquia da AAM LOGÍSTICA LTDA!
                     </p>
                   </div>
                 </div>
@@ -883,13 +884,18 @@ function SAPSDQuestApp() {
               {onboardingStep === 2 && (
                 <div className="space-y-6 animate-in slide-in-from-right-4 duration-300">
                   <div className="size-16 bg-amber-50 text-amber-500 rounded-2xl flex items-center justify-center">
-                    <Star className="size-8" />
+                    <Shield className="size-8" />
                   </div>
                   <div>
-                    <h2 className="text-2xl font-black text-slate-800 tracking-tight mb-2">Regras do Jogo</h2>
-                    <p className="text-slate-600 leading-relaxed">
-                      Preencha as transações corretamente para ganhar <b>+25 XP</b>, subir na hierarquia da empresa e acumular pontos. 
-                      Em caso de dúvidas nos campos, utilize a <b>Ajuda (F1)</b>.
+                    <h2 className="text-2xl font-black text-slate-800 tracking-tight mb-2">Aviso Legal</h2>
+                    <div className="p-4 bg-amber-50 border border-amber-100 rounded-xl">
+                      <p className="text-xs text-amber-800 leading-relaxed font-medium">
+                        <b>Aviso Importante:</b> O SAP SD Quest é uma plataforma educacional e simulador independente. 
+                        Não possui vínculo, patrocínio ou afiliação com a SAP SE. SAP, S/4HANA e Fiori são marcas registradas da SAP SE.
+                      </p>
+                    </div>
+                    <p className="mt-4 text-slate-600 text-sm leading-relaxed">
+                      Ao continuar, você concorda que este é um ambiente de simulação para fins de aprendizado e aprimoramento profissional.
                     </p>
                   </div>
                 </div>
@@ -916,11 +922,12 @@ function SAPSDQuestApp() {
                     className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-8 rounded-xl shadow-lg shadow-indigo-100"
                     onClick={finishOnboarding}
                   >
-                    INICIAR MINHA JORNADA NA AAM CORP
+                    ENTENDI E QUERO COMEÇAR
                   </Button>
                 )}
               </div>
             </div>
+
           </Card>
         </div>
       )}
