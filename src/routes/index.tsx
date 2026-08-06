@@ -411,36 +411,65 @@ function SAPSDQuestApp() {
     const errors: string[] = [];
     let localHint = "";
     
+    // Validate Transaction
     if (!selectedTransaction || selectedTransaction !== currentMission.transaction) {
       errors.push("transaction");
       localHint = `Transação incorreta. O Chefe Hugo pediu ${currentMission.transaction}.`;
-    } else if (!formData.orderType || formData.orderType !== currentMission.expectedData.tipoOrdem) {
-      errors.push("orderType");
-      localHint = `Tipo de ordem incorreto. Esperado: ${currentMission.expectedData.tipoOrdem}`;
-    } else if (!formData.salesOrg || formData.salesOrg !== currentMission.expectedData.orgVendas) {
-      errors.push("salesOrg");
-      localHint = `Org. Vendas incorreta. Esperado: ${currentMission.expectedData.orgVendas}`;
-    } else if (!formData.customer || formData.customer !== currentMission.expectedData.cliente) {
-      errors.push("customer");
-      localHint = `Cliente incorreto. Esperado: ${currentMission.expectedData.cliente}`;
-    } else if (!formData.material || formData.material !== currentMission.expectedData.material) {
-      errors.push("material");
-      localHint = `Material incorreto. Esperado: ${currentMission.expectedData.material}`;
-    } else if (!formData.incoterms || formData.incoterms !== currentMission.expectedData.incoterms) {
-      errors.push("incoterms");
-      localHint = `Incoterms incorreto. Esperado: ${currentMission.expectedData.incoterms}`;
-    } else if (!formData.distChannel || formData.distChannel !== currentMission.expectedData.canalDist) {
-      errors.push("distChannel");
-      localHint = `Canal de Distribuição incorreto. Esperado: ${currentMission.expectedData.canalDist}`;
-    } else if (!formData.quantity || formData.quantity !== currentMission.expectedData.quantidade) {
-      errors.push("quantity");
-      localHint = `Quantidade incorreta. Esperado: ${currentMission.expectedData.quantidade}`;
-    } else if (!formData.division || formData.division !== currentMission.expectedData.setorAtiv) {
-      errors.push("division");
-      localHint = `Setor de Atividade incorreto. Esperado: ${currentMission.expectedData.setorAtiv}`;
-    } else if (!formData.paymentCond || formData.paymentCond !== currentMission.expectedData.condPagto) {
-      errors.push("paymentCond");
-      localHint = `Condição de Pagamento incorreta. Esperado: ${currentMission.expectedData.condPagto}`;
+    } 
+
+    // Dynamic validation logic based on Transaction
+    if (selectedTransaction === "BP") {
+      // Missions M19 and M20 require code and function
+      if (!formData.customer || formData.customer !== currentMission.expectedData.cliente) {
+        errors.push("customer");
+        localHint = `Código do Parceiro incorreto. Esperado: ${currentMission.expectedData.cliente}`;
+      } else if (!formData.salesOrg || formData.salesOrg !== currentMission.expectedData.orgVendas) {
+        // Even for BP, we are checking the Sales Org as per requirement "Exibir apenas... Organização de Vendas (1000)"
+        errors.push("salesOrg");
+        localHint = `Organização de Vendas incorreta. Esperado: ${currentMission.expectedData.orgVendas}`;
+      }
+    } else if (selectedTransaction === "VL01N") {
+      // Logic for delivery
+      if (!formData.salesOrg || formData.salesOrg !== "1000") { // Using 1000 as point of expedition mock
+        errors.push("salesOrg");
+        localHint = `Ponto de Expedição incorreto. Esperado: 1000`;
+      } else if (!formData.poNumber || formData.poNumber !== "REF-ORDEM") { // Mock ref
+         // Validation would be more specific in real scenario
+      }
+    } else if (selectedTransaction === "VF01") {
+       // Logic for billing
+    } else if (selectedTransaction === "VA05" || selectedTransaction === "V.02") {
+       // Logic for reports
+    } else {
+      // Standard VA01 logic
+      if (!formData.orderType || formData.orderType !== currentMission.expectedData.tipoOrdem) {
+        errors.push("orderType");
+        localHint = `Tipo de ordem incorreto. Esperado: ${currentMission.expectedData.tipoOrdem}`;
+      } else if (!formData.salesOrg || formData.salesOrg !== currentMission.expectedData.orgVendas) {
+        errors.push("salesOrg");
+        localHint = `Org. Vendas incorreta. Esperado: ${currentMission.expectedData.orgVendas}`;
+      } else if (!formData.customer || formData.customer !== currentMission.expectedData.cliente) {
+        errors.push("customer");
+        localHint = `Cliente incorreto. Esperado: ${currentMission.expectedData.cliente}`;
+      } else if (!formData.material || formData.material !== currentMission.expectedData.material) {
+        errors.push("material");
+        localHint = `Material incorreto. Esperado: ${currentMission.expectedData.material}`;
+      } else if (!formData.incoterms || formData.incoterms !== currentMission.expectedData.incoterms) {
+        errors.push("incoterms");
+        localHint = `Incoterms incorreto. Esperado: ${currentMission.expectedData.incoterms}`;
+      } else if (!formData.distChannel || formData.distChannel !== currentMission.expectedData.canalDist) {
+        errors.push("distChannel");
+        localHint = `Canal de Distribuição incorreto. Esperado: ${currentMission.expectedData.canalDist}`;
+      } else if (!formData.quantity || formData.quantity !== currentMission.expectedData.quantidade) {
+        errors.push("quantity");
+        localHint = `Quantidade incorreta. Esperado: ${currentMission.expectedData.quantidade}`;
+      } else if (!formData.division || formData.division !== currentMission.expectedData.setorAtiv) {
+        errors.push("division");
+        localHint = `Setor de Atividade incorreto. Esperado: ${currentMission.expectedData.setorAtiv}`;
+      } else if (!formData.paymentCond || formData.paymentCond !== currentMission.expectedData.condPagto) {
+        errors.push("paymentCond");
+        localHint = `Condição de Pagamento incorreta. Esperado: ${currentMission.expectedData.condPagto}`;
+      }
     }
 
     setValidationErrors(errors);

@@ -30,7 +30,7 @@ export const MISSIONS: Mission[] = [
     title: "19. Consulta de Parceiro Comercial (BP - Business Partner)",
     transaction: "BP",
     chefeHugoDialog: "Antes de fechar um grande contrato, precisamos validar se o cliente NORTEL DISTRIBUIDORA (Cód: 208016) possui a função de cliente SD ativa na Área de Vendas 1000/10/00. Acesse a transação BP para conferir.",
-    successFeedback: "Parceiro verificado com sucesso! Os dados fiscais (CNPJ e Inscrição Estadual) e a classificação de crédito estão ativos.",
+    successFeedback: "Parceiro verificado com sucesso! Os dados fiscais (CNPJ e IE) e a área de vendas 1000/10/00 do cliente NORTEL DISTRIBUIDORA estão ativos no sistema.",
     errorFeedback: "Selecione a transação 'BP' e verifique os dados do cliente '208016'.",
     expectedData: {
       tipoOrdem: "OR",
