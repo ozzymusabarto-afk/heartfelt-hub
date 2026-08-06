@@ -997,19 +997,47 @@ function SAPSDQuestApp() {
                 <Target className="size-4 text-indigo-600" /> Dados do Pedido
               </h3>
               <div className="grid grid-cols-2 gap-3 pr-1">
-                {[
-                  { id: "orderType", label: "Tipo", type: "select", options: ["OR", "QT", "ZBN", "RE"] },
-                  { id: "orderDate", label: "Data Pedido" },
-                  { id: "salesOrg", label: "Org. Vendas", type: "select", options: ["1000", "2000"] },
-                  { id: "distChannel", label: "Canal Dist.", type: "select", options: ["10", "20"] },
-                  { id: "division", label: "Setor Ativ.", type: "select", options: ["00", "01"] },
-                  { id: "customer", label: "Emissor", hasSearch: true },
-                  { id: "poNumber", label: "Nº Pedido" },
-                  { id: "material", label: "Material", type: "select", options: ["MAT-SD-015", "MAT-SD-020", "MAT-SD-099"] },
-                  { id: "quantity", label: "Quantidade" },
-                  { id: "incoterms", label: "Incoterms", type: "select", options: ["FOB", "CIF"] },
-                  { id: "paymentCond", label: "Cond. Pagto.", type: "select", options: ["ZF30", "ZB00", "ZF60", "0001"] },
-                ].map((field) => {
+                {(() => {
+                  let fieldsToShow = [
+                    { id: "orderType", label: "Tipo", type: "select", options: ["OR", "QT", "ZBN", "RE"] },
+                    { id: "orderDate", label: "Data Pedido" },
+                    { id: "salesOrg", label: "Org. Vendas", type: "select", options: ["1000", "2000"] },
+                    { id: "distChannel", label: "Canal Dist.", type: "select", options: ["10", "20"] },
+                    { id: "division", label: "Setor Ativ.", type: "select", options: ["00", "01"] },
+                    { id: "customer", label: "Emissor", hasSearch: true },
+                    { id: "poNumber", label: "Nº Pedido" },
+                    { id: "material", label: "Material", type: "select", options: ["MAT-SD-015", "MAT-SD-020", "MAT-SD-099"] },
+                    { id: "quantity", label: "Quantidade" },
+                    { id: "incoterms", label: "Incoterms", type: "select", options: ["FOB", "CIF"] },
+                    { id: "paymentCond", label: "Cond. Pagto.", type: "select", options: ["ZF30", "ZB00", "ZF60", "0001"] },
+                  ];
+
+                  if (selectedTransaction === "BP") {
+                    fieldsToShow = [
+                      { id: "customer", label: "Cód. Parceiro Comercial", hasSearch: true },
+                      { id: "poNumber", label: "Categoria (Empresa/Pessoa)", type: "select", options: ["Empresa", "Pessoa"] }, // Reusing poNumber for Categoria
+                      { id: "paymentCond", label: "Função de Parceiro", type: "select", options: ["Cliente SD", "Fornecedor"] }, // Reusing paymentCond for Função
+                      { id: "salesOrg", label: "Organização de Vendas", type: "select", options: ["1000"] },
+                    ];
+                  } else if (selectedTransaction === "VL01N") {
+                    fieldsToShow = [
+                      { id: "salesOrg", label: "Ponto de Expedição", type: "select", options: ["1000"] },
+                      { id: "orderDate", label: "Data de Seleção" },
+                      { id: "poNumber", label: "Ordem de Venda Ref." },
+                    ];
+                  } else if (selectedTransaction === "VF01") {
+                    fieldsToShow = [
+                      { id: "poNumber", label: "Documento Faturável Ref." },
+                      { id: "orderType", label: "Tipo de Fatura", type: "select", options: ["F2 - Fatura Padrão", "NFS-e"] },
+                    ];
+                  } else if (selectedTransaction === "VA05" || selectedTransaction === "V.02") {
+                    fieldsToShow = [
+                      { id: "customer", label: "Filtro: Cliente", hasSearch: true },
+                      { id: "salesOrg", label: "Área de Vendas", type: "select", options: ["1000/10/00"] },
+                    ];
+                  }
+
+                  return fieldsToShow.map((field) => {
                   const fieldId = field.id as keyof typeof formData;
                   return (
                     <div key={field.id} className="space-y-1">
@@ -1054,6 +1082,20 @@ function SAPSDQuestApp() {
                   );
                 })}
               </div>
+
+              {(selectedTransaction === "VA05" || selectedTransaction === "V.02") && (
+                <div className="mt-4 pt-4 border-t border-slate-100">
+                  <Button 
+                    className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl h-10 gap-2 shadow-md shadow-indigo-100"
+                    onClick={() => {
+                      toast.success("Relatório executado com sucesso!");
+                      // In a real app, this would show a table modal
+                    }}
+                  >
+                    EXECUTAR RELATÓRIO <Search className="size-4" />
+                  </Button>
+                </div>
+              )}
 
               <Button 
                 onClick={handleSubmit} 
