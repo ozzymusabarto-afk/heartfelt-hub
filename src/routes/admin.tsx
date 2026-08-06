@@ -20,6 +20,13 @@ import { toast } from "sonner";
 
 export const Route = createFileRoute("/admin")({
   component: AdminPage,
+  head: () => ({
+    title: "Administração | SAP SD Quest",
+    meta: [
+      { name: "description", content: "Portal administrativo do simulador SAP SD Quest da AAM LOGÍSTICA LTDA." },
+      { name: "robots", content: "noindex, nofollow" }
+    ]
+  }),
 });
 
 function AdminPage() {
