@@ -900,7 +900,6 @@ function SAPSDQuestApp() {
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [hintMessage, setHintMessage] = useState("");
   const [isHelpOpen, setIsHelpOpen] = useState(false);
-  const [formTab, setFormTab] = useState<'header' | 'items'>('header');
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("sap-quest-help-expanded");
