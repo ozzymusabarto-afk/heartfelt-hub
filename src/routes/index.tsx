@@ -1218,7 +1218,11 @@ function SAPSDQuestApp() {
           }
         } catch (e) {}
       } else if (savedUser) {
-        setCurrentMissionIndex(getRandomMissionIndex(undefined, [], 0));
+        const startIdx = getRandomMissionIndex(undefined, [], 0);
+        setCurrentMissionIndex(startIdx);
+        // Force randomization for first mission if it's the start
+        const firstMission = randomizeMissionData(missions[startIdx], "Adriana");
+        setActiveMission(firstMission);
       }
       if (savedUser && savedHistory) {
         try { setTrainingHistory(JSON.parse(savedHistory)); } catch (e) {}
