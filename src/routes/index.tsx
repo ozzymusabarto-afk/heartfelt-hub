@@ -81,10 +81,18 @@ const randomizeMissionData = (mission: Mission, name: string): Mission => {
   // Create a deep copy to avoid mutating the original mission
   const newMission = JSON.parse(JSON.stringify(mission));
   
-  newMission.expectedData.materialCode = randomValue(materials);
-  newMission.expectedData.headerIncoterms = randomValue(incoterms);
-  newMission.expectedData.partnerFunction = randomValue(paymentConds);
-  newMission.expectedData.quantidade = randomValue(quantities);
+  if (mission.expectedData.materialCode) {
+    newMission.expectedData.materialCode = randomValue(materials);
+  }
+  if (mission.expectedData.headerIncoterms) {
+    newMission.expectedData.headerIncoterms = randomValue(incoterms);
+  }
+  if (mission.expectedData.partnerFunction) {
+    newMission.expectedData.partnerFunction = randomValue(paymentConds);
+  }
+  if (mission.expectedData.quantidade) {
+    newMission.expectedData.quantidade = randomValue(quantities);
+  }
   
   // Randomize customer from master if not BP
   if (mission.transaction !== "BP") {
