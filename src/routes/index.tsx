@@ -354,6 +354,12 @@ function SAPSDQuestApp() {
     toast.info("Jornada iniciada! Boa sorte nas demandas.");
   };
 
+  const openOnboarding = () => {
+    setOnboardingStep(0);
+    setShowOnboarding(true);
+  };
+
+
   useEffect(() => {
     const handleGlobalKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
