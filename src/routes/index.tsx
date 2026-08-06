@@ -432,7 +432,7 @@ function SAPSDQuestApp() {
           }
         } catch (e) {}
       } else if (savedUser) {
-        setCurrentMissionIndex(getRandomMissionIndex());
+        setCurrentMissionIndex(getRandomMissionIndex(undefined, [], 0));
       }
       if (savedUser && savedHistory) {
         try { setTrainingHistory(JSON.parse(savedHistory)); } catch (e) {}
