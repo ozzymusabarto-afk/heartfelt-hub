@@ -112,11 +112,11 @@ function SAPSDQuestApp() {
   const [currentMissionIndex, setCurrentMissionIndex] = useState(0);
   const [activeMission, setActiveMission] = useState<Mission | null>(null);
   
-  const currentMission = useMemo(() => {
-    if (activeMission && activeMission.id === missions[currentMissionIndex].id) {
+  const currentMission = useMemo((): Mission => {
+    if (activeMission && activeMission.id === missions[currentMissionIndex]?.id) {
        return activeMission;
     }
-    return missions[currentMissionIndex];
+    return missions[currentMissionIndex] || missions[0];
   }, [currentMissionIndex, activeMission]);
 
   const [selectedTransaction, setSelectedTransaction] = useState("");
