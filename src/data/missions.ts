@@ -1025,1005 +1025,1005 @@ export const MISSIONS: Mission[] = [
         "brazilRule": "Valide se o número do protocolo da SEFAZ está presente no documento de faturamento."
     }
 },
-  {
-    "id": "M041-VA01",
-    "title": "41. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 51.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "51",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+    {
+      "id": "M041-VA01",
+      "title": "41. Júnior - Cotação (VA01)",
+      "transaction": "VA01",
+      "chefeHugoDialog": "Consultor(a), a AAM LOGÍSTICA recebeu uma solicitação de cotação. Por favor, crie o documento no sistema. Tipo: QT, Cliente: 208018, Material: MAT-SD-030, Qtd: 91. Org. Vendas 1000, Canal 10.",
+      "successFeedback": "Cotação criada com sucesso! O fluxo de vendas da AAM LOGÍSTICA segue operando com eficiência sob sua supervisão Júnior.",
+      "errorFeedback": "Erro na criação do documento. Verifique o Tipo de Documento, Cliente e Material conforme solicitado pelo Chefe Hugo.",
+      "expectedData": {
+          "tipoOrdem": "QT",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208018",
+          "material": "MAT-SD-030",
+          "quantidade": "91",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: VA01 - Cotação",
+          "concept": "A VA01 inicia o compromisso comercial. Cotações (QT) precedem Ordens (OR).",
+          "businessImpact": "Documentos bem criados garantem que a reserva de estoque (ATP) funcione corretamente.",
+          "brazilRule": "O tipo de documento determina o código de imposto (Tax Code) que será sugerido pelo sistema."
+      }
   },
   {
-    "id": "M042-VA01",
-    "title": "42. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 52.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "52",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M042-VA01",
+      "title": "42. Júnior - Cotação (VA01)",
+      "transaction": "VA01",
+      "chefeHugoDialog": "Consultor(a), a AAM LOGÍSTICA recebeu uma solicitação de cotação. Por favor, crie o documento no sistema. Tipo: QT, Cliente: 208015, Material: MAT-SD-015, Qtd: 92. Org. Vendas 1000, Canal 10.",
+      "successFeedback": "Cotação criada com sucesso! O fluxo de vendas da AAM LOGÍSTICA segue operando com eficiência sob sua supervisão Júnior.",
+      "errorFeedback": "Erro na criação do documento. Verifique o Tipo de Documento, Cliente e Material conforme solicitado pelo Chefe Hugo.",
+      "expectedData": {
+          "tipoOrdem": "QT",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208015",
+          "material": "MAT-SD-015",
+          "quantidade": "92",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: VA01 - Cotação",
+          "concept": "A VA01 inicia o compromisso comercial. Cotações (QT) precedem Ordens (OR).",
+          "businessImpact": "Documentos bem criados garantem que a reserva de estoque (ATP) funcione corretamente.",
+          "brazilRule": "O tipo de documento determina o código de imposto (Tax Code) que será sugerido pelo sistema."
+      }
   },
   {
-    "id": "M043-VA01",
-    "title": "43. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 53.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "53",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M043-VA01",
+      "title": "43. Júnior - Cotação (VA01)",
+      "transaction": "VA01",
+      "chefeHugoDialog": "Consultor(a), a AAM LOGÍSTICA recebeu uma solicitação de cotação. Por favor, crie o documento no sistema. Tipo: QT, Cliente: 208016, Material: MAT-SD-020, Qtd: 93. Org. Vendas 1000, Canal 10.",
+      "successFeedback": "Cotação criada com sucesso! O fluxo de vendas da AAM LOGÍSTICA segue operando com eficiência sob sua supervisão Júnior.",
+      "errorFeedback": "Erro na criação do documento. Verifique o Tipo de Documento, Cliente e Material conforme solicitado pelo Chefe Hugo.",
+      "expectedData": {
+          "tipoOrdem": "QT",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208016",
+          "material": "MAT-SD-020",
+          "quantidade": "93",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: VA01 - Cotação",
+          "concept": "A VA01 inicia o compromisso comercial. Cotações (QT) precedem Ordens (OR).",
+          "businessImpact": "Documentos bem criados garantem que a reserva de estoque (ATP) funcione corretamente.",
+          "brazilRule": "O tipo de documento determina o código de imposto (Tax Code) que será sugerido pelo sistema."
+      }
   },
   {
-    "id": "M044-VA01",
-    "title": "44. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 54.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "54",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M044-VA01",
+      "title": "44. Júnior - Cotação (VA01)",
+      "transaction": "VA01",
+      "chefeHugoDialog": "Consultor(a), a AAM LOGÍSTICA recebeu uma solicitação de cotação. Por favor, crie o documento no sistema. Tipo: QT, Cliente: 208018, Material: MAT-SD-030, Qtd: 94. Org. Vendas 1000, Canal 10.",
+      "successFeedback": "Cotação criada com sucesso! O fluxo de vendas da AAM LOGÍSTICA segue operando com eficiência sob sua supervisão Júnior.",
+      "errorFeedback": "Erro na criação do documento. Verifique o Tipo de Documento, Cliente e Material conforme solicitado pelo Chefe Hugo.",
+      "expectedData": {
+          "tipoOrdem": "QT",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208018",
+          "material": "MAT-SD-030",
+          "quantidade": "94",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: VA01 - Cotação",
+          "concept": "A VA01 inicia o compromisso comercial. Cotações (QT) precedem Ordens (OR).",
+          "businessImpact": "Documentos bem criados garantem que a reserva de estoque (ATP) funcione corretamente.",
+          "brazilRule": "O tipo de documento determina o código de imposto (Tax Code) que será sugerido pelo sistema."
+      }
   },
   {
-    "id": "M045-VA01",
-    "title": "45. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 55.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "55",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M045-VA01",
+      "title": "45. Júnior - Cotação (VA01)",
+      "transaction": "VA01",
+      "chefeHugoDialog": "Consultor(a), a AAM LOGÍSTICA recebeu uma solicitação de cotação. Por favor, crie o documento no sistema. Tipo: QT, Cliente: 208015, Material: MAT-SD-015, Qtd: 95. Org. Vendas 1000, Canal 10.",
+      "successFeedback": "Cotação criada com sucesso! O fluxo de vendas da AAM LOGÍSTICA segue operando com eficiência sob sua supervisão Júnior.",
+      "errorFeedback": "Erro na criação do documento. Verifique o Tipo de Documento, Cliente e Material conforme solicitado pelo Chefe Hugo.",
+      "expectedData": {
+          "tipoOrdem": "QT",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208015",
+          "material": "MAT-SD-015",
+          "quantidade": "95",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: VA01 - Cotação",
+          "concept": "A VA01 inicia o compromisso comercial. Cotações (QT) precedem Ordens (OR).",
+          "businessImpact": "Documentos bem criados garantem que a reserva de estoque (ATP) funcione corretamente.",
+          "brazilRule": "O tipo de documento determina o código de imposto (Tax Code) que será sugerido pelo sistema."
+      }
   },
   {
-    "id": "M046-VA01",
-    "title": "46. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 56.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "56",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M046-VA01",
+      "title": "46. Júnior - Ordem de Venda (VA01)",
+      "transaction": "VA01",
+      "chefeHugoDialog": "Consultor(a), a AAM LOGÍSTICA recebeu uma solicitação de ordem de venda. Por favor, crie o documento no sistema. Tipo: OR, Cliente: 208016, Material: MAT-SD-020, Qtd: 96. Org. Vendas 1000, Canal 10.",
+      "successFeedback": "Ordem de Venda criada com sucesso! O fluxo de vendas da AAM LOGÍSTICA segue operando com eficiência sob sua supervisão Júnior.",
+      "errorFeedback": "Erro na criação do documento. Verifique o Tipo de Documento, Cliente e Material conforme solicitado pelo Chefe Hugo.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208016",
+          "material": "MAT-SD-020",
+          "quantidade": "96",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: VA01 - Ordem de Venda",
+          "concept": "A VA01 inicia o compromisso comercial. Cotações (QT) precedem Ordens (OR).",
+          "businessImpact": "Documentos bem criados garantem que a reserva de estoque (ATP) funcione corretamente.",
+          "brazilRule": "O tipo de documento determina o código de imposto (Tax Code) que será sugerido pelo sistema."
+      }
   },
   {
-    "id": "M047-VA01",
-    "title": "47. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 57.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "57",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M047-VA01",
+      "title": "47. Júnior - Ordem de Venda (VA01)",
+      "transaction": "VA01",
+      "chefeHugoDialog": "Consultor(a), a AAM LOGÍSTICA recebeu uma solicitação de ordem de venda. Por favor, crie o documento no sistema. Tipo: OR, Cliente: 208018, Material: MAT-SD-030, Qtd: 97. Org. Vendas 1000, Canal 10.",
+      "successFeedback": "Ordem de Venda criada com sucesso! O fluxo de vendas da AAM LOGÍSTICA segue operando com eficiência sob sua supervisão Júnior.",
+      "errorFeedback": "Erro na criação do documento. Verifique o Tipo de Documento, Cliente e Material conforme solicitado pelo Chefe Hugo.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208018",
+          "material": "MAT-SD-030",
+          "quantidade": "97",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: VA01 - Ordem de Venda",
+          "concept": "A VA01 inicia o compromisso comercial. Cotações (QT) precedem Ordens (OR).",
+          "businessImpact": "Documentos bem criados garantem que a reserva de estoque (ATP) funcione corretamente.",
+          "brazilRule": "O tipo de documento determina o código de imposto (Tax Code) que será sugerido pelo sistema."
+      }
   },
   {
-    "id": "M048-VA01",
-    "title": "48. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 58.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "58",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M048-VA01",
+      "title": "48. Júnior - Ordem de Venda (VA01)",
+      "transaction": "VA01",
+      "chefeHugoDialog": "Consultor(a), a AAM LOGÍSTICA recebeu uma solicitação de ordem de venda. Por favor, crie o documento no sistema. Tipo: OR, Cliente: 208015, Material: MAT-SD-015, Qtd: 98. Org. Vendas 1000, Canal 10.",
+      "successFeedback": "Ordem de Venda criada com sucesso! O fluxo de vendas da AAM LOGÍSTICA segue operando com eficiência sob sua supervisão Júnior.",
+      "errorFeedback": "Erro na criação do documento. Verifique o Tipo de Documento, Cliente e Material conforme solicitado pelo Chefe Hugo.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208015",
+          "material": "MAT-SD-015",
+          "quantidade": "98",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: VA01 - Ordem de Venda",
+          "concept": "A VA01 inicia o compromisso comercial. Cotações (QT) precedem Ordens (OR).",
+          "businessImpact": "Documentos bem criados garantem que a reserva de estoque (ATP) funcione corretamente.",
+          "brazilRule": "O tipo de documento determina o código de imposto (Tax Code) que será sugerido pelo sistema."
+      }
   },
   {
-    "id": "M049-VA01",
-    "title": "49. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 59.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "59",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M049-VA01",
+      "title": "49. Júnior - Ordem de Venda (VA01)",
+      "transaction": "VA01",
+      "chefeHugoDialog": "Consultor(a), a AAM LOGÍSTICA recebeu uma solicitação de ordem de venda. Por favor, crie o documento no sistema. Tipo: OR, Cliente: 208016, Material: MAT-SD-020, Qtd: 99. Org. Vendas 1000, Canal 10.",
+      "successFeedback": "Ordem de Venda criada com sucesso! O fluxo de vendas da AAM LOGÍSTICA segue operando com eficiência sob sua supervisão Júnior.",
+      "errorFeedback": "Erro na criação do documento. Verifique o Tipo de Documento, Cliente e Material conforme solicitado pelo Chefe Hugo.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208016",
+          "material": "MAT-SD-020",
+          "quantidade": "99",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: VA01 - Ordem de Venda",
+          "concept": "A VA01 inicia o compromisso comercial. Cotações (QT) precedem Ordens (OR).",
+          "businessImpact": "Documentos bem criados garantem que a reserva de estoque (ATP) funcione corretamente.",
+          "brazilRule": "O tipo de documento determina o código de imposto (Tax Code) que será sugerido pelo sistema."
+      }
   },
   {
-    "id": "M050-VA01",
-    "title": "50. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 60.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "60",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M050-VA01",
+      "title": "50. Júnior - Ordem de Venda (VA01)",
+      "transaction": "VA01",
+      "chefeHugoDialog": "Consultor(a), a AAM LOGÍSTICA recebeu uma solicitação de ordem de venda. Por favor, crie o documento no sistema. Tipo: OR, Cliente: 208018, Material: MAT-SD-030, Qtd: 100. Org. Vendas 1000, Canal 10.",
+      "successFeedback": "Ordem de Venda criada com sucesso! O fluxo de vendas da AAM LOGÍSTICA segue operando com eficiência sob sua supervisão Júnior.",
+      "errorFeedback": "Erro na criação do documento. Verifique o Tipo de Documento, Cliente e Material conforme solicitado pelo Chefe Hugo.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208018",
+          "material": "MAT-SD-030",
+          "quantidade": "100",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: VA01 - Ordem de Venda",
+          "concept": "A VA01 inicia o compromisso comercial. Cotações (QT) precedem Ordens (OR).",
+          "businessImpact": "Documentos bem criados garantem que a reserva de estoque (ATP) funcione corretamente.",
+          "brazilRule": "O tipo de documento determina o código de imposto (Tax Code) que será sugerido pelo sistema."
+      }
   },
   {
-    "id": "M051-VA01",
-    "title": "51. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 61.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "61",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M051-VA02",
+      "title": "51. Júnior - Modificação de Ordem (VA02)",
+      "transaction": "VA02",
+      "chefeHugoDialog": "Houve uma mudança nos planos! O cliente 208016 solicitou alterar a quantidade e validar o item. Acesse a VA02 para a Ordem Padrão (OR) e atualize: Material MAT-SD-020, nova Qtd 111. Org. 1000.",
+      "successFeedback": "Modificação concluída! Manter as ordens atualizadas é vital para evitar faturamentos incorretos.",
+      "errorFeedback": "A alteração não foi processada corretamente. Revise a quantidade ou o material no formulário da VA02.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208016",
+          "material": "MAT-SD-020",
+          "quantidade": "111",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: VA02 - Modificações",
+          "concept": "A VA02 permite ajustar ordens antes do processamento da remessa.",
+          "businessImpact": "Evita devoluções por erro de quantidade ou material errado no pedido.",
+          "brazilRule": "Alterações no cabeçalho ou itens podem disparar novo cálculo de impostos (pricing redetermination)."
+      }
   },
   {
-    "id": "M052-VA01",
-    "title": "52. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 62.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "62",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M052-VA02",
+      "title": "52. Júnior - Modificação de Ordem (VA02)",
+      "transaction": "VA02",
+      "chefeHugoDialog": "Houve uma mudança nos planos! O cliente 208015 solicitou alterar a quantidade e validar o item. Acesse a VA02 para a Ordem Padrão (OR) e atualize: Material MAT-SD-015, nova Qtd 112. Org. 1000.",
+      "successFeedback": "Modificação concluída! Manter as ordens atualizadas é vital para evitar faturamentos incorretos.",
+      "errorFeedback": "A alteração não foi processada corretamente. Revise a quantidade ou o material no formulário da VA02.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208015",
+          "material": "MAT-SD-015",
+          "quantidade": "112",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: VA02 - Modificações",
+          "concept": "A VA02 permite ajustar ordens antes do processamento da remessa.",
+          "businessImpact": "Evita devoluções por erro de quantidade ou material errado no pedido.",
+          "brazilRule": "Alterações no cabeçalho ou itens podem disparar novo cálculo de impostos (pricing redetermination)."
+      }
   },
   {
-    "id": "M053-VA01",
-    "title": "53. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 63.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "63",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M053-VA02",
+      "title": "53. Júnior - Modificação de Ordem (VA02)",
+      "transaction": "VA02",
+      "chefeHugoDialog": "Houve uma mudança nos planos! O cliente 208016 solicitou alterar a quantidade e validar o item. Acesse a VA02 para a Ordem Padrão (OR) e atualize: Material MAT-SD-020, nova Qtd 113. Org. 1000.",
+      "successFeedback": "Modificação concluída! Manter as ordens atualizadas é vital para evitar faturamentos incorretos.",
+      "errorFeedback": "A alteração não foi processada corretamente. Revise a quantidade ou o material no formulário da VA02.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208016",
+          "material": "MAT-SD-020",
+          "quantidade": "113",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: VA02 - Modificações",
+          "concept": "A VA02 permite ajustar ordens antes do processamento da remessa.",
+          "businessImpact": "Evita devoluções por erro de quantidade ou material errado no pedido.",
+          "brazilRule": "Alterações no cabeçalho ou itens podem disparar novo cálculo de impostos (pricing redetermination)."
+      }
   },
   {
-    "id": "M054-VA01",
-    "title": "54. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 64.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "64",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M054-VA02",
+      "title": "54. Júnior - Modificação de Ordem (VA02)",
+      "transaction": "VA02",
+      "chefeHugoDialog": "Houve uma mudança nos planos! O cliente 208015 solicitou alterar a quantidade e validar o item. Acesse a VA02 para a Ordem Padrão (OR) e atualize: Material MAT-SD-015, nova Qtd 114. Org. 1000.",
+      "successFeedback": "Modificação concluída! Manter as ordens atualizadas é vital para evitar faturamentos incorretos.",
+      "errorFeedback": "A alteração não foi processada corretamente. Revise a quantidade ou o material no formulário da VA02.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208015",
+          "material": "MAT-SD-015",
+          "quantidade": "114",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: VA02 - Modificações",
+          "concept": "A VA02 permite ajustar ordens antes do processamento da remessa.",
+          "businessImpact": "Evita devoluções por erro de quantidade ou material errado no pedido.",
+          "brazilRule": "Alterações no cabeçalho ou itens podem disparar novo cálculo de impostos (pricing redetermination)."
+      }
   },
   {
-    "id": "M055-VA01",
-    "title": "55. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 65.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "65",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M055-VA02",
+      "title": "55. Júnior - Modificação de Ordem (VA02)",
+      "transaction": "VA02",
+      "chefeHugoDialog": "Houve uma mudança nos planos! O cliente 208016 solicitou alterar a quantidade e validar o item. Acesse a VA02 para a Ordem Padrão (OR) e atualize: Material MAT-SD-020, nova Qtd 115. Org. 1000.",
+      "successFeedback": "Modificação concluída! Manter as ordens atualizadas é vital para evitar faturamentos incorretos.",
+      "errorFeedback": "A alteração não foi processada corretamente. Revise a quantidade ou o material no formulário da VA02.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208016",
+          "material": "MAT-SD-020",
+          "quantidade": "115",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: VA02 - Modificações",
+          "concept": "A VA02 permite ajustar ordens antes do processamento da remessa.",
+          "businessImpact": "Evita devoluções por erro de quantidade ou material errado no pedido.",
+          "brazilRule": "Alterações no cabeçalho ou itens podem disparar novo cálculo de impostos (pricing redetermination)."
+      }
   },
   {
-    "id": "M056-VA01",
-    "title": "56. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 66.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "66",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M056-VA02",
+      "title": "56. Júnior - Modificação de Ordem (VA02)",
+      "transaction": "VA02",
+      "chefeHugoDialog": "Houve uma mudança nos planos! O cliente 208015 solicitou adicionar um novo item de material. Acesse a VA02 para a Ordem Padrão (OR) e atualize: Material MAT-SD-015, nova Qtd 116. Org. 1000.",
+      "successFeedback": "Modificação concluída! Manter as ordens atualizadas é vital para evitar faturamentos incorretos.",
+      "errorFeedback": "A alteração não foi processada corretamente. Revise a quantidade ou o material no formulário da VA02.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208015",
+          "material": "MAT-SD-015",
+          "quantidade": "116",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: VA02 - Modificações",
+          "concept": "A VA02 permite ajustar ordens antes do processamento da remessa.",
+          "businessImpact": "Evita devoluções por erro de quantidade ou material errado no pedido.",
+          "brazilRule": "Alterações no cabeçalho ou itens podem disparar novo cálculo de impostos (pricing redetermination)."
+      }
   },
   {
-    "id": "M057-VA01",
-    "title": "57. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 67.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "67",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M057-VA02",
+      "title": "57. Júnior - Modificação de Ordem (VA02)",
+      "transaction": "VA02",
+      "chefeHugoDialog": "Houve uma mudança nos planos! O cliente 208016 solicitou adicionar um novo item de material. Acesse a VA02 para a Ordem Padrão (OR) e atualize: Material MAT-SD-020, nova Qtd 117. Org. 1000.",
+      "successFeedback": "Modificação concluída! Manter as ordens atualizadas é vital para evitar faturamentos incorretos.",
+      "errorFeedback": "A alteração não foi processada corretamente. Revise a quantidade ou o material no formulário da VA02.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208016",
+          "material": "MAT-SD-020",
+          "quantidade": "117",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: VA02 - Modificações",
+          "concept": "A VA02 permite ajustar ordens antes do processamento da remessa.",
+          "businessImpact": "Evita devoluções por erro de quantidade ou material errado no pedido.",
+          "brazilRule": "Alterações no cabeçalho ou itens podem disparar novo cálculo de impostos (pricing redetermination)."
+      }
   },
   {
-    "id": "M058-VA01",
-    "title": "58. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 68.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "68",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M058-VA02",
+      "title": "58. Júnior - Modificação de Ordem (VA02)",
+      "transaction": "VA02",
+      "chefeHugoDialog": "Houve uma mudança nos planos! O cliente 208015 solicitou adicionar um novo item de material. Acesse a VA02 para a Ordem Padrão (OR) e atualize: Material MAT-SD-015, nova Qtd 118. Org. 1000.",
+      "successFeedback": "Modificação concluída! Manter as ordens atualizadas é vital para evitar faturamentos incorretos.",
+      "errorFeedback": "A alteração não foi processada corretamente. Revise a quantidade ou o material no formulário da VA02.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208015",
+          "material": "MAT-SD-015",
+          "quantidade": "118",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: VA02 - Modificações",
+          "concept": "A VA02 permite ajustar ordens antes do processamento da remessa.",
+          "businessImpact": "Evita devoluções por erro de quantidade ou material errado no pedido.",
+          "brazilRule": "Alterações no cabeçalho ou itens podem disparar novo cálculo de impostos (pricing redetermination)."
+      }
   },
   {
-    "id": "M059-VA01",
-    "title": "59. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 69.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "69",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M059-VA02",
+      "title": "59. Júnior - Modificação de Ordem (VA02)",
+      "transaction": "VA02",
+      "chefeHugoDialog": "Houve uma mudança nos planos! O cliente 208016 solicitou adicionar um novo item de material. Acesse a VA02 para a Ordem Padrão (OR) e atualize: Material MAT-SD-020, nova Qtd 119. Org. 1000.",
+      "successFeedback": "Modificação concluída! Manter as ordens atualizadas é vital para evitar faturamentos incorretos.",
+      "errorFeedback": "A alteração não foi processada corretamente. Revise a quantidade ou o material no formulário da VA02.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208016",
+          "material": "MAT-SD-020",
+          "quantidade": "119",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: VA02 - Modificações",
+          "concept": "A VA02 permite ajustar ordens antes do processamento da remessa.",
+          "businessImpact": "Evita devoluções por erro de quantidade ou material errado no pedido.",
+          "brazilRule": "Alterações no cabeçalho ou itens podem disparar novo cálculo de impostos (pricing redetermination)."
+      }
   },
   {
-    "id": "M060-VA01",
-    "title": "60. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 70.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "70",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M060-VA02",
+      "title": "60. Júnior - Modificação de Ordem (VA02)",
+      "transaction": "VA02",
+      "chefeHugoDialog": "Houve uma mudança nos planos! O cliente 208015 solicitou adicionar um novo item de material. Acesse a VA02 para a Ordem Padrão (OR) e atualize: Material MAT-SD-015, nova Qtd 120. Org. 1000.",
+      "successFeedback": "Modificação concluída! Manter as ordens atualizadas é vital para evitar faturamentos incorretos.",
+      "errorFeedback": "A alteração não foi processada corretamente. Revise a quantidade ou o material no formulário da VA02.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208015",
+          "material": "MAT-SD-015",
+          "quantidade": "120",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: VA02 - Modificações",
+          "concept": "A VA02 permite ajustar ordens antes do processamento da remessa.",
+          "businessImpact": "Evita devoluções por erro de quantidade ou material errado no pedido.",
+          "brazilRule": "Alterações no cabeçalho ou itens podem disparar novo cálculo de impostos (pricing redetermination)."
+      }
   },
   {
-    "id": "M061-VA01",
-    "title": "61. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 71.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "71",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M061-VA02-PRC",
+      "title": "61. Júnior - Precificação e Condições (PR00)",
+      "transaction": "VA02",
+      "chefeHugoDialog": "A equipe comercial da AAM LOGÍSTICA precisa aplicar a condição PR00 (Preço Base). Valide os dados da Ordem (OR) para o cliente 208015, Material MAT-SD-015, Qtd 131. Garanta a Org. Vendas 1000.",
+      "successFeedback": "Condição de preço aplicada com sucesso! A margem de lucro da operação está garantida.",
+      "errorFeedback": "Erro na precificação. Verifique se a condição e os dados da ordem estão consistentes.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208015",
+          "material": "MAT-SD-015",
+          "quantidade": "131",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: Precificação - PR00",
+          "concept": "O esquema de cálculo (Pricing Procedure) organiza como os preços e descontos são somados.",
+          "businessImpact": "Erros aqui impactam diretamente o lucro e a base de cálculo dos impostos.",
+          "brazilRule": "No Brasil, o IPI e ICMS dependem do valor líquido da mercadoria definido nestas condições."
+      }
   },
   {
-    "id": "M062-VA01",
-    "title": "62. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 72.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "72",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M062-VA02-PRC",
+      "title": "62. Júnior - Precificação e Condições (PR00)",
+      "transaction": "VA02",
+      "chefeHugoDialog": "A equipe comercial da AAM LOGÍSTICA precisa aplicar a condição PR00 (Preço Base). Valide os dados da Ordem (OR) para o cliente 208018, Material MAT-SD-015, Qtd 132. Garanta a Org. Vendas 1000.",
+      "successFeedback": "Condição de preço aplicada com sucesso! A margem de lucro da operação está garantida.",
+      "errorFeedback": "Erro na precificação. Verifique se a condição e os dados da ordem estão consistentes.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208018",
+          "material": "MAT-SD-015",
+          "quantidade": "132",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: Precificação - PR00",
+          "concept": "O esquema de cálculo (Pricing Procedure) organiza como os preços e descontos são somados.",
+          "businessImpact": "Erros aqui impactam diretamente o lucro e a base de cálculo dos impostos.",
+          "brazilRule": "No Brasil, o IPI e ICMS dependem do valor líquido da mercadoria definido nestas condições."
+      }
   },
   {
-    "id": "M063-VA01",
-    "title": "63. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 73.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "73",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M063-VA02-PRC",
+      "title": "63. Júnior - Precificação e Condições (PR00)",
+      "transaction": "VA02",
+      "chefeHugoDialog": "A equipe comercial da AAM LOGÍSTICA precisa aplicar a condição PR00 (Preço Base). Valide os dados da Ordem (OR) para o cliente 208015, Material MAT-SD-015, Qtd 133. Garanta a Org. Vendas 1000.",
+      "successFeedback": "Condição de preço aplicada com sucesso! A margem de lucro da operação está garantida.",
+      "errorFeedback": "Erro na precificação. Verifique se a condição e os dados da ordem estão consistentes.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208015",
+          "material": "MAT-SD-015",
+          "quantidade": "133",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: Precificação - PR00",
+          "concept": "O esquema de cálculo (Pricing Procedure) organiza como os preços e descontos são somados.",
+          "businessImpact": "Erros aqui impactam diretamente o lucro e a base de cálculo dos impostos.",
+          "brazilRule": "No Brasil, o IPI e ICMS dependem do valor líquido da mercadoria definido nestas condições."
+      }
   },
   {
-    "id": "M064-VA01",
-    "title": "64. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 74.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "74",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M064-VA02-PRC",
+      "title": "64. Júnior - Precificação e Condições (PR00)",
+      "transaction": "VA02",
+      "chefeHugoDialog": "A equipe comercial da AAM LOGÍSTICA precisa aplicar a condição PR00 (Preço Base). Valide os dados da Ordem (OR) para o cliente 208018, Material MAT-SD-015, Qtd 134. Garanta a Org. Vendas 1000.",
+      "successFeedback": "Condição de preço aplicada com sucesso! A margem de lucro da operação está garantida.",
+      "errorFeedback": "Erro na precificação. Verifique se a condição e os dados da ordem estão consistentes.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208018",
+          "material": "MAT-SD-015",
+          "quantidade": "134",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: Precificação - PR00",
+          "concept": "O esquema de cálculo (Pricing Procedure) organiza como os preços e descontos são somados.",
+          "businessImpact": "Erros aqui impactam diretamente o lucro e a base de cálculo dos impostos.",
+          "brazilRule": "No Brasil, o IPI e ICMS dependem do valor líquido da mercadoria definido nestas condições."
+      }
   },
   {
-    "id": "M065-VA01",
-    "title": "65. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 75.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "75",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M065-VA02-PRC",
+      "title": "65. Júnior - Precificação e Condições (PR00)",
+      "transaction": "VA02",
+      "chefeHugoDialog": "A equipe comercial da AAM LOGÍSTICA precisa aplicar a condição PR00 (Preço Base). Valide os dados da Ordem (OR) para o cliente 208015, Material MAT-SD-015, Qtd 135. Garanta a Org. Vendas 1000.",
+      "successFeedback": "Condição de preço aplicada com sucesso! A margem de lucro da operação está garantida.",
+      "errorFeedback": "Erro na precificação. Verifique se a condição e os dados da ordem estão consistentes.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208015",
+          "material": "MAT-SD-015",
+          "quantidade": "135",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: Precificação - PR00",
+          "concept": "O esquema de cálculo (Pricing Procedure) organiza como os preços e descontos são somados.",
+          "businessImpact": "Erros aqui impactam diretamente o lucro e a base de cálculo dos impostos.",
+          "brazilRule": "No Brasil, o IPI e ICMS dependem do valor líquido da mercadoria definido nestas condições."
+      }
   },
   {
-    "id": "M066-VA01",
-    "title": "66. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 76.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "76",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M066-VA02-PRC",
+      "title": "66. Júnior - Precificação e Condições (K007)",
+      "transaction": "VA02",
+      "chefeHugoDialog": "A equipe comercial da AAM LOGÍSTICA precisa aplicar a condição K007 (Desconto %). Valide os dados da Ordem (OR) para o cliente 208018, Material MAT-SD-015, Qtd 136. Garanta a Org. Vendas 1000.",
+      "successFeedback": "Condição de preço aplicada com sucesso! A margem de lucro da operação está garantida.",
+      "errorFeedback": "Erro na precificação. Verifique se a condição e os dados da ordem estão consistentes.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208018",
+          "material": "MAT-SD-015",
+          "quantidade": "136",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: Precificação - K007",
+          "concept": "O esquema de cálculo (Pricing Procedure) organiza como os preços e descontos são somados.",
+          "businessImpact": "Erros aqui impactam diretamente o lucro e a base de cálculo dos impostos.",
+          "brazilRule": "No Brasil, o IPI e ICMS dependem do valor líquido da mercadoria definido nestas condições."
+      }
   },
   {
-    "id": "M067-VA01",
-    "title": "67. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 77.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "77",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M067-VA02-PRC",
+      "title": "67. Júnior - Precificação e Condições (K007)",
+      "transaction": "VA02",
+      "chefeHugoDialog": "A equipe comercial da AAM LOGÍSTICA precisa aplicar a condição K007 (Desconto %). Valide os dados da Ordem (OR) para o cliente 208015, Material MAT-SD-015, Qtd 137. Garanta a Org. Vendas 1000.",
+      "successFeedback": "Condição de preço aplicada com sucesso! A margem de lucro da operação está garantida.",
+      "errorFeedback": "Erro na precificação. Verifique se a condição e os dados da ordem estão consistentes.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208015",
+          "material": "MAT-SD-015",
+          "quantidade": "137",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: Precificação - K007",
+          "concept": "O esquema de cálculo (Pricing Procedure) organiza como os preços e descontos são somados.",
+          "businessImpact": "Erros aqui impactam diretamente o lucro e a base de cálculo dos impostos.",
+          "brazilRule": "No Brasil, o IPI e ICMS dependem do valor líquido da mercadoria definido nestas condições."
+      }
   },
   {
-    "id": "M068-VA01",
-    "title": "68. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 78.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "78",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M068-VA02-PRC",
+      "title": "68. Júnior - Precificação e Condições (K007)",
+      "transaction": "VA02",
+      "chefeHugoDialog": "A equipe comercial da AAM LOGÍSTICA precisa aplicar a condição K007 (Desconto %). Valide os dados da Ordem (OR) para o cliente 208018, Material MAT-SD-015, Qtd 138. Garanta a Org. Vendas 1000.",
+      "successFeedback": "Condição de preço aplicada com sucesso! A margem de lucro da operação está garantida.",
+      "errorFeedback": "Erro na precificação. Verifique se a condição e os dados da ordem estão consistentes.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208018",
+          "material": "MAT-SD-015",
+          "quantidade": "138",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: Precificação - K007",
+          "concept": "O esquema de cálculo (Pricing Procedure) organiza como os preços e descontos são somados.",
+          "businessImpact": "Erros aqui impactam diretamente o lucro e a base de cálculo dos impostos.",
+          "brazilRule": "No Brasil, o IPI e ICMS dependem do valor líquido da mercadoria definido nestas condições."
+      }
   },
   {
-    "id": "M069-VA01",
-    "title": "69. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 79.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "79",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M069-VA02-PRC",
+      "title": "69. Júnior - Precificação e Condições (K007)",
+      "transaction": "VA02",
+      "chefeHugoDialog": "A equipe comercial da AAM LOGÍSTICA precisa aplicar a condição K007 (Desconto %). Valide os dados da Ordem (OR) para o cliente 208015, Material MAT-SD-015, Qtd 139. Garanta a Org. Vendas 1000.",
+      "successFeedback": "Condição de preço aplicada com sucesso! A margem de lucro da operação está garantida.",
+      "errorFeedback": "Erro na precificação. Verifique se a condição e os dados da ordem estão consistentes.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208015",
+          "material": "MAT-SD-015",
+          "quantidade": "139",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: Precificação - K007",
+          "concept": "O esquema de cálculo (Pricing Procedure) organiza como os preços e descontos são somados.",
+          "businessImpact": "Erros aqui impactam diretamente o lucro e a base de cálculo dos impostos.",
+          "brazilRule": "No Brasil, o IPI e ICMS dependem do valor líquido da mercadoria definido nestas condições."
+      }
   },
   {
-    "id": "M070-VA01",
-    "title": "70. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 80.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "80",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M070-VA02-PRC",
+      "title": "70. Júnior - Precificação e Condições (K007)",
+      "transaction": "VA02",
+      "chefeHugoDialog": "A equipe comercial da AAM LOGÍSTICA precisa aplicar a condição K007 (Desconto %). Valide os dados da Ordem (OR) para o cliente 208018, Material MAT-SD-015, Qtd 140. Garanta a Org. Vendas 1000.",
+      "successFeedback": "Condição de preço aplicada com sucesso! A margem de lucro da operação está garantida.",
+      "errorFeedback": "Erro na precificação. Verifique se a condição e os dados da ordem estão consistentes.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208018",
+          "material": "MAT-SD-015",
+          "quantidade": "140",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: Precificação - K007",
+          "concept": "O esquema de cálculo (Pricing Procedure) organiza como os preços e descontos são somados.",
+          "businessImpact": "Erros aqui impactam diretamente o lucro e a base de cálculo dos impostos.",
+          "brazilRule": "No Brasil, o IPI e ICMS dependem do valor líquido da mercadoria definido nestas condições."
+      }
   },
   {
-    "id": "M071-VA01",
-    "title": "71. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 81.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "81",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M071-VA01-ATP",
+      "title": "71. Júnior - Verificação ATP (Disponibilidade)",
+      "transaction": "VA01",
+      "chefeHugoDialog": "O cliente 208016 precisa de urgência! Verifique a disponibilidade (ATP) para o material MAT-SD-030 na quantidade 151. Processe a Ordem (OR) na Org. 1000 e Canal 10.",
+      "successFeedback": "Verificação concluída! O estoque foi confirmado e a data de entrega está garantida no sistema.",
+      "errorFeedback": "Erro no ATP. Verifique se a quantidade solicitada e o material estão corretos no formulário.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208016",
+          "material": "MAT-SD-030",
+          "quantidade": "151",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: ATP (Available to Promise)",
+          "concept": "O ATP verifica se há estoque físico ou ordens de produção para atender o pedido.",
+          "businessImpact": "Evita promessas de entrega falsas que geram insatisfação no cliente.",
+          "brazilRule": "O local de expedição (Shipping Point) deve estar corretamente configurado para que o ATP funcione."
+      }
   },
   {
-    "id": "M072-VA01",
-    "title": "72. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 82.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "82",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M072-VA01-ATP",
+      "title": "72. Júnior - Verificação ATP (Disponibilidade)",
+      "transaction": "VA01",
+      "chefeHugoDialog": "O cliente 208015 precisa de urgência! Verifique a disponibilidade (ATP) para o material MAT-SD-030 na quantidade 152. Processe a Ordem (OR) na Org. 1000 e Canal 10.",
+      "successFeedback": "Verificação concluída! O estoque foi confirmado e a data de entrega está garantida no sistema.",
+      "errorFeedback": "Erro no ATP. Verifique se a quantidade solicitada e o material estão corretos no formulário.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208015",
+          "material": "MAT-SD-030",
+          "quantidade": "152",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: ATP (Available to Promise)",
+          "concept": "O ATP verifica se há estoque físico ou ordens de produção para atender o pedido.",
+          "businessImpact": "Evita promessas de entrega falsas que geram insatisfação no cliente.",
+          "brazilRule": "O local de expedição (Shipping Point) deve estar corretamente configurado para que o ATP funcione."
+      }
   },
   {
-    "id": "M073-VA01",
-    "title": "73. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 83.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "83",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M073-VA01-ATP",
+      "title": "73. Júnior - Verificação ATP (Disponibilidade)",
+      "transaction": "VA01",
+      "chefeHugoDialog": "O cliente 208016 precisa de urgência! Verifique a disponibilidade (ATP) para o material MAT-SD-030 na quantidade 153. Processe a Ordem (OR) na Org. 1000 e Canal 10.",
+      "successFeedback": "Verificação concluída! O estoque foi confirmado e a data de entrega está garantida no sistema.",
+      "errorFeedback": "Erro no ATP. Verifique se a quantidade solicitada e o material estão corretos no formulário.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208016",
+          "material": "MAT-SD-030",
+          "quantidade": "153",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: ATP (Available to Promise)",
+          "concept": "O ATP verifica se há estoque físico ou ordens de produção para atender o pedido.",
+          "businessImpact": "Evita promessas de entrega falsas que geram insatisfação no cliente.",
+          "brazilRule": "O local de expedição (Shipping Point) deve estar corretamente configurado para que o ATP funcione."
+      }
   },
   {
-    "id": "M074-VA01",
-    "title": "74. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 84.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "84",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M074-VA01-ATP",
+      "title": "74. Júnior - Verificação ATP (Disponibilidade)",
+      "transaction": "VA01",
+      "chefeHugoDialog": "O cliente 208015 precisa de urgência! Verifique a disponibilidade (ATP) para o material MAT-SD-030 na quantidade 154. Processe a Ordem (OR) na Org. 1000 e Canal 10.",
+      "successFeedback": "Verificação concluída! O estoque foi confirmado e a data de entrega está garantida no sistema.",
+      "errorFeedback": "Erro no ATP. Verifique se a quantidade solicitada e o material estão corretos no formulário.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208015",
+          "material": "MAT-SD-030",
+          "quantidade": "154",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: ATP (Available to Promise)",
+          "concept": "O ATP verifica se há estoque físico ou ordens de produção para atender o pedido.",
+          "businessImpact": "Evita promessas de entrega falsas que geram insatisfação no cliente.",
+          "brazilRule": "O local de expedição (Shipping Point) deve estar corretamente configurado para que o ATP funcione."
+      }
   },
   {
-    "id": "M075-VA01",
-    "title": "75. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 85.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "85",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M075-VA01-ATP",
+      "title": "75. Júnior - Verificação ATP (Disponibilidade)",
+      "transaction": "VA01",
+      "chefeHugoDialog": "O cliente 208016 precisa de urgência! Verifique a disponibilidade (ATP) para o material MAT-SD-030 na quantidade 155. Processe a Ordem (OR) na Org. 1000 e Canal 10.",
+      "successFeedback": "Verificação concluída! O estoque foi confirmado e a data de entrega está garantida no sistema.",
+      "errorFeedback": "Erro no ATP. Verifique se a quantidade solicitada e o material estão corretos no formulário.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208016",
+          "material": "MAT-SD-030",
+          "quantidade": "155",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: ATP (Available to Promise)",
+          "concept": "O ATP verifica se há estoque físico ou ordens de produção para atender o pedido.",
+          "businessImpact": "Evita promessas de entrega falsas que geram insatisfação no cliente.",
+          "brazilRule": "O local de expedição (Shipping Point) deve estar corretamente configurado para que o ATP funcione."
+      }
   },
   {
-    "id": "M076-VA01",
-    "title": "76. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 86.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "86",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M076-VA01-ATP",
+      "title": "76. Júnior - Verificação ATP (Disponibilidade)",
+      "transaction": "VA01",
+      "chefeHugoDialog": "O cliente 208015 precisa de urgência! Verifique a disponibilidade (ATP) para o material MAT-SD-030 na quantidade 156. Processe a Ordem (OR) na Org. 1000 e Canal 10.",
+      "successFeedback": "Verificação concluída! O estoque foi confirmado e a data de entrega está garantida no sistema.",
+      "errorFeedback": "Erro no ATP. Verifique se a quantidade solicitada e o material estão corretos no formulário.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208015",
+          "material": "MAT-SD-030",
+          "quantidade": "156",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: ATP (Available to Promise)",
+          "concept": "O ATP verifica se há estoque físico ou ordens de produção para atender o pedido.",
+          "businessImpact": "Evita promessas de entrega falsas que geram insatisfação no cliente.",
+          "brazilRule": "O local de expedição (Shipping Point) deve estar corretamente configurado para que o ATP funcione."
+      }
   },
   {
-    "id": "M077-VA01",
-    "title": "77. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 87.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "87",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M077-VA01-ATP",
+      "title": "77. Júnior - Verificação ATP (Disponibilidade)",
+      "transaction": "VA01",
+      "chefeHugoDialog": "O cliente 208016 precisa de urgência! Verifique a disponibilidade (ATP) para o material MAT-SD-030 na quantidade 157. Processe a Ordem (OR) na Org. 1000 e Canal 10.",
+      "successFeedback": "Verificação concluída! O estoque foi confirmado e a data de entrega está garantida no sistema.",
+      "errorFeedback": "Erro no ATP. Verifique se a quantidade solicitada e o material estão corretos no formulário.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208016",
+          "material": "MAT-SD-030",
+          "quantidade": "157",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: ATP (Available to Promise)",
+          "concept": "O ATP verifica se há estoque físico ou ordens de produção para atender o pedido.",
+          "businessImpact": "Evita promessas de entrega falsas que geram insatisfação no cliente.",
+          "brazilRule": "O local de expedição (Shipping Point) deve estar corretamente configurado para que o ATP funcione."
+      }
   },
   {
-    "id": "M078-VA01",
-    "title": "78. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 88.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "88",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M078-VA01-ATP",
+      "title": "78. Júnior - Verificação ATP (Disponibilidade)",
+      "transaction": "VA01",
+      "chefeHugoDialog": "O cliente 208015 precisa de urgência! Verifique a disponibilidade (ATP) para o material MAT-SD-030 na quantidade 158. Processe a Ordem (OR) na Org. 1000 e Canal 10.",
+      "successFeedback": "Verificação concluída! O estoque foi confirmado e a data de entrega está garantida no sistema.",
+      "errorFeedback": "Erro no ATP. Verifique se a quantidade solicitada e o material estão corretos no formulário.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208015",
+          "material": "MAT-SD-030",
+          "quantidade": "158",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: ATP (Available to Promise)",
+          "concept": "O ATP verifica se há estoque físico ou ordens de produção para atender o pedido.",
+          "businessImpact": "Evita promessas de entrega falsas que geram insatisfação no cliente.",
+          "brazilRule": "O local de expedição (Shipping Point) deve estar corretamente configurado para que o ATP funcione."
+      }
   },
   {
-    "id": "M079-VA01",
-    "title": "79. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 89.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "89",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M079-VA01-ATP",
+      "title": "79. Júnior - Verificação ATP (Disponibilidade)",
+      "transaction": "VA01",
+      "chefeHugoDialog": "O cliente 208016 precisa de urgência! Verifique a disponibilidade (ATP) para o material MAT-SD-030 na quantidade 159. Processe a Ordem (OR) na Org. 1000 e Canal 10.",
+      "successFeedback": "Verificação concluída! O estoque foi confirmado e a data de entrega está garantida no sistema.",
+      "errorFeedback": "Erro no ATP. Verifique se a quantidade solicitada e o material estão corretos no formulário.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208016",
+          "material": "MAT-SD-030",
+          "quantidade": "159",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: ATP (Available to Promise)",
+          "concept": "O ATP verifica se há estoque físico ou ordens de produção para atender o pedido.",
+          "businessImpact": "Evita promessas de entrega falsas que geram insatisfação no cliente.",
+          "brazilRule": "O local de expedição (Shipping Point) deve estar corretamente configurado para que o ATP funcione."
+      }
   },
   {
-    "id": "M080-VA01",
-    "title": "80. Júnior - Operação VA01",
-    "transaction": "VA01",
-    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 90.",
-    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "90",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA01",
-      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
+      "id": "M080-VA01-ATP",
+      "title": "80. Júnior - Verificação ATP (Disponibilidade)",
+      "transaction": "VA01",
+      "chefeHugoDialog": "O cliente 208015 precisa de urgência! Verifique a disponibilidade (ATP) para o material MAT-SD-030 na quantidade 160. Processe a Ordem (OR) na Org. 1000 e Canal 10.",
+      "successFeedback": "Verificação concluída! O estoque foi confirmado e a data de entrega está garantida no sistema.",
+      "errorFeedback": "Erro no ATP. Verifique se a quantidade solicitada e o material estão corretos no formulário.",
+      "expectedData": {
+          "tipoOrdem": "OR",
+          "orgVendas": "1000",
+          "canalDist": "10",
+          "setorAtiv": "00",
+          "cliente": "208015",
+          "material": "MAT-SD-030",
+          "quantidade": "160",
+          "incoterms": "FOB",
+          "condPagto": "ZF30"
+      },
+      "f1Help": {
+          "title": "Dica Júnior: ATP (Available to Promise)",
+          "concept": "O ATP verifica se há estoque físico ou ordens de produção para atender o pedido.",
+          "businessImpact": "Evita promessas de entrega falsas que geram insatisfação no cliente.",
+          "brazilRule": "O local de expedição (Shipping Point) deve estar corretamente configurado para que o ATP funcione."
+      }
   },
   {
     "id": "M081-VL01N",
