@@ -824,6 +824,7 @@ function SAPSDQuestApp() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [showOnboarding, setShowOnboarding] = useState(false);
+  const [showWelcomeModal, setShowWelcomeModal] = useState(false);
   const [onboardingStep, setOnboardingStep] = useState(0);
   const [activeTab, setActiveTab] = useState<"main" | "certification" | "profile" | "certificate">("main");
   const [certName, setCertName] = useState("");
