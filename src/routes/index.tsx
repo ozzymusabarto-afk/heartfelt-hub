@@ -880,18 +880,21 @@ function SAPSDQuestApp() {
   const [xp, setXp] = useState(0);
   const [completedMissions, setCompletedMissions] = useState(0);
   const [formData, setFormData] = useState({
+    // Header Data
+    customer: "",
+    poNumber: "", // Also used for partnerCategory in BP
+    paymentCond: "", // Also used for partnerFunction in BP
+    salesOrg: "",
+    distChannel: "",
+    division: "",
     orderType: "",
     orderDate: "",
-    salesOrg: "",
-    deliveryDate: "",
-    distChannel: "",
-    paymentCond: "",
-    customer: "",
-    quantity: "",
-    material: "",
     incoterms: "",
-    division: "",
-    poNumber: "",
+    // Item Data
+    material: "",
+    quantity: "",
+    plant: "1000", // Default plant
+    storageLocation: "SL01", // Default storage location
   });
   const [feedbackState, setFeedbackState] = useState<"idle" | "review" | "success" | "error">("idle");
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
@@ -1517,9 +1520,10 @@ function SAPSDQuestApp() {
     setSelectedTransaction("");
     setFormTab("header");
     setFormData({
-      orderType: "", orderDate: "", salesOrg: "", deliveryDate: "",
-      distChannel: "", paymentCond: "", customer: "", quantity: "", material: "",
-      incoterms: "", division: "", poNumber: "",
+      customer: "", poNumber: "", paymentCond: "", salesOrg: "",
+      distChannel: "", division: "", orderType: "", orderDate: "",
+      incoterms: "", material: "", quantity: "", plant: "1000",
+      storageLocation: "SL01"
     });
   };
 
@@ -2113,25 +2117,35 @@ function SAPSDQuestApp() {
                 <Target className="size-4 text-indigo-600" /> Dados do Pedido
               </h3>
               <div className="flex-1 flex flex-col min-h-0">
+                {/* Tabs UI with Indicators */}
                 <div className="flex border-b border-slate-100 mb-3 overflow-x-auto no-scrollbar shrink-0">
                   <button 
-                    className={`px-3 py-2 text-[10px] font-black uppercase tracking-wider border-b-2 transition-all ${!formTab || formTab === 'header' ? 'border-indigo-600 text-indigo-600 bg-indigo-50/30' : 'border-transparent text-slate-400 hover:text-slate-600'}`}
+                    className={`px-3 py-2 text-[10px] font-black uppercase tracking-wider border-b-2 transition-all flex items-center gap-2 ${(!formTab || formTab === 'header') ? 'border-indigo-600 text-indigo-600 bg-indigo-50/30' : 'border-transparent text-slate-400 hover:text-slate-600'}`}
                     onClick={() => setFormTab('header')}
                   >
-                    Cabeçalho
+                    1. Cabeçalho / Parceiro
+                    {formData.customer && formData.salesOrg && (
+                      <div className="size-1.5 rounded-full bg-emerald-500" />
+                    )}
                   </button>
-                  <button 
-                    className={`px-3 py-2 text-[10px] font-black uppercase tracking-wider border-b-2 transition-all ${formTab === 'items' ? 'border-indigo-600 text-indigo-600 bg-indigo-50/30' : 'border-transparent text-slate-400 hover:text-slate-600'}`}
-                    onClick={() => setFormTab('items')}
-                  >
-                    Itens
-                  </button>
+                  
+                  {/* Item tab logic: enabled if mission has material or is standard VA01 */}
+                  {(currentMission.expectedData.material || selectedTransaction.startsWith("VA")) && (
+                    <button 
+                      className={`px-3 py-2 text-[10px] font-black uppercase tracking-wider border-b-2 transition-all flex items-center gap-2 ${formTab === 'items' ? 'border-indigo-600 text-indigo-600 bg-indigo-50/30' : 'border-transparent text-slate-400 hover:text-slate-600'}`}
+                      onClick={() => setFormTab('items')}
+                    >
+                      2. Itens / Material
+                      {formData.material && formData.quantity && (
+                        <div className="size-1.5 rounded-full bg-emerald-500" />
+                      )}
+                    </button>
+                  )}
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 pr-1 overflow-y-auto custom-scrollbar flex-1 pb-2">
                   {(() => {
                     let fieldsToShow: any[] = [];
-                    
                     const isHeader = !formTab || formTab === 'header';
                     const isItems = formTab === 'items';
 
@@ -2171,7 +2185,7 @@ function SAPSDQuestApp() {
                         ];
                       }
                     } else {
-                      // VA01, VA02, VA03, etc.
+                      // Standard Sales Orders (VA01, etc)
                       if (isHeader) {
                         fieldsToShow = [
                           { id: "orderType", label: "Tipo", type: "select", options: ["OR", "QT", "ZBN", "RE"] },
@@ -2188,6 +2202,8 @@ function SAPSDQuestApp() {
                         fieldsToShow = [
                           { id: "material", label: "Material", type: "select", options: ["MAT-SD-015", "MAT-SD-020", "MAT-SD-099"] },
                           { id: "quantity", label: "Quantidade" },
+                          { id: "plant", label: "Centro / Plant", type: "select", options: ["1000", "2000"] },
+                          { id: "storageLocation", label: "Depósito", type: "select", options: ["SL01", "SL02"] },
                         ];
                       }
                     }
@@ -2246,7 +2262,6 @@ function SAPSDQuestApp() {
                     className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl h-10 gap-2 shadow-md shadow-indigo-100"
                     onClick={() => {
                       toast.success("Relatório executado com sucesso!");
-                      // In a real app, this would show a table modal
                     }}
                   >
                     EXECUTAR RELATÓRIO <Search className="size-4" />
