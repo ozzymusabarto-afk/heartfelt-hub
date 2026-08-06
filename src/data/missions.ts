@@ -30,7 +30,7 @@ export const MISSIONS: Mission[] = [
     title: "19. Consulta de Parceiro Comercial (BP - Business Partner)",
     transaction: "BP",
     chefeHugoDialog: "Antes de fechar um grande contrato, precisamos validar se o cliente NORTEL DISTRIBUIDORA (Cód: 208016) possui a função de cliente SD ativa na Área de Vendas 1000/10/00. Acesse a transação BP para conferir.",
-    successFeedback: "Parceiro verificado com sucesso! Os dados fiscais (CNPJ e IE) e a área de vendas 1000/10/00 do cliente NORTEL DISTRIBUIDORA estão ativos no sistema.",
+    successFeedback: "Parceiro Comercial 208016 verificado com sucesso no cadastro do SAP S/4HANA! Dados fiscais e áreas de vendas validados.",
     errorFeedback: "Selecione a transação 'BP' e verifique os dados do cliente '208016'.",
     expectedData: {
       tipoOrdem: "OR",
@@ -55,7 +55,7 @@ export const MISSIONS: Mission[] = [
     title: "20. Determinação de Funções de Parceiro",
     transaction: "BP",
     chefeHugoDialog: "A AAM LOGÍSTICA LTDA (Cód: 208015) comprou um lote de produtos, mas solicitou que a entrega seja feita na filial de centro de distribuição (Recebedor da Mercadoria). Valide a função de parceiro na transação BP.",
-    successFeedback: "Função de parceiro validada! A regra de determinação atribuiu o endereço de entrega correto sem alterar o cliente faturado.",
+    successFeedback: "Parceiro Comercial 208015 verificado com sucesso no cadastro do SAP S/4HANA! Dados fiscais e áreas de vendas validados.",
     errorFeedback: "Verifique os dados da transação 'BP' e do cliente '208015'.",
     expectedData: {
       tipoOrdem: "OR",
@@ -78,10 +78,10 @@ export const MISSIONS: Mission[] = [
   {
     id: "M21-V02-INCOMP",
     title: "21. Análise de Log de Ordens Incompletas (V.02)",
-    transaction: "VA01",
+    transaction: "V.02",
     chefeHugoDialog: "Uma ordem criada na VA01 ficou parada no sistema porque o vendedor esqueceu de preencher o Incoterm. Execute a análise na V.02 para identificar a pendência e liberar o documento.",
-    successFeedback: "Ordem localizada e corrigida com sucesso! O esquema de incompletude foi atendido e a ordem liberada para remessa.",
-    errorFeedback: "Atenção ao processo de correção! Verifique os dados do cliente '208015' e preencha os Incoterms como 'FOB'.",
+    successFeedback: "Relatório gerado com sucesso! Nenhuma pendência crítica encontrada para os filtros selecionados.",
+    errorFeedback: "Atenção ao processo de correção! Verifique os dados do cliente '208015' e utilize a transação V.02.",
     expectedData: {
       tipoOrdem: "OR",
       orgVendas: "1000",
@@ -103,9 +103,9 @@ export const MISSIONS: Mission[] = [
   {
     id: "M22-VA05-LISTA",
     title: "22. Relatório de Lista de Ordens de Venda (VA05)",
-    transaction: "VA01",
+    transaction: "VA05",
     chefeHugoDialog: "O Gerente Comercial solicitou uma posição de todas as ordens de venda em aberto da AAM Corp para o cliente TECH BRASIL S.A. (Cód: 208017). Acesse o relatório da VA05.",
-    successFeedback: "Relatório gerado com sucesso! A lista de ordens da carteira do cliente foi exportada com status de faturamento.",
+    successFeedback: "Relatório gerado com sucesso! Nenhuma pendência crítica encontrada para os filtros selecionados.",
     errorFeedback: "Confirme a seleção para o cliente '208017' para listar as ordens correspondentes na VA05.",
     expectedData: {
       tipoOrdem: "OR",
@@ -128,9 +128,9 @@ export const MISSIONS: Mission[] = [
   {
     id: "M23-VA02-ALTERAR",
     title: "23. Modificar Ordem de Venda (VA02)",
-    transaction: "VA01",
+    transaction: "VA02",
     chefeHugoDialog: "O cliente AAM LOGÍSTICA LTDA (Cód: 208015) pediu para alterar a condição de pagamento de 30 dias (ZF30) para 60 dias (ZF60) antes do faturamento. Acesse a VA02 e efetue a alteração.",
-    successFeedback: "Ordem alterada com sucesso! As novas datas de vencimento financeiro foram recalculadas para o faturamento.",
+    successFeedback: "Alteração/Auditoria da Ordem 450000000 realizada com sucesso no sistema.",
     errorFeedback: "Na transação VA02, altere a Condição de Pagamento para 'ZF60'.",
     expectedData: {
       tipoOrdem: "OR",
@@ -153,9 +153,9 @@ export const MISSIONS: Mission[] = [
   {
     id: "M24-VA03-EXIBIR",
     title: "24. Auditar Fluxo do Documento (VA03)",
-    transaction: "VA01",
+    transaction: "VA03",
     chefeHugoDialog: "O departamento de auditoria quer verificar a rastreabilidade do pedido do cliente NORTEL DISTRIBUIDORA (Cód: 208016). Acesse a VA03 e exiba o Fluxo do Documento.",
-    successFeedback: "Auditoria concluída! O fluxo completo (Ordem -> Remessa -> Fatura -> Documento Contábil) foi verificado sem inconsistências.",
+    successFeedback: "Alteração/Auditoria da Ordem 450000000 realizada com sucesso no sistema.",
     errorFeedback: "Selecione a transação de exibição VA03 e confirme a verificação da ordem para o cliente '208016'.",
     expectedData: {
       tipoOrdem: "OR",
@@ -480,7 +480,7 @@ export const MISSIONS: Mission[] = [
     title: "13. Criar Remessa de Entrega Standard",
     transaction: "VL01N",
     chefeHugoDialog: "A ordem do cliente AAM LOGÍSTICA LTDA (Cód: 208015) foi aprovada! Acesse a transação VL01N para gerar a Remessa de Entrega a partir do Centro Fornecedor 1000 (SP).",
-    successFeedback: "Remessa gerada com sucesso! O documento de expedição foi enviado para a equipe de separação (Picking) no armazém.",
+    successFeedback: "Documento de Remessa 800000000 criado com sucesso para o Pedido 450000000!",
     errorFeedback: "Atenção aos dados de expedição! Certifique-se de selecionar a transação 'VL01N', usar o Centro '1000' e o cliente '208015'.",
     expectedData: {
       tipoOrdem: "OR",
@@ -505,7 +505,7 @@ export const MISSIONS: Mission[] = [
     title: "14. Remessa Parcial por Corte de Estoque",
     transaction: "VL01N",
     chefeHugoDialog: "Atenção, o armazém de SP só possui 50 unidades do MAT-SD-015 em estoque para o cliente NORTEL DISTRIBUIDORA (Cód: 208016). Gere a remessa parcial ajustando a quantidade fornecida para 50.",
-    successFeedback: "Remessa parcial registrada! O SAP manteve o saldo restante na ordem de venda aberto para posterior fornecimento.",
+    successFeedback: "Documento de Remessa 800000000 criado com sucesso para o Pedido 450000000!",
     errorFeedback: "Para a remessa parcial da NORTEL, ajuste o campo Quantidade no pedido/fornecimento para '50'.",
     expectedData: {
       tipoOrdem: "OR",
@@ -530,7 +530,7 @@ export const MISSIONS: Mission[] = [
     title: "15. Tentativa de Expedição com Bloqueio Financeiro",
     transaction: "VL01N",
     chefeHugoDialog: "O cliente TECH BRASIL S.A. (Cód: 208017) solicita o envio urgente do material MAT-SD-020, mas o pedido está retido por crédito. Tente gerar a remessa para verificar a mensagem de trava do SAP.",
-    successFeedback: "Trava de segurança acionada! O SAP impediu a geração da remessa devido ao bloqueio de crédito ativo no departamento financeiro.",
+    successFeedback: "Documento de Remessa 800000000 criado com sucesso para o Pedido 450000000!",
     errorFeedback: "Selecione o cliente '208017' e confirme os dados para visualizar a validação de trava de crédito da transação.",
     expectedData: {
       tipoOrdem: "OR",
@@ -555,7 +555,7 @@ export const MISSIONS: Mission[] = [
     title: "16. Faturamento Standard de Remessa (NF-e)",
     transaction: "VF01",
     chefeHugoDialog: "A remessa da AAM LOGÍSTICA LTDA (Cód: 208015) foi entregue! Transição para a VF01 para processar o faturamento e emitir a Nota Fiscal Eletrônica (NF-e).",
-    successFeedback: "Fatura gerada com sucesso! A NF-e foi autorizada pela SEFAZ e o documento contábil de Contas a Receber foi criado no módulo FI.",
+    successFeedback: "Fatura/NF-e 900000000 emitida com sucesso para o documento 800000000!",
     errorFeedback: "Para faturar a operação standard, selecione a transação 'VF01' e confirme os dados da ordem para o cliente '208015'.",
     expectedData: {
       tipoOrdem: "OR",
@@ -580,7 +580,7 @@ export const MISSIONS: Mission[] = [
     title: "17. Cancelamento / Estorno de Fatura (VF11)",
     transaction: "VF01",
     chefeHugoDialog: "Atenção! Houve divergência no valor do frete negociado com a NORTEL DISTRIBUIDORA (Cód: 208016). Crie o estorno do faturamento na transação de cancelamento (VF11).",
-    successFeedback: "Fatura cancelada com sucesso! A Nota Fiscal foi estornada na SEFAZ e o título financeiro foi baixado.",
+    successFeedback: "Fatura/NF-e 900000000 emitida com sucesso para o documento 800000000!",
     errorFeedback: "Atenção à operação de cancelamento! Verifique a seleção da transação e os dados do cliente '208016'.",
     expectedData: {
       tipoOrdem: "OR",
@@ -605,7 +605,7 @@ export const MISSIONS: Mission[] = [
     title: "18. Faturamento Direct Drive de Serviços (NFS-e)",
     transaction: "VF01",
     chefeHugoDialog: "A consultoria técnica prestada para a TECH BRASIL S.A. (Cód: 208017) foi concluída. Processe o faturamento direto da ordem de serviços (MAT-SD-099).",
-    successFeedback: "Fatura de Serviços emitida! A Nota Fiscal de Serviços Eletrônica (NFS-e) foi integrada à Prefeitura.",
+    successFeedback: "Fatura/NF-e 900000000 emitida com sucesso para o documento 450000000!",
     errorFeedback: "Selecione o cliente '208017' e o material de serviços 'MAT-SD-099' para concluir o faturamento.",
     expectedData: {
       tipoOrdem: "OR",
