@@ -312,13 +312,25 @@ function ProfileTestModule() {
             </div>
           </div>
 
-          <Button 
-            onClick={() => setTestState("intro")}
-            variant="outline"
-            className="border-slate-200 text-slate-500 font-bold rounded-xl"
-          >
-            REFAZER TESTE
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Button 
+              onClick={() => setTestState("intro")}
+              variant="outline"
+              className="border-slate-200 text-slate-500 font-bold rounded-xl h-12 px-6"
+            >
+              REFAZER TESTE
+            </Button>
+            <Button 
+              onClick={() => {
+                const text = `Meu perfil SAP SD é: ${metadata.title} (${results[0].percentage}%). Descubra o seu no SAP SD Quest!`;
+                navigator.clipboard.writeText(text);
+                toast.success("Resultado copiado para a área de transferência!");
+              }}
+              className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl h-12 px-6 gap-2"
+            >
+              <Download className="size-4" /> COMPARTILHAR RESULTADO
+            </Button>
+          </div>
         </Card>
       </div>
     );
@@ -1812,7 +1824,7 @@ function SAPSDQuestApp() {
               { id: "quick", icon: Rocket, label: "Treino Rápido", sub: "Desafios aleatórios" },
               { id: "docs", icon: BookOpen, label: "Módulos & Apostila", sub: "Estude por tópico" },
               { id: "certification", icon: FileText, label: "Simulador de Certificação", sub: "100 questões S/4HANA SD", premium: true },
-              { id: "profile", icon: BarChart3, label: "Perfil Profissional", sub: "Avaliação de competências", premium: true },
+              { id: "profile", icon: BarChart3, label: "Perfil Profissional", sub: "Avaliação de competências", premium: false },
               { id: "about", icon: HelpCircle, label: "Como Usar / Sobre", sub: "Guia e Aviso Legal", action: openOnboarding },
               { id: "premium", icon: Crown, label: "Modos Premium", sub: "Recursos exclusivos" },
               { id: "stats", icon: BarChart3, label: "Estatísticas", sub: "Seu desempenho" },
