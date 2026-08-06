@@ -857,6 +857,7 @@ function SAPSDQuestApp() {
   const [onboardingStep, setOnboardingStep] = useState(0);
   const [activeTab, setActiveTab] = useState<"main" | "certification" | "profile" | "certificate" | "quick" | "docs" | "stats" | "achievements" | "settings">("main");
   const [certName, setCertName] = useState("");
+  const [formTab, setFormTab] = useState<'header' | 'items'>('header');
   const certificateRef = useRef<HTMLDivElement>(null);
   const [selectedModule, setSelectedModule] = useState<SAPModule | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
