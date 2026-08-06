@@ -731,7 +731,7 @@ function SAPSDQuestApp() {
   };
 
   const nextMission = () => {
-    const nextIdx = getRandomMissionIndex(currentMissionIndex, reinforcementQueue);
+    const nextIdx = getRandomMissionIndex(currentMissionIndex, reinforcementQueue, completedMissions);
     let nextM = missions[nextIdx] || missions[0];
     
     // If it's a reinforced mission, randomize its data
