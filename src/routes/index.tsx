@@ -32,12 +32,55 @@ export const Route = createFileRoute("/")({
 });
 
 // Correct data is now handled per mission from missions.ts
-const getRandomMissionIndex = (excludeIndex?: number) => {
+const getRandomMissionIndex = (excludeIndex?: number, reinforcementQueue: string[] = []) => {
+  // If there's a mission in the reinforcement queue, and it's not the same as the current one,
+  // we have a chance to pick it (spaced repetition)
+  if (reinforcementQueue.length > 0 && Math.random() > 0.4) {
+    const queueIndex = missions.findIndex(m => m.id === reinforcementQueue[0]);
+    if (queueIndex !== -1 && queueIndex !== excludeIndex) {
+      return queueIndex;
+    }
+  }
+
   let newIndex;
   do {
     newIndex = Math.floor(Math.random() * missions.length);
   } while (newIndex === excludeIndex && missions.length > 1);
   return newIndex;
+};
+
+const randomizeMissionData = (mission: Mission): Mission => {
+  const materials = ["MAT-SD-015", "MAT-SD-020", "MAT-SD-030", "MAT-SD-045"];
+  const incoterms = ["FOB", "CIF"];
+  const paymentConds = ["ZF30", "ZF60", "ZB00"];
+  const quantities = ["10", "25", "50", "80", "100", "150"];
+
+  const randomValue = (arr: string[]) => arr[Math.floor(Math.random() * arr.length)];
+  
+  // Create a deep copy to avoid mutating the original mission
+  const newMission = JSON.parse(JSON.stringify(mission));
+  
+  newMission.expectedData.material = randomValue(materials);
+  newMission.expectedData.incoterms = randomValue(incoterms);
+  newMission.expectedData.condPagto = randomValue(paymentConds);
+  newMission.expectedData.quantidade = randomValue(quantities);
+  
+  // Randomize customer from master if not BP
+  if (mission.transaction !== "BP") {
+    const customers = ["208015", "208016", "208017", "208018", "208019"];
+    newMission.expectedData.cliente = randomValue(customers);
+  }
+
+  // Update dialog text with new values
+  newMission.chefeHugoDialog = newMission.chefeHugoDialog
+    .replace(/\bMAT-SD-\d+\b/g, newMission.expectedData.material)
+    .replace(/\b\d+ unidades\b/g, `${newMission.expectedData.quantidade} unidades`)
+    .replace(/\b\d+ peças\b/g, `${newMission.expectedData.quantidade} peças`)
+    .replace(/\bfrete \w+\b/g, `frete ${newMission.expectedData.incoterms}`)
+    .replace(/\bCondição \w+\b/g, `Condição ${newMission.expectedData.condPagto}`)
+    .replace(/\bZF\d+\b/g, newMission.expectedData.condPagto);
+
+  return newMission;
 };
 
 function HugoAvatar({ className }: { className?: string }) {
