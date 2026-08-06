@@ -8,7 +8,8 @@ import {
   Search, Bell, Plus, MoreHorizontal, ArrowRight, Check, Menu, X,
   Gamepad2, Dices, User, UserCheck, Eye, EyeOff, LogIn,
   FileText, Undo2, ChevronDown, LogOut, ClipboardList, Timer, 
-  AlertCircle, ChevronLeft, Award, Download, Printer, UserCircle
+  AlertCircle, ChevronLeft, Award, Download, Printer, UserCircle,
+  Truck, Database, Info, Lightbulb, AlertTriangle
 } from "lucide-react";
 import { 
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area 
