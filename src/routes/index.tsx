@@ -133,6 +133,7 @@ function ProfileTestModule() {
   const currentQuestion = PROFILE_TEST_QUESTIONS[currentQuestionIndex];
 
   const handleAnswer = (profile: SAPProfile) => {
+    if (!currentQuestion) return;
     setAnswers(prev => ({ ...prev, [currentQuestion.id]: profile }));
     if (currentQuestionIndex < PROFILE_TEST_QUESTIONS.length - 1) {
       setCurrentQuestionIndex(prev => prev + 1);
