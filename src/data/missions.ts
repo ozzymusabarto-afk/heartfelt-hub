@@ -26,603 +26,4253 @@ export interface Mission {
 
 export const MISSIONS: Mission[] = [
   {
-    id: "M19-BP-CLIENTE",
-    title: "19. Consulta de Parceiro Comercial (BP - Business Partner)",
-    transaction: "BP",
-    chefeHugoDialog: "Antes de fechar um grande contrato, precisamos validar se o cliente NORTEL DISTRIBUIDORA (Cód: 208016) possui a função de cliente SD ativa na Área de Vendas 1000/10/00. Acesse a transação BP para conferir.",
-    successFeedback: "Parceiro Comercial 208016 verificado com sucesso no cadastro do SAP S/4HANA! Dados fiscais e áreas de vendas validados.",
-    errorFeedback: "Selecione a transação 'BP' e verifique os dados do cliente '208016'.",
-    expectedData: {
-      tipoOrdem: "OR",
-      orgVendas: "1000",
-      canalDist: "10",
-      setorAtiv: "00",
-      cliente: "208016",
-      material: "MAT-SD-015",
-      quantidade: "50",
-      incoterms: "FOB",
-      condPagto: "ZF30"
+    "id": "M001-BP",
+    "title": "01. Trainee - Operação BP",
+    "transaction": "BP",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar BP. Use Material MAT-SD-015 e Qtd 11.",
+    "successFeedback": "Excelente! Operação BP finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação BP. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "11",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
     },
-    f1Help: {
-      title: "Parceiro Comercial (Transação BP)",
-      concept: "Conceito central no SAP S/4HANA que unifica cadastros de Clientes, Fornecedores e Pessoas Físicas em um único ID.",
-      businessImpact: "Garante a consistência de dados entre os módulos de Vendas (SD), Compras (MM) e Financeiro (FI).",
-      brazilRule: "Valida obrigatoriamente CNPJ/CPF, Inscrição Estadual e Regime Tributário para emissão de NF-e."
+    "f1Help": {
+      "title": "Dica SAP: BP",
+      "concept": "Entenda o fluxo de BP no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
     }
   },
   {
-    id: "M20-BP-FUNCOES",
-    title: "20. Determinação de Funções de Parceiro",
-    transaction: "BP",
-    chefeHugoDialog: "A AAM LOGÍSTICA LTDA (Cód: 208015) comprou um lote de produtos, mas solicitou que a entrega seja feita na filial de centro de distribuição (Recebedor da Mercadoria). Valide a função de parceiro na transação BP.",
-    successFeedback: "Parceiro Comercial 208015 verificado com sucesso no cadastro do SAP S/4HANA! Dados fiscais e áreas de vendas validados.",
-    errorFeedback: "Verifique os dados da transação 'BP' e do cliente '208015'.",
-    expectedData: {
-      tipoOrdem: "OR",
-      orgVendas: "1000",
-      canalDist: "10",
-      setorAtiv: "00",
-      cliente: "208015",
-      material: "MAT-SD-015",
-      quantidade: "99",
-      incoterms: "FOB",
-      condPagto: "ZF30"
+    "id": "M002-BP",
+    "title": "02. Trainee - Operação BP",
+    "transaction": "BP",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar BP. Use Material MAT-SD-015 e Qtd 12.",
+    "successFeedback": "Excelente! Operação BP finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação BP. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "12",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
     },
-    f1Help: {
-      title: "Funções de Parceiro (Partner Functions)",
-      concept: "Define os papéis desempenhados na venda: Emissor (SP), Recebedor da Mercadoria (SH), Recebedor da Fatura (BP) e Pagador (PY).",
-      businessImpact: "Permite faturar para uma matriz e entregar em filiais logísticas distintas.",
-      brazilRule: "Determina o local do fato gerador do transporte e as alíquotas de ICMS interestadual."
+    "f1Help": {
+      "title": "Dica SAP: BP",
+      "concept": "Entenda o fluxo de BP no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
     }
   },
   {
-    id: "M21-V02-INCOMP",
-    title: "21. Análise de Log de Ordens Incompletas (V.02)",
-    transaction: "V.02",
-    chefeHugoDialog: "Uma ordem criada na VA01 ficou parada no sistema porque o vendedor esqueceu de preencher o Incoterm. Execute a análise na V.02 para identificar a pendência e liberar o documento.",
-    successFeedback: "Relatório gerado com sucesso! Nenhuma pendência crítica encontrada para os filtros selecionados.",
-    errorFeedback: "Atenção ao processo de correção! Verifique os dados do cliente '208015' e utilize a transação V.02.",
-    expectedData: {
-      tipoOrdem: "OR",
-      orgVendas: "1000",
-      canalDist: "10",
-      setorAtiv: "00",
-      cliente: "208015",
-      material: "MAT-SD-015",
-      quantidade: "99",
-      incoterms: "FOB",
-      condPagto: "ZF30"
+    "id": "M003-BP",
+    "title": "03. Trainee - Operação BP",
+    "transaction": "BP",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar BP. Use Material MAT-SD-015 e Qtd 13.",
+    "successFeedback": "Excelente! Operação BP finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação BP. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "13",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
     },
-    f1Help: {
-      title: "Esquema de Incompletude (Incompleteness Log)",
-      concept: "Mecanismo de controle do SAP que bloqueia documentos comercialmente incompletos.",
-      businessImpact: "Evita que pedidos sem dados essenciais (ex: condição de pagamento ou frete) sigam para expedição.",
-      brazilRule: "Impede a geração de NF-e com campos fiscais obrigatórios ausentes."
+    "f1Help": {
+      "title": "Dica SAP: BP",
+      "concept": "Entenda o fluxo de BP no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
     }
   },
   {
-    id: "M22-VA05-LISTA",
-    title: "22. Relatório de Lista de Ordens de Venda (VA05)",
-    transaction: "VA05",
-    chefeHugoDialog: "O Gerente Comercial solicitou uma posição de todas as ordens de venda em aberto da AAM Corp para o cliente TECH BRASIL S.A. (Cód: 208017). Acesse o relatório da VA05.",
-    successFeedback: "Relatório gerado com sucesso! Nenhuma pendência crítica encontrada para os filtros selecionados.",
-    errorFeedback: "Confirme a seleção para o cliente '208017' para listar as ordens correspondentes na VA05.",
-    expectedData: {
-      tipoOrdem: "OR",
-      orgVendas: "1000",
-      canalDist: "10",
-      setorAtiv: "00",
-      cliente: "208017",
-      material: "MAT-SD-020",
-      quantidade: "80",
-      incoterms: "FOB",
-      condPagto: "ZF30"
+    "id": "M004-BP",
+    "title": "04. Trainee - Operação BP",
+    "transaction": "BP",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar BP. Use Material MAT-SD-015 e Qtd 14.",
+    "successFeedback": "Excelente! Operação BP finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação BP. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "14",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
     },
-    f1Help: {
-      title: "Lista de Ordens de Venda (VA05)",
-      concept: "Relatório analítico de acompanhamento da carteira de pedidos comerciais por cliente, material ou período.",
-      businessImpact: "Oferece visibilidade sobre o volume de vendas pendentes e entregas programadas.",
-      brazilRule: "Base para relatórios de compliance fiscal e previsão de arrecadação tributária."
+    "f1Help": {
+      "title": "Dica SAP: BP",
+      "concept": "Entenda o fluxo de BP no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
     }
   },
   {
-    id: "M23-VA02-ALTERAR",
-    title: "23. Modificar Ordem de Venda (VA02)",
-    transaction: "VA02",
-    chefeHugoDialog: "O cliente AAM LOGÍSTICA LTDA (Cód: 208015) pediu para alterar a condição de pagamento de 30 dias (ZF30) para 60 dias (ZF60) antes do faturamento. Acesse a VA02 e efetue a alteração.",
-    successFeedback: "Alteração/Auditoria da Ordem 450000000 realizada com sucesso no sistema.",
-    errorFeedback: "Na transação VA02, altere a Condição de Pagamento para 'ZF60'.",
-    expectedData: {
-      tipoOrdem: "OR",
-      orgVendas: "1000",
-      canalDist: "10",
-      setorAtiv: "00",
-      cliente: "208015",
-      material: "MAT-SD-015",
-      quantidade: "99",
-      incoterms: "FOB",
-      condPagto: "ZF60"
+    "id": "M005-BP",
+    "title": "05. Trainee - Operação BP",
+    "transaction": "BP",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar BP. Use Material MAT-SD-015 e Qtd 15.",
+    "successFeedback": "Excelente! Operação BP finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação BP. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "15",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
     },
-    f1Help: {
-      title: "Modificar Documento de Venda (VA02)",
-      concept: "Transação usada para alterar dados operacionais, quantitativos ou comerciais em ordens já gravadas.",
-      businessImpact: "Permite ajustes contratuais antes que a remessa ou fatura sejam processadas.",
-      brazilRule: "Alterações nos valores antes do faturamento ajustam a base de cálculo tributária da futura NF-e."
+    "f1Help": {
+      "title": "Dica SAP: BP",
+      "concept": "Entenda o fluxo de BP no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
     }
   },
   {
-    id: "M24-VA03-EXIBIR",
-    title: "24. Auditar Fluxo do Documento (VA03)",
-    transaction: "VA03",
-    chefeHugoDialog: "O departamento de auditoria quer verificar a rastreabilidade do pedido do cliente NORTEL DISTRIBUIDORA (Cód: 208016). Acesse a VA03 e exiba o Fluxo do Documento.",
-    successFeedback: "Alteração/Auditoria da Ordem 450000000 realizada com sucesso no sistema.",
-    errorFeedback: "Selecione a transação de exibição VA03 e confirme a verificação da ordem para o cliente '208016'.",
-    expectedData: {
-      tipoOrdem: "OR",
-      orgVendas: "1000",
-      canalDist: "20",
-      setorAtiv: "00",
-      cliente: "208016",
-      material: "MAT-SD-015",
-      quantidade: "50",
-      incoterms: "FOB",
-      condPagto: "ZF30"
+    "id": "M006-BP",
+    "title": "06. Trainee - Operação BP",
+    "transaction": "BP",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar BP. Use Material MAT-SD-015 e Qtd 16.",
+    "successFeedback": "Excelente! Operação BP finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação BP. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "16",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
     },
-    f1Help: {
-      title: "Exibir Ordem e Fluxo do Documento (VA03)",
-      concept: "Transação de consulta que exibe a ordem de venda e a árvore do fluxo de documentos encadeados.",
-      businessImpact: "Garante a rastreabilidade total do processo Order-to-Cash para auditorias internas e externas.",
-      brazilRule: "Permite vincular o número da ordem ao protocolo de autorização do documento fiscal SEFAZ."
+    "f1Help": {
+      "title": "Dica SAP: BP",
+      "concept": "Entenda o fluxo de BP no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
     }
   },
   {
-    id: "M1-VA01-STD",
-    title: "01. Ordem Standard (OTC Padrão)",
-    transaction: "VA01",
-    chefeHugoDialog: "Parabéns pelo seu primeiro dia, Consultor(a)! Vamos começar com uma operação de rotina da AAM Corp: o cliente AAM LOGÍSTICA precisa de 99 unidades do material MAT-SD-015 para entrega faturada em 30 dias (ZF30) com frete FOB.",
-    successFeedback: "Excelente trabalho! A ordem foi criada e o módulo de MM já reservou o estoque no depósito de SP. A logística da AAM Corp foi notificada.",
-    errorFeedback: "Atenção aos dados informados! Verifique se usou Tipo de Ordem 'OR', Org. Vendas '1000', Canal '10', Setor '00', Cliente '208015' e Condição 'ZF30'.",
-    expectedData: {
-      tipoOrdem: "OR",
-      orgVendas: "1000",
-      canalDist: "10",
-      setorAtiv: "00",
-      cliente: "208015",
-      material: "MAT-SD-015",
-      quantidade: "99",
-      incoterms: "FOB",
-      condPagto: "ZF30"
+    "id": "M007-BP",
+    "title": "07. Trainee - Operação BP",
+    "transaction": "BP",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar BP. Use Material MAT-SD-015 e Qtd 17.",
+    "successFeedback": "Excelente! Operação BP finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação BP. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "17",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
     },
-    f1Help: {
-      title: "Ordem Standard (Tipo OR)",
-      concept: "Documento comercial que registra a venda de mercadorias no fluxo Order-to-Cash da AAM Corp.",
-      businessImpact: "Reserva o estoque no módulo de MM e inicia a verificação de disponibilidade (ATP).",
-      brazilRule: "Determina a alíquota base de ICMS/PIS/COFINS dependendo do estado do cliente."
+    "f1Help": {
+      "title": "Dica SAP: BP",
+      "concept": "Entenda o fluxo de BP no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
     }
   },
   {
-    id: "M2-VA01-CIF",
-    title: "02. Venda com Frete Pago (CIF)",
-    transaction: "VA01",
-    chefeHugoDialog: "O cliente AAM LOGÍSTICA negociou e fechou o pedido com frete por nossa conta (CIF SP). Registre essa ordem de 50 unidades do MAT-SD-015 com condição de pagamento faturada (ZF30).",
-    successFeedback: "Perfeito! A cláusula CIF acionou a precificação de frete interno no SAP e a transportadora parceira da AAM Corp foi vinculada.",
-    errorFeedback: "O frete negociado foi CIF! Ajuste o campo Incoterms para 'CIF' para garantes a inclusão do custo no documento.",
-    expectedData: {
-      tipoOrdem: "OR",
-      orgVendas: "1000",
-      canalDist: "10",
-      setorAtiv: "00",
-      cliente: "208015",
-      material: "MAT-SD-015",
-      quantidade: "50",
-      incoterms: "CIF",
-      condPagto: "ZF30"
+    "id": "M008-BP",
+    "title": "08. Trainee - Operação BP",
+    "transaction": "BP",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar BP. Use Material MAT-SD-015 e Qtd 18.",
+    "successFeedback": "Excelente! Operação BP finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação BP. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "18",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
     },
-    f1Help: {
-      title: "Incoterms - Frete CIF vs. FOB",
-      concept: "CIF (Cost, Insurance and Freight) indica que a AAM Corp arca com o frete e seguro até o destino.",
-      businessImpact: "Influencia diretamente a formação de preço da ordem e o valor destacado de frete na NF-e.",
-      brazilRule: "O tipo de frete (CIF = 1 / FOB = 2) é informado no campo específico da DANFE/SEFAZ."
+    "f1Help": {
+      "title": "Dica SAP: BP",
+      "concept": "Entenda o fluxo de BP no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
     }
   },
   {
-    id: "M3-VA01-AVISTA",
-    title: "03. Venda à Vista com Desconto Especial",
-    transaction: "VA01",
-    chefeHugoDialog: "Temos um pedido especial do cliente AAM Corp! Eles vão pagar à vista (Condição ZB00) para obter desconto financeiro imediato. Lance a ordem de 20 unidades do MAT-SD-015 (Frete FOB).",
-    successFeedback: "Excelente! O pagamento à vista liberou a ordem imediatamente no Financeiro (FI) para expedição sem necessidade de análise de crédito.",
-    errorFeedback: "Para pagamentos à vista com desconto, certifique-se de preencher a Condição de Pagamento como 'ZB00'.",
-    expectedData: {
-      tipoOrdem: "OR",
-      orgVendas: "1000",
-      canalDist: "10",
-      setorAtiv: "00",
-      cliente: "208015",
-      material: "MAT-SD-015",
-      quantidade: "20",
-      incoterms: "FOB",
-      condPagto: "ZB00"
+    "id": "M009-BP",
+    "title": "09. Trainee - Operação BP",
+    "transaction": "BP",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar BP. Use Material MAT-SD-015 e Qtd 19.",
+    "successFeedback": "Excelente! Operação BP finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação BP. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "19",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
     },
-    f1Help: {
-      title: "Condições de Pagamento À Vista (ZB00)",
-      concept: "Determina que a liquidação financeira ocorre no momento do faturamento da nota.",
-      businessImpact: "Elimina o risco de inadimplência e acelera o fluxo de caixa no módulo FI.",
-      brazilRule: "Altera o indicador da forma de pagamento na NF-e para Pagamento À Vista."
+    "f1Help": {
+      "title": "Dica SAP: BP",
+      "concept": "Entenda o fluxo de BP no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
     }
   },
   {
-    id: "M4-VA01-REVENDA",
-    title: "04. Venda para Canal Atacado / Revenda",
-    transaction: "VA01",
-    chefeHugoDialog: "Atenção às regras operacionais! Este pedido do cliente AAM LOGÍSTICA é para operação de Revenda. Altere o Canal de Distribuição para '20' (Atacado/Revenda) com 150 unidades do MAT-SD-015.",
-    successFeedback: "Muito bem! Ao alterar o Canal para 20, o SAP aplicou a tabela de preços do atacado e a substituição tributária correspondente.",
-    errorFeedback: "Atenção! Para vendas destinadas a revendedores, o Canal de Distribuição correto no cadastro da AAM Corp é '20'.",
-    expectedData: {
-      tipoOrdem: "OR",
-      orgVendas: "1000",
-      canalDist: "20",
-      setorAtiv: "00",
-      cliente: "208015",
-      material: "MAT-SD-015",
-      quantidade: "150",
-      incoterms: "FOB",
-      condPagto: "ZF30"
+    "id": "M010-BP",
+    "title": "10. Trainee - Operação BP",
+    "transaction": "BP",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar BP. Use Material MAT-SD-015 e Qtd 20.",
+    "successFeedback": "Excelente! Operação BP finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação BP. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "20",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
     },
-    f1Help: {
-      title: "Canal de Distribuição (Atacado - 20)",
-      concept: "Define a via comercial pela qual os produtos da AAM Corp chegam aos clientes.",
-      businessImpact: "Determina quais esquemas de cálculo de preço (Pricing) e regras contratuais serão acionados.",
-      brazilRule: "Definir se a venda é para revenda impacta a incidência de ICMS-ST (Substituição Tributária)."
+    "f1Help": {
+      "title": "Dica SAP: BP",
+      "concept": "Entenda o fluxo de BP no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
     }
   },
   {
-    id: "M5-VA01-BONIF",
-    title: "05. Ordem de Bonificação / Amostra Grátis",
-    transaction: "VA01",
-    chefeHugoDialog: "A diretoria aprovou o envio de 10 unidades de amostra sem cobrança comercial para o cliente AAM LOGÍSTICA. Utilize o Tipo de Ordem de Bonificação 'ZBN' e condição 'ZB00'.",
-    successFeedback: "Registrado com sucesso! O valor de receita comercial foi zerado, mantendo apenas o destaque fiscal obrigatório para trânsito.",
-    errorFeedback: "Para operações sem cobrança (Bonificação), utilize obrigatoriamente o Tipo de Ordem 'ZBN'.",
-    expectedData: {
-      tipoOrdem: "ZBN",
-      orgVendas: "1000",
-      canalDist: "10",
-      setorAtiv: "00",
-      cliente: "208015",
-      material: "MAT-SD-015",
-      quantidade: "10",
-      incoterms: "FOB",
-      condPagto: "ZB00"
+    "id": "M011-BP",
+    "title": "11. Trainee - Operação BP",
+    "transaction": "BP",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar BP. Use Material MAT-SD-015 e Qtd 21.",
+    "successFeedback": "Excelente! Operação BP finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação BP. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "21",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
     },
-    f1Help: {
-      title: "Ordem de Bonificação (ZBN)",
-      concept: "Remessa de mercadoria sem cobrança financeira do cliente, usada em ações promocionais.",
-      businessImpact: "Não gera lançamento de Contas a Receber no Financeiro (FI), mas abate o estoque físico.",
-      brazilRule: "Exige emissão de Nota Fiscal com natureza da operação 'Bonificação/Doação'."
+    "f1Help": {
+      "title": "Dica SAP: BP",
+      "concept": "Entenda o fluxo de BP no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
     }
   },
   {
-    id: "M6-VA01-CREDITO",
-    title: "06. Pedido com Bloqueio de Crédito",
-    transaction: "VA01",
-    chefeHugoDialog: "O cliente AAM Corp está próximo do limite de crédito, mas a gerência pediu para registrar a ordem de 500 peças (ZF30) assim mesmo. A ordem vai salvar com bloqueio automático no sistema.",
-    successFeedback: "Ordem gravada! Como o valor ultrapassou o limite do cliente, o SAP aplicou a trava automática no Financeiro (FSCM/Credit Management).",
-    errorFeedback: "Insira a quantidade de 500 peças e verifique os dados padrão da ordem 'OR' com cliente '208015'.",
-    expectedData: {
-      tipoOrdem: "OR",
-      orgVendas: "1000",
-      canalDist: "10",
-      setorAtiv: "00",
-      cliente: "208015",
-      material: "MAT-SD-015",
-      quantidade: "500",
-      incoterms: "FOB",
-      condPagto: "ZF30"
+    "id": "M012-BP",
+    "title": "12. Trainee - Operação BP",
+    "transaction": "BP",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar BP. Use Material MAT-SD-015 e Qtd 22.",
+    "successFeedback": "Excelente! Operação BP finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação BP. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "22",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
     },
-    f1Help: {
-      title: "Gestão e Bloqueio de Crédito",
-      concept: "Mecanismo de segurança que analisa a saúde financeira e títulos em aberto do cliente.",
-      businessImpact: "Impede que a remessa (VL01N) e o faturamento sejam gerados sem aprovação do Gerente Financeiro.",
-      brazilRule: "Garante a governança fiscal prevenindo vendas para clientes inadimplentes."
+    "f1Help": {
+      "title": "Dica SAP: BP",
+      "concept": "Entenda o fluxo de BP no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
     }
   },
   {
-    id: "M7-VA01-OUTROMAT",
-    title: "07. Inclusão de Novo Material da Linha",
-    transaction: "VA01",
-    chefeHugoDialog: "Lançamento de produto novo na AAM Corp! O cliente solicitou 80 unidades do material de linha avançada MAT-SD-020 (faturado 30 dias - ZF30 e frete FOB).",
-    successFeedback: "Material validado! A determinação de depósitos e a alíquota fiscal do novo item foram aplicadas corretamente.",
-    errorFeedback: "Atenção ao código do material! O item correto para esta operação é o 'MAT-SD-020'.",
-    expectedData: {
-      tipoOrdem: "OR",
-      orgVendas: "1000",
-      canalDist: "10",
-      setorAtiv: "00",
-      cliente: "208015",
-      material: "MAT-SD-020",
-      quantidade: "80",
-      incoterms: "FOB",
-      condPagto: "ZF30"
+    "id": "M013-BP",
+    "title": "13. Trainee - Operação BP",
+    "transaction": "BP",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar BP. Use Material MAT-SD-015 e Qtd 23.",
+    "successFeedback": "Excelente! Operação BP finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação BP. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "23",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
     },
-    f1Help: {
-      title: "Mestre de Materiais (Cadastro SD)",
-      concept: "Guarda as visões de vendas, dados do centro fornecedor e grupo de impostos do produto.",
-      businessImpact: "Define o peso, volume de transporte e determinação de contas de receita.",
-      brazilRule: "Conecta a NCM (Nomenclatura Comum do Mercosul) ao cálculo de IPI e impostos retidos."
+    "f1Help": {
+      "title": "Dica SAP: BP",
+      "concept": "Entenda o fluxo de BP no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
     }
   },
   {
-    id: "M8-VA01-EXPOR",
-    title: "08. Ordem de Exportação / Filial Externa",
-    transaction: "VA01",
-    chefeHugoDialog: "Temos uma venda corporativa internacional! Altere a Organização de Vendas para '2000' (Exportação/Internacional) para 300 unidades do MAT-SD-015 com Incoterm CIF.",
-    successFeedback: "Ordem internacional gerada! A Org. Vendas 2000 acionou as regras de faturamento com isenção de impostos nacionais para exportação.",
-    errorFeedback: "Para vendas do departamento de Exportação, a Org. de Vendas deve ser a '2000'.",
-    expectedData: {
-      tipoOrdem: "OR",
-      orgVendas: "2000",
-      canalDist: "10",
-      setorAtiv: "00",
-      cliente: "208015",
-      material: "MAT-SD-015",
-      quantidade: "300",
-      incoterms: "CIF",
-      condPagto: "ZF30"
+    "id": "M014-BP",
+    "title": "14. Trainee - Operação BP",
+    "transaction": "BP",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar BP. Use Material MAT-SD-015 e Qtd 24.",
+    "successFeedback": "Excelente! Operação BP finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação BP. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "24",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
     },
-    f1Help: {
-      title: "Organização de Vendas (Org. Vendas 2000)",
-      concept: "Unidade jurídica responsável por celebrar os contratos de vendas em diferentes mercados.",
-      businessImpact: "Segrega os resultados financeiros e relatórios de vendas entre mercado interno e exportação.",
-      brazilRule: "Aciona o regime de não incidência de ICMS/PIS/COFINS para operações de exportação."
+    "f1Help": {
+      "title": "Dica SAP: BP",
+      "concept": "Entenda o fluxo de BP no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
     }
   },
   {
-    id: "M9-VA01-PARCEL",
-    title: "09. Venda com Condição Faturada em 60 Dias",
-    transaction: "VA01",
-    chefeHugoDialog: "Fechamos um fornecimento de longo prazo com a AAM LOGÍSTICA: 250 unidades do MAT-SD-015 com prazo de pagamento estendido de 60 dias (Condição ZF60).",
-    successFeedback: "Muito bem! O prazo de 60 dias recalculou a data de vencimento das duplicatas no financeiro com sucesso.",
-    errorFeedback: "A condição de pagamento estendida acordada com o cliente foi a 'ZF60'.",
-    expectedData: {
-      tipoOrdem: "OR",
-      orgVendas: "1000",
-      canalDist: "10",
-      setorAtiv: "00",
-      cliente: "208015",
-      material: "MAT-SD-015",
-      quantidade: "250",
-      incoterms: "FOB",
-      condPagto: "ZF60"
+    "id": "M015-BP",
+    "title": "15. Trainee - Operação BP",
+    "transaction": "BP",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar BP. Use Material MAT-SD-015 e Qtd 25.",
+    "successFeedback": "Excelente! Operação BP finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação BP. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "25",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
     },
-    f1Help: {
-      title: "Prazos de Pagamento Longos (ZF60)",
-      concept: "Regra que calcula as datas de vencimento do faturamento no futuro.",
-      businessImpact: "Afeta a previsão de fluxo de caixa da empresa no módulo financeiro.",
-      brazilRule: "Gera a informação do número de parcelas e vencimentos na fatura da NF-e."
+    "f1Help": {
+      "title": "Dica SAP: BP",
+      "concept": "Entenda o fluxo de BP no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
     }
   },
   {
-    id: "M10-VA01-DEVOL",
-    title: "10. Ordem de Devolução de Mercadoria",
-    transaction: "VA01",
-    chefeHugoDialog: "O cliente solicita a devolução de 15 unidades do MAT-SD-015 com avaria no transporte. Crie a ordem com Tipo 'RE' (Devolução) para registro do retorno ao estoque.",
-    successFeedback: "Ordem de devolução aberta! O fluxo de entrada de estoque e o estorno da cobrança foram configurados.",
-    errorFeedback: "Para registrar o retorno de mercadorias devolvidas, o Tipo de Ordem correto é 'RE'.",
-    expectedData: {
-      tipoOrdem: "RE",
-      orgVendas: "1000",
-      canalDist: "10",
-      setorAtiv: "00",
-      cliente: "208015",
-      material: "MAT-SD-015",
-      quantidade: "15",
-      incoterms: "FOB",
-      condPagto: "ZB00"
+    "id": "M016-BP",
+    "title": "16. Trainee - Operação BP",
+    "transaction": "BP",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar BP. Use Material MAT-SD-015 e Qtd 26.",
+    "successFeedback": "Excelente! Operação BP finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação BP. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "26",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
     },
-    f1Help: {
-      title: "Ordem de Devolução (Tipo RE)",
-      concept: "Documento que inicia o processo de estorno financeiro e retorno físico de produtos ao depósito.",
-      businessImpact: "Gera uma nota de crédito ao cliente e aguarda o recebimento físico para dar entrada em estoque.",
-      brazilRule: "Exige emissão de Nota Fiscal de Entrada com o CFOP relativo a devoluções de vendas."
+    "f1Help": {
+      "title": "Dica SAP: BP",
+      "concept": "Entenda o fluxo de BP no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
     }
   },
   {
-    id: "M11-VA01-SERVICO",
-    title: "11. Venda de Serviços / Consultoria SD",
-    transaction: "VA01",
-    chefeHugoDialog: "A AAM Corp também presta serviços de consultoria técnica! Registre a ordem para 10 horas do material de serviço 'MAT-SD-099' (Condição ZF30 e Ordem OR).",
-    successFeedback: "Ordem de serviço cadastrada! O sistema dispensou a checagem de transporte e estoque físico por se tratar de um item intangível.",
-    errorFeedback: "Verifique se indicou o código do material de serviço 'MAT-SD-099'.",
-    expectedData: {
-      tipoOrdem: "OR",
-      orgVendas: "1000",
-      canalDist: "10",
-      setorAtiv: "00",
-      cliente: "208015",
-      material: "MAT-SD-099",
-      quantidade: "10",
-      incoterms: "FOB",
-      condPagto: "ZF30"
+    "id": "M017-BP",
+    "title": "17. Trainee - Operação BP",
+    "transaction": "BP",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar BP. Use Material MAT-SD-015 e Qtd 27.",
+    "successFeedback": "Excelente! Operação BP finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação BP. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "27",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
     },
-    f1Help: {
-      title: "Venda de Serviços (Itens Intangíveis)",
-      concept: "Operação comercial sem transferência física de bens materiais.",
-      businessImpact: "Não aciona o picking ou remessa no depósito (VL01N), permitindo ir direto para o faturamento.",
-      brazilRule: "Sujeito à tributação de ISS (Imposto Sobre Serviços) em vez de ICMS."
+    "f1Help": {
+      "title": "Dica SAP: BP",
+      "concept": "Entenda o fluxo de BP no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
     }
   },
   {
-    id: "M12-VA01-PROVA",
-    title: "12. Desafio Final Trainee - Ordem Completa",
-    transaction: "VA01",
-    chefeHugoDialog: "Chegamos ao fim da primeira etapa de avaliação do Nível Trainee! Registre o pedido urgente do cliente AAM LOGÍSTICA para 120 peças do MAT-SD-015 com Frete CIF e faturamento estendido ZF60.",
-    successFeedback: "SENSACIONAL! Você concluiu com 100% de precisão todas as variações da VA01! Seu cargo de Trainee na AAM LOGÍSTICA LTDA foi consolidado com sucesso!",
-    errorFeedback: "Atenção máxima no Desafio Final! Verifique: Ordem 'OR', Org '1000', Canal '10', Setor '00', Cliente '208015', Material 'MAT-SD-015', Quantidade '120', Incoterms 'CIF' e Condição 'ZF60'.",
-    expectedData: {
-      tipoOrdem: "OR",
-      orgVendas: "1000",
-      canalDist: "10",
-      setorAtiv: "00",
-      cliente: "208015",
-      material: "MAT-SD-015",
-      quantidade: "120",
-      incoterms: "CIF",
-      condPagto: "ZF60"
+    "id": "M018-BP",
+    "title": "18. Trainee - Operação BP",
+    "transaction": "BP",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar BP. Use Material MAT-SD-015 e Qtd 28.",
+    "successFeedback": "Excelente! Operação BP finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação BP. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "28",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
     },
-    f1Help: {
-      title: "Conclusão do Bloco VA01 - Criar Ordem",
-      concept: "Você domina agora a criação de ordens com fretes dinâmicos, prazos, descontos, devoluções e bonificações.",
-      businessImpact: "Pronto para avançar no ciclo Order-to-Cash para os módulos de Expedição (VL01N) e Faturamento (VF01).",
-      brazilRule: "Capacitado para tratar as principais regras fiscais e comerciais de vendas no Brasil."
+    "f1Help": {
+      "title": "Dica SAP: BP",
+      "concept": "Entenda o fluxo de BP no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
     }
   },
   {
-    id: "M13-VL01N-STD",
-    title: "13. Criar Remessa de Entrega Standard",
-    transaction: "VL01N",
-    chefeHugoDialog: "A ordem do cliente AAM LOGÍSTICA LTDA (Cód: 208015) foi aprovada! Acesse a transação VL01N para gerar a Remessa de Entrega a partir do Centro Fornecedor 1000 (SP).",
-    successFeedback: "Documento de Remessa 800000000 criado com sucesso para o Pedido 450000000!",
-    errorFeedback: "Atenção aos dados de expedição! Certifique-se de selecionar a transação 'VL01N', usar o Centro '1000' e o cliente '208015'.",
-    expectedData: {
-      tipoOrdem: "OR",
-      orgVendas: "1000",
-      canalDist: "10",
-      setorAtiv: "00",
-      cliente: "208015",
-      material: "MAT-SD-015",
-      quantidade: "99",
-      incoterms: "FOB",
-      condPagto: "ZF30"
+    "id": "M019-BP",
+    "title": "19. Trainee - Operação BP",
+    "transaction": "BP",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar BP. Use Material MAT-SD-015 e Qtd 29.",
+    "successFeedback": "Excelente! Operação BP finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação BP. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "29",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
     },
-    f1Help: {
-      title: "Criar Remessa com Referência (VL01N)",
-      concept: "Transação logarítmica que inicia o processo de picking, embalagem e expedição de mercadorias no SAP SD/LES.",
-      businessImpact: "Reserva fisicamente os lotes no depósito e impede a alocação para outros pedidos.",
-      brazilRule: "Gera a lista de embarque necessária para a conferência de carga física do transporte rodoviário."
+    "f1Help": {
+      "title": "Dica SAP: BP",
+      "concept": "Entenda o fluxo de BP no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
     }
   },
   {
-    id: "M14-VL01N-PARCIAL",
-    title: "14. Remessa Parcial por Corte de Estoque",
-    transaction: "VL01N",
-    chefeHugoDialog: "Atenção, o armazém de SP só possui 50 unidades do MAT-SD-015 em estoque para o cliente NORTEL DISTRIBUIDORA (Cód: 208016). Gere a remessa parcial ajustando a quantidade fornecida para 50.",
-    successFeedback: "Documento de Remessa 800000000 criado com sucesso para o Pedido 450000000!",
-    errorFeedback: "Para a remessa parcial da NORTEL, ajuste o campo Quantidade no pedido/fornecimento para '50'.",
-    expectedData: {
-      tipoOrdem: "OR",
-      orgVendas: "1000",
-      canalDist: "20",
-      setorAtiv: "00",
-      cliente: "208016",
-      material: "MAT-SD-015",
-      quantidade: "50",
-      incoterms: "FOB",
-      condPagto: "ZF30"
+    "id": "M020-BP",
+    "title": "20. Trainee - Operação BP",
+    "transaction": "BP",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar BP. Use Material MAT-SD-015 e Qtd 30.",
+    "successFeedback": "Excelente! Operação BP finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação BP. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "30",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
     },
-    f1Help: {
-      title: "Fornecimento Parcial (Partial Delivery)",
-      concept: "Permite expedir uma quantidade menor do que a solicitada originalmente no pedido de venda.",
-      businessImpact: "Atende emergencialmente o cliente sem cancelar o saldo remanescente da ordem.",
-      brazilRule: "Exige que a Nota Fiscal seja emitida com o valor proporcional aos produtos efetivamente embarcados."
+    "f1Help": {
+      "title": "Dica SAP: BP",
+      "concept": "Entenda o fluxo de BP no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
     }
   },
   {
-    id: "M15-VL01N-BLOQ",
-    title: "15. Tentativa de Expedição com Bloqueio Financeiro",
-    transaction: "VL01N",
-    chefeHugoDialog: "O cliente TECH BRASIL S.A. (Cód: 208017) solicita o envio urgente do material MAT-SD-020, mas o pedido está retido por crédito. Tente gerar a remessa para verificar a mensagem de trava do SAP.",
-    successFeedback: "Documento de Remessa 800000000 criado com sucesso para o Pedido 450000000!",
-    errorFeedback: "Selecione o cliente '208017' e confirme os dados para visualizar a validação de trava de crédito da transação.",
-    expectedData: {
-      tipoOrdem: "OR",
-      orgVendas: "1000",
-      canalDist: "10",
-      setorAtiv: "00",
-      cliente: "208017",
-      material: "MAT-SD-020",
-      quantidade: "80",
-      incoterms: "FOB",
-      condPagto: "ZF30"
+    "id": "M021-VA05",
+    "title": "21. Trainee - Operação VA05",
+    "transaction": "VA05",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA05. Use Material MAT-SD-015 e Qtd 31.",
+    "successFeedback": "Excelente! Operação VA05 finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA05. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "31",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
     },
-    f1Help: {
-      title: "Bloqueio de Remessa por Crédito (FSCM)",
-      concept: "Controle que impede a saída física de mercadorias para clientes com inadimplência ou limite estourado.",
-      businessImpact: "Protege o patrimônio da AAM Corp evitando perdas financeiras e entregas não autorizadas.",
-      brazilRule: "Evita o fato gerador do ICMS e emissão de NF-e para títulos com risco de não recebimento."
+    "f1Help": {
+      "title": "Dica SAP: VA05",
+      "concept": "Entenda o fluxo de VA05 no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
     }
   },
   {
-    id: "M16-VF01-STD",
-    title: "16. Faturamento Standard de Remessa (NF-e)",
-    transaction: "VF01",
-    chefeHugoDialog: "A remessa da AAM LOGÍSTICA LTDA (Cód: 208015) foi entregue! Transição para a VF01 para processar o faturamento e emitir a Nota Fiscal Eletrônica (NF-e).",
-    successFeedback: "Fatura/NF-e 900000000 emitida com sucesso para o documento 800000000!",
-    errorFeedback: "Para faturar a operação standard, selecione a transação 'VF01' e confirme os dados da ordem para o cliente '208015'.",
-    expectedData: {
-      tipoOrdem: "OR",
-      orgVendas: "1000",
-      canalDist: "10",
-      setorAtiv: "00",
-      cliente: "208015",
-      material: "MAT-SD-015",
-      quantidade: "99",
-      incoterms: "FOB",
-      condPagto: "ZF30"
+    "id": "M022-VA05",
+    "title": "22. Trainee - Operação VA05",
+    "transaction": "VA05",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA05. Use Material MAT-SD-015 e Qtd 32.",
+    "successFeedback": "Excelente! Operação VA05 finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA05. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "32",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
     },
-    f1Help: {
-      title: "Criar Fatura (VF01)",
-      concept: "Transação do módulo SD/FI que consolida os dados de vendas e expedição para gerar a cobrança ao cliente.",
-      businessImpact: "Gera o lançamento automático na conta de Clientes a Receber (FI-AR) e atualiza a receita bruta.",
-      brazilRule: "Dispara a comunicação via Schema XML com a SEFAZ para autorização do protocolo da NF-e e DANFE."
+    "f1Help": {
+      "title": "Dica SAP: VA05",
+      "concept": "Entenda o fluxo de VA05 no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
     }
   },
   {
-    id: "M17-VF01-CANCL",
-    title: "17. Cancelamento / Estorno de Fatura (VF11)",
-    transaction: "VF01",
-    chefeHugoDialog: "Atenção! Houve divergência no valor do frete negociado com a NORTEL DISTRIBUIDORA (Cód: 208016). Crie o estorno do faturamento na transação de cancelamento (VF11).",
-    successFeedback: "Fatura/NF-e 900000000 emitida com sucesso para o documento 800000000!",
-    errorFeedback: "Atenção à operação de cancelamento! Verifique a seleção da transação e os dados do cliente '208016'.",
-    expectedData: {
-      tipoOrdem: "OR",
-      orgVendas: "1000",
-      canalDist: "20",
-      setorAtiv: "00",
-      cliente: "208016",
-      material: "MAT-SD-015",
-      quantidade: "50",
-      incoterms: "FOB",
-      condPagto: "ZF30"
+    "id": "M023-VA05",
+    "title": "23. Trainee - Operação VA05",
+    "transaction": "VA05",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA05. Use Material MAT-SD-015 e Qtd 33.",
+    "successFeedback": "Excelente! Operação VA05 finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA05. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "33",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
     },
-    f1Help: {
-      title: "Estorno de Faturamento (VF11)",
-      concept: "Processo que anula os efeitos contábeis e fiscais de uma fatura emitida com divergência.",
-      businessImpact: "Reverte o lançamento de Contas a Receber e libera a remessa para re-faturamento correto.",
-      brazilRule: "Exige o envio do evento de Cancelamento de NF-e respeitando o prazo legal estabelecido pela SEFAZ."
+    "f1Help": {
+      "title": "Dica SAP: VA05",
+      "concept": "Entenda o fluxo de VA05 no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
     }
   },
   {
-    id: "M18-VF01-SERVICO",
-    title: "18. Faturamento Direct Drive de Serviços (NFS-e)",
-    transaction: "VF01",
-    chefeHugoDialog: "A consultoria técnica prestada para a TECH BRASIL S.A. (Cód: 208017) foi concluída. Processe o faturamento direto da ordem de serviços (MAT-SD-099).",
-    successFeedback: "Fatura/NF-e 900000000 emitida com sucesso para o documento 450000000!",
-    errorFeedback: "Selecione o cliente '208017' e o material de serviços 'MAT-SD-099' para concluir o faturamento.",
-    expectedData: {
-      tipoOrdem: "OR",
-      orgVendas: "1000",
-      canalDist: "10",
-      setorAtiv: "00",
-      cliente: "208017",
-      material: "MAT-SD-099",
-      quantidade: "10",
-      incoterms: "FOB",
-      condPagto: "ZF30"
+    "id": "M024-VA05",
+    "title": "24. Trainee - Operação VA05",
+    "transaction": "VA05",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA05. Use Material MAT-SD-015 e Qtd 34.",
+    "successFeedback": "Excelente! Operação VA05 finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA05. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "34",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
     },
-    f1Help: {
-      title: "Faturamento de Serviços (NFS-e)",
-      concept: "Processamento de cobrança para itens intangíveis que não demandam movimentação física em estoque.",
-      businessImpact: "Gera a fatura direto a partir da ordem de venda sem passar pela etapa de remessa (VL01N).",
-      brazilRule: "Sujeito à retenção na fonte de ISS e tributos federais (PIS/COFINS/CSLL/IRRF) conforme legislação municipal."
+    "f1Help": {
+      "title": "Dica SAP: VA05",
+      "concept": "Entenda o fluxo de VA05 no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M025-VA05",
+    "title": "25. Trainee - Operação VA05",
+    "transaction": "VA05",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA05. Use Material MAT-SD-015 e Qtd 35.",
+    "successFeedback": "Excelente! Operação VA05 finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA05. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "35",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA05",
+      "concept": "Entenda o fluxo de VA05 no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M026-VA05",
+    "title": "26. Trainee - Operação VA05",
+    "transaction": "VA05",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA05. Use Material MAT-SD-015 e Qtd 36.",
+    "successFeedback": "Excelente! Operação VA05 finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA05. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "36",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA05",
+      "concept": "Entenda o fluxo de VA05 no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M027-VA05",
+    "title": "27. Trainee - Operação VA05",
+    "transaction": "VA05",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA05. Use Material MAT-SD-015 e Qtd 37.",
+    "successFeedback": "Excelente! Operação VA05 finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA05. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "37",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA05",
+      "concept": "Entenda o fluxo de VA05 no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M028-VA05",
+    "title": "28. Trainee - Operação VA05",
+    "transaction": "VA05",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA05. Use Material MAT-SD-015 e Qtd 38.",
+    "successFeedback": "Excelente! Operação VA05 finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA05. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "38",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA05",
+      "concept": "Entenda o fluxo de VA05 no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M029-VA05",
+    "title": "29. Trainee - Operação VA05",
+    "transaction": "VA05",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA05. Use Material MAT-SD-015 e Qtd 39.",
+    "successFeedback": "Excelente! Operação VA05 finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA05. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "39",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA05",
+      "concept": "Entenda o fluxo de VA05 no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M030-VA05",
+    "title": "30. Trainee - Operação VA05",
+    "transaction": "VA05",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA05. Use Material MAT-SD-015 e Qtd 40.",
+    "successFeedback": "Excelente! Operação VA05 finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA05. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "40",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA05",
+      "concept": "Entenda o fluxo de VA05 no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M031-VA05",
+    "title": "31. Trainee - Operação VA05",
+    "transaction": "VA05",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA05. Use Material MAT-SD-015 e Qtd 41.",
+    "successFeedback": "Excelente! Operação VA05 finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA05. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "41",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA05",
+      "concept": "Entenda o fluxo de VA05 no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M032-VA05",
+    "title": "32. Trainee - Operação VA05",
+    "transaction": "VA05",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA05. Use Material MAT-SD-015 e Qtd 42.",
+    "successFeedback": "Excelente! Operação VA05 finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA05. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "42",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA05",
+      "concept": "Entenda o fluxo de VA05 no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M033-VA05",
+    "title": "33. Trainee - Operação VA05",
+    "transaction": "VA05",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA05. Use Material MAT-SD-015 e Qtd 43.",
+    "successFeedback": "Excelente! Operação VA05 finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA05. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "43",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA05",
+      "concept": "Entenda o fluxo de VA05 no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M034-VA05",
+    "title": "34. Trainee - Operação VA05",
+    "transaction": "VA05",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA05. Use Material MAT-SD-015 e Qtd 44.",
+    "successFeedback": "Excelente! Operação VA05 finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA05. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "44",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA05",
+      "concept": "Entenda o fluxo de VA05 no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M035-VA05",
+    "title": "35. Trainee - Operação VA05",
+    "transaction": "VA05",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA05. Use Material MAT-SD-015 e Qtd 45.",
+    "successFeedback": "Excelente! Operação VA05 finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA05. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "45",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA05",
+      "concept": "Entenda o fluxo de VA05 no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M036-VA05",
+    "title": "36. Trainee - Operação VA05",
+    "transaction": "VA05",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA05. Use Material MAT-SD-015 e Qtd 46.",
+    "successFeedback": "Excelente! Operação VA05 finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA05. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "46",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA05",
+      "concept": "Entenda o fluxo de VA05 no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M037-VA05",
+    "title": "37. Trainee - Operação VA05",
+    "transaction": "VA05",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA05. Use Material MAT-SD-015 e Qtd 47.",
+    "successFeedback": "Excelente! Operação VA05 finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA05. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "47",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA05",
+      "concept": "Entenda o fluxo de VA05 no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M038-VA05",
+    "title": "38. Trainee - Operação VA05",
+    "transaction": "VA05",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA05. Use Material MAT-SD-015 e Qtd 48.",
+    "successFeedback": "Excelente! Operação VA05 finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA05. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "48",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA05",
+      "concept": "Entenda o fluxo de VA05 no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M039-VA05",
+    "title": "39. Trainee - Operação VA05",
+    "transaction": "VA05",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA05. Use Material MAT-SD-015 e Qtd 49.",
+    "successFeedback": "Excelente! Operação VA05 finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA05. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "49",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA05",
+      "concept": "Entenda o fluxo de VA05 no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M040-VA05",
+    "title": "40. Trainee - Operação VA05",
+    "transaction": "VA05",
+    "chefeHugoDialog": "Consultor(a), no nível Trainee a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA05. Use Material MAT-SD-015 e Qtd 50.",
+    "successFeedback": "Excelente! Operação VA05 finalizada com sucesso no nível Trainee. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA05. Revise o Tipo de Ordem e Cliente para o nível Trainee.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "50",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA05",
+      "concept": "Entenda o fluxo de VA05 no nível Trainee.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M041-VA01",
+    "title": "41. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 51.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "51",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M042-VA01",
+    "title": "42. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 52.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "52",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M043-VA01",
+    "title": "43. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 53.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "53",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M044-VA01",
+    "title": "44. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 54.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "54",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M045-VA01",
+    "title": "45. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 55.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "55",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M046-VA01",
+    "title": "46. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 56.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "56",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M047-VA01",
+    "title": "47. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 57.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "57",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M048-VA01",
+    "title": "48. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 58.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "58",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M049-VA01",
+    "title": "49. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 59.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "59",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M050-VA01",
+    "title": "50. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 60.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "60",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M051-VA01",
+    "title": "51. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 61.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "61",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M052-VA01",
+    "title": "52. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 62.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "62",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M053-VA01",
+    "title": "53. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 63.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "63",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M054-VA01",
+    "title": "54. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 64.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "64",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M055-VA01",
+    "title": "55. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 65.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "65",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M056-VA01",
+    "title": "56. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 66.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "66",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M057-VA01",
+    "title": "57. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 67.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "67",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M058-VA01",
+    "title": "58. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 68.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "68",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M059-VA01",
+    "title": "59. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 69.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "69",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M060-VA01",
+    "title": "60. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 70.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "70",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M061-VA01",
+    "title": "61. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 71.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "71",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M062-VA01",
+    "title": "62. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 72.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "72",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M063-VA01",
+    "title": "63. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 73.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "73",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M064-VA01",
+    "title": "64. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 74.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "74",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M065-VA01",
+    "title": "65. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 75.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "75",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M066-VA01",
+    "title": "66. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 76.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "76",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M067-VA01",
+    "title": "67. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 77.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "77",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M068-VA01",
+    "title": "68. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 78.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "78",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M069-VA01",
+    "title": "69. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 79.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "79",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M070-VA01",
+    "title": "70. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 80.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "80",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M071-VA01",
+    "title": "71. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 81.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "81",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M072-VA01",
+    "title": "72. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 82.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "82",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M073-VA01",
+    "title": "73. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 83.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "83",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M074-VA01",
+    "title": "74. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 84.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "84",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M075-VA01",
+    "title": "75. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 85.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "85",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M076-VA01",
+    "title": "76. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 86.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "86",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M077-VA01",
+    "title": "77. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 87.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "87",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M078-VA01",
+    "title": "78. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 88.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "88",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M079-VA01",
+    "title": "79. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 89.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "89",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M080-VA01",
+    "title": "80. Júnior - Operação VA01",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor(a), no nível Júnior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA01. Use Material MAT-SD-015 e Qtd 90.",
+    "successFeedback": "Excelente! Operação VA01 finalizada com sucesso no nível Júnior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA01. Revise o Tipo de Ordem e Cliente para o nível Júnior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "90",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA01",
+      "concept": "Entenda o fluxo de VA01 no nível Júnior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M081-VL01N",
+    "title": "81. Pleno - Operação VL01N",
+    "transaction": "VL01N",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VL01N. Use Material MAT-SD-015 e Qtd 91.",
+    "successFeedback": "Excelente! Operação VL01N finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VL01N. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "91",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VL01N",
+      "concept": "Entenda o fluxo de VL01N no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M082-VL01N",
+    "title": "82. Pleno - Operação VL01N",
+    "transaction": "VL01N",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VL01N. Use Material MAT-SD-015 e Qtd 92.",
+    "successFeedback": "Excelente! Operação VL01N finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VL01N. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "92",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VL01N",
+      "concept": "Entenda o fluxo de VL01N no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M083-VL01N",
+    "title": "83. Pleno - Operação VL01N",
+    "transaction": "VL01N",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VL01N. Use Material MAT-SD-015 e Qtd 93.",
+    "successFeedback": "Excelente! Operação VL01N finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VL01N. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "93",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VL01N",
+      "concept": "Entenda o fluxo de VL01N no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M084-VL01N",
+    "title": "84. Pleno - Operação VL01N",
+    "transaction": "VL01N",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VL01N. Use Material MAT-SD-015 e Qtd 94.",
+    "successFeedback": "Excelente! Operação VL01N finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VL01N. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "94",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VL01N",
+      "concept": "Entenda o fluxo de VL01N no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M085-VL01N",
+    "title": "85. Pleno - Operação VL01N",
+    "transaction": "VL01N",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VL01N. Use Material MAT-SD-015 e Qtd 95.",
+    "successFeedback": "Excelente! Operação VL01N finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VL01N. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "95",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VL01N",
+      "concept": "Entenda o fluxo de VL01N no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M086-VL01N",
+    "title": "86. Pleno - Operação VL01N",
+    "transaction": "VL01N",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VL01N. Use Material MAT-SD-015 e Qtd 96.",
+    "successFeedback": "Excelente! Operação VL01N finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VL01N. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "96",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VL01N",
+      "concept": "Entenda o fluxo de VL01N no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M087-VL01N",
+    "title": "87. Pleno - Operação VL01N",
+    "transaction": "VL01N",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VL01N. Use Material MAT-SD-015 e Qtd 97.",
+    "successFeedback": "Excelente! Operação VL01N finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VL01N. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "97",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VL01N",
+      "concept": "Entenda o fluxo de VL01N no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M088-VL01N",
+    "title": "88. Pleno - Operação VL01N",
+    "transaction": "VL01N",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VL01N. Use Material MAT-SD-015 e Qtd 98.",
+    "successFeedback": "Excelente! Operação VL01N finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VL01N. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "98",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VL01N",
+      "concept": "Entenda o fluxo de VL01N no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M089-VL01N",
+    "title": "89. Pleno - Operação VL01N",
+    "transaction": "VL01N",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VL01N. Use Material MAT-SD-015 e Qtd 99.",
+    "successFeedback": "Excelente! Operação VL01N finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VL01N. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "99",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VL01N",
+      "concept": "Entenda o fluxo de VL01N no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M090-VL01N",
+    "title": "90. Pleno - Operação VL01N",
+    "transaction": "VL01N",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VL01N. Use Material MAT-SD-015 e Qtd 100.",
+    "successFeedback": "Excelente! Operação VL01N finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VL01N. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "100",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VL01N",
+      "concept": "Entenda o fluxo de VL01N no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M091-VL01N",
+    "title": "91. Pleno - Operação VL01N",
+    "transaction": "VL01N",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VL01N. Use Material MAT-SD-015 e Qtd 101.",
+    "successFeedback": "Excelente! Operação VL01N finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VL01N. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "101",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VL01N",
+      "concept": "Entenda o fluxo de VL01N no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M092-VL01N",
+    "title": "92. Pleno - Operação VL01N",
+    "transaction": "VL01N",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VL01N. Use Material MAT-SD-015 e Qtd 102.",
+    "successFeedback": "Excelente! Operação VL01N finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VL01N. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "102",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VL01N",
+      "concept": "Entenda o fluxo de VL01N no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M093-VL01N",
+    "title": "93. Pleno - Operação VL01N",
+    "transaction": "VL01N",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VL01N. Use Material MAT-SD-015 e Qtd 103.",
+    "successFeedback": "Excelente! Operação VL01N finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VL01N. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "103",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VL01N",
+      "concept": "Entenda o fluxo de VL01N no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M094-VL01N",
+    "title": "94. Pleno - Operação VL01N",
+    "transaction": "VL01N",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VL01N. Use Material MAT-SD-015 e Qtd 104.",
+    "successFeedback": "Excelente! Operação VL01N finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VL01N. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "104",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VL01N",
+      "concept": "Entenda o fluxo de VL01N no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M095-VL01N",
+    "title": "95. Pleno - Operação VL01N",
+    "transaction": "VL01N",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VL01N. Use Material MAT-SD-015 e Qtd 105.",
+    "successFeedback": "Excelente! Operação VL01N finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VL01N. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "105",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VL01N",
+      "concept": "Entenda o fluxo de VL01N no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M096-VL01N",
+    "title": "96. Pleno - Operação VL01N",
+    "transaction": "VL01N",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VL01N. Use Material MAT-SD-015 e Qtd 106.",
+    "successFeedback": "Excelente! Operação VL01N finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VL01N. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "106",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VL01N",
+      "concept": "Entenda o fluxo de VL01N no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M097-VL01N",
+    "title": "97. Pleno - Operação VL01N",
+    "transaction": "VL01N",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VL01N. Use Material MAT-SD-015 e Qtd 107.",
+    "successFeedback": "Excelente! Operação VL01N finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VL01N. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "107",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VL01N",
+      "concept": "Entenda o fluxo de VL01N no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M098-VL01N",
+    "title": "98. Pleno - Operação VL01N",
+    "transaction": "VL01N",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VL01N. Use Material MAT-SD-015 e Qtd 108.",
+    "successFeedback": "Excelente! Operação VL01N finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VL01N. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "108",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VL01N",
+      "concept": "Entenda o fluxo de VL01N no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M099-VL01N",
+    "title": "99. Pleno - Operação VL01N",
+    "transaction": "VL01N",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VL01N. Use Material MAT-SD-015 e Qtd 109.",
+    "successFeedback": "Excelente! Operação VL01N finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VL01N. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "109",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VL01N",
+      "concept": "Entenda o fluxo de VL01N no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M100-VL01N",
+    "title": "100. Pleno - Operação VL01N",
+    "transaction": "VL01N",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VL01N. Use Material MAT-SD-015 e Qtd 110.",
+    "successFeedback": "Excelente! Operação VL01N finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VL01N. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "110",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VL01N",
+      "concept": "Entenda o fluxo de VL01N no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M101-VL01N",
+    "title": "101. Pleno - Operação VL01N",
+    "transaction": "VL01N",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VL01N. Use Material MAT-SD-015 e Qtd 111.",
+    "successFeedback": "Excelente! Operação VL01N finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VL01N. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "111",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VL01N",
+      "concept": "Entenda o fluxo de VL01N no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M102-VL01N",
+    "title": "102. Pleno - Operação VL01N",
+    "transaction": "VL01N",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VL01N. Use Material MAT-SD-015 e Qtd 112.",
+    "successFeedback": "Excelente! Operação VL01N finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VL01N. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "112",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VL01N",
+      "concept": "Entenda o fluxo de VL01N no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M103-VL01N",
+    "title": "103. Pleno - Operação VL01N",
+    "transaction": "VL01N",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VL01N. Use Material MAT-SD-015 e Qtd 113.",
+    "successFeedback": "Excelente! Operação VL01N finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VL01N. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "113",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VL01N",
+      "concept": "Entenda o fluxo de VL01N no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M104-VL01N",
+    "title": "104. Pleno - Operação VL01N",
+    "transaction": "VL01N",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VL01N. Use Material MAT-SD-015 e Qtd 114.",
+    "successFeedback": "Excelente! Operação VL01N finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VL01N. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "114",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VL01N",
+      "concept": "Entenda o fluxo de VL01N no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M105-VL01N",
+    "title": "105. Pleno - Operação VL01N",
+    "transaction": "VL01N",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VL01N. Use Material MAT-SD-015 e Qtd 115.",
+    "successFeedback": "Excelente! Operação VL01N finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VL01N. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "115",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VL01N",
+      "concept": "Entenda o fluxo de VL01N no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M106-VF01",
+    "title": "106. Pleno - Operação VF01",
+    "transaction": "VF01",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF01. Use Material MAT-SD-015 e Qtd 116.",
+    "successFeedback": "Excelente! Operação VF01 finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF01. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "116",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF01",
+      "concept": "Entenda o fluxo de VF01 no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M107-VF01",
+    "title": "107. Pleno - Operação VF01",
+    "transaction": "VF01",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF01. Use Material MAT-SD-015 e Qtd 117.",
+    "successFeedback": "Excelente! Operação VF01 finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF01. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "117",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF01",
+      "concept": "Entenda o fluxo de VF01 no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M108-VF01",
+    "title": "108. Pleno - Operação VF01",
+    "transaction": "VF01",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF01. Use Material MAT-SD-015 e Qtd 118.",
+    "successFeedback": "Excelente! Operação VF01 finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF01. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "118",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF01",
+      "concept": "Entenda o fluxo de VF01 no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M109-VF01",
+    "title": "109. Pleno - Operação VF01",
+    "transaction": "VF01",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF01. Use Material MAT-SD-015 e Qtd 119.",
+    "successFeedback": "Excelente! Operação VF01 finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF01. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "119",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF01",
+      "concept": "Entenda o fluxo de VF01 no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M110-VF01",
+    "title": "110. Pleno - Operação VF01",
+    "transaction": "VF01",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF01. Use Material MAT-SD-015 e Qtd 120.",
+    "successFeedback": "Excelente! Operação VF01 finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF01. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "120",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF01",
+      "concept": "Entenda o fluxo de VF01 no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M111-VF01",
+    "title": "111. Pleno - Operação VF01",
+    "transaction": "VF01",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF01. Use Material MAT-SD-015 e Qtd 121.",
+    "successFeedback": "Excelente! Operação VF01 finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF01. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "121",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF01",
+      "concept": "Entenda o fluxo de VF01 no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M112-VF01",
+    "title": "112. Pleno - Operação VF01",
+    "transaction": "VF01",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF01. Use Material MAT-SD-015 e Qtd 122.",
+    "successFeedback": "Excelente! Operação VF01 finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF01. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "122",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF01",
+      "concept": "Entenda o fluxo de VF01 no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M113-VF01",
+    "title": "113. Pleno - Operação VF01",
+    "transaction": "VF01",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF01. Use Material MAT-SD-015 e Qtd 123.",
+    "successFeedback": "Excelente! Operação VF01 finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF01. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "123",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF01",
+      "concept": "Entenda o fluxo de VF01 no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M114-VF01",
+    "title": "114. Pleno - Operação VF01",
+    "transaction": "VF01",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF01. Use Material MAT-SD-015 e Qtd 124.",
+    "successFeedback": "Excelente! Operação VF01 finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF01. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "124",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF01",
+      "concept": "Entenda o fluxo de VF01 no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M115-VF01",
+    "title": "115. Pleno - Operação VF01",
+    "transaction": "VF01",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF01. Use Material MAT-SD-015 e Qtd 125.",
+    "successFeedback": "Excelente! Operação VF01 finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF01. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "125",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF01",
+      "concept": "Entenda o fluxo de VF01 no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M116-VF01",
+    "title": "116. Pleno - Operação VF01",
+    "transaction": "VF01",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF01. Use Material MAT-SD-015 e Qtd 126.",
+    "successFeedback": "Excelente! Operação VF01 finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF01. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "126",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF01",
+      "concept": "Entenda o fluxo de VF01 no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M117-VF01",
+    "title": "117. Pleno - Operação VF01",
+    "transaction": "VF01",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF01. Use Material MAT-SD-015 e Qtd 127.",
+    "successFeedback": "Excelente! Operação VF01 finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF01. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "127",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF01",
+      "concept": "Entenda o fluxo de VF01 no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M118-VF01",
+    "title": "118. Pleno - Operação VF01",
+    "transaction": "VF01",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF01. Use Material MAT-SD-015 e Qtd 128.",
+    "successFeedback": "Excelente! Operação VF01 finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF01. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "128",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF01",
+      "concept": "Entenda o fluxo de VF01 no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M119-VF01",
+    "title": "119. Pleno - Operação VF01",
+    "transaction": "VF01",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF01. Use Material MAT-SD-015 e Qtd 129.",
+    "successFeedback": "Excelente! Operação VF01 finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF01. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "129",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF01",
+      "concept": "Entenda o fluxo de VF01 no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M120-VF01",
+    "title": "120. Pleno - Operação VF01",
+    "transaction": "VF01",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF01. Use Material MAT-SD-015 e Qtd 130.",
+    "successFeedback": "Excelente! Operação VF01 finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF01. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "130",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF01",
+      "concept": "Entenda o fluxo de VF01 no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M121-VF01",
+    "title": "121. Pleno - Operação VF01",
+    "transaction": "VF01",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF01. Use Material MAT-SD-015 e Qtd 131.",
+    "successFeedback": "Excelente! Operação VF01 finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF01. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "131",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF01",
+      "concept": "Entenda o fluxo de VF01 no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M122-VF01",
+    "title": "122. Pleno - Operação VF01",
+    "transaction": "VF01",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF01. Use Material MAT-SD-015 e Qtd 132.",
+    "successFeedback": "Excelente! Operação VF01 finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF01. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "132",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF01",
+      "concept": "Entenda o fluxo de VF01 no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M123-VF01",
+    "title": "123. Pleno - Operação VF01",
+    "transaction": "VF01",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF01. Use Material MAT-SD-015 e Qtd 133.",
+    "successFeedback": "Excelente! Operação VF01 finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF01. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "133",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF01",
+      "concept": "Entenda o fluxo de VF01 no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M124-VF01",
+    "title": "124. Pleno - Operação VF01",
+    "transaction": "VF01",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF01. Use Material MAT-SD-015 e Qtd 134.",
+    "successFeedback": "Excelente! Operação VF01 finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF01. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "134",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF01",
+      "concept": "Entenda o fluxo de VF01 no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M125-VF01",
+    "title": "125. Pleno - Operação VF01",
+    "transaction": "VF01",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF01. Use Material MAT-SD-015 e Qtd 135.",
+    "successFeedback": "Excelente! Operação VF01 finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF01. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "135",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF01",
+      "concept": "Entenda o fluxo de VF01 no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M126-VF01",
+    "title": "126. Pleno - Operação VF01",
+    "transaction": "VF01",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF01. Use Material MAT-SD-015 e Qtd 136.",
+    "successFeedback": "Excelente! Operação VF01 finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF01. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "136",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF01",
+      "concept": "Entenda o fluxo de VF01 no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M127-VF01",
+    "title": "127. Pleno - Operação VF01",
+    "transaction": "VF01",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF01. Use Material MAT-SD-015 e Qtd 137.",
+    "successFeedback": "Excelente! Operação VF01 finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF01. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "137",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF01",
+      "concept": "Entenda o fluxo de VF01 no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M128-VF01",
+    "title": "128. Pleno - Operação VF01",
+    "transaction": "VF01",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF01. Use Material MAT-SD-015 e Qtd 138.",
+    "successFeedback": "Excelente! Operação VF01 finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF01. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "138",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF01",
+      "concept": "Entenda o fluxo de VF01 no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M129-VF01",
+    "title": "129. Pleno - Operação VF01",
+    "transaction": "VF01",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF01. Use Material MAT-SD-015 e Qtd 139.",
+    "successFeedback": "Excelente! Operação VF01 finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF01. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "139",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF01",
+      "concept": "Entenda o fluxo de VF01 no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M130-VF01",
+    "title": "130. Pleno - Operação VF01",
+    "transaction": "VF01",
+    "chefeHugoDialog": "Consultor(a), no nível Pleno a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF01. Use Material MAT-SD-015 e Qtd 140.",
+    "successFeedback": "Excelente! Operação VF01 finalizada com sucesso no nível Pleno. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF01. Revise o Tipo de Ordem e Cliente para o nível Pleno.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "140",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF01",
+      "concept": "Entenda o fluxo de VF01 no nível Pleno.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M131-VA02",
+    "title": "131. Sênior - Operação VA02",
+    "transaction": "VA02",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 141.",
+    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "141",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA02",
+      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M132-VA02",
+    "title": "132. Sênior - Operação VA02",
+    "transaction": "VA02",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 142.",
+    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "142",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA02",
+      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M133-VA02",
+    "title": "133. Sênior - Operação VA02",
+    "transaction": "VA02",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 143.",
+    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "143",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA02",
+      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M134-VA02",
+    "title": "134. Sênior - Operação VA02",
+    "transaction": "VA02",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 144.",
+    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "144",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA02",
+      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M135-VA02",
+    "title": "135. Sênior - Operação VA02",
+    "transaction": "VA02",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 145.",
+    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "145",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA02",
+      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M136-VA02",
+    "title": "136. Sênior - Operação VA02",
+    "transaction": "VA02",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 146.",
+    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "146",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA02",
+      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M137-VA02",
+    "title": "137. Sênior - Operação VA02",
+    "transaction": "VA02",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 147.",
+    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "147",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA02",
+      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M138-VA02",
+    "title": "138. Sênior - Operação VA02",
+    "transaction": "VA02",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 148.",
+    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "148",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA02",
+      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M139-VA02",
+    "title": "139. Sênior - Operação VA02",
+    "transaction": "VA02",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 149.",
+    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "149",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA02",
+      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M140-VA02",
+    "title": "140. Sênior - Operação VA02",
+    "transaction": "VA02",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 150.",
+    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "150",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA02",
+      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M141-VA02",
+    "title": "141. Sênior - Operação VA02",
+    "transaction": "VA02",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 151.",
+    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "151",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA02",
+      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M142-VA02",
+    "title": "142. Sênior - Operação VA02",
+    "transaction": "VA02",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 152.",
+    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "152",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA02",
+      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M143-VA02",
+    "title": "143. Sênior - Operação VA02",
+    "transaction": "VA02",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 153.",
+    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "153",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA02",
+      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M144-VA02",
+    "title": "144. Sênior - Operação VA02",
+    "transaction": "VA02",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 154.",
+    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "154",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA02",
+      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M145-VA02",
+    "title": "145. Sênior - Operação VA02",
+    "transaction": "VA02",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 155.",
+    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "155",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA02",
+      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M146-VA02",
+    "title": "146. Sênior - Operação VA02",
+    "transaction": "VA02",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 156.",
+    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "156",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA02",
+      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M147-VA02",
+    "title": "147. Sênior - Operação VA02",
+    "transaction": "VA02",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 157.",
+    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "157",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA02",
+      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M148-VA02",
+    "title": "148. Sênior - Operação VA02",
+    "transaction": "VA02",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 158.",
+    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "158",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA02",
+      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M149-VA02",
+    "title": "149. Sênior - Operação VA02",
+    "transaction": "VA02",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 159.",
+    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "159",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA02",
+      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M150-VA02",
+    "title": "150. Sênior - Operação VA02",
+    "transaction": "VA02",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 160.",
+    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "160",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VA02",
+      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M151-VF11",
+    "title": "151. Sênior - Operação VF11",
+    "transaction": "VF11",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF11. Use Material MAT-SD-015 e Qtd 161.",
+    "successFeedback": "Excelente! Operação VF11 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF11. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "161",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF11",
+      "concept": "Entenda o fluxo de VF11 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M152-VF11",
+    "title": "152. Sênior - Operação VF11",
+    "transaction": "VF11",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF11. Use Material MAT-SD-015 e Qtd 162.",
+    "successFeedback": "Excelente! Operação VF11 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF11. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "162",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF11",
+      "concept": "Entenda o fluxo de VF11 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M153-VF11",
+    "title": "153. Sênior - Operação VF11",
+    "transaction": "VF11",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF11. Use Material MAT-SD-015 e Qtd 163.",
+    "successFeedback": "Excelente! Operação VF11 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF11. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "163",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF11",
+      "concept": "Entenda o fluxo de VF11 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M154-VF11",
+    "title": "154. Sênior - Operação VF11",
+    "transaction": "VF11",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF11. Use Material MAT-SD-015 e Qtd 164.",
+    "successFeedback": "Excelente! Operação VF11 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF11. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "164",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF11",
+      "concept": "Entenda o fluxo de VF11 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M155-VF11",
+    "title": "155. Sênior - Operação VF11",
+    "transaction": "VF11",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF11. Use Material MAT-SD-015 e Qtd 165.",
+    "successFeedback": "Excelente! Operação VF11 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF11. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "165",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF11",
+      "concept": "Entenda o fluxo de VF11 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M156-VF11",
+    "title": "156. Sênior - Operação VF11",
+    "transaction": "VF11",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF11. Use Material MAT-SD-015 e Qtd 166.",
+    "successFeedback": "Excelente! Operação VF11 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF11. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "166",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF11",
+      "concept": "Entenda o fluxo de VF11 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M157-VF11",
+    "title": "157. Sênior - Operação VF11",
+    "transaction": "VF11",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF11. Use Material MAT-SD-015 e Qtd 167.",
+    "successFeedback": "Excelente! Operação VF11 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF11. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "167",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF11",
+      "concept": "Entenda o fluxo de VF11 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M158-VF11",
+    "title": "158. Sênior - Operação VF11",
+    "transaction": "VF11",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF11. Use Material MAT-SD-015 e Qtd 168.",
+    "successFeedback": "Excelente! Operação VF11 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF11. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "168",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF11",
+      "concept": "Entenda o fluxo de VF11 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M159-VF11",
+    "title": "159. Sênior - Operação VF11",
+    "transaction": "VF11",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF11. Use Material MAT-SD-015 e Qtd 169.",
+    "successFeedback": "Excelente! Operação VF11 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF11. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "169",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF11",
+      "concept": "Entenda o fluxo de VF11 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M160-VF11",
+    "title": "160. Sênior - Operação VF11",
+    "transaction": "VF11",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF11. Use Material MAT-SD-015 e Qtd 170.",
+    "successFeedback": "Excelente! Operação VF11 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação VF11. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "170",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: VF11",
+      "concept": "Entenda o fluxo de VF11 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M161-V.02",
+    "title": "161. Sênior - Operação V.02",
+    "transaction": "V.02",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar V.02. Use Material MAT-SD-015 e Qtd 171.",
+    "successFeedback": "Excelente! Operação V.02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação V.02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "171",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: V.02",
+      "concept": "Entenda o fluxo de V.02 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M162-V.02",
+    "title": "162. Sênior - Operação V.02",
+    "transaction": "V.02",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar V.02. Use Material MAT-SD-015 e Qtd 172.",
+    "successFeedback": "Excelente! Operação V.02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação V.02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "172",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: V.02",
+      "concept": "Entenda o fluxo de V.02 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M163-V.02",
+    "title": "163. Sênior - Operação V.02",
+    "transaction": "V.02",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar V.02. Use Material MAT-SD-015 e Qtd 173.",
+    "successFeedback": "Excelente! Operação V.02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação V.02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "173",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: V.02",
+      "concept": "Entenda o fluxo de V.02 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M164-V.02",
+    "title": "164. Sênior - Operação V.02",
+    "transaction": "V.02",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar V.02. Use Material MAT-SD-015 e Qtd 174.",
+    "successFeedback": "Excelente! Operação V.02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação V.02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "174",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: V.02",
+      "concept": "Entenda o fluxo de V.02 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M165-V.02",
+    "title": "165. Sênior - Operação V.02",
+    "transaction": "V.02",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar V.02. Use Material MAT-SD-015 e Qtd 175.",
+    "successFeedback": "Excelente! Operação V.02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação V.02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "175",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: V.02",
+      "concept": "Entenda o fluxo de V.02 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M166-V.02",
+    "title": "166. Sênior - Operação V.02",
+    "transaction": "V.02",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar V.02. Use Material MAT-SD-015 e Qtd 176.",
+    "successFeedback": "Excelente! Operação V.02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação V.02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "176",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: V.02",
+      "concept": "Entenda o fluxo de V.02 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M167-V.02",
+    "title": "167. Sênior - Operação V.02",
+    "transaction": "V.02",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar V.02. Use Material MAT-SD-015 e Qtd 177.",
+    "successFeedback": "Excelente! Operação V.02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação V.02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "177",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: V.02",
+      "concept": "Entenda o fluxo de V.02 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M168-V.02",
+    "title": "168. Sênior - Operação V.02",
+    "transaction": "V.02",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar V.02. Use Material MAT-SD-015 e Qtd 178.",
+    "successFeedback": "Excelente! Operação V.02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação V.02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "178",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: V.02",
+      "concept": "Entenda o fluxo de V.02 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M169-V.02",
+    "title": "169. Sênior - Operação V.02",
+    "transaction": "V.02",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar V.02. Use Material MAT-SD-015 e Qtd 179.",
+    "successFeedback": "Excelente! Operação V.02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação V.02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "179",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: V.02",
+      "concept": "Entenda o fluxo de V.02 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+    }
+  },
+  {
+    "id": "M170-V.02",
+    "title": "170. Sênior - Operação V.02",
+    "transaction": "V.02",
+    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar V.02. Use Material MAT-SD-015 e Qtd 180.",
+    "successFeedback": "Excelente! Operação V.02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
+    "errorFeedback": "Erro na operação V.02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "expectedData": {
+      "tipoOrdem": "OR",
+      "orgVendas": "1000",
+      "canalDist": "10",
+      "setorAtiv": "00",
+      "cliente": "208015",
+      "material": "MAT-SD-015",
+      "quantidade": "180",
+      "incoterms": "FOB",
+      "condPagto": "ZF30"
+    },
+    "f1Help": {
+      "title": "Dica SAP: V.02",
+      "concept": "Entenda o fluxo de V.02 no nível Sênior.",
+      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
+      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
     }
   }
 ];

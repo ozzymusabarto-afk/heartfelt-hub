@@ -29,10 +29,19 @@ import { toast } from "sonner";
 
 export const Route = createFileRoute("/")({
   component: SAPSDQuestApp,
+  head: () => ({
+    title: "SAP SD Quest | Simulador AAM LOGÍSTICA",
+    meta: [
+      { name: "description", content: "Simulador gamificado de SAP SD para treinamento de consultores na AAM LOGÍSTICA LTDA." },
+      { property: "og:title", content: "SAP SD Quest - Domine o Order-to-Cash" },
+      { property: "og:description", content: "Treinamento prático com Chefe Hugo. 170 missões de Trainee a Sênior." },
+      { name: "twitter:card", content: "summary_large_image" }
+    ]
+  }),
 });
 
 // Correct data is now handled per mission from missions.ts
-const getRandomMissionIndex = (excludeIndex?: number, reinforcementQueue: string[] = []) => {
+const getRandomMissionIndex = (excludeIndex?: number, reinforcementQueue: string[] = [], completedCount: number = 0) => {
   // If there's a mission in the reinforcement queue, and it's not the same as the current one,
   // we have a chance to pick it (spaced repetition)
   if (reinforcementQueue.length > 0 && Math.random() > 0.4) {
@@ -42,10 +51,14 @@ const getRandomMissionIndex = (excludeIndex?: number, reinforcementQueue: string
     }
   }
 
+  // Progressive unlock: pick from missions up to the current seniority level + a small buffer
+  // Level ranges: Trainee (1-40), Júnior (41-80), Pleno (81-130), Sênior (131-170)
+  const maxAvailableIndex = Math.min(missions.length, completedCount + 5);
+  
   let newIndex;
   do {
-    newIndex = Math.floor(Math.random() * missions.length);
-  } while (newIndex === excludeIndex && missions.length > 1);
+    newIndex = Math.floor(Math.random() * maxAvailableIndex);
+  } while (newIndex === excludeIndex && maxAvailableIndex > 1);
   return newIndex;
 };
 
@@ -262,8 +275,8 @@ function SAPSDQuestApp() {
       Consultor(a): ${userName}
       -------------------------------------
       Empresa: AAM LOGÍSTICA LTDA
-      Status: Nível 1 - Trainee SD
-      XP Total: ${xp} / 500
+      Status: ${xp < 400 ? 'Trainee' : xp < 800 ? 'Júnior' : xp < 1300 ? 'Pleno' : 'Sênior'} SD
+      XP Total: ${xp} / 1700
       Missões Concluídas: ${completedMissions} / ${missions.length}
       Taxa de Sucesso: ${Math.round((trainingHistory.filter(h => h.status === 'success').length / Math.max(trainingHistory.length, 1)) * 100)}%
       -------------------------------------
@@ -328,7 +341,7 @@ function SAPSDQuestApp() {
           if (parsed.currentMissionIndex !== undefined) {
             setCurrentMissionIndex(parsed.currentMissionIndex);
           } else {
-            setCurrentMissionIndex(getRandomMissionIndex());
+            setCurrentMissionIndex(getRandomMissionIndex(undefined, [], parsed.completedMissions || 0));
           }
           // Merge admin status if not already set by email
           if (parsed.isAdmin) isAdmin = true;
@@ -337,7 +350,7 @@ function SAPSDQuestApp() {
         }
       } else {
         // First time or no data, pick a random mission
-        setCurrentMissionIndex(getRandomMissionIndex());
+        setCurrentMissionIndex(getRandomMissionIndex(undefined, [], 0));
       }
       
       // Persist admin status in current session data if it changed
@@ -424,11 +437,11 @@ function SAPSDQuestApp() {
           if (parsed.currentMissionIndex !== undefined) {
             setCurrentMissionIndex(parsed.currentMissionIndex);
           } else {
-            setCurrentMissionIndex(getRandomMissionIndex());
+            setCurrentMissionIndex(getRandomMissionIndex(undefined, [], parsed.completedMissions || 0));
           }
         } catch (e) {}
       } else if (savedUser) {
-        setCurrentMissionIndex(getRandomMissionIndex());
+        setCurrentMissionIndex(getRandomMissionIndex(undefined, [], 0));
       }
       if (savedUser && savedHistory) {
         try { setTrainingHistory(JSON.parse(savedHistory)); } catch (e) {}
@@ -446,7 +459,10 @@ function SAPSDQuestApp() {
           if (parsed.xp !== undefined) setXp(parsed.xp);
           if (parsed.completedMissions !== undefined) {
             setCompletedMissions(parsed.completedMissions);
-            setCurrentMissionIndex(parsed.completedMissions);
+            // Don't override currentMissionIndex if it exists, otherwise use completedMissions as start
+            if (parsed.currentMissionIndex === undefined) {
+              setCurrentMissionIndex(parsed.completedMissions);
+            }
           }
           if (parsed.feedbackState) setFeedbackState(parsed.feedbackState);
           if (parsed.mode) setMode(parsed.mode);
@@ -680,7 +696,7 @@ function SAPSDQuestApp() {
         toast.success(successMsg);
 
         if (mode !== "practice") {
-          setXp(prev => Math.min(prev + 25, 500));
+          setXp(prev => Math.min(prev + 25, missions.length * 25));
           setCompletedMissions(prev => prev + 1);
         }
         setTrainingHistory(prev => [{
@@ -724,7 +740,7 @@ function SAPSDQuestApp() {
   };
 
   const nextMission = () => {
-    const nextIdx = getRandomMissionIndex(currentMissionIndex, reinforcementQueue);
+    const nextIdx = getRandomMissionIndex(currentMissionIndex, reinforcementQueue, completedMissions);
     let nextM = missions[nextIdx] || missions[0];
     
     // If it's a reinforced mission, randomize its data
@@ -1346,20 +1362,31 @@ function SAPSDQuestApp() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div className="flex flex-col gap-3">
-              <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Tópico Atual</h3>
+              <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Progresso de Senioridade</h3>
               <Card className="p-4 bg-white shadow-sm border-indigo-100 rounded-2xl border-l-4 border-l-indigo-600 relative overflow-hidden group">
-                <div className="relative z-10">
-                  <span className="inline-block px-2 py-0.5 bg-indigo-50 text-indigo-600 text-[9px] font-black rounded-md mb-2">MODULO 01</span>
-                  <h4 className="font-bold text-slate-800 text-sm mb-1">Processo Order-to-Cash</h4>
-                  <p className="text-[11px] text-slate-500 leading-relaxed mb-3">
-                    Aprenda e pratique todo o fluxo de pedido à fatura.
-                  </p>
-                  <div className="flex items-center justify-between">
+                <div className="relative z-10 space-y-3">
+                  <div className="flex justify-between items-center">
+                    <span className="inline-block px-2 py-0.5 bg-indigo-50 text-indigo-600 text-[9px] font-black rounded-md uppercase">
+                      {completedMissions <= 40 ? 'Trainee' : completedMissions <= 80 ? 'Júnior' : completedMissions <= 130 ? 'Pleno' : 'Sênior'}
+                    </span>
                     <span className="text-[10px] font-bold text-slate-700 bg-slate-100 px-2 py-1 rounded-lg">[{completedMissions} / {missions.length} Missões]</span>
-                    <Button variant="ghost" size="sm" className="h-7 text-indigo-600 text-[10px] font-bold hover:bg-indigo-50">VER DETALHES</Button>
+                  </div>
+                  
+                  <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                    <div 
+                      className="h-full bg-indigo-600 transition-all duration-1000 ease-out"
+                      style={{ width: `${(completedMissions / missions.length) * 100}%` }}
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-4 gap-1 text-[8px] text-center font-bold uppercase tracking-tighter">
+                    <div className={completedMissions > 0 ? 'text-indigo-600' : 'text-slate-300'}>Trainee</div>
+                    <div className={completedMissions > 40 ? 'text-indigo-600' : 'text-slate-300'}>Júnior</div>
+                    <div className={completedMissions > 80 ? 'text-indigo-600' : 'text-slate-300'}>Pleno</div>
+                    <div className={completedMissions > 130 ? 'text-indigo-600' : 'text-slate-300'}>Sênior</div>
                   </div>
                 </div>
-                <Rocket className="absolute -right-4 -top-4 size-16 text-indigo-50 -rotate-12 group-hover:scale-110 transition-transform" />
+                <Trophy className="absolute -right-4 -top-4 size-16 text-indigo-50 -rotate-12 group-hover:scale-110 transition-transform" />
               </Card>
             </div>
 
