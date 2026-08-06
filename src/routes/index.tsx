@@ -446,7 +446,10 @@ function SAPSDQuestApp() {
           if (parsed.xp !== undefined) setXp(parsed.xp);
           if (parsed.completedMissions !== undefined) {
             setCompletedMissions(parsed.completedMissions);
-            setCurrentMissionIndex(parsed.completedMissions);
+            // Don't override currentMissionIndex if it exists, otherwise use completedMissions as start
+            if (parsed.currentMissionIndex === undefined) {
+              setCurrentMissionIndex(parsed.completedMissions);
+            }
           }
           if (parsed.feedbackState) setFeedbackState(parsed.feedbackState);
           if (parsed.mode) setMode(parsed.mode);
