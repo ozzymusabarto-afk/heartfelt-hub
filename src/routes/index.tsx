@@ -310,6 +310,14 @@ function SAPSDQuestApp() {
       const saved = localStorage.getItem("sap-quest-data");
       const savedHistory = localStorage.getItem("sap-quest-history");
       
+      let isAdmin = false;
+      // Admin Master Email check
+      if (userName.toLowerCase() === "admin@aam.com.br") {
+        isAdmin = true;
+        localStorage.setItem("sap-quest-super-admin", "true");
+        toast.info("Perfil Administrador Master detectado.");
+      }
+
       if (saved) {
         try {
           const parsed = JSON.parse(saved);
@@ -322,6 +330,8 @@ function SAPSDQuestApp() {
           } else {
             setCurrentMissionIndex(getRandomMissionIndex());
           }
+          // Merge admin status if not already set by email
+          if (parsed.isAdmin) isAdmin = true;
         } catch (e) {
           console.error("Erro ao carregar progresso", e);
         }
@@ -330,6 +340,12 @@ function SAPSDQuestApp() {
         setCurrentMissionIndex(getRandomMissionIndex());
       }
       
+      // Persist admin status in current session data if it changed
+      if (isAdmin) {
+        const currentData = saved ? JSON.parse(saved) : {};
+        localStorage.setItem("sap-quest-data", JSON.stringify({ ...currentData, isAdmin: true }));
+      }
+
       if (savedHistory) {
         try {
           setTrainingHistory(JSON.parse(savedHistory));
