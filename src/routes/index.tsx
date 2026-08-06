@@ -1,12 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect, useRef, useMemo } from "react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 import { 
   Rocket, Target, BookOpen, Crown, BarChart3, Trophy, Settings, 
   ChevronRight, HelpCircle, CheckCircle2, Flame, Star, Shield,
   Search, Bell, Plus, MoreHorizontal, ArrowRight, Check, Menu, X,
   Gamepad2, Dices, User, UserCheck, Eye, EyeOff, LogIn,
   FileText, Undo2, ChevronDown, LogOut, ClipboardList, Timer, 
-  AlertCircle, ChevronLeft, Award
+  AlertCircle, ChevronLeft, Award, Download, Printer, UserCircle
 } from "lucide-react";
 import { 
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area 
