@@ -374,9 +374,10 @@ function SAPSDQuestApp() {
     const saved = localStorage.getItem("sap-quest-data");
     const savedHistory = localStorage.getItem("sap-quest-history");
     
+    // Check for Super Admin mode
+    const isSuperAdmin = localStorage.getItem("sap-quest-super-admin") === "true";
+    
     if (!hasStarted) {
-      // Don't remove data anymore to allow persistence across logout
-      // We only reset the current form/UI state for a "fresh" start of the session
       setFormData({
         orderType: "", orderDate: "", salesOrg: "", deliveryDate: "",
         distChannel: "", paymentCond: "", customer: "", quantity: "", material: "",
@@ -384,12 +385,13 @@ function SAPSDQuestApp() {
       });
       setSelectedTransaction("");
       
-      // If we are authenticated but it's a new session, ensure we have the data loaded
       if (savedUser && saved) {
         try {
           const parsed = JSON.parse(saved);
           if (parsed.xp !== undefined) setXp(parsed.xp);
           if (parsed.completedMissions !== undefined) {
+            // Super Admin can skip missions or has them all unlocked, but let's keep normal flow
+            // for tracking, and only handle the "unlock" part in the UI if needed
             setCompletedMissions(parsed.completedMissions);
           }
           if (parsed.currentMissionIndex !== undefined) {
@@ -399,12 +401,17 @@ function SAPSDQuestApp() {
           }
         } catch (e) {}
       } else if (savedUser) {
-        // No saved data found for user, pick a random mission
         setCurrentMissionIndex(getRandomMissionIndex());
       }
       if (savedUser && savedHistory) {
         try { setTrainingHistory(JSON.parse(savedHistory)); } catch (e) {}
       }
+
+      setFeedbackState("idle");
+      sessionStorage.setItem("sap-quest-session-started", "true");
+    } else {
+      // Normal continuous flow...
+
 
       setFeedbackState("idle");
       sessionStorage.setItem("sap-quest-session-started", "true");
