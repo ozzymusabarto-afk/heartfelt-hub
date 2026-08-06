@@ -602,10 +602,16 @@ function SAPSDQuestApp() {
       }
     }
 
+    if (isSuperAdmin) {
+      errors.length = 0;
+      localHint = "";
+    }
+
     setValidationErrors(errors);
     setHintMessage(localHint);
 
     if (errors.length === 0) {
+
       if (feedbackState === "idle") {
         setFeedbackState("review");
         toast.info("Validação OK! Revise antes de enviar.");
