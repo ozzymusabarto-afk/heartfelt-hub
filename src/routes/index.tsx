@@ -2633,6 +2633,28 @@ function SAPSDQuestApp() {
                     <Badge variant="outline" className="bg-slate-50 text-slate-500 font-bold px-3 py-1">Padrão do Sistema</Badge>
                   </div>
                 </div>
+                <div className="pt-8 border-t border-slate-100 space-y-4">
+                  <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                    <Crown className="size-4 text-amber-500" /> Assinatura Premium
+                  </h3>
+                  <div className="flex items-center justify-between p-4 bg-amber-50 rounded-2xl border border-amber-100">
+                    <div>
+                      <h4 className="text-sm font-bold text-amber-900">Status da Assinatura</h4>
+                      <p className="text-xs text-amber-700">
+                        {localStorage.getItem("sap-quest-premium") === "true" || userName.toLowerCase() === "admin@aam.com.br" 
+                          ? "Assinante Premium Ativo" 
+                          : "Plano Gratuito / Trial"}
+                      </p>
+                    </div>
+                    {!(localStorage.getItem("sap-quest-premium") === "true" || userName.toLowerCase() === "admin@aam.com.br") && (
+                      <a href="https://pay.hotmart.com/J107054343W" target="_blank" rel="noopener noreferrer">
+                        <Button size="sm" className="bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl shadow-lg shadow-amber-100">
+                          UPGRADE PARA PREMIUM
+                        </Button>
+                      </a>
+                    )}
+                  </div>
+                </div>
               </Card>
             </div>
           )}
