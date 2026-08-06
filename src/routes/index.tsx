@@ -1863,10 +1863,13 @@ function SAPSDQuestApp() {
                   className={`w-full justify-start h-12 px-3 py-2 rounded-xl gap-3 ${activeTab === item.id ? "bg-indigo-600 text-white shadow-md shadow-indigo-100" : "text-slate-500 hover:bg-indigo-50 hover:text-indigo-600"}`}
                   onClick={() => {
                     if (item.premium) {
-                      // Check if user is "admin@aam.com.br" to allow access for free
-                      if (userName.toLowerCase() !== "admin@aam.com.br") {
+                      // Allow access for specific test email and check if user has premium flag in localStorage
+                      const userEmail = userName.toLowerCase();
+                      const isPremiumUser = userEmail === "admin@aam.com.br" || localStorage.getItem("sap-quest-premium") === "true";
+                      
+                      if (!isPremiumUser) {
                         setFeedbackState("review");
-                        setHintMessage("🌟 RECURSO PREMIUM: Este módulo está disponível apenas no Plano Premium. Adquira agora para acessar simuladores de prova e testes de perfil!");
+                        setHintMessage("🌟 RECURSO PREMIUM: Este módulo está disponível apenas no Plano Premium. Adquira agora para acessar simuladores de prova, perfis profissionais e conteúdos exclusivos!");
                         toast.info("Módulo Premium bloqueado.");
                         return;
                       }
@@ -2628,6 +2631,28 @@ function SAPSDQuestApp() {
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-bold text-slate-700">Tema do Simulador</span>
                     <Badge variant="outline" className="bg-slate-50 text-slate-500 font-bold px-3 py-1">Padrão do Sistema</Badge>
+                  </div>
+                </div>
+                <div className="pt-8 border-t border-slate-100 space-y-4">
+                  <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                    <Crown className="size-4 text-amber-500" /> Assinatura Premium
+                  </h3>
+                  <div className="flex items-center justify-between p-4 bg-amber-50 rounded-2xl border border-amber-100">
+                    <div>
+                      <h4 className="text-sm font-bold text-amber-900">Status da Assinatura</h4>
+                      <p className="text-xs text-amber-700">
+                        {localStorage.getItem("sap-quest-premium") === "true" || userName.toLowerCase() === "admin@aam.com.br" 
+                          ? "Assinante Premium Ativo" 
+                          : "Plano Gratuito / Trial"}
+                      </p>
+                    </div>
+                    {!(localStorage.getItem("sap-quest-premium") === "true" || userName.toLowerCase() === "admin@aam.com.br") && (
+                      <a href="https://pay.hotmart.com/J107054343W" target="_blank" rel="noopener noreferrer">
+                        <Button size="sm" className="bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl shadow-lg shadow-amber-100">
+                          UPGRADE PARA PREMIUM
+                        </Button>
+                      </a>
+                    )}
                   </div>
                 </div>
               </Card>
