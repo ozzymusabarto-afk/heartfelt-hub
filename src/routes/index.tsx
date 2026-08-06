@@ -13,6 +13,7 @@ import {
 } from 'recharts';
 import { MISSIONS as missions, type Mission } from "@/data/missions";
 import { CERTIFICATION_QUESTIONS, type CertificationQuestion } from "@/data/certificationQuestions";
+import { PROFILE_TEST_QUESTIONS, PROFILE_METADATA, type SAPProfile, type ProfileQuestion } from "@/data/profileTestQuestions";
 
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
