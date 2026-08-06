@@ -32,12 +32,55 @@ export const Route = createFileRoute("/")({
 });
 
 // Correct data is now handled per mission from missions.ts
-const getRandomMissionIndex = (excludeIndex?: number) => {
+const getRandomMissionIndex = (excludeIndex?: number, reinforcementQueue: string[] = []) => {
+  // If there's a mission in the reinforcement queue, and it's not the same as the current one,
+  // we have a chance to pick it (spaced repetition)
+  if (reinforcementQueue.length > 0 && Math.random() > 0.4) {
+    const queueIndex = missions.findIndex(m => m.id === reinforcementQueue[0]);
+    if (queueIndex !== -1 && queueIndex !== excludeIndex) {
+      return queueIndex;
+    }
+  }
+
   let newIndex;
   do {
     newIndex = Math.floor(Math.random() * missions.length);
   } while (newIndex === excludeIndex && missions.length > 1);
   return newIndex;
+};
+
+const randomizeMissionData = (mission: Mission): Mission => {
+  const materials = ["MAT-SD-015", "MAT-SD-020", "MAT-SD-030", "MAT-SD-045"];
+  const incoterms = ["FOB", "CIF"];
+  const paymentConds = ["ZF30", "ZF60", "ZB00"];
+  const quantities = ["10", "25", "50", "80", "100", "150"];
+
+  const randomValue = (arr: string[]) => arr[Math.floor(Math.random() * arr.length)];
+  
+  // Create a deep copy to avoid mutating the original mission
+  const newMission = JSON.parse(JSON.stringify(mission));
+  
+  newMission.expectedData.material = randomValue(materials);
+  newMission.expectedData.incoterms = randomValue(incoterms);
+  newMission.expectedData.condPagto = randomValue(paymentConds);
+  newMission.expectedData.quantidade = randomValue(quantities);
+  
+  // Randomize customer from master if not BP
+  if (mission.transaction !== "BP") {
+    const customers = ["208015", "208016", "208017", "208018", "208019"];
+    newMission.expectedData.cliente = randomValue(customers);
+  }
+
+  // Update dialog text with new values
+  newMission.chefeHugoDialog = newMission.chefeHugoDialog
+    .replace(/\bMAT-SD-\d+\b/g, newMission.expectedData.material)
+    .replace(/\b\d+ unidades\b/g, `${newMission.expectedData.quantidade} unidades`)
+    .replace(/\b\d+ peças\b/g, `${newMission.expectedData.quantidade} peças`)
+    .replace(/\bfrete \w+\b/g, `frete ${newMission.expectedData.incoterms}`)
+    .replace(/\bCondição \w+\b/g, `Condição ${newMission.expectedData.condPagto}`)
+    .replace(/\bZF\d+\b/g, newMission.expectedData.condPagto);
+
+  return newMission;
 };
 
 function HugoAvatar({ className }: { className?: string }) {
@@ -67,7 +110,15 @@ function SAPSDQuestApp() {
   const [onboardingStep, setOnboardingStep] = useState(0);
 
   const [currentMissionIndex, setCurrentMissionIndex] = useState(0);
-  const currentMission = missions[currentMissionIndex]!;
+  const [activeMission, setActiveMission] = useState<Mission | null>(null);
+  
+  const currentMission = useMemo((): Mission => {
+    if (activeMission && activeMission.id === missions[currentMissionIndex]?.id) {
+       return activeMission;
+    }
+    const baseMission = missions[currentMissionIndex] || missions[0];
+    return baseMission!;
+  }, [currentMissionIndex, activeMission]);
 
   const [selectedTransaction, setSelectedTransaction] = useState("");
   const [mode, setMode] = useState("standard");
@@ -110,6 +161,7 @@ function SAPSDQuestApp() {
     missionName?: string;
     progressAtTime?: number;
   }[]>([]);
+  const [reinforcementQueue, setReinforcementQueue] = useState<string[]>([]);
   const [historyPeriod, setHistoryPeriod] = useState<"all" | "7d" | "30d">("all");
   const [historySearch, setHistorySearch] = useState("");
   const [lastStateBeforeReset, setLastStateBeforeReset] = useState<any>(null);
@@ -404,7 +456,7 @@ function SAPSDQuestApp() {
 
     window.addEventListener("storage", handleStorageChange);
     return () => window.removeEventListener("storage", handleStorageChange);
-  }, [formData, selectedTransaction, xp, completedMissions, currentMissionIndex, feedbackState, mode]);
+  }, [formData, selectedTransaction, xp, completedMissions, currentMissionIndex, feedbackState, mode, reinforcementQueue]);
 
   // Shortcut for F1 Help and Keyboard Access
   useEffect(() => {
@@ -544,6 +596,11 @@ function SAPSDQuestApp() {
         toast.info("Validação OK! Revise antes de enviar.");
       } else {
         setFeedbackState("success");
+        // Remove from reinforcement queue if completed successfully
+        if (reinforcementQueue.includes(currentMission.id)) {
+          setReinforcementQueue(prev => prev.filter(id => id !== currentMission.id));
+        }
+
         const isVL01N = currentMission.transaction === "VL01N";
         const isVF01 = currentMission.transaction === "VF01";
         const docPrefix = isVL01N ? "Remessa de Entrega" : isVF01 ? "Fatura de Venda (NF-e)" : "Ordem de Venda Standard";
@@ -577,6 +634,10 @@ function SAPSDQuestApp() {
       }
     } else {
       setFeedbackState("error");
+      // Add to reinforcement queue on error
+      if (!reinforcementQueue.includes(currentMission.id)) {
+        setReinforcementQueue(prev => [...prev, currentMission.id]);
+      }
       setHintMessage(currentMission.errorFeedback + " " + localHint);
       setTrainingHistory(prev => [{
         id: Math.random().toString(36).substr(2, 9),
@@ -593,12 +654,22 @@ function SAPSDQuestApp() {
   };
 
   const nextMission = () => {
-    const nextIdx = getRandomMissionIndex(currentMissionIndex);
-    const nextM = missions[nextIdx];
+    const nextIdx = getRandomMissionIndex(currentMissionIndex, reinforcementQueue);
+    let nextM = missions[nextIdx] || missions[0];
+    
+    // If it's a reinforced mission, randomize its data
+    if (nextM && reinforcementQueue.includes(nextM.id)) {
+      nextM = randomizeMissionData(nextM);
+      setActiveMission(nextM);
+    } else {
+      setActiveMission(null);
+    }
+
     setCurrentMissionIndex(nextIdx);
     resetGame();
     if (nextM) {
-      toast.info(`Sorteando Nova Missão: ${nextM.title}`);
+      const isReinforced = reinforcementQueue.includes(nextM.id);
+      toast.info(isReinforced ? `Reforço de Aprendizado: ${nextM.title}` : `Sorteando Nova Missão: ${nextM.title}`);
     }
   };
 
