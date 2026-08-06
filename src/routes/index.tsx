@@ -1365,7 +1365,6 @@ function SAPSDQuestApp() {
 
     // Dynamic validation logic based on Transaction
     if (selectedTransaction === "BP") {
-      // Missions M19 and M20 require code and function
       if (!formData.partnerCode || formData.partnerCode !== currentMission.expectedData.cliente) {
         errors.push("partnerCode");
         localHint = `Código do Parceiro incorreto. Esperado: ${currentMission.expectedData.cliente}`;
@@ -1374,19 +1373,14 @@ function SAPSDQuestApp() {
         localHint = `Organização de Vendas incorreta. Esperado: ${currentMission.expectedData.orgVendas}`;
       }
     } else if (selectedTransaction === "VL01N") {
-      // Logic for delivery
       if (!formData.salesOrg || formData.salesOrg !== "1000") {
         errors.push("salesOrg");
         localHint = `Ponto de Expedição incorreto. Esperado: 1000`;
-      } else if (!formData.partnerCategory || formData.partnerCategory !== "REF-ORDEM") {
-         // Validation would be more specific in real scenario
       }
     } else if (selectedTransaction === "VF01") {
        // Logic for billing
-    } else if (selectedTransaction === "VA05" || selectedTransaction === "V.02") {
-       // Logic for reports
     } else {
-      // Standard VA01 logic
+      // Standard Sales Orders (VA01, etc)
       if (!formData.orderType || formData.orderType !== currentMission.expectedData.tipoOrdem) {
         errors.push("orderType");
         localHint = `Tipo de ordem incorreto. Esperado: ${currentMission.expectedData.tipoOrdem}`;
@@ -1413,7 +1407,7 @@ function SAPSDQuestApp() {
         localHint = `Setor de Atividade incorreto. Esperado: ${currentMission.expectedData.setorAtiv}`;
       } else if (!formData.partnerFunction || formData.partnerFunction !== currentMission.expectedData.condPagto) {
         errors.push("partnerFunction");
-        localHint = `Condição de Pagamento incorreta. Esperado: ${currentMission.expectedData.condPagto}`;
+        localHint = `Condição de Pagamento/Função incorreta. Esperado: ${currentMission.expectedData.condPagto}`;
       }
     }
 
