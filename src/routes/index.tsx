@@ -1515,6 +1515,7 @@ function SAPSDQuestApp() {
     setValidationErrors([]);
     setHintMessage("");
     setSelectedTransaction("");
+    setFormTab("header");
     setFormData({
       orderType: "", orderDate: "", salesOrg: "", deliveryDate: "",
       distChannel: "", paymentCond: "", customer: "", quantity: "", material: "",
