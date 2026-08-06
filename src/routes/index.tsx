@@ -29,6 +29,15 @@ import { toast } from "sonner";
 
 export const Route = createFileRoute("/")({
   component: SAPSDQuestApp,
+  head: () => ({
+    title: "SAP SD Quest | Simulador AAM LOGÍSTICA",
+    meta: [
+      { name: "description", content: "Simulador gamificado de SAP SD para treinamento de consultores na AAM LOGÍSTICA LTDA." },
+      { property: "og:title", content: "SAP SD Quest - Domine o Order-to-Cash" },
+      { property: "og:description", content: "Treinamento prático com Chefe Hugo. 170 missões de Trainee a Sênior." },
+      { name: "twitter:card", content: "summary_large_image" }
+    ]
+  }),
 });
 
 // Correct data is now handled per mission from missions.ts
