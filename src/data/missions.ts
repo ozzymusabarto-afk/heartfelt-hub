@@ -10,11 +10,11 @@ export interface Mission {
     orgVendas: string;
     canalDist: string;
     setorAtiv: string;
-    cliente: string;
-    material: string;
+    partnerCode: string;
+    materialCode: string;
     quantidade: string;
-    incoterms: string;
-    condPagto: string;
+    headerIncoterms: string;
+    partnerFunction: string;
   };
   f1Help: {
     title: string;
