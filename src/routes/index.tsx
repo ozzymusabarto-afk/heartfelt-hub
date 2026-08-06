@@ -1025,19 +1025,19 @@ function SAPSDQuestApp() {
       <div className="flex-1 flex flex-col md:flex-row relative">
         <aside className={`fixed inset-y-0 left-0 z-40 w-[260px] bg-card border-r p-6 transform transition-transform md:relative md:translate-x-0 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} h-screen md:h-auto flex flex-col`}>
           <nav className="space-y-1 flex-1">
-            {[
+            {( [
               { icon: Gamepad2, label: "Trilha Principal", sub: "Carreira passo a passo", active: true },
               { icon: Rocket, label: "Treino Rápido", sub: "Desafios aleatórios" },
               { icon: BookOpen, label: "Módulos & Apostila", sub: "Estude por tópico" },
+              { icon: FileText, label: "Simulador de Certificação", sub: "100 questões S/4HANA SD", premium: true },
+              { icon: BarChart3, label: "Perfil Profissional", sub: "Avaliação de competências", premium: true },
               { icon: HelpCircle, label: "Como Usar / Sobre", sub: "Guia e Aviso Legal", action: openOnboarding },
               { icon: Crown, label: "Modos Premium", sub: "Recursos exclusivos" },
               { icon: BarChart3, label: "Estatísticas", sub: "Seu desempenho" },
               { icon: Trophy, label: "Conquistas", sub: "Medalhas e troféus" },
               { icon: Settings, label: "Configurações", sub: "Conta e preferências" },
-
               { icon: Shield, label: "Admin", sub: "Painel de Controle", path: "/admin", adminOnly: true },
-
-            ].map((item) => {
+            ] as any[]).map((item) => {
               const isAdminSession = typeof window !== "undefined" && localStorage.getItem("sap-quest-admin-session") === "true";
               const userData = typeof window !== "undefined" ? localStorage.getItem("sap-quest-data") : null;
               const isAdminProfile = userData ? JSON.parse(userData).isAdmin === true : false;
@@ -1051,11 +1051,28 @@ function SAPSDQuestApp() {
                   key={item.label} 
                   variant="ghost" 
                   className={`w-full justify-start h-12 px-3 py-2 rounded-xl gap-3 ${item.label === "Trilha Principal" ? "bg-indigo-600 text-white shadow-md shadow-indigo-100" : "text-slate-500 hover:bg-indigo-50 hover:text-indigo-600"}`}
-                  onClick={item.action}
+                  onClick={() => {
+                    if (item.premium) {
+                      setFeedbackState("review");
+                      setHintMessage("🌟 RECURSO PREMIUM: Este módulo está disponível apenas no Plano Premium. Adquira agora para acessar simuladores de prova e testes de perfil!");
+                      toast.info("Módulo Premium bloqueado.");
+                      return;
+                    }
+                    if (item.action) item.action();
+                  }}
                 >
-                  <item.icon className={`size-5 ${item.label === "Trilha Principal" ? "text-white" : ""}`} />
+                  <div className="relative">
+                    <item.icon className={`size-5 ${item.label === "Trilha Principal" ? "text-white" : ""}`} />
+                    {item.premium && (
+                      <div className="absolute -top-1.5 -right-1.5 bg-amber-500 rounded-full border border-white p-0.5 shadow-sm">
+                        <Shield className="size-2 text-white fill-white" />
+                      </div>
+                    )}
+                  </div>
                   <div className="flex flex-col items-start text-left">
-                    <span className="text-xs font-bold leading-tight">{item.label}</span>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-xs font-bold leading-tight">{item.label}</span>
+                    </div>
                     <span className={`text-[9px] ${item.label === "Trilha Principal" ? "text-indigo-100" : "text-slate-400"}`}>{item.sub}</span>
                   </div>
                 </Button>
