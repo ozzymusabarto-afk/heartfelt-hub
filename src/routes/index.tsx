@@ -3158,6 +3158,191 @@ function SAPSDQuestApp() {
           </div>
         </div>
       )}
+
+      {/* MODAL DE IMPRESSÃO / DOWNLOAD ESTILIZADO */}
+      {isPDFPreviewOpen && (
+        <div className="fixed inset-0 z-[120] bg-slate-900/80 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-300">
+          <Card className="w-full max-w-4xl max-h-[90vh] flex flex-col bg-white rounded-3xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300 border-none">
+            {/* Header do Modal */}
+            <div className="px-8 py-6 border-b border-slate-100 flex items-center justify-between bg-white shrink-0">
+              <div className="flex items-center gap-3">
+                <div className="bg-indigo-600 p-2 rounded-xl text-white shadow-lg shadow-indigo-100">
+                  <Printer className="size-5" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-black text-slate-800 tracking-tight leading-none uppercase">Pré-visualização da Ficha Técnica</h3>
+                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">SAP SD Quest • Documento Oficial</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <Button variant="ghost" size="sm" onClick={() => setIsPDFPreviewOpen(false)} className="font-bold text-slate-400 hover:text-slate-600 hover:bg-slate-50 rounded-xl">
+                  FECHAR
+                </Button>
+                <Button onClick={downloadPDFReport} className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl px-6 shadow-lg shadow-indigo-100 gap-2">
+                  <Download className="size-4" /> BAIXAR AGORA
+                </Button>
+              </div>
+            </div>
+
+            {/* Conteúdo Imprimível */}
+            <div className="flex-1 overflow-y-auto p-8 bg-slate-50/50">
+              <div 
+                id="pdf-report-content" 
+                className="bg-white shadow-sm border border-slate-200 mx-auto w-full max-w-[700px] p-10 font-sans text-slate-800 relative min-h-[900px]"
+              >
+                {/* Cabeçalho Bonito */}
+                <div className="flex justify-between items-start border-b-2 border-indigo-600 pb-6 mb-8">
+                  <div className="space-y-1">
+                    <h1 className="text-2xl font-black text-indigo-900 leading-none">SAP SD Quest</h1>
+                    <p className="text-sm font-bold text-indigo-600 uppercase tracking-widest">Ficha Técnica de Missão</p>
+                    <div className="mt-4 flex items-center gap-4">
+                      <div className="text-[10px]">
+                        <p className="text-slate-400 font-bold uppercase leading-none mb-1">Empresa</p>
+                        <p className="font-black text-slate-800 uppercase">AAM LOGÍSTICA LTDA</p>
+                      </div>
+                      <div className="h-6 w-px bg-slate-200" />
+                      <div className="text-[10px]">
+                        <p className="text-slate-400 font-bold uppercase leading-none mb-1">ID Documento</p>
+                        <p className="font-mono font-bold text-slate-800">#{Math.random().toString(36).substring(7).toUpperCase()}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="bg-indigo-50 px-4 py-2 rounded-xl border border-indigo-100 mb-2">
+                      <p className="text-[9px] text-indigo-600 font-black uppercase mb-0.5 tracking-tighter">Status da Missão</p>
+                      <p className="text-sm font-black text-indigo-900 uppercase">Concluída</p>
+                    </div>
+                    <p className="text-[10px] text-slate-400 font-medium italic">Gerado em {new Date().toLocaleDateString()}</p>
+                  </div>
+                </div>
+
+                {/* Info Consultora */}
+                <div className="grid grid-cols-2 gap-8 mb-8">
+                  <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+                      <UserCircle className="size-3 text-indigo-600" /> Dados da Consultora
+                    </p>
+                    <div className="space-y-2">
+                      <div className="flex justify-between">
+                        <span className="text-xs text-slate-500 font-medium">Nome:</span>
+                        <span className="text-xs font-black text-slate-800">{userName}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-xs text-slate-500 font-medium">Sênioridade:</span>
+                        <span className="text-xs font-black text-indigo-600 uppercase">{seniorityLevel}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-xs text-slate-500 font-medium">Progresso Técnico:</span>
+                        <span className="text-xs font-black text-slate-800">{completedMissions} Missões</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+                      <Target className="size-3 text-indigo-600" /> Detalhes da Missão
+                    </p>
+                    <div className="space-y-2">
+                      <div className="flex justify-between">
+                        <span className="text-xs text-slate-500 font-medium">Título:</span>
+                        <span className="text-xs font-black text-slate-800 truncate ml-4 max-w-[150px]">{currentMission.title}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-xs text-slate-500 font-medium">Transação:</span>
+                        <span className="text-xs font-mono font-black text-indigo-600">{currentMission.transaction}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-xs text-slate-500 font-medium">XP Ganhos:</span>
+                        <span className="text-xs font-black text-emerald-600">+25 XP</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Mensagem Hugo */}
+                <div className="mb-8">
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+                    <Lightbulb className="size-3 text-amber-500" /> Solicitação do Business (Chefe Hugo)
+                  </p>
+                  <div className="p-5 bg-amber-50 rounded-2xl border border-amber-100 text-xs text-slate-700 leading-relaxed italic">
+                    "{currentMission.chefeHugoDialog}"
+                  </div>
+                </div>
+
+                {/* Tabela de Dados */}
+                <div className="mb-8">
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+                    <ClipboardList className="size-3 text-indigo-600" /> Parâmetros de Entrada e Validação
+                  </p>
+                  <div className="border border-slate-200 rounded-xl overflow-hidden">
+                    <table className="w-full text-[11px] border-collapse">
+                      <thead className="bg-slate-100 text-slate-500 uppercase font-black tracking-tighter">
+                        <tr>
+                          <th className="px-4 py-2 text-left border-b border-r border-slate-200">Campo SAP</th>
+                          <th className="px-4 py-2 text-left border-b border-r border-slate-200">Valor Informado</th>
+                          <th className="px-4 py-2 text-left border-b border-slate-200">Elemento Técnico</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100">
+                        {Object.entries(currentMission.expectedData).map(([key, value]) => {
+                          const meta = FIELD_METADATA[key as keyof typeof FIELD_METADATA];
+                          if (!meta) return null;
+                          return (
+                            <tr key={key} className="hover:bg-slate-50/50">
+                              <td className="px-4 py-2 font-bold text-slate-700 border-r border-slate-100">{meta.label}</td>
+                              <td className="px-4 py-2 font-mono font-bold text-indigo-600 border-r border-slate-100">{String(value)}</td>
+                              <td className="px-4 py-2 text-slate-400 font-mono text-[9px]">{meta.table}</td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                {/* Estudo e Tabelas Transparentes */}
+                <div className="grid grid-cols-2 gap-8 pt-6 border-t border-slate-100">
+                  <div>
+                    <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-3">Conceitos Técnicos de Revisão</p>
+                    <div className="space-y-3">
+                      <div className="flex gap-2 items-start">
+                        <div className="size-1.5 rounded-full bg-indigo-500 mt-1" />
+                        <p className="text-[10px] text-slate-600 leading-snug">
+                          <b>{currentMission.f1Help.title}:</b> {currentMission.f1Help.concept}
+                        </p>
+                      </div>
+                      <div className="flex gap-2 items-start">
+                        <div className="size-1.5 rounded-full bg-indigo-500 mt-1" />
+                        <p className="text-[10px] text-slate-600 leading-snug">
+                          <b>Regra Local:</b> {currentMission.f1Help.brazilRule}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-3">Tabelas Transparentes Impactadas</p>
+                    <div className="flex flex-wrap gap-2">
+                      {["BUT000", "KNA1", "VBAK", "VBAP", "KNVV"].map(t => (
+                        <div key={t} className="px-2 py-1 bg-slate-100 rounded text-[9px] font-mono font-black text-slate-500 border border-slate-200">
+                          {t}
+                        </div>
+                      ))}
+                    </div>
+                    <p className="text-[9px] text-slate-400 mt-4 leading-relaxed font-medium">
+                      Nota: Em ambiente de produção, certifique-se de validar o fluxo de documentos via VA03 -> Fluxo de Documentos.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Footer do PDF */}
+                <div className="absolute bottom-10 left-10 right-10 flex justify-between items-center text-[8px] text-slate-300 font-bold uppercase tracking-[0.2em]">
+                  <span>AAM Logística LTDA • SAP SD Quest v1.5</span>
+                  <span>Documento de Treinamento Técnico</span>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </div>
+      )}
     </div>
   );
 }
