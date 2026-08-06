@@ -258,17 +258,17 @@ function ProfileTestModule() {
             {metadata.description}
           </p>
 
-          <div className="w-full max-w-2xl grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+          <div className="w-full max-w-3xl grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <div className="space-y-4">
               <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                <Star className="size-3 text-amber-500 fill-amber-500" /> Afinidade por Categoria
+                <Star className="size-3 text-amber-500 fill-amber-500" /> Afinidade
               </h4>
               <div className="space-y-3">
                 {results.map((res) => (
                   <div key={res.profile} className="space-y-1.5">
                     <div className="flex items-center justify-between text-[10px] font-bold">
-                      <span className="text-slate-600">{PROFILE_METADATA[res.profile].title}</span>
-                      <span className="text-indigo-600">{res.percentage}%</span>
+                      <span className="text-slate-600 truncate mr-2">{PROFILE_METADATA[res.profile].title}</span>
+                      <span className="text-indigo-600 shrink-0">{res.percentage}%</span>
                     </div>
                     <Progress value={res.percentage} className="h-1.5 bg-slate-100" />
                   </div>
@@ -278,20 +278,34 @@ function ProfileTestModule() {
 
             <div className="space-y-4">
               <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                <CheckCircle2 className="size-3 text-emerald-500" /> Seus Pontos Fortes
+                <CheckCircle2 className="size-3 text-emerald-500" /> Pontos Fortes
               </h4>
               <div className="grid grid-cols-1 gap-2">
                 {metadata.strengths.map((s, i) => (
-                  <div key={i} className="flex items-center gap-2 p-2 bg-emerald-50/50 rounded-lg border border-emerald-100/50">
+                  <div key={i} className="flex items-center gap-2 p-2 bg-emerald-50/50 rounded-xl border border-emerald-100/50">
                     <Check className="size-3 text-emerald-600" />
-                    <span className="text-[11px] font-bold text-slate-700">{s}</span>
+                    <span className="text-[10px] font-bold text-slate-700 leading-tight">{s}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                <AlertCircle className="size-3 text-indigo-500" /> A Desenvolver
+              </h4>
+              <div className="grid grid-cols-1 gap-2">
+                {metadata.developmentPoints.map((dp, i) => (
+                  <div key={i} className="flex items-center gap-2 p-2 bg-indigo-50/50 rounded-xl border border-indigo-100/50">
+                    <ArrowRight className="size-3 text-indigo-600" />
+                    <span className="text-[10px] font-bold text-slate-700 leading-tight">{dp}</span>
                   </div>
                 ))}
               </div>
             </div>
           </div>
 
-          <div className="w-full max-w-2xl bg-slate-50 rounded-2xl border border-slate-100 p-6 mb-8">
+          <div className="w-full max-w-3xl bg-slate-50 rounded-3xl border border-slate-100 p-8 mb-8">
             <div className="flex items-center gap-3 mb-4">
               <HugoAvatar className="size-10" />
               <div>
@@ -299,26 +313,39 @@ function ProfileTestModule() {
                 <p className="text-[10px] text-slate-400 font-medium">Plano de Carreira Personalizado</p>
               </div>
             </div>
-            <p className="text-xs text-slate-600 leading-relaxed mb-4">
+            <p className="text-sm text-slate-600 leading-relaxed mb-6">
               {metadata.recommendations}
             </p>
             <div className="flex flex-wrap gap-2">
-              <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest w-full mb-1">Transações Sugeridas</span>
+              <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest w-full mb-1">Transações Sugeridas para Focar</span>
               {metadata.transactions.map(t => (
-                <Badge key={t} variant="outline" className="bg-white border-slate-200 text-slate-600 font-mono text-[10px] px-2">
+                <Badge key={t} variant="outline" className="bg-white border-slate-200 text-slate-600 font-mono text-[10px] px-2 py-0.5 rounded-lg shadow-sm">
                   {t}
                 </Badge>
               ))}
             </div>
           </div>
 
-          <Button 
-            onClick={() => setTestState("intro")}
-            variant="outline"
-            className="border-slate-200 text-slate-500 font-bold rounded-xl"
-          >
-            REFAZER TESTE
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Button 
+              onClick={() => setTestState("intro")}
+              variant="outline"
+              className="border-slate-200 text-slate-500 font-bold rounded-xl h-12 px-6"
+            >
+              REFAZER TESTE
+            </Button>
+            <Button 
+              onClick={() => {
+                const percentage = results[0]?.percentage || 0;
+                const text = `Meu perfil SAP SD é: ${metadata.title} (${percentage}%). Descubra o seu no SAP SD Quest!`;
+                navigator.clipboard.writeText(text);
+                toast.success("Resultado copiado para a área de transferência!");
+              }}
+              className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl h-12 px-6 gap-2"
+            >
+              <Download className="size-4" /> COMPARTILHAR RESULTADO
+            </Button>
+          </div>
         </Card>
       </div>
     );
@@ -1812,7 +1839,7 @@ function SAPSDQuestApp() {
               { id: "quick", icon: Rocket, label: "Treino Rápido", sub: "Desafios aleatórios" },
               { id: "docs", icon: BookOpen, label: "Módulos & Apostila", sub: "Estude por tópico" },
               { id: "certification", icon: FileText, label: "Simulador de Certificação", sub: "100 questões S/4HANA SD", premium: true },
-              { id: "profile", icon: BarChart3, label: "Perfil Profissional", sub: "Avaliação de competências", premium: true },
+              { id: "profile", icon: BarChart3, label: "Perfil Profissional", sub: "Avaliação de competências", premium: false },
               { id: "about", icon: HelpCircle, label: "Como Usar / Sobre", sub: "Guia e Aviso Legal", action: openOnboarding },
               { id: "premium", icon: Crown, label: "Modos Premium", sub: "Recursos exclusivos" },
               { id: "stats", icon: BarChart3, label: "Estatísticas", sub: "Seu desempenho" },
