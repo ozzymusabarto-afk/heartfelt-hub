@@ -1834,6 +1834,15 @@ function SAPSDQuestApp() {
               certificateRef={certificateRef}
             />
           )}
+          {activeTab === "certificate" && (
+            <CertificateModule 
+              completedMissions={completedMissions} 
+              xp={xp} 
+              certName={certName} 
+              setCertName={setCertName} 
+              certificateRef={certificateRef}
+            />
+          )}
           {activeTab === "main" && (
             <>
 
