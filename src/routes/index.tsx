@@ -1,12 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect, useRef, useMemo } from "react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 import { 
   Rocket, Target, BookOpen, Crown, BarChart3, Trophy, Settings, 
   ChevronRight, HelpCircle, CheckCircle2, Flame, Star, Shield,
   Search, Bell, Plus, MoreHorizontal, ArrowRight, Check, Menu, X,
   Gamepad2, Dices, User, UserCheck, Eye, EyeOff, LogIn,
   FileText, Undo2, ChevronDown, LogOut, ClipboardList, Timer, 
-  AlertCircle, ChevronLeft, Award
+  AlertCircle, ChevronLeft, Award, Download, Printer, UserCircle
 } from "lucide-react";
 import { 
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area 
@@ -631,6 +633,191 @@ function CertificationModule() {
   return null;
 }
 
+function CertificateModule({ completedMissions, xp, certName, setCertName, certificateRef }: { 
+  completedMissions: number, 
+  xp: number, 
+  certName: string, 
+  setCertName: (val: string) => void,
+  certificateRef: React.RefObject<HTMLDivElement | null>
+}) {
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [showCertificate, setShowCertificate] = useState(false);
+  
+  const totalMissions = missions.length;
+  const progressPercent = Math.round((completedMissions / totalMissions) * 100);
+  const isEligible = progressPercent >= 5 || completedMissions >= 5; // Lowered for testing, usually 80% or complete
+  
+  const seniorityLevel = completedMissions >= 131 ? "Sênior" : 
+                        completedMissions >= 81 ? "Pleno" : 
+                        completedMissions >= 41 ? "Júnior" : "Trainee";
+
+  const handleDownload = async () => {
+    if (!certificateRef.current) return;
+    setIsGenerating(true);
+    try {
+      const canvas = await html2canvas(certificateRef.current, {
+        scale: 3,
+        useCORS: true,
+        backgroundColor: "#ffffff"
+      });
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF({
+        orientation: "landscape",
+        unit: "px",
+        format: [canvas.width, canvas.height]
+      });
+      pdf.addImage(imgData, "PNG", 0, 0, canvas.width, canvas.height);
+      pdf.save(`Certificado_SAP_SD_Quest_${certName.replace(/\s+/g, "_")}.pdf`);
+      toast.success("Certificado baixado com sucesso!");
+    } catch (error) {
+      console.error("Erro ao gerar PDF:", error);
+      toast.error("Erro ao gerar o certificado. Tente novamente.");
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
+  if (!showCertificate) {
+    return (
+      <Card className="flex-1 p-8 flex flex-col items-center justify-center bg-white border-slate-200 rounded-3xl animate-in fade-in zoom-in-95 duration-300">
+        <div className="size-20 bg-amber-100 rounded-3xl flex items-center justify-center text-amber-600 mb-6 shadow-xl shadow-amber-50">
+          <Award className="size-10" />
+        </div>
+        <h2 className="text-3xl font-black text-slate-800 mb-4 tracking-tight">Emissão de Certificado</h2>
+        
+        {!isEligible ? (
+          <div className="text-center max-w-md">
+            <p className="text-slate-600 mb-6 leading-relaxed">
+              Para emitir seu certificado de conclusão prática, você precisa concluir pelo menos 5 missões do simulador.
+            </p>
+            <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 mb-8">
+              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Seu Progresso Atual</p>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs font-bold text-slate-700">{completedMissions} de {totalMissions} missões</span>
+                <span className="text-xs font-black text-indigo-600">{progressPercent}%</span>
+              </div>
+              <Progress value={progressPercent} className="h-2" />
+            </div>
+            <Button onClick={() => window.location.reload()} className="bg-indigo-600 text-white font-bold rounded-xl px-8">
+              CONTINUAR MISSÕES
+            </Button>
+          </div>
+        ) : (
+          <div className="w-full max-w-md space-y-6">
+            <p className="text-slate-600 text-center leading-relaxed">
+              Parabéns! Você atingiu os requisitos para a certificação prática em SAP S/4HANA SD. Confirme seu nome para o documento:
+            </p>
+            
+            <div className="space-y-2">
+              <Label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Nome Completo no Certificado</Label>
+              <Input 
+                value={certName} 
+                onChange={(e) => setCertName(e.target.value)}
+                placeholder="Ex: João da Silva Santos"
+                className="h-12 rounded-xl border-slate-200 focus:ring-indigo-500"
+              />
+            </div>
+
+            <Button 
+              disabled={!certName.trim()}
+              onClick={() => setShowCertificate(true)}
+              className="w-full h-14 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl shadow-lg shadow-indigo-100 gap-2 text-lg transition-all active:scale-95"
+            >
+              GERAR PRÉVIA <ArrowRight className="size-5" />
+            </Button>
+          </div>
+        )}
+      </Card>
+    );
+  }
+
+  const authCode = useMemo(() => Math.random().toString(36).substring(2, 10).toUpperCase() + "-" + Math.random().toString(36).substring(2, 6).toUpperCase(), []);
+  const issueDate = new Date().toLocaleDateString('pt-BR');
+
+  return (
+    <div className="flex-1 flex flex-col gap-6 animate-in fade-in duration-300">
+      <div className="flex items-center justify-between bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+        <Button variant="ghost" onClick={() => setShowCertificate(false)} className="gap-2 text-slate-500 font-bold">
+          <ChevronLeft className="size-4" /> VOLTAR
+        </Button>
+        <div className="flex gap-3">
+          <Button 
+            onClick={handleDownload} 
+            disabled={isGenerating}
+            className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl gap-2 shadow-md shadow-indigo-100"
+          >
+            {isGenerating ? <Timer className="size-4 animate-spin" /> : <Download className="size-4" />}
+            BAIXAR EM PDF
+          </Button>
+        </div>
+      </div>
+
+      <div className="overflow-x-auto pb-8">
+        <div 
+          ref={certificateRef}
+          className="min-w-[1000px] aspect-[1.414/1] bg-white border-[16px] border-double border-indigo-900 p-16 flex flex-col items-center justify-between text-center shadow-2xl mx-auto relative overflow-hidden"
+          style={{ fontFamily: "'Fraunces', serif" }}
+        >
+          {/* Background Decorations */}
+          <div className="absolute top-0 right-0 size-64 bg-indigo-50 rounded-full -mr-32 -mt-32 opacity-50" />
+          <div className="absolute bottom-0 left-0 size-64 bg-indigo-50 rounded-full -ml-32 -mb-32 opacity-50" />
+          
+          <div className="z-10 w-full flex flex-col items-center flex-1 justify-center space-y-8">
+            <div className="space-y-2">
+              <Trophy className="size-16 text-indigo-900 mx-auto mb-4" />
+              <h1 className="text-5xl font-black text-indigo-950 tracking-tight leading-none uppercase">
+                Certificado de Conclusão Prática
+              </h1>
+              <p className="text-xl font-bold text-indigo-600 tracking-[0.2em] uppercase">
+                SAP S/4HANA Sales and Distribution (SD)
+              </p>
+            </div>
+
+            <div className="space-y-6 max-w-3xl">
+              <p className="text-slate-500 text-lg italic">Certificamos que</p>
+              <h2 className="text-6xl font-black text-slate-900 border-b-4 border-indigo-900 pb-4 inline-block px-12">
+                {certName}
+              </h2>
+              <p className="text-xl text-slate-700 leading-relaxed font-sans">
+                concluiu com êxito a jornada de treinamento prático no simulador <b>SAP SD Quest</b>, demonstrando proficiência na execução de processos operacionais de Vendas e Distribuição, abrangendo desde a manutenção de dados mestres até o faturamento e monitoramento de KPIs.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-3 gap-12 w-full max-w-4xl py-8 border-y border-slate-100 font-sans">
+              <div>
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Missões Concluídas</p>
+                <p className="text-2xl font-black text-indigo-900">{completedMissions}</p>
+              </div>
+              <div>
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Nível Técnico</p>
+                <p className="text-2xl font-black text-indigo-900 uppercase tracking-tight">{seniorityLevel}</p>
+              </div>
+              <div>
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Desempenho (XP)</p>
+                <p className="text-2xl font-black text-indigo-900">{xp.toLocaleString()}</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="z-10 w-full flex items-end justify-between font-sans">
+            <div className="text-left space-y-1">
+              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Autenticidade</p>
+              <p className="text-xs font-mono font-bold text-slate-600">{authCode}</p>
+              <p className="text-[9px] text-slate-400">Emissão: {issueDate}</p>
+            </div>
+            
+            <div className="text-right max-w-sm">
+              <p className="text-[8px] text-slate-400 leading-tight italic">
+                O SAP SD Quest é uma plataforma educacional e simulador independente de propriedade da AAM LOGÍSTICA LTDA. SAP, S/4HANA e Fiori são marcas registradas da SAP SE.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 
 function SAPSDQuestApp() {
   const [isAuth, setIsAuth] = useState(false);
@@ -638,7 +825,9 @@ function SAPSDQuestApp() {
   const [password, setPassword] = useState("");
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [onboardingStep, setOnboardingStep] = useState(0);
-  const [activeTab, setActiveTab] = useState<"main" | "certification" | "profile">("main");
+  const [activeTab, setActiveTab] = useState<"main" | "certification" | "profile" | "certificate">("main");
+  const [certName, setCertName] = useState("");
+  const certificateRef = useRef<HTMLDivElement>(null);
 
   const [currentMissionIndex, setCurrentMissionIndex] = useState(0);
 
@@ -1581,7 +1770,7 @@ function SAPSDQuestApp() {
                         return;
                       }
                     }
-                    if (item.id === "main" || item.id === "certification" || item.id === "profile") {
+                    if (item.id === "main" || item.id === "certification" || item.id === "profile" || item.id === "certificate") {
                       setActiveTab(item.id as any);
                     }
                     if (item.action) item.action();
@@ -1636,6 +1825,24 @@ function SAPSDQuestApp() {
         </aside>
 
         <main className="bg-slate-50 p-4 flex-1 flex flex-col gap-4">
+          {activeTab === "certificate" && (
+            <CertificateModule 
+              completedMissions={completedMissions} 
+              xp={xp} 
+              certName={certName} 
+              setCertName={setCertName} 
+              certificateRef={certificateRef}
+            />
+          )}
+          {activeTab === "certificate" && (
+            <CertificateModule 
+              completedMissions={completedMissions} 
+              xp={xp} 
+              certName={certName} 
+              setCertName={setCertName} 
+              certificateRef={certificateRef}
+            />
+          )}
           {activeTab === "main" && (
             <>
 
