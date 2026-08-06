@@ -1079,6 +1079,8 @@ function SAPSDQuestApp() {
       const hasCompletedOnboarding = localStorage.getItem("sap-quest-onboarding-done");
       if (!hasCompletedOnboarding) {
         setShowOnboarding(true);
+      } else {
+        setShowWelcomeModal(true);
       }
       toast.success(`Bem-vindo(a), Consultor(a) ${userName}!`);
     } else {
@@ -1089,6 +1091,7 @@ function SAPSDQuestApp() {
   const finishOnboarding = () => {
     localStorage.setItem("sap-quest-onboarding-done", "true");
     setShowOnboarding(false);
+    setShowWelcomeModal(true);
     toast.info("Jornada iniciada! Boa sorte nas demandas.");
   };
 
