@@ -1173,9 +1173,9 @@ function SAPSDQuestApp() {
     
     if (!hasStarted) {
       setFormData({
-        customer: "", poNumber: "", paymentCond: "", salesOrg: "",
+        partnerCode: "", partnerCategory: "", partnerFunction: "", salesOrg: "",
         distChannel: "", division: "", orderType: "", orderDate: "",
-        incoterms: "", material: "", quantity: "", plant: "1000",
+        incoterms: "", materialCode: "", quantity: "", plant: "1000",
         storageLocation: "SL01"
       });
       setSelectedTransaction("");
