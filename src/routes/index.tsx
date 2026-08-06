@@ -854,7 +854,7 @@ function CertificateModule({ completedMissions, xp, certName, setCertName, certi
 
 function SAPSDQuestApp() {
   const [isAuth, setIsAuth] = useState(false);
-  const [userName, setUserName] = useState("");
+  const [userName, setUserName] = useState("Adriana");
   const [password, setPassword] = useState("");
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
