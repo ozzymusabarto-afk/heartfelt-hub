@@ -1816,9 +1816,11 @@ function SAPSDQuestApp() {
               <p className="text-[11px] font-bold text-slate-700 leading-snug mb-3">
                 Quer acelerar sua carreira? Desbloqueie tudo no SAP SD Quest Premium!
               </p>
-              <Button size="sm" className="w-full h-8 bg-indigo-600 text-white text-[10px] font-bold rounded-lg gap-2">
-                ASSINAR AGORA <ArrowRight className="size-3" />
-              </Button>
+              <a href="https://pay.hotmart.com/J107054343W" target="_blank" rel="noopener noreferrer" className="w-full">
+                <Button size="sm" className="w-full h-8 bg-indigo-600 text-white text-[10px] font-bold rounded-lg gap-2 cursor-pointer">
+                  DESBLOQUEAR ACESSO PREMIUM <ArrowRight className="size-3" />
+                </Button>
+              </a>
             </div>
             <Crown className="absolute -right-4 -bottom-4 size-20 text-indigo-200/50 -rotate-12 group-hover:scale-110 transition-transform" />
           </Card>
@@ -2347,9 +2349,11 @@ function SAPSDQuestApp() {
                     </li>
                   ))}
                 </ul>
-                <Button className="w-full h-9 bg-white text-indigo-600 hover:bg-slate-50 text-[10px] font-bold rounded-xl">
-                  QUERO DESBLOQUEAR!
-                </Button>
+                <a href="https://pay.hotmart.com/J107054343W" target="_blank" rel="noopener noreferrer" className="w-full">
+                  <Button className="w-full h-9 bg-white text-indigo-600 hover:bg-slate-50 text-[10px] font-bold rounded-xl cursor-pointer">
+                    DESBLOQUEAR ACESSO PREMIUM
+                  </Button>
+                </a>
               </div>
               <Crown className="absolute -right-6 -bottom-6 size-24 text-indigo-500/30 -rotate-12 group-hover:scale-110 transition-transform" />
             </Card>
