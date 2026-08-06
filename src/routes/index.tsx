@@ -374,6 +374,11 @@ function SAPSDQuestApp() {
     if (savedUser) {
       setUserName(savedUser);
       setIsAuth(true);
+      const hasCompletedOnboarding = localStorage.getItem("sap-quest-onboarding-done");
+      if (!hasCompletedOnboarding) {
+        setShowOnboarding(true);
+      }
+
     }
 
     const hasStarted = sessionStorage.getItem("sap-quest-session-started");
