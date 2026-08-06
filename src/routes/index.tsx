@@ -32,6 +32,13 @@ export const Route = createFileRoute("/")({
 });
 
 // Correct data is now handled per mission from missions.ts
+const getRandomMissionIndex = (excludeIndex?: number) => {
+  let newIndex;
+  do {
+    newIndex = Math.floor(Math.random() * missions.length);
+  } while (newIndex === excludeIndex && missions.length > 1);
+  return newIndex;
+};
 
 function HugoAvatar({ className }: { className?: string }) {
   return (
@@ -257,11 +264,18 @@ function SAPSDQuestApp() {
           if (parsed.xp !== undefined) setXp(parsed.xp);
           if (parsed.completedMissions !== undefined) {
             setCompletedMissions(parsed.completedMissions);
-            setCurrentMissionIndex(parsed.completedMissions);
+          }
+          if (parsed.currentMissionIndex !== undefined) {
+            setCurrentMissionIndex(parsed.currentMissionIndex);
+          } else {
+            setCurrentMissionIndex(getRandomMissionIndex());
           }
         } catch (e) {
           console.error("Erro ao carregar progresso", e);
         }
+      } else {
+        // First time or no data, pick a random mission
+        setCurrentMissionIndex(getRandomMissionIndex());
       }
       
       if (savedHistory) {
@@ -316,9 +330,16 @@ function SAPSDQuestApp() {
           if (parsed.xp !== undefined) setXp(parsed.xp);
           if (parsed.completedMissions !== undefined) {
             setCompletedMissions(parsed.completedMissions);
-            setCurrentMissionIndex(parsed.completedMissions);
+          }
+          if (parsed.currentMissionIndex !== undefined) {
+            setCurrentMissionIndex(parsed.currentMissionIndex);
+          } else {
+            setCurrentMissionIndex(getRandomMissionIndex());
           }
         } catch (e) {}
+      } else if (savedUser) {
+        // No saved data found for user, pick a random mission
+        setCurrentMissionIndex(getRandomMissionIndex());
       }
       if (savedUser && savedHistory) {
         try { setTrainingHistory(JSON.parse(savedHistory)); } catch (e) {}
@@ -572,16 +593,12 @@ function SAPSDQuestApp() {
   };
 
   const nextMission = () => {
-    if (currentMissionIndex < missions.length - 1) {
-      const nextIdx = currentMissionIndex + 1;
-      const nextM = missions[nextIdx];
-      setCurrentMissionIndex(nextIdx);
-      resetGame();
-      if (nextM) {
-        toast.info(`Carregando Missão ${nextIdx + 1}: ${nextM.title}`);
-      }
-    } else {
-      toast.success("Parabéns! Você concluiu todas as missões disponíveis na AAM Corp!");
+    const nextIdx = getRandomMissionIndex(currentMissionIndex);
+    const nextM = missions[nextIdx];
+    setCurrentMissionIndex(nextIdx);
+    resetGame();
+    if (nextM) {
+      toast.info(`Sorteando Nova Missão: ${nextM.title}`);
     }
   };
 
@@ -1169,33 +1186,24 @@ function SAPSDQuestApp() {
             </div>
 
             <div className="flex flex-col gap-3">
-              <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Missões Recentes</h3>
+              <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Missão Atual</h3>
               <div className="grid grid-cols-1 gap-2">
-                {missions.map((m, idx) => (
-                  <Card 
-                    key={m.id} 
-                    onClick={() => {
-                      if (idx <= completedMissions) {
-                        setCurrentMissionIndex(idx);
-                        resetGame();
-                      }
-                    }}
-                    className={`p-3 bg-white border-slate-200 shadow-sm rounded-xl flex items-center justify-between group hover:border-indigo-200 transition-colors cursor-pointer ${idx === currentMissionIndex ? "border-indigo-600 bg-indigo-50/10 ring-1 ring-indigo-600" : idx > completedMissions ? "opacity-50 grayscale pointer-events-none" : ""}`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className={`size-8 rounded-lg flex items-center justify-center ${idx < completedMissions ? "bg-emerald-50 text-emerald-600" : "bg-indigo-50 text-indigo-600"}`}>
-                        {idx < completedMissions ? <CheckCircle2 className="size-5" /> : idx === currentMissionIndex ? <Rocket className="size-5 animate-pulse" /> : <Shield className="size-5" />}
-                      </div>
-                      <div>
-                        <h4 className="text-[11px] font-bold text-slate-800">{m.title}</h4>
-                        <span className={`text-[9px] uppercase font-black ${idx < completedMissions ? "text-emerald-600" : "text-indigo-600"}`}>
-                          {idx < completedMissions ? "Concluído" : idx === currentMissionIndex ? "Em Andamento" : "Bloqueado"}
-                        </span>
-                      </div>
+                <Card 
+                  className="p-3 bg-white border-indigo-600 shadow-sm rounded-xl flex items-center justify-between ring-1 ring-indigo-600 group hover:bg-indigo-50/10 transition-colors"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="size-8 rounded-lg flex items-center justify-center bg-indigo-50 text-indigo-600">
+                      <Rocket className="size-5 animate-pulse" />
                     </div>
-                    {idx <= completedMissions && <ArrowRight className={`size-4 ${idx < completedMissions ? "text-emerald-500" : "text-indigo-600"}`} />}
-                  </Card>
-                ))}
+                    <div>
+                      <h4 className="text-[11px] font-bold text-slate-800">{currentMission.title}</h4>
+                      <span className="text-[9px] uppercase font-black text-indigo-600">
+                        Objetivo Ativo
+                      </span>
+                    </div>
+                  </div>
+                  <ArrowRight className="size-4 text-indigo-600" />
+                </Card>
               </div>
             </div>
           </div>
