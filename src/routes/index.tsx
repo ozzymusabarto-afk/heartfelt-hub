@@ -683,7 +683,7 @@ function SAPSDQuestApp() {
         toast.success(successMsg);
 
         if (mode !== "practice") {
-          setXp(prev => Math.min(prev + 25, 500));
+          setXp(prev => Math.min(prev + 25, missions.length * 25));
           setCompletedMissions(prev => prev + 1);
         }
         setTrainingHistory(prev => [{
