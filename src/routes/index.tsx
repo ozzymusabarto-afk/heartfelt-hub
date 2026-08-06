@@ -32,7 +32,7 @@ export const Route = createFileRoute("/")({
 });
 
 // Correct data is now handled per mission from missions.ts
-const getRandomMissionIndex = (excludeIndex?: number, reinforcementQueue: string[] = []) => {
+const getRandomMissionIndex = (excludeIndex?: number, reinforcementQueue: string[] = [], completedCount: number = 0) => {
   // If there's a mission in the reinforcement queue, and it's not the same as the current one,
   // we have a chance to pick it (spaced repetition)
   if (reinforcementQueue.length > 0 && Math.random() > 0.4) {
@@ -42,10 +42,14 @@ const getRandomMissionIndex = (excludeIndex?: number, reinforcementQueue: string
     }
   }
 
+  // Progressive unlock: pick from missions up to the current seniority level + a small buffer
+  // Level ranges: Trainee (1-40), Júnior (41-80), Pleno (81-130), Sênior (131-170)
+  const maxAvailableIndex = Math.min(missions.length, completedCount + 5);
+  
   let newIndex;
   do {
-    newIndex = Math.floor(Math.random() * missions.length);
-  } while (newIndex === excludeIndex && missions.length > 1);
+    newIndex = Math.floor(Math.random() * maxAvailableIndex);
+  } while (newIndex === excludeIndex && maxAvailableIndex > 1);
   return newIndex;
 };
 
