@@ -942,6 +942,7 @@ function SAPSDQuestApp() {
   const [customerSearchTerm, setHistorySearchTerm] = useState(""); // Reusing generic search term logic if needed, but let's keep it separate
   const [isF1ModalOpen, setIsF1ModalOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+  const [isPDFPreviewOpen, setIsPDFPreviewOpen] = useState(false);
   const [f1ActiveField, setF1ActiveField] = useState<{
     label: string;
     table: string;
