@@ -534,7 +534,11 @@ function SAPSDQuestApp() {
   };
 
   const handleSubmit = () => {
+    // Check for Super Admin bypass
+    const isSuperAdmin = localStorage.getItem("sap-quest-super-admin") === "true";
+    
     const errors: string[] = [];
+
     let localHint = "";
     
     // Validate Transaction
