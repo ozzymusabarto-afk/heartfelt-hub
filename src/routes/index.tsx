@@ -1863,10 +1863,13 @@ function SAPSDQuestApp() {
                   className={`w-full justify-start h-12 px-3 py-2 rounded-xl gap-3 ${activeTab === item.id ? "bg-indigo-600 text-white shadow-md shadow-indigo-100" : "text-slate-500 hover:bg-indigo-50 hover:text-indigo-600"}`}
                   onClick={() => {
                     if (item.premium) {
-                      // Check if user is "admin@aam.com.br" to allow access for free
-                      if (userName.toLowerCase() !== "admin@aam.com.br") {
+                      // Allow access for specific test email and check if user has premium flag in localStorage
+                      const userEmail = userName.toLowerCase();
+                      const isPremiumUser = userEmail === "admin@aam.com.br" || localStorage.getItem("sap-quest-premium") === "true";
+                      
+                      if (!isPremiumUser) {
                         setFeedbackState("review");
-                        setHintMessage("🌟 RECURSO PREMIUM: Este módulo está disponível apenas no Plano Premium. Adquira agora para acessar simuladores de prova e testes de perfil!");
+                        setHintMessage("🌟 RECURSO PREMIUM: Este módulo está disponível apenas no Plano Premium. Adquira agora para acessar simuladores de prova, perfis profissionais e conteúdos exclusivos!");
                         toast.info("Módulo Premium bloqueado.");
                         return;
                       }
