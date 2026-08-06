@@ -322,7 +322,8 @@ function ProfileTestModule() {
             </Button>
             <Button 
               onClick={() => {
-                const text = `Meu perfil SAP SD é: ${metadata.title} (${results[0].percentage}%). Descubra o seu no SAP SD Quest!`;
+                const percentage = results[0]?.percentage || 0;
+                const text = `Meu perfil SAP SD é: ${metadata.title} (${percentage}%). Descubra o seu no SAP SD Quest!`;
                 navigator.clipboard.writeText(text);
                 toast.success("Resultado copiado para a área de transferência!");
               }}
