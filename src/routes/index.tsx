@@ -1038,50 +1038,50 @@ function SAPSDQuestApp() {
                   }
 
                   return fieldsToShow.map((field) => {
-                  const fieldId = field.id as keyof typeof formData;
-                  return (
-                    <div key={field.id} className="space-y-1">
-                      <div className="flex items-center justify-between">
-                        <Label className="text-[9px] font-black text-slate-400 uppercase tracking-wider">{field.label}</Label>
-                        <Button 
-                          variant="ghost" 
-                          size="icon" 
-                          className="size-4 h-4 w-4 p-0 text-slate-300 hover:text-indigo-600 transition-colors"
-                          onClick={() => openF1ForField(field.id)}
-                          title="Ajuda F1"
-                        >
-                          <HelpCircle className="size-2.5" />
-                        </Button>
-                      </div>
-                      {field.type === "select" ? (
-                        <Select value={formData[fieldId] || ""} onValueChange={(v) => handleInputChange(field.id, v)}>
-                          <SelectTrigger className={`h-9 rounded-lg border-slate-200 text-xs ${validationErrors.includes(field.id) ? "border-red-400 ring-1 ring-red-400" : ""}`}><SelectValue placeholder="-" /></SelectTrigger>
-                          <SelectContent>{field.options?.map(o => <SelectItem key={o} value={o} className="text-xs">{o}</SelectItem>)}</SelectContent>
-                        </Select>
-                      ) : (
-                        <div className="relative group">
-                          <Input 
-                            value={formData[fieldId] || ""} 
-                            onChange={(e) => handleInputChange(field.id, e.target.value)} 
-                            className={`h-9 rounded-lg border-slate-200 text-xs placeholder:text-slate-300 focus:ring-indigo-600 ${field.hasSearch ? "pr-8" : ""} ${validationErrors.includes(field.id) ? "border-red-400 ring-1 ring-red-400" : ""}`}
-                          />
-                          {field.hasSearch && (
-                            <Button
-                              size="icon"
-                              variant="ghost"
-                              className="absolute right-0 top-0 h-9 w-8 text-slate-400 hover:text-indigo-600"
-                              onClick={() => setIsCustomerSearchOpen(true)}
-                              title="Busca F4 (Matchcode)"
-                            >
-                              <Search className="size-3" />
-                            </Button>
-                          )}
+                    const fieldId = field.id as keyof typeof formData;
+                    return (
+                      <div key={field.id} className="space-y-1">
+                        <div className="flex items-center justify-between">
+                          <Label className="text-[9px] font-black text-slate-400 uppercase tracking-wider">{field.label}</Label>
+                          <Button 
+                            variant="ghost" 
+                            size="icon" 
+                            className="size-4 h-4 w-4 p-0 text-slate-300 hover:text-indigo-600 transition-colors"
+                            onClick={() => openF1ForField(field.id)}
+                            title="Ajuda F1"
+                          >
+                            <HelpCircle className="size-2.5" />
+                          </Button>
                         </div>
-                      )}
-                    </div>
-                  );
-                })() // Invoke the IIFE
-                }
+                        {field.type === "select" ? (
+                          <Select value={formData[fieldId] || ""} onValueChange={(v) => handleInputChange(field.id, v)}>
+                            <SelectTrigger className={`h-9 rounded-lg border-slate-200 text-xs ${validationErrors.includes(field.id) ? "border-red-400 ring-1 ring-red-400" : ""}`}><SelectValue placeholder="-" /></SelectTrigger>
+                            <SelectContent>{field.options?.map(o => <SelectItem key={o} value={o} className="text-xs">{o}</SelectItem>)}</SelectContent>
+                          </Select>
+                        ) : (
+                          <div className="relative group">
+                            <Input 
+                              value={formData[fieldId] || ""} 
+                              onChange={(e) => handleInputChange(field.id, e.target.value)} 
+                              className={`h-9 rounded-lg border-slate-200 text-xs placeholder:text-slate-300 focus:ring-indigo-600 ${field.hasSearch ? "pr-8" : ""} ${validationErrors.includes(field.id) ? "border-red-400 ring-1 ring-red-400" : ""}`}
+                            />
+                            {field.hasSearch && (
+                              <Button
+                                size="icon"
+                                variant="ghost"
+                                className="absolute right-0 top-0 h-9 w-8 text-slate-400 hover:text-indigo-600"
+                                onClick={() => setIsCustomerSearchOpen(true)}
+                                title="Busca F4 (Matchcode)"
+                              >
+                                <Search className="size-3" />
+                              </Button>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  });
+                })()}
               </div>
 
               {(selectedTransaction === "VA05" || selectedTransaction === "V.02") && (
