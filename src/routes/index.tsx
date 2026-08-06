@@ -1221,7 +1221,8 @@ function SAPSDQuestApp() {
         const startIdx = getRandomMissionIndex(undefined, [], 0);
         setCurrentMissionIndex(startIdx);
         // Force randomization for first mission if it's the start
-        const firstMission = randomizeMissionData(missions[startIdx], "Adriana");
+        const baseM = missions[startIdx] || missions[0];
+        const firstMission = randomizeMissionData(baseM, "Adriana");
         setActiveMission(firstMission);
       }
       if (savedUser && savedHistory) {
