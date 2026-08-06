@@ -880,18 +880,21 @@ function SAPSDQuestApp() {
   const [xp, setXp] = useState(0);
   const [completedMissions, setCompletedMissions] = useState(0);
   const [formData, setFormData] = useState({
+    // Header Data
+    partnerCode: "",
+    partnerCategory: "", 
+    partnerFunction: "",
+    salesOrg: "",
+    distChannel: "",
+    division: "",
     orderType: "",
     orderDate: "",
-    salesOrg: "",
-    deliveryDate: "",
-    distChannel: "",
-    paymentCond: "",
-    customer: "",
-    quantity: "",
-    material: "",
     incoterms: "",
-    division: "",
-    poNumber: "",
+    // Item Data
+    materialCode: "",
+    quantity: "",
+    plant: "1000",
+    storageLocation: "SL01",
   });
   const [feedbackState, setFeedbackState] = useState<"idle" | "review" | "success" | "error">("idle");
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
@@ -962,13 +965,13 @@ function SAPSDQuestApp() {
       concept: "Unidade organizacional responsável pelas vendas e contratos.", 
       impact: "Define a origem do faturamento e a base de cálculo de impostos estaduais." 
     },
-    customer: { 
+    partnerCode: { 
       label: "Emissor (Cliente)", 
       table: "KNA1-KUNNR", 
       concept: "O parceiro de negócios que solicita a mercadoria.", 
       impact: "Determina o endereço de entrega e as alíquotas de ICMS/Substituição Tributária." 
     },
-    material: { 
+    materialCode: { 
       label: "Material", 
       table: "VBAP-MATNR", 
       concept: "Código único do produto no mestre de materiais.", 
@@ -992,17 +995,35 @@ function SAPSDQuestApp() {
       concept: "Meio pelo qual o produto chega ao cliente (Varejo/Atacado).", 
       impact: "Pode alterar a precificação e a incidência de PIS/COFINS." 
     },
-    paymentCond: { 
-      label: "Condição de Pagamento", 
+    partnerFunction: { 
+      label: "Função de Parceiro / Cond. Pagto", 
       table: "VBAK-ZTERM", 
-      concept: "Regras de vencimento e parcelamento acordadas.", 
-      impact: "Define as datas de vencimento das duplicatas no financeiro." 
+      concept: "Regras de vencimento e parcelamento ou função do parceiro no BP.", 
+      impact: "Define as datas de vencimento ou as responsabilidades do parceiro." 
     },
     division: { 
       label: "Setor de Atividade", 
       table: "VBAK-SPART", 
       concept: "Agrupamento de produtos (Peças, Serviços).", 
       impact: "Usado para determinar o setor fiscal de saída dos produtos." 
+    },
+    partnerCategory: {
+      label: "Categoria / Nº Pedido",
+      table: "BUT000-TYPE",
+      concept: "Define se o parceiro é Pessoa ou Empresa, ou o número do pedido de compra.",
+      impact: "Influencia o tratamento fiscal e a rastreabilidade do documento."
+    },
+    plant: {
+      label: "Centro (Plant)",
+      table: "VBAP-WERKS",
+      concept: "Unidade logística onde o estoque é armazenado ou produzido.",
+      impact: "Define a origem física da mercadoria para cálculo de frete e impostos."
+    },
+    storageLocation: {
+      label: "Depósito",
+      table: "VBAP-LGORT",
+      concept: "Localização específica dentro do centro para armazenamento.",
+      impact: "Essencial para a execução da remessa e controle de inventário."
     }
   };
 
@@ -1170,9 +1191,10 @@ function SAPSDQuestApp() {
     
     if (!hasStarted) {
       setFormData({
-        orderType: "", orderDate: "", salesOrg: "", deliveryDate: "",
-        distChannel: "", paymentCond: "", customer: "", quantity: "", material: "",
-        incoterms: "", division: "", poNumber: "",
+        partnerCode: "", partnerCategory: "", partnerFunction: "", salesOrg: "",
+        distChannel: "", division: "", orderType: "", orderDate: "",
+        incoterms: "", materialCode: "", quantity: "", plant: "1000",
+        storageLocation: "SL01"
       });
       setSelectedTransaction("");
       
@@ -1343,40 +1365,33 @@ function SAPSDQuestApp() {
 
     // Dynamic validation logic based on Transaction
     if (selectedTransaction === "BP") {
-      // Missions M19 and M20 require code and function
-      if (!formData.customer || formData.customer !== currentMission.expectedData.cliente) {
-        errors.push("customer");
+      if (!formData.partnerCode || formData.partnerCode !== currentMission.expectedData.cliente) {
+        errors.push("partnerCode");
         localHint = `Código do Parceiro incorreto. Esperado: ${currentMission.expectedData.cliente}`;
       } else if (!formData.salesOrg || formData.salesOrg !== currentMission.expectedData.orgVendas) {
-        // Even for BP, we are checking the Sales Org as per requirement "Exibir apenas... Organização de Vendas (1000)"
         errors.push("salesOrg");
         localHint = `Organização de Vendas incorreta. Esperado: ${currentMission.expectedData.orgVendas}`;
       }
     } else if (selectedTransaction === "VL01N") {
-      // Logic for delivery
-      if (!formData.salesOrg || formData.salesOrg !== "1000") { // Using 1000 as point of expedition mock
+      if (!formData.salesOrg || formData.salesOrg !== "1000") {
         errors.push("salesOrg");
         localHint = `Ponto de Expedição incorreto. Esperado: 1000`;
-      } else if (!formData.poNumber || formData.poNumber !== "REF-ORDEM") { // Mock ref
-         // Validation would be more specific in real scenario
       }
     } else if (selectedTransaction === "VF01") {
        // Logic for billing
-    } else if (selectedTransaction === "VA05" || selectedTransaction === "V.02") {
-       // Logic for reports
     } else {
-      // Standard VA01 logic
+      // Standard Sales Orders (VA01, etc)
       if (!formData.orderType || formData.orderType !== currentMission.expectedData.tipoOrdem) {
         errors.push("orderType");
         localHint = `Tipo de ordem incorreto. Esperado: ${currentMission.expectedData.tipoOrdem}`;
       } else if (!formData.salesOrg || formData.salesOrg !== currentMission.expectedData.orgVendas) {
         errors.push("salesOrg");
         localHint = `Org. Vendas incorreta. Esperado: ${currentMission.expectedData.orgVendas}`;
-      } else if (!formData.customer || formData.customer !== currentMission.expectedData.cliente) {
-        errors.push("customer");
+      } else if (!formData.partnerCode || formData.partnerCode !== currentMission.expectedData.cliente) {
+        errors.push("partnerCode");
         localHint = `Cliente incorreto. Esperado: ${currentMission.expectedData.cliente}`;
-      } else if (!formData.material || formData.material !== currentMission.expectedData.material) {
-        errors.push("material");
+      } else if (!formData.materialCode || formData.materialCode !== currentMission.expectedData.material) {
+        errors.push("materialCode");
         localHint = `Material incorreto. Esperado: ${currentMission.expectedData.material}`;
       } else if (!formData.incoterms || formData.incoterms !== currentMission.expectedData.incoterms) {
         errors.push("incoterms");
@@ -1390,9 +1405,9 @@ function SAPSDQuestApp() {
       } else if (!formData.division || formData.division !== currentMission.expectedData.setorAtiv) {
         errors.push("division");
         localHint = `Setor de Atividade incorreto. Esperado: ${currentMission.expectedData.setorAtiv}`;
-      } else if (!formData.paymentCond || formData.paymentCond !== currentMission.expectedData.condPagto) {
-        errors.push("paymentCond");
-        localHint = `Condição de Pagamento incorreta. Esperado: ${currentMission.expectedData.condPagto}`;
+      } else if (!formData.partnerFunction || formData.partnerFunction !== currentMission.expectedData.condPagto) {
+        errors.push("partnerFunction");
+        localHint = `Condição de Pagamento/Função incorreta. Esperado: ${currentMission.expectedData.condPagto}`;
       }
     }
 
@@ -1424,7 +1439,7 @@ function SAPSDQuestApp() {
         
         let successMsg = "";
         if (isBP) {
-          successMsg = `Parceiro Comercial ${formData.customer || currentMission.expectedData.cliente} verificado com sucesso no cadastro do SAP S/4HANA! Dados fiscais e áreas de vendas validados.`;
+          successMsg = `Parceiro Comercial ${formData.partnerCode || currentMission.expectedData.cliente} verificado com sucesso no cadastro do SAP S/4HANA! Dados fiscais e áreas de vendas validados.`;
         } else if (isVL01N) {
           const remNum = Math.floor(800000000 + Math.random() * 999999);
           const ordNum = 450000000 + Math.floor(Math.random() * 1000);
@@ -1440,7 +1455,7 @@ function SAPSDQuestApp() {
           successMsg = `Alteração/Auditoria da Ordem ${ordNum} realizada com sucesso no sistema.`;
         } else {
           const ordNum = Math.floor(450000000 + Math.random() * 999999);
-          successMsg = `Ordem de Venda ${currentMission.expectedData.tipoOrdem} ${ordNum} criada com sucesso para o cliente ${formData.customer || currentMission.expectedData.cliente}!`;
+          successMsg = `Ordem de Venda ${currentMission.expectedData.tipoOrdem} ${ordNum} criada com sucesso para o cliente ${formData.partnerCode || currentMission.expectedData.cliente}!`;
         }
 
         setHintMessage(`🎉 ${successMsg} \n\n${currentMission.successFeedback}`);
@@ -1517,9 +1532,10 @@ function SAPSDQuestApp() {
     setSelectedTransaction("");
     setFormTab("header");
     setFormData({
-      orderType: "", orderDate: "", salesOrg: "", deliveryDate: "",
-      distChannel: "", paymentCond: "", customer: "", quantity: "", material: "",
-      incoterms: "", division: "", poNumber: "",
+      partnerCode: "", partnerCategory: "", partnerFunction: "", salesOrg: "",
+      distChannel: "", division: "", orderType: "", orderDate: "",
+      incoterms: "", materialCode: "", quantity: "", plant: "1000",
+      storageLocation: "SL01"
     });
   };
 
@@ -2113,34 +2129,44 @@ function SAPSDQuestApp() {
                 <Target className="size-4 text-indigo-600" /> Dados do Pedido
               </h3>
               <div className="flex-1 flex flex-col min-h-0">
+                {/* Tabs UI with Indicators */}
                 <div className="flex border-b border-slate-100 mb-3 overflow-x-auto no-scrollbar shrink-0">
                   <button 
-                    className={`px-3 py-2 text-[10px] font-black uppercase tracking-wider border-b-2 transition-all ${!formTab || formTab === 'header' ? 'border-indigo-600 text-indigo-600 bg-indigo-50/30' : 'border-transparent text-slate-400 hover:text-slate-600'}`}
+                    className={`px-3 py-2 text-[10px] font-black uppercase tracking-wider border-b-2 transition-all flex items-center gap-2 ${(!formTab || formTab === 'header') ? 'border-indigo-600 text-indigo-600 bg-indigo-50/30' : 'border-transparent text-slate-400 hover:text-slate-600'}`}
                     onClick={() => setFormTab('header')}
                   >
-                    Cabeçalho
+                    1. Cabeçalho / Parceiro
+                    {formData.partnerCode && formData.salesOrg && (
+                      <div className="size-1.5 rounded-full bg-emerald-500" />
+                    )}
                   </button>
-                  <button 
-                    className={`px-3 py-2 text-[10px] font-black uppercase tracking-wider border-b-2 transition-all ${formTab === 'items' ? 'border-indigo-600 text-indigo-600 bg-indigo-50/30' : 'border-transparent text-slate-400 hover:text-slate-600'}`}
-                    onClick={() => setFormTab('items')}
-                  >
-                    Itens
-                  </button>
+                  
+                  {/* Item tab logic: enabled if mission has material or is standard VA01 */}
+                  {(currentMission.expectedData.material || selectedTransaction.startsWith("VA")) && (
+                    <button 
+                      className={`px-3 py-2 text-[10px] font-black uppercase tracking-wider border-b-2 transition-all flex items-center gap-2 ${formTab === 'items' ? 'border-indigo-600 text-indigo-600 bg-indigo-50/30' : 'border-transparent text-slate-400 hover:text-slate-600'}`}
+                      onClick={() => setFormTab('items')}
+                    >
+                      2. Itens / Material
+                      {formData.materialCode && formData.quantity && (
+                        <div className="size-1.5 rounded-full bg-emerald-500" />
+                      )}
+                    </button>
+                  )}
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 pr-1 overflow-y-auto custom-scrollbar flex-1 pb-2">
                   {(() => {
                     let fieldsToShow: any[] = [];
-                    
                     const isHeader = !formTab || formTab === 'header';
                     const isItems = formTab === 'items';
 
                     if (selectedTransaction === "BP") {
                       if (isHeader) {
                         fieldsToShow = [
-                          { id: "customer", label: "Cód. Parceiro Comercial", hasSearch: true },
-                          { id: "poNumber", label: "Categoria", type: "select", options: ["Empresa", "Pessoa"] },
-                          { id: "paymentCond", label: "Função", type: "select", options: ["Cliente SD", "Fornecedor"] },
+                          { id: "partnerCode", label: "Cód. Parceiro Comercial", hasSearch: true },
+                          { id: "partnerCategory", label: "Categoria", type: "select", options: ["Empresa", "Pessoa"] },
+                          { id: "partnerFunction", label: "Função", type: "select", options: ["Cliente SD", "Fornecedor"] },
                         ];
                       } else {
                         fieldsToShow = [
@@ -2157,7 +2183,7 @@ function SAPSDQuestApp() {
                         ];
                       } else {
                         fieldsToShow = [
-                          { id: "poNumber", label: "Ordem Ref." },
+                          { id: "partnerCategory", label: "Ordem Ref." },
                         ];
                       }
                     } else if (selectedTransaction === "VF01") {
@@ -2167,27 +2193,29 @@ function SAPSDQuestApp() {
                         ];
                       } else {
                         fieldsToShow = [
-                          { id: "poNumber", label: "Doc. Ref." },
+                          { id: "partnerCategory", label: "Doc. Ref." },
                         ];
                       }
                     } else {
-                      // VA01, VA02, VA03, etc.
+                      // Standard Sales Orders (VA01, etc)
                       if (isHeader) {
                         fieldsToShow = [
                           { id: "orderType", label: "Tipo", type: "select", options: ["OR", "QT", "ZBN", "RE"] },
                           { id: "salesOrg", label: "Org. Vendas", type: "select", options: ["1000", "2000"] },
                           { id: "distChannel", label: "Canal Dist.", type: "select", options: ["10", "20"] },
                           { id: "division", label: "Setor Ativ.", type: "select", options: ["00", "01"] },
-                          { id: "customer", label: "Emissor", hasSearch: true },
+                          { id: "partnerCode", label: "Emissor", hasSearch: true },
                           { id: "orderDate", label: "Data Pedido" },
-                          { id: "poNumber", label: "Nº Pedido" },
-                          { id: "paymentCond", label: "Cond. Pagto.", type: "select", options: ["ZF30", "ZB00", "ZF60", "0001"] },
+                          { id: "partnerCategory", label: "Nº Pedido" },
+                          { id: "partnerFunction", label: "Cond. Pagto.", type: "select", options: ["ZF30", "ZB00", "ZF60", "0001"] },
                           { id: "incoterms", label: "Incoterms", type: "select", options: ["FOB", "CIF"] },
                         ];
                       } else {
                         fieldsToShow = [
-                          { id: "material", label: "Material", type: "select", options: ["MAT-SD-015", "MAT-SD-020", "MAT-SD-099"] },
+                          { id: "materialCode", label: "Material", type: "select", options: ["MAT-SD-015", "MAT-SD-020", "MAT-SD-099"] },
                           { id: "quantity", label: "Quantidade" },
+                          { id: "plant", label: "Centro / Plant", type: "select", options: ["1000", "2000"] },
+                          { id: "storageLocation", label: "Depósito", type: "select", options: ["SL01", "SL02"] },
                         ];
                       }
                     }
@@ -2246,7 +2274,6 @@ function SAPSDQuestApp() {
                     className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl h-10 gap-2 shadow-md shadow-indigo-100"
                     onClick={() => {
                       toast.success("Relatório executado com sucesso!");
-                      // In a real app, this would show a table modal
                     }}
                   >
                     EXECUTAR RELATÓRIO <Search className="size-4" />
@@ -2917,8 +2944,8 @@ function SAPSDQuestApp() {
                       key={c.code} 
                       className="hover:bg-indigo-50 cursor-pointer transition-colors group"
                       onClick={() => {
-                        handleInputChange("customer", c.code);
-                        setIsCustomerSearchOpen(false);
+                      handleInputChange("partnerCode", c.code);
+                      setIsCustomerSearchOpen(false);
                         toast.success(`Cliente ${c.name} selecionado.`);
                       }}
                     >
