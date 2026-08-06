@@ -2096,22 +2096,31 @@ function SAPSDQuestApp() {
               </div>
             </div>
             
-            {/* Stepper de 4 passos */}
-            <div className="bg-slate-50 px-4 py-3 border-t border-slate-100 flex items-center justify-between">
-              {[
-                { n: "1", label: "Contexto", color: completedMissions > currentMissionIndex ? "bg-emerald-500" : "bg-emerald-500", text: "text-emerald-700", bg: "bg-emerald-50" },
-                { n: "2", label: "Transação", color: selectedTransaction ? "bg-emerald-500" : "bg-indigo-600", text: selectedTransaction ? "text-emerald-700" : "text-indigo-700", bg: "bg-indigo-50", active: true },
-                { n: "3", label: "Preencher Dados", color: feedbackState !== "idle" ? "bg-emerald-500" : "bg-slate-200", text: feedbackState !== "idle" ? "text-emerald-700" : "text-slate-400", bg: "bg-slate-100" },
-                { n: "4", label: "Revisar & Enviar", color: feedbackState === "success" ? "bg-emerald-500" : "bg-slate-200", text: feedbackState === "success" ? "text-emerald-700" : "text-slate-400", bg: "bg-slate-100" },
-              ].map((step, i) => (
-                <div key={i} className="flex items-center gap-2 flex-1 group">
-                  <div className={`size-6 rounded-full flex items-center justify-center text-[10px] font-black text-white ${step.color} shadow-sm`}>
-                    {step.n}
+            {/* Stepper de 4 passos & Título da Missão */}
+            <div className="bg-slate-50 px-4 py-3 border-t border-slate-100 flex items-center justify-between gap-4">
+              <div className="hidden xl:flex items-center gap-2 pr-4 border-r border-slate-200">
+                <Target className="size-3.5 text-indigo-600" />
+                <span className="text-[10px] font-black text-slate-800 uppercase tracking-widest whitespace-nowrap">
+                  {currentMission.title}
+                </span>
+              </div>
+
+              <div className="flex-1 flex items-center justify-between">
+                {[
+                  { n: "1", label: "Contexto", color: completedMissions > currentMissionIndex ? "bg-emerald-500" : "bg-emerald-500", text: "text-emerald-700", bg: "bg-emerald-50" },
+                  { n: "2", label: "Transação", color: selectedTransaction ? "bg-emerald-500" : "bg-indigo-600", text: selectedTransaction ? "text-emerald-700" : "text-indigo-700", bg: "bg-indigo-50", active: true },
+                  { n: "3", label: "Dados", color: feedbackState !== "idle" ? "bg-emerald-500" : "bg-slate-200", text: feedbackState !== "idle" ? "text-emerald-700" : "text-slate-400", bg: "bg-slate-100" },
+                  { n: "4", label: "Revisar", color: feedbackState === "success" ? "bg-emerald-500" : "bg-slate-200", text: feedbackState === "success" ? "text-emerald-700" : "text-slate-400", bg: "bg-slate-100" },
+                ].map((step, i) => (
+                  <div key={i} className="flex items-center gap-2 flex-1 group last:flex-none">
+                    <div className={`size-6 rounded-full flex items-center justify-center text-[10px] font-black text-white ${step.color} shadow-sm shrink-0`}>
+                      {step.n}
+                    </div>
+                    <span className={`text-[10px] font-bold ${step.text} uppercase tracking-wider hidden sm:inline`}>{step.label}</span>
+                    {i < 3 && <div className="h-px bg-slate-200 flex-1 mx-2 sm:mx-4" />}
                   </div>
-                  <span className={`text-[10px] font-bold ${step.text} uppercase tracking-wider`}>{step.label}</span>
-                  {i < 3 && <div className="h-px bg-slate-200 flex-1 mx-4" />}
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </Card>
 
