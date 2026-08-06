@@ -113,6 +113,7 @@ function SAPSDQuestApp() {
   const [isCustomerSearchOpen, setIsCustomerSearchOpen] = useState(false);
   const [customerSearchTerm, setHistorySearchTerm] = useState(""); // Reusing generic search term logic if needed, but let's keep it separate
   const [isF1ModalOpen, setIsF1ModalOpen] = useState(false);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const [f1ActiveField, setF1ActiveField] = useState<{
     label: string;
     table: string;
@@ -228,12 +229,16 @@ function SAPSDQuestApp() {
     toast.success("Relatório baixado com sucesso!");
   };
 
-  const handleLogout = () => {
-    if (confirm("Deseja sair do sistema?")) {
-      setIsAuth(false);
-      localStorage.removeItem("sap-quest-username");
-      toast.info("Sessão encerrada.");
-    }
+  const handleLogoutClick = () => {
+    setIsLogoutModalOpen(true);
+  };
+
+  const confirmLogout = () => {
+    setIsAuth(false);
+    setIsLogoutModalOpen(false);
+    // Preserving progress (XP, level, missions) - only clearing the session name
+    localStorage.removeItem("sap-quest-username");
+    toast.info("Sessão encerrada.");
   };
 
   const handleLogin = (e: React.FormEvent) => {
@@ -242,6 +247,31 @@ function SAPSDQuestApp() {
       localStorage.setItem("sap-quest-username", userName);
       setIsAuth(true);
       
+      // Load saved data for this user
+      const saved = localStorage.getItem("sap-quest-data");
+      const savedHistory = localStorage.getItem("sap-quest-history");
+      
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (parsed.xp !== undefined) setXp(parsed.xp);
+          if (parsed.completedMissions !== undefined) {
+            setCompletedMissions(parsed.completedMissions);
+            setCurrentMissionIndex(parsed.completedMissions);
+          }
+        } catch (e) {
+          console.error("Erro ao carregar progresso", e);
+        }
+      }
+      
+      if (savedHistory) {
+        try {
+          setTrainingHistory(JSON.parse(savedHistory));
+        } catch (e) {
+          console.error("Erro ao carregar histórico", e);
+        }
+      }
+
       const hasCompletedOnboarding = localStorage.getItem("sap-quest-onboarding-done");
       if (!hasCompletedOnboarding) {
         setShowOnboarding(true);
@@ -270,18 +300,30 @@ function SAPSDQuestApp() {
     const savedHistory = localStorage.getItem("sap-quest-history");
     
     if (!hasStarted) {
-      localStorage.removeItem("sap-quest-data");
-      localStorage.removeItem("sap-quest-history");
+      // Don't remove data anymore to allow persistence across logout
+      // We only reset the current form/UI state for a "fresh" start of the session
       setFormData({
         orderType: "", orderDate: "", salesOrg: "", deliveryDate: "",
         distChannel: "", paymentCond: "", customer: "", quantity: "", material: "",
         incoterms: "", division: "", poNumber: "",
       });
       setSelectedTransaction("");
-      setXp(0);
-      setCompletedMissions(0);
-      setCurrentMissionIndex(0);
-      setTrainingHistory([]);
+      
+      // If we are authenticated but it's a new session, ensure we have the data loaded
+      if (savedUser && saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (parsed.xp !== undefined) setXp(parsed.xp);
+          if (parsed.completedMissions !== undefined) {
+            setCompletedMissions(parsed.completedMissions);
+            setCurrentMissionIndex(parsed.completedMissions);
+          }
+        } catch (e) {}
+      }
+      if (savedUser && savedHistory) {
+        try { setTrainingHistory(JSON.parse(savedHistory)); } catch (e) {}
+      }
+
       setFeedbackState("idle");
       sessionStorage.setItem("sap-quest-session-started", "true");
     } else {
@@ -790,7 +832,7 @@ function SAPSDQuestApp() {
               variant="ghost" 
               size="icon" 
               className="size-9 rounded-xl text-slate-400 hover:text-red-500 hover:bg-red-50 transition-colors"
-              onClick={handleLogout}
+              onClick={handleLogoutClick}
               title="Sair do Sistema"
             >
               <LogOut className="size-4" />
@@ -1386,6 +1428,47 @@ function SAPSDQuestApp() {
               </table>
             </div>
             <div className="bg-slate-50 px-6 py-3 border-t border-slate-200 text-right">
+              <Button size="sm" onClick={() => setIsCustomerSearchOpen(false)} className="bg-indigo-600 text-white font-bold rounded-lg h-8">FECHAR</Button>
+            </div>
+          </Card>
+        </div>
+      )}
+
+      {/* Modal de Despedida do Chefe Hugo */}
+      {isLogoutModalOpen && (
+        <div className="fixed inset-0 z-[100] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-300">
+          <Card className="w-full max-w-[450px] border-none shadow-2xl rounded-3xl overflow-hidden bg-white animate-in zoom-in-95 duration-300">
+            <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-red-500 to-amber-500" />
+            <div className="p-8 flex flex-col items-center text-center">
+              <div className="size-20 bg-indigo-50 rounded-2xl flex items-center justify-center mb-6 relative group overflow-hidden border-2 border-indigo-100 shadow-sm">
+                <HugoAvatar className="size-16" />
+              </div>
+              
+              <h2 className="text-2xl font-black text-slate-800 tracking-tight mb-2">Até amanhã, {userName}!</h2>
+              
+              <p className="text-slate-600 leading-relaxed text-sm mb-8">
+                Hoje foi um dia super produtivo! Suas operações no SAP SD garantiram o fluxo da <b>AAM LOGÍSTICA LTDA</b> sem gargalos. Descanse e nos vemos no próximo turno!
+              </p>
+              
+              <div className="grid grid-cols-2 gap-3 w-full">
+                <Button 
+                  variant="outline" 
+                  className="h-12 rounded-xl font-bold border-slate-200 text-slate-500 hover:bg-slate-50"
+                  onClick={() => setIsLogoutModalOpen(false)}
+                >
+                  CANCELAR
+                </Button>
+                <Button 
+                  className="h-12 rounded-xl font-bold bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-100"
+                  onClick={confirmLogout}
+                >
+                  CONFIRMAR SAÍDA
+                </Button>
+              </div>
+            </div>
+          </Card>
+        </div>
+      )}
               <Button variant="outline" size="sm" onClick={() => setIsCustomerSearchOpen(false)}>Cancelar</Button>
             </div>
           </Card>
