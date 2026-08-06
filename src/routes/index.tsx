@@ -1173,9 +1173,10 @@ function SAPSDQuestApp() {
     
     if (!hasStarted) {
       setFormData({
-        orderType: "", orderDate: "", salesOrg: "", deliveryDate: "",
-        distChannel: "", paymentCond: "", customer: "", quantity: "", material: "",
-        incoterms: "", division: "", poNumber: "",
+        customer: "", poNumber: "", paymentCond: "", salesOrg: "",
+        distChannel: "", division: "", orderType: "", orderDate: "",
+        incoterms: "", material: "", quantity: "", plant: "1000",
+        storageLocation: "SL01"
       });
       setSelectedTransaction("");
       
