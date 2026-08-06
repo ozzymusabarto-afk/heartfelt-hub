@@ -2950,8 +2950,8 @@ function SAPSDQuestApp() {
                       key={c.code} 
                       className="hover:bg-indigo-50 cursor-pointer transition-colors group"
                       onClick={() => {
-                        handleInputChange("customer", c.code);
-                        setIsCustomerSearchOpen(false);
+                      handleInputChange("partnerCode", c.code);
+                      setIsCustomerSearchOpen(false);
                         toast.success(`Cliente ${c.name} selecionado.`);
                       }}
                     >
