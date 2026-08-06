@@ -2152,9 +2152,9 @@ function SAPSDQuestApp() {
                     if (selectedTransaction === "BP") {
                       if (isHeader) {
                         fieldsToShow = [
-                          { id: "customer", label: "Cód. Parceiro Comercial", hasSearch: true },
-                          { id: "poNumber", label: "Categoria", type: "select", options: ["Empresa", "Pessoa"] },
-                          { id: "paymentCond", label: "Função", type: "select", options: ["Cliente SD", "Fornecedor"] },
+                          { id: "partnerCode", label: "Cód. Parceiro Comercial", hasSearch: true },
+                          { id: "partnerCategory", label: "Categoria", type: "select", options: ["Empresa", "Pessoa"] },
+                          { id: "partnerFunction", label: "Função", type: "select", options: ["Cliente SD", "Fornecedor"] },
                         ];
                       } else {
                         fieldsToShow = [
@@ -2171,7 +2171,7 @@ function SAPSDQuestApp() {
                         ];
                       } else {
                         fieldsToShow = [
-                          { id: "poNumber", label: "Ordem Ref." },
+                          { id: "partnerCategory", label: "Ordem Ref." },
                         ];
                       }
                     } else if (selectedTransaction === "VF01") {
@@ -2181,7 +2181,7 @@ function SAPSDQuestApp() {
                         ];
                       } else {
                         fieldsToShow = [
-                          { id: "poNumber", label: "Doc. Ref." },
+                          { id: "partnerCategory", label: "Doc. Ref." },
                         ];
                       }
                     } else {
@@ -2192,15 +2192,15 @@ function SAPSDQuestApp() {
                           { id: "salesOrg", label: "Org. Vendas", type: "select", options: ["1000", "2000"] },
                           { id: "distChannel", label: "Canal Dist.", type: "select", options: ["10", "20"] },
                           { id: "division", label: "Setor Ativ.", type: "select", options: ["00", "01"] },
-                          { id: "customer", label: "Emissor", hasSearch: true },
+                          { id: "partnerCode", label: "Emissor", hasSearch: true },
                           { id: "orderDate", label: "Data Pedido" },
-                          { id: "poNumber", label: "Nº Pedido" },
-                          { id: "paymentCond", label: "Cond. Pagto.", type: "select", options: ["ZF30", "ZB00", "ZF60", "0001"] },
+                          { id: "partnerCategory", label: "Nº Pedido" },
+                          { id: "partnerFunction", label: "Cond. Pagto.", type: "select", options: ["ZF30", "ZB00", "ZF60", "0001"] },
                           { id: "incoterms", label: "Incoterms", type: "select", options: ["FOB", "CIF"] },
                         ];
                       } else {
                         fieldsToShow = [
-                          { id: "material", label: "Material", type: "select", options: ["MAT-SD-015", "MAT-SD-020", "MAT-SD-099"] },
+                          { id: "materialCode", label: "Material", type: "select", options: ["MAT-SD-015", "MAT-SD-020", "MAT-SD-099"] },
                           { id: "quantity", label: "Quantidade" },
                           { id: "plant", label: "Centro / Plant", type: "select", options: ["1000", "2000"] },
                           { id: "storageLocation", label: "Depósito", type: "select", options: ["SL01", "SL02"] },
