@@ -341,7 +341,7 @@ function SAPSDQuestApp() {
         }
       } else {
         // First time or no data, pick a random mission
-        setCurrentMissionIndex(getRandomMissionIndex());
+        setCurrentMissionIndex(getRandomMissionIndex(undefined, [], 0));
       }
       
       // Persist admin status in current session data if it changed
