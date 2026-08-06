@@ -1515,7 +1515,7 @@ function SAPSDQuestApp() {
     
     // If it's a reinforced mission, randomize its data
     if (nextM && reinforcementQueue.includes(nextM.id)) {
-      nextM = randomizeMissionData(nextM, userName);
+      nextM = randomizeMissionData(nextM, userName || "Adriana");
       setActiveMission(nextM);
     } else {
       setActiveMission(null);
