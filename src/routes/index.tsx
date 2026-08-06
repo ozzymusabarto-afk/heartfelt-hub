@@ -70,7 +70,7 @@ const getRandomMissionIndex = (excludeIndex?: number, reinforcementQueue: string
   return newIndex;
 };
 
-const randomizeMissionData = (mission: Mission): Mission => {
+const randomizeMissionData = (mission: Mission, name: string): Mission => {
   const materials = ["MAT-SD-015", "MAT-SD-020", "MAT-SD-030", "MAT-SD-045"];
   const incoterms = ["FOB", "CIF"];
   const paymentConds = ["ZF30", "ZF60", "ZB00"];
@@ -81,25 +81,29 @@ const randomizeMissionData = (mission: Mission): Mission => {
   // Create a deep copy to avoid mutating the original mission
   const newMission = JSON.parse(JSON.stringify(mission));
   
-  newMission.expectedData.material = randomValue(materials);
-  newMission.expectedData.incoterms = randomValue(incoterms);
-  newMission.expectedData.condPagto = randomValue(paymentConds);
+  newMission.expectedData.materialCode = randomValue(materials);
+  newMission.expectedData.headerIncoterms = randomValue(incoterms);
+  newMission.expectedData.partnerFunction = randomValue(paymentConds);
   newMission.expectedData.quantidade = randomValue(quantities);
   
   // Randomize customer from master if not BP
   if (mission.transaction !== "BP") {
     const customers = ["208015", "208016", "208017", "208018", "208019"];
-    newMission.expectedData.cliente = randomValue(customers);
+    newMission.expectedData.partnerCode = randomValue(customers);
   }
 
-  // Update dialog text with new values
+  // Personalization: inject name and clean dialogue
+  const greeting = name ? `Olá, ${name}!` : "Olá Consultor(a)!";
+  
   newMission.chefeHugoDialog = newMission.chefeHugoDialog
-    .replace(/\bMAT-SD-\d+\b/g, newMission.expectedData.material)
+    .replace(/^Olá Consultor\(a\)!/g, greeting)
+    .replace(/\bAAM LOGÍSTICA\b/g, "AAM LOGÍSTICA LTDA (Cód: 208015)")
+    .replace(/\bMAT-SD-\d+\b/g, newMission.expectedData.materialCode)
     .replace(/\b\d+ unidades\b/g, `${newMission.expectedData.quantidade} unidades`)
     .replace(/\b\d+ peças\b/g, `${newMission.expectedData.quantidade} peças`)
-    .replace(/\bfrete \w+\b/g, `frete ${newMission.expectedData.incoterms}`)
-    .replace(/\bCondição \w+\b/g, `Condição ${newMission.expectedData.condPagto}`)
-    .replace(/\bZF\d+\b/g, newMission.expectedData.condPagto);
+    .replace(/\bfrete \w+\b/g, `frete ${newMission.expectedData.headerIncoterms}`)
+    .replace(/\bCondição \w+\b/g, `Condição ${newMission.expectedData.partnerFunction}`)
+    .replace(/\bZF\d+\b/g, newMission.expectedData.partnerFunction);
 
   return newMission;
 };
@@ -1365,9 +1369,9 @@ function SAPSDQuestApp() {
 
     // Dynamic validation logic based on Transaction
     if (selectedTransaction === "BP") {
-      if (!formData.partnerCode || formData.partnerCode !== currentMission.expectedData.cliente) {
+      if (!formData.partnerCode || formData.partnerCode !== currentMission.expectedData.partnerCode) {
         errors.push("partnerCode");
-        localHint = `Código do Parceiro incorreto. Esperado: ${currentMission.expectedData.cliente}`;
+        localHint = `Código do Parceiro incorreto. Esperado: ${currentMission.expectedData.partnerCode}`;
       } else if (!formData.salesOrg || formData.salesOrg !== currentMission.expectedData.orgVendas) {
         errors.push("salesOrg");
         localHint = `Organização de Vendas incorreta. Esperado: ${currentMission.expectedData.orgVendas}`;
@@ -1387,15 +1391,15 @@ function SAPSDQuestApp() {
       } else if (!formData.salesOrg || formData.salesOrg !== currentMission.expectedData.orgVendas) {
         errors.push("salesOrg");
         localHint = `Org. Vendas incorreta. Esperado: ${currentMission.expectedData.orgVendas}`;
-      } else if (!formData.partnerCode || formData.partnerCode !== currentMission.expectedData.cliente) {
+      } else if (!formData.partnerCode || formData.partnerCode !== currentMission.expectedData.partnerCode) {
         errors.push("partnerCode");
-        localHint = `Cliente incorreto. Esperado: ${currentMission.expectedData.cliente}`;
-      } else if (!formData.materialCode || formData.materialCode !== currentMission.expectedData.material) {
+        localHint = `Cliente incorreto. Esperado: ${currentMission.expectedData.partnerCode}`;
+      } else if (!formData.materialCode || formData.materialCode !== currentMission.expectedData.materialCode) {
         errors.push("materialCode");
-        localHint = `Material incorreto. Esperado: ${currentMission.expectedData.material}`;
-      } else if (!formData.incoterms || formData.incoterms !== currentMission.expectedData.incoterms) {
+        localHint = `Material incorreto. Esperado: ${currentMission.expectedData.materialCode}`;
+      } else if (!formData.incoterms || formData.incoterms !== currentMission.expectedData.headerIncoterms) {
         errors.push("incoterms");
-        localHint = `Incoterms incorreto. Esperado: ${currentMission.expectedData.incoterms}`;
+        localHint = `Incoterms incorreto. Esperado: ${currentMission.expectedData.headerIncoterms}`;
       } else if (!formData.distChannel || formData.distChannel !== currentMission.expectedData.canalDist) {
         errors.push("distChannel");
         localHint = `Canal de Distribuição incorreto. Esperado: ${currentMission.expectedData.canalDist}`;
@@ -1405,9 +1409,9 @@ function SAPSDQuestApp() {
       } else if (!formData.division || formData.division !== currentMission.expectedData.setorAtiv) {
         errors.push("division");
         localHint = `Setor de Atividade incorreto. Esperado: ${currentMission.expectedData.setorAtiv}`;
-      } else if (!formData.partnerFunction || formData.partnerFunction !== currentMission.expectedData.condPagto) {
+      } else if (!formData.partnerFunction || formData.partnerFunction !== currentMission.expectedData.partnerFunction) {
         errors.push("partnerFunction");
-        localHint = `Condição de Pagamento/Função incorreta. Esperado: ${currentMission.expectedData.condPagto}`;
+        localHint = `Condição de Pagamento/Função incorreta. Esperado: ${currentMission.expectedData.partnerFunction}`;
       }
     }
 
@@ -1439,7 +1443,7 @@ function SAPSDQuestApp() {
         
         let successMsg = "";
         if (isBP) {
-          successMsg = `Parceiro Comercial ${formData.partnerCode || currentMission.expectedData.cliente} verificado com sucesso no cadastro do SAP S/4HANA! Dados fiscais e áreas de vendas validados.`;
+          successMsg = `Parceiro Comercial ${formData.partnerCode || currentMission.expectedData.partnerCode} verificado com sucesso no cadastro do SAP S/4HANA! Dados fiscais e áreas de vendas validados.`;
         } else if (isVL01N) {
           const remNum = Math.floor(800000000 + Math.random() * 999999);
           const ordNum = 450000000 + Math.floor(Math.random() * 1000);
@@ -1455,7 +1459,7 @@ function SAPSDQuestApp() {
           successMsg = `Alteração/Auditoria da Ordem ${ordNum} realizada com sucesso no sistema.`;
         } else {
           const ordNum = Math.floor(450000000 + Math.random() * 999999);
-          successMsg = `Ordem de Venda ${currentMission.expectedData.tipoOrdem} ${ordNum} criada com sucesso para o cliente ${formData.partnerCode || currentMission.expectedData.cliente}!`;
+          successMsg = `Ordem de Venda ${currentMission.expectedData.tipoOrdem} ${ordNum} criada com sucesso para o cliente ${formData.partnerCode || currentMission.expectedData.partnerCode}!`;
         }
 
         setHintMessage(`🎉 ${successMsg} \n\n${currentMission.successFeedback}`);
@@ -1511,7 +1515,7 @@ function SAPSDQuestApp() {
     
     // If it's a reinforced mission, randomize its data
     if (nextM && reinforcementQueue.includes(nextM.id)) {
-      nextM = randomizeMissionData(nextM);
+      nextM = randomizeMissionData(nextM, userName);
       setActiveMission(nextM);
     } else {
       setActiveMission(null);
@@ -1977,10 +1981,9 @@ function SAPSDQuestApp() {
                 <HugoAvatar className="size-14" />
                 <div>
                   <h3 className="font-bold text-slate-800 text-sm">Chefe Hugo 👋</h3>
-                  <p className="text-xs text-slate-600">{userName}, sua missão [{currentMissionIndex + 1}/{missions.length}]: <b>{currentMission.title}</b>.</p>
-                  <p className="text-[10px] text-slate-400 mt-0.5 italic">
-                    "{currentMission.chefeHugoDialog.replace("AAM LOGÍSTICA", "AAM LOGÍSTICA LTDA (Cód: 208015)")}"
-                  </p>
+                  <div className="text-[11px] text-slate-600 leading-relaxed mt-1">
+                    "{currentMission.chefeHugoDialog}"
+                  </div>
                 </div>
               </div>
 
@@ -2025,11 +2028,18 @@ function SAPSDQuestApp() {
                     >
                       {[
                         { 
+                          id: "MISSION_TITLE", 
+                          title: `Missão [${currentMissionIndex + 1}/${missions.length}]`, 
+                          icon: Target, 
+                          content: currentMission.title,
+                          variant: "indigo"
+                        },
+                        { 
                           id: "MISSION_OBJ", 
                           title: currentMission.f1Help.title, 
-                          icon: Target, 
+                          icon: HelpCircle, 
                           content: currentMission.f1Help.concept,
-                          variant: "indigo"
+                          variant: "slate"
                         },
                         { 
                           id: "IMPACT", 
@@ -2086,22 +2096,31 @@ function SAPSDQuestApp() {
               </div>
             </div>
             
-            {/* Stepper de 4 passos */}
-            <div className="bg-slate-50 px-4 py-3 border-t border-slate-100 flex items-center justify-between">
-              {[
-                { n: "1", label: "Contexto", color: completedMissions > currentMissionIndex ? "bg-emerald-500" : "bg-emerald-500", text: "text-emerald-700", bg: "bg-emerald-50" },
-                { n: "2", label: "Transação", color: selectedTransaction ? "bg-emerald-500" : "bg-indigo-600", text: selectedTransaction ? "text-emerald-700" : "text-indigo-700", bg: "bg-indigo-50", active: true },
-                { n: "3", label: "Preencher Dados", color: feedbackState !== "idle" ? "bg-emerald-500" : "bg-slate-200", text: feedbackState !== "idle" ? "text-emerald-700" : "text-slate-400", bg: "bg-slate-100" },
-                { n: "4", label: "Revisar & Enviar", color: feedbackState === "success" ? "bg-emerald-500" : "bg-slate-200", text: feedbackState === "success" ? "text-emerald-700" : "text-slate-400", bg: "bg-slate-100" },
-              ].map((step, i) => (
-                <div key={i} className="flex items-center gap-2 flex-1 group">
-                  <div className={`size-6 rounded-full flex items-center justify-center text-[10px] font-black text-white ${step.color} shadow-sm`}>
-                    {step.n}
+            {/* Stepper de 4 passos & Título da Missão */}
+            <div className="bg-slate-50 px-4 py-3 border-t border-slate-100 flex items-center justify-between gap-4">
+              <div className="hidden xl:flex items-center gap-2 pr-4 border-r border-slate-200">
+                <Target className="size-3.5 text-indigo-600" />
+                <span className="text-[10px] font-black text-slate-800 uppercase tracking-widest whitespace-nowrap">
+                  {currentMission.title}
+                </span>
+              </div>
+
+              <div className="flex-1 flex items-center justify-between">
+                {[
+                  { n: "1", label: "Contexto", color: completedMissions > currentMissionIndex ? "bg-emerald-500" : "bg-emerald-500", text: "text-emerald-700", bg: "bg-emerald-50" },
+                  { n: "2", label: "Transação", color: selectedTransaction ? "bg-emerald-500" : "bg-indigo-600", text: selectedTransaction ? "text-emerald-700" : "text-indigo-700", bg: "bg-indigo-50", active: true },
+                  { n: "3", label: "Dados", color: feedbackState !== "idle" ? "bg-emerald-500" : "bg-slate-200", text: feedbackState !== "idle" ? "text-emerald-700" : "text-slate-400", bg: "bg-slate-100" },
+                  { n: "4", label: "Revisar", color: feedbackState === "success" ? "bg-emerald-500" : "bg-slate-200", text: feedbackState === "success" ? "text-emerald-700" : "text-slate-400", bg: "bg-slate-100" },
+                ].map((step, i) => (
+                  <div key={i} className="flex items-center gap-2 flex-1 group last:flex-none">
+                    <div className={`size-6 rounded-full flex items-center justify-center text-[10px] font-black text-white ${step.color} shadow-sm shrink-0`}>
+                      {step.n}
+                    </div>
+                    <span className={`text-[10px] font-bold ${step.text} uppercase tracking-wider hidden sm:inline`}>{step.label}</span>
+                    {i < 3 && <div className="h-px bg-slate-200 flex-1 mx-2 sm:mx-4" />}
                   </div>
-                  <span className={`text-[10px] font-bold ${step.text} uppercase tracking-wider`}>{step.label}</span>
-                  {i < 3 && <div className="h-px bg-slate-200 flex-1 mx-4" />}
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </Card>
 
@@ -2142,7 +2161,7 @@ function SAPSDQuestApp() {
                   </button>
                   
                   {/* Item tab logic: enabled if mission has material or is standard VA01 */}
-                  {(currentMission.expectedData.material || selectedTransaction.startsWith("VA")) && (
+                  {(currentMission.expectedData.materialCode || selectedTransaction.startsWith("VA")) && (
                     <button 
                       className={`px-3 py-2 text-[10px] font-black uppercase tracking-wider border-b-2 transition-all flex items-center gap-2 ${formTab === 'items' ? 'border-indigo-600 text-indigo-600 bg-indigo-50/30' : 'border-transparent text-slate-400 hover:text-slate-600'}`}
                       onClick={() => setFormTab('items')}
