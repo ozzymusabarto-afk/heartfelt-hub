@@ -1507,6 +1507,7 @@ function SAPSDQuestApp() {
         setLastStateBeforeReset(null);
       }, 10000); // 10 segundos
     }
+    setShowWelcomeModal(true);
   };
 
   const undoReset = () => {
