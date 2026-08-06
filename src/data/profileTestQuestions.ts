@@ -130,6 +130,11 @@ export const PROFILE_METADATA: Record<SAPProfile, {
       "Visão funcional ponta a ponta",
       "Capacidade de prototipação rápida"
     ],
+    developmentPoints: [
+      "Integrações técnicas (EDIs/IDocs)",
+      "Linguagem ABAP para debug",
+      "Processos cross (MM/FI)"
+    ],
     transactions: ["SPRO", "VOK0", "VOV7", "V/06", "V/08", "OVA8"],
     recommendations: "Foque em missões de Nível Pleno e Sênior que envolvam cenários de precificação complexos e determinação de contas. Explore o módulo de Certificação para validar seus conhecimentos teóricos."
   },
@@ -141,6 +146,11 @@ export const PROFILE_METADATA: Record<SAPProfile, {
       "Excelente comunicação com usuários",
       "Foco em eficiência operacional",
       "Habilidade em testes de aceitação (UAT)"
+    ],
+    developmentPoints: [
+      "Conhecimento técnico de tabelas",
+      "Configuração básica de documentos",
+      "Visão de parametrização fiscal"
     ],
     transactions: ["VA01", "VA05", "VF04", "VC01N", "V.02", "BP"],
     recommendations: "Pratique missões que envolvam gestão de dados mestres (BP) e fluxos de venda padrão. Utilize a trilha de Trainee e Júnior para consolidar os fundamentos do Order-to-Cash."
@@ -154,6 +164,11 @@ export const PROFILE_METADATA: Record<SAPProfile, {
       "Habilidade em depuração (Debug/Logs)",
       "Gestão de conhecimento de erros"
     ],
+    developmentPoints: [
+      "Implementação de novos cenários",
+      "Arquitetura de soluções",
+      "Design de processos de negócio"
+    ],
     transactions: ["VA02", "VF11", "VL09", "SU53", "ST22", "SM37"],
     recommendations: "Foque em missões que envolvam correções de documentos, estornos de faturamento e análise de log de determinação. O Modo de Treino Rápido é excelente para você."
   },
@@ -165,6 +180,11 @@ export const PROFILE_METADATA: Record<SAPProfile, {
       "Desenho de soluções complexas",
       "Liderança técnica em projetos",
       "Foco em inovação e escalabilidade"
+    ],
+    developmentPoints: [
+      "Micro-configurações específicas",
+      "Gestão de usuários e perfis",
+      "Suporte operacional do dia a dia"
     ],
     transactions: ["WE20", "BD64", "BD87", "NACE", "SOAMANAGER"],
     recommendations: "Foque em missões de Nível Sênior que envolvam integrações e processos transversais. Utilize o simulador para testar o impacto de mudanças estruturais em processos de faturamento e remessa."
