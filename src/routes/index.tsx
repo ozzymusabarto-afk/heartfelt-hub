@@ -119,6 +119,208 @@ function HugoAvatar({ className }: { className?: string }) {
   );
 }
 
+function ProfileTestModule() {
+  const [testState, setTestState] = useState<"intro" | "testing" | "result">("intro");
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [answers, setAnswers] = useState<Record<string, SAPProfile>>({});
+
+  const startTest = () => {
+    setTestState("testing");
+    setCurrentQuestionIndex(0);
+    setAnswers({});
+  };
+
+  const currentQuestion = PROFILE_TEST_QUESTIONS[currentQuestionIndex];
+
+  const handleAnswer = (profile: SAPProfile) => {
+    setAnswers(prev => ({ ...prev, [currentQuestion.id]: profile }));
+    if (currentQuestionIndex < PROFILE_TEST_QUESTIONS.length - 1) {
+      setCurrentQuestionIndex(prev => prev + 1);
+    } else {
+      setTestState("result");
+    }
+  };
+
+  const getProfileResults = () => {
+    const counts: Record<SAPProfile, number> = {
+      Consultor: 0,
+      KeyUser: 0,
+      Suporte: 0,
+      Arquiteto: 0
+    };
+    
+    Object.values(answers).forEach(profile => {
+      counts[profile]++;
+    });
+
+    const total = PROFILE_TEST_QUESTIONS.length;
+    return Object.entries(counts).map(([profile, count]) => ({
+      profile: profile as SAPProfile,
+      percentage: Math.round((count / total) * 100),
+      count
+    })).sort((a, b) => b.percentage - a.percentage);
+  };
+
+  if (testState === "intro") {
+    return (
+      <Card className="flex-1 p-8 flex flex-col items-center justify-center text-center bg-white border-slate-200 rounded-3xl animate-in fade-in zoom-in-95 duration-300">
+        <div className="size-20 bg-indigo-100 rounded-3xl flex items-center justify-center text-indigo-600 mb-6 shadow-xl shadow-indigo-50">
+          <UserCheck className="size-10" />
+        </div>
+        <h2 className="text-3xl font-black text-slate-800 mb-4 tracking-tight">Teste de Perfil Profissional SAP SD</h2>
+        <p className="text-slate-600 max-w-md mb-8 leading-relaxed">
+          Descubra seu perfil de atuação no ecossistema SAP SD: Consultor, Analista Key User, Suporte AMS ou Arquiteto de Processos.
+        </p>
+        
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-2xl mb-10">
+          {["Consultor", "Key User", "Suporte", "Arquiteto"].map((p) => (
+            <div key={p} className="p-3 bg-slate-50 rounded-2xl border border-slate-100">
+              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Perfil</p>
+              <p className="text-xs font-bold text-slate-700">{p}</p>
+            </div>
+          ))}
+        </div>
+        
+        <Button 
+          onClick={startTest}
+          className="h-14 px-10 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl shadow-lg shadow-indigo-100 gap-2 text-lg transition-all active:scale-95"
+        >
+          INICIAR AVALIAÇÃO <ArrowRight className="size-5" />
+        </Button>
+      </Card>
+    );
+  }
+
+  if (testState === "testing" && currentQuestion) {
+    const progress = ((currentQuestionIndex) / PROFILE_TEST_QUESTIONS.length) * 100;
+
+    return (
+      <div className="flex-1 flex flex-col gap-4 animate-in fade-in duration-300">
+        <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+          <div className="flex items-center justify-between">
+            <Badge variant="outline" className="bg-indigo-50 text-indigo-600 border-indigo-100 font-bold px-3 py-1">
+              Pergunta {currentQuestionIndex + 1} de {PROFILE_TEST_QUESTIONS.length}
+            </Badge>
+            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Avaliação Situacional</span>
+          </div>
+          <Progress value={progress} className="h-1.5 bg-slate-100" />
+        </div>
+
+        <Card className="flex-1 p-8 bg-white border-slate-200 rounded-3xl shadow-sm flex flex-col">
+          <h3 className="text-xl font-bold text-slate-800 mb-8 leading-tight">
+            {currentQuestion.question}
+          </h3>
+          
+          <div className="grid grid-cols-1 gap-3 flex-1">
+            {currentQuestion.options.map((option) => (
+              <button
+                key={option.id}
+                onClick={() => handleAnswer(option.profile)}
+                className="w-full p-5 border-2 border-slate-100 hover:border-indigo-600 hover:bg-indigo-50 rounded-2xl text-left transition-all flex items-start gap-4 group"
+              >
+                <div className="size-8 rounded-xl bg-slate-100 text-slate-400 flex items-center justify-center font-black text-xs shrink-0 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                  {option.id}
+                </div>
+                <span className="text-sm font-bold text-slate-600 group-hover:text-indigo-900 transition-colors">
+                  {option.text}
+                </span>
+              </button>
+            ))}
+          </div>
+        </Card>
+      </div>
+    );
+  }
+
+  if (testState === "result") {
+    const results = getProfileResults();
+    const primaryProfile = results[0].profile;
+    const metadata = PROFILE_METADATA[primaryProfile];
+
+    return (
+      <div className="flex-1 flex flex-col gap-4 animate-in fade-in zoom-in-95 duration-300">
+        <Card className="p-8 flex flex-col items-center bg-white border-slate-200 rounded-3xl shadow-sm overflow-hidden relative">
+          <div className="absolute top-0 inset-x-0 h-1.5 bg-indigo-600" />
+          
+          <div className="size-20 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 shadow-xl shadow-indigo-50">
+            <Trophy className="size-10" />
+          </div>
+          
+          <p className="text-[10px] font-black text-indigo-600 uppercase tracking-[0.2em] mb-1">Seu Perfil Predominante</p>
+          <h2 className="text-3xl font-black text-slate-800 mb-2">{metadata.title}</h2>
+          <p className="text-sm text-slate-500 max-w-xl text-center mb-8 leading-relaxed">
+            {metadata.description}
+          </p>
+
+          <div className="w-full max-w-2xl grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+            <div className="space-y-4">
+              <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                <Star className="size-3 text-amber-500 fill-amber-500" /> Afinidade por Categoria
+              </h4>
+              <div className="space-y-3">
+                {results.map((res) => (
+                  <div key={res.profile} className="space-y-1.5">
+                    <div className="flex items-center justify-between text-[10px] font-bold">
+                      <span className="text-slate-600">{PROFILE_METADATA[res.profile].title}</span>
+                      <span className="text-indigo-600">{res.percentage}%</span>
+                    </div>
+                    <Progress value={res.percentage} className="h-1.5 bg-slate-100" />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                <CheckCircle2 className="size-3 text-emerald-500" /> Seus Pontos Fortes
+              </h4>
+              <div className="grid grid-cols-1 gap-2">
+                {metadata.strengths.map((s, i) => (
+                  <div key={i} className="flex items-center gap-2 p-2 bg-emerald-50/50 rounded-lg border border-emerald-100/50">
+                    <Check className="size-3 text-emerald-600" />
+                    <span className="text-[11px] font-bold text-slate-700">{s}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="w-full max-w-2xl bg-slate-50 rounded-2xl border border-slate-100 p-6 mb-8">
+            <div className="flex items-center gap-3 mb-4">
+              <HugoAvatar className="size-10" />
+              <div>
+                <h4 className="text-xs font-black text-indigo-600 uppercase tracking-widest leading-none">Dica do Chefe Hugo</h4>
+                <p className="text-[10px] text-slate-400 font-medium">Plano de Carreira Personalizado</p>
+              </div>
+            </div>
+            <p className="text-xs text-slate-600 leading-relaxed mb-4">
+              {metadata.recommendations}
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest w-full mb-1">Transações Sugeridas</span>
+              {metadata.transactions.map(t => (
+                <Badge key={t} variant="outline" className="bg-white border-slate-200 text-slate-600 font-mono text-[10px] px-2">
+                  {t}
+                </Badge>
+              ))}
+            </div>
+          </div>
+
+          <Button 
+            onClick={() => setTestState("intro")}
+            variant="outline"
+            className="border-slate-200 text-slate-500 font-bold rounded-xl"
+          >
+            REFAZER TESTE
+          </Button>
+        </Card>
+      </div>
+    );
+  }
+
+  return null;
+}
+
 function CertificationModule() {
   const [examState, setExamState] = useState<"intro" | "mode-select" | "testing" | "result">("intro");
   const [examMode, setExamMode] = useState<"study" | "exam">("study");
