@@ -1051,11 +1051,28 @@ function SAPSDQuestApp() {
                   key={item.label} 
                   variant="ghost" 
                   className={`w-full justify-start h-12 px-3 py-2 rounded-xl gap-3 ${item.label === "Trilha Principal" ? "bg-indigo-600 text-white shadow-md shadow-indigo-100" : "text-slate-500 hover:bg-indigo-50 hover:text-indigo-600"}`}
-                  onClick={item.action}
+                  onClick={() => {
+                    if (item.premium) {
+                      setFeedbackState("review");
+                      setHintMessage("🌟 RECURSO PREMIUM: Este módulo está disponível apenas no Plano Premium. Adquira agora para acessar simuladores de prova e testes de perfil!");
+                      toast.info("Módulo Premium bloqueado.");
+                      return;
+                    }
+                    if (item.action) item.action();
+                  }}
                 >
-                  <item.icon className={`size-5 ${item.label === "Trilha Principal" ? "text-white" : ""}`} />
+                  <div className="relative">
+                    <item.icon className={`size-5 ${item.label === "Trilha Principal" ? "text-white" : ""}`} />
+                    {item.premium && (
+                      <div className="absolute -top-1.5 -right-1.5 bg-amber-500 rounded-full border border-white p-0.5 shadow-sm">
+                        <Shield className="size-2 text-white fill-white" />
+                      </div>
+                    )}
+                  </div>
                   <div className="flex flex-col items-start text-left">
-                    <span className="text-xs font-bold leading-tight">{item.label}</span>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-xs font-bold leading-tight">{item.label}</span>
+                    </div>
                     <span className={`text-[9px] ${item.label === "Trilha Principal" ? "text-indigo-100" : "text-slate-400"}`}>{item.sub}</span>
                   </div>
                 </Button>
