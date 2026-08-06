@@ -355,6 +355,15 @@ function SAPSDQuestApp() {
   };
 
   useEffect(() => {
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsF1ModalOpen(false);
+        setIsLogoutModalOpen(false);
+        setIsCustomerSearchOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleGlobalKeyDown);
+
     const savedUser = localStorage.getItem("sap-quest-username");
     if (savedUser) {
       setUserName(savedUser);
@@ -1571,61 +1580,120 @@ function SAPSDQuestApp() {
         </div>
       )}
 
-      {/* Modal F1 Ajuda do Campo */}
+      {/* F1 HELP MODAL */}
       {isF1ModalOpen && f1ActiveField && (
-        <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200">
-          <Card className="w-full max-w-md shadow-2xl overflow-hidden border-slate-200 animate-in zoom-in-95 duration-200">
+        <div 
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[110] flex items-center justify-center p-4 animate-in fade-in duration-200"
+          onClick={() => setIsF1ModalOpen(false)}
+        >
+          <div 
+            className="bg-white dark:bg-slate-900 w-full max-w-lg rounded-xl shadow-2xl overflow-hidden border border-slate-200 dark:border-slate-800 animate-in zoom-in-95 duration-200"
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="f1-modal-title"
+          >
+            {/* Modal Header */}
             <div className="bg-indigo-600 px-6 py-4 flex items-center justify-between text-white">
-              <div className="flex items-center gap-2">
-                <HelpCircle className="size-5" />
-                <h3 className="font-bold">Ajuda SAP GUI [F1]</h3>
-              </div>
-              <Button variant="ghost" size="icon" onClick={() => setIsF1ModalOpen(false)} className="text-indigo-100 hover:text-white hover:bg-indigo-700 rounded-full size-8">
-                <X className="size-5" />
-              </Button>
-            </div>
-            <div className="p-6 space-y-6">
-              <div>
-                <h4 className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest mb-1">Nome do Campo</h4>
-                <p className="text-xl font-bold text-slate-800">{f1ActiveField.label}</p>
-              </div>
-              
-              <div className="flex items-center gap-2 bg-slate-50 p-3 rounded-lg border border-slate-100">
-                <div className="p-1.5 bg-indigo-100 rounded-md">
-                  <FileText className="size-4 text-indigo-600" />
+              <div className="flex items-center gap-3">
+                <div className="bg-white/20 p-2 rounded-lg">
+                  <HelpCircle className="size-5" />
                 </div>
                 <div>
-                  <h4 className="text-[9px] font-bold text-slate-500 uppercase leading-none">Tabela/Campo SAP</h4>
-                  <p className="font-mono text-sm font-semibold text-slate-700">{f1ActiveField.table}</p>
+                  <h3 id="f1-modal-title" className="font-bold text-lg leading-tight uppercase tracking-wide">
+                    Guia de Apoio SAP
+                  </h3>
+                  <p className="text-indigo-100 text-[10px] font-medium opacity-90 uppercase tracking-wider">
+                    {f1ActiveField.label} • {f1ActiveField.table}
+                  </p>
+                </div>
+              </div>
+              <button 
+                onClick={() => setIsF1ModalOpen(false)}
+                className="p-2 hover:bg-white/10 rounded-full transition-colors outline-none focus:ring-2 focus:ring-white/50"
+                aria-label="Fechar modal"
+              >
+                <X className="size-6" />
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6 space-y-6 max-h-[70vh] overflow-y-auto">
+              {/* Dynamic Mission Context Section */}
+              <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-5 border border-indigo-100 dark:border-indigo-800/50">
+                <div className="flex items-start gap-3 mb-3">
+                  <div className="bg-indigo-600 text-white p-1 rounded">
+                    <Target className="size-4" />
+                  </div>
+                  <h4 className="font-bold text-indigo-900 dark:text-indigo-100 text-xs uppercase tracking-wider">
+                    Foco da Missão Atual
+                  </h4>
+                </div>
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-indigo-900/70 dark:text-indigo-300 text-[10px] font-bold uppercase mb-1">
+                      Conceito SAP
+                    </p>
+                    <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">
+                      {currentMission.f1Help.concept}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-indigo-900/70 dark:text-indigo-300 text-[10px] font-bold uppercase mb-1">
+                      Dica Prática para o Chefe Hugo
+                    </p>
+                    <div className="flex gap-2">
+                      <div className="mt-1 flex-shrink-0">
+                        <div className="size-1.5 rounded-full bg-indigo-500"></div>
+                      </div>
+                      <p className="text-slate-700 dark:text-slate-300 text-sm font-medium italic">
+                        {currentMission.f1Help.businessImpact}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
 
+              {/* General Field Concept Section */}
               <div className="space-y-4">
-                <div className="space-y-1">
-                  <h4 className="text-xs font-bold text-slate-900 flex items-center gap-2">
-                    <span className="size-1.5 rounded-full bg-indigo-500"></span>
-                    Conceito de Negócio
+                <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-2">
+                  <FileText className="size-4 text-slate-400" />
+                  <h4 className="font-bold text-slate-800 dark:text-slate-200 text-xs uppercase">
+                    Detalhes do Campo
                   </h4>
-                  <p className="text-sm text-slate-600 leading-relaxed pl-3.5">
-                    {f1ActiveField.concept}
-                  </p>
                 </div>
-
-                <div className="space-y-1">
-                  <h4 className="text-xs font-bold text-slate-900 flex items-center gap-2">
-                    <span className="size-1.5 rounded-full bg-amber-500"></span>
-                    Impacto Fiscal (Brasil)
-                  </h4>
-                  <p className="text-sm text-slate-600 leading-relaxed pl-3.5">
-                    {f1ActiveField.impact}
-                  </p>
+                
+                <div className="grid grid-cols-1 gap-4">
+                  <div>
+                    <p className="text-slate-500 dark:text-slate-400 text-[10px] font-bold uppercase mb-1">
+                      Definição Técnica
+                    </p>
+                    <p className="text-slate-700 dark:text-slate-300 text-sm">
+                      {f1ActiveField.concept}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-slate-500 dark:text-slate-400 text-[10px] font-bold uppercase mb-1">
+                      Impacto no Negócio
+                    </p>
+                    <p className="text-slate-700 dark:text-slate-300 text-sm">
+                      {f1ActiveField.impact}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="bg-slate-50 px-6 py-4 border-t border-slate-200 flex justify-end">
-              <Button onClick={() => setIsF1ModalOpen(false)} className="bg-indigo-600 hover:bg-indigo-700">Fechar Ajuda</Button>
+
+            {/* Modal Footer */}
+            <div className="bg-slate-50 dark:bg-slate-800/50 px-6 py-4 flex justify-end border-t border-slate-100 dark:border-slate-800">
+              <Button 
+                onClick={() => setIsF1ModalOpen(false)}
+                className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-8 rounded-lg"
+              >
+                ENTENDI
+              </Button>
             </div>
-          </Card>
+          </div>
         </div>
       )}
     </div>
