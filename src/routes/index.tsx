@@ -1348,20 +1348,19 @@ function SAPSDQuestApp() {
     // Dynamic validation logic based on Transaction
     if (selectedTransaction === "BP") {
       // Missions M19 and M20 require code and function
-      if (!formData.customer || formData.customer !== currentMission.expectedData.cliente) {
-        errors.push("customer");
+      if (!formData.partnerCode || formData.partnerCode !== currentMission.expectedData.cliente) {
+        errors.push("partnerCode");
         localHint = `Código do Parceiro incorreto. Esperado: ${currentMission.expectedData.cliente}`;
       } else if (!formData.salesOrg || formData.salesOrg !== currentMission.expectedData.orgVendas) {
-        // Even for BP, we are checking the Sales Org as per requirement "Exibir apenas... Organização de Vendas (1000)"
         errors.push("salesOrg");
         localHint = `Organização de Vendas incorreta. Esperado: ${currentMission.expectedData.orgVendas}`;
       }
     } else if (selectedTransaction === "VL01N") {
       // Logic for delivery
-      if (!formData.salesOrg || formData.salesOrg !== "1000") { // Using 1000 as point of expedition mock
+      if (!formData.salesOrg || formData.salesOrg !== "1000") {
         errors.push("salesOrg");
         localHint = `Ponto de Expedição incorreto. Esperado: 1000`;
-      } else if (!formData.poNumber || formData.poNumber !== "REF-ORDEM") { // Mock ref
+      } else if (!formData.partnerCategory || formData.partnerCategory !== "REF-ORDEM") {
          // Validation would be more specific in real scenario
       }
     } else if (selectedTransaction === "VF01") {
@@ -1376,11 +1375,11 @@ function SAPSDQuestApp() {
       } else if (!formData.salesOrg || formData.salesOrg !== currentMission.expectedData.orgVendas) {
         errors.push("salesOrg");
         localHint = `Org. Vendas incorreta. Esperado: ${currentMission.expectedData.orgVendas}`;
-      } else if (!formData.customer || formData.customer !== currentMission.expectedData.cliente) {
-        errors.push("customer");
+      } else if (!formData.partnerCode || formData.partnerCode !== currentMission.expectedData.cliente) {
+        errors.push("partnerCode");
         localHint = `Cliente incorreto. Esperado: ${currentMission.expectedData.cliente}`;
-      } else if (!formData.material || formData.material !== currentMission.expectedData.material) {
-        errors.push("material");
+      } else if (!formData.materialCode || formData.materialCode !== currentMission.expectedData.material) {
+        errors.push("materialCode");
         localHint = `Material incorreto. Esperado: ${currentMission.expectedData.material}`;
       } else if (!formData.incoterms || formData.incoterms !== currentMission.expectedData.incoterms) {
         errors.push("incoterms");
@@ -1394,8 +1393,8 @@ function SAPSDQuestApp() {
       } else if (!formData.division || formData.division !== currentMission.expectedData.setorAtiv) {
         errors.push("division");
         localHint = `Setor de Atividade incorreto. Esperado: ${currentMission.expectedData.setorAtiv}`;
-      } else if (!formData.paymentCond || formData.paymentCond !== currentMission.expectedData.condPagto) {
-        errors.push("paymentCond");
+      } else if (!formData.partnerFunction || formData.partnerFunction !== currentMission.expectedData.condPagto) {
+        errors.push("partnerFunction");
         localHint = `Condição de Pagamento incorreta. Esperado: ${currentMission.expectedData.condPagto}`;
       }
     }
