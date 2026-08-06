@@ -144,7 +144,7 @@ export const CERTIFICATION_QUESTIONS: CertificationQuestion[] = [
 ,
 {
   "id": "cert-011",
-  "topic": "Organizational Structures",
+  "topic": "Processos Transversais",
   "question": "Em qual nível organizacional a 'Determinação de Centro' (Plant Determination) é primeiramente verificada na Ordem de Venda?",
   "options": [
     {
@@ -169,7 +169,7 @@ export const CERTIFICATION_QUESTIONS: CertificationQuestion[] = [
 },
 {
   "id": "cert-012",
-  "topic": "Sales Documents",
+  "topic": "Vendas",
   "question": "Qual é a função da 'Divisão de Remessa' (Schedule Line Category) no processo de vendas?",
   "options": [
     {
@@ -194,7 +194,7 @@ export const CERTIFICATION_QUESTIONS: CertificationQuestion[] = [
 },
 {
   "id": "cert-013",
-  "topic": "Pricing",
+  "topic": "Precificação",
   "question": "Na técnica de condições, o que acontece se o campo 'Exclusivo' estiver marcado em um acesso dentro da Sequência de Acesso?",
   "options": [
     {
@@ -219,7 +219,7 @@ export const CERTIFICATION_QUESTIONS: CertificationQuestion[] = [
 },
 {
   "id": "cert-014",
-  "topic": "Shipping & Billing",
+  "topic": "Faturamento",
   "question": "Qual transação é utilizada no S/4HANA para o processamento coletivo de faturas (Billing Due List)?",
   "options": [
     {
@@ -244,7 +244,7 @@ export const CERTIFICATION_QUESTIONS: CertificationQuestion[] = [
 },
 {
   "id": "cert-015",
-  "topic": "Master Data",
+  "topic": "Dados Mestres/BP",
   "question": "Qual 'Role' (Função de Parceiro) do Business Partner é necessária para estender um parceiro às funções de Vendas e Distribuição?",
   "options": [
     {
@@ -269,7 +269,7 @@ export const CERTIFICATION_QUESTIONS: CertificationQuestion[] = [
 },
 {
   "id": "cert-016",
-  "topic": "Credit Management",
+  "topic": "Processos Transversais",
   "question": "No SAP S/4HANA, qual componente substituiu o 'FI-AR Credit Management' (antigo SD Credit Management)?",
   "options": [
     {
@@ -294,7 +294,7 @@ export const CERTIFICATION_QUESTIONS: CertificationQuestion[] = [
 },
 {
   "id": "cert-017",
-  "topic": "Organizational Structures",
+  "topic": "Processos Transversais",
   "question": "Qual a relação hierárquica entre Organização de Vendas e Empresa (Company Code)?",
   "options": [
     {
@@ -319,7 +319,7 @@ export const CERTIFICATION_QUESTIONS: CertificationQuestion[] = [
 },
 {
   "id": "cert-018",
-  "topic": "Sales Documents",
+  "topic": "Vendas",
   "question": "O que é o 'Log de Incompletude' (Incompletion Log)?",
   "options": [
     {
@@ -344,7 +344,7 @@ export const CERTIFICATION_QUESTIONS: CertificationQuestion[] = [
 },
 {
   "id": "cert-019",
-  "topic": "Pricing",
+  "topic": "Precificação",
   "question": "Qual das seguintes categorias de condição é usada para 'Impostos' no esquema de cálculo?",
   "options": [
     {
@@ -369,7 +369,7 @@ export const CERTIFICATION_QUESTIONS: CertificationQuestion[] = [
 },
 {
   "id": "cert-020",
-  "topic": "Shipping & Billing",
+  "topic": "Faturamento",
   "question": "O que ocorre fisicamente no sistema quando o 'Registro de Saída de Mercadorias' (PGI) é efetuado?",
   "options": [
     {
