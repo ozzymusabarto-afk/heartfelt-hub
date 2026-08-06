@@ -1469,11 +1469,6 @@ function SAPSDQuestApp() {
           </Card>
         </div>
       )}
-              <Button variant="outline" size="sm" onClick={() => setIsCustomerSearchOpen(false)}>Cancelar</Button>
-            </div>
-          </Card>
-        </div>
-      )}
 
       {/* Modal F1 Ajuda do Campo */}
       {isF1ModalOpen && f1ActiveField && (
