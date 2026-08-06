@@ -1,3 +1,4 @@
+import json
 import re
 
 def update_missions():
