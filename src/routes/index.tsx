@@ -81,15 +81,15 @@ const randomizeMissionData = (mission: Mission, name: string): Mission => {
   // Create a deep copy to avoid mutating the original mission
   const newMission = JSON.parse(JSON.stringify(mission));
   
-  newMission.expectedData.material = randomValue(materials);
-  newMission.expectedData.incoterms = randomValue(incoterms);
-  newMission.expectedData.condPagto = randomValue(paymentConds);
+  newMission.expectedData.materialCode = randomValue(materials);
+  newMission.expectedData.headerIncoterms = randomValue(incoterms);
+  newMission.expectedData.partnerFunction = randomValue(paymentConds);
   newMission.expectedData.quantidade = randomValue(quantities);
   
   // Randomize customer from master if not BP
   if (mission.transaction !== "BP") {
     const customers = ["208015", "208016", "208017", "208018", "208019"];
-    newMission.expectedData.cliente = randomValue(customers);
+    newMission.expectedData.partnerCode = randomValue(customers);
   }
 
   // Personalization: inject name and clean dialogue
