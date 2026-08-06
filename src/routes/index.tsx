@@ -1392,10 +1392,10 @@ function SAPSDQuestApp() {
 
     // Dynamic validation logic based on Transaction
     if (selectedTransaction === "BP") {
-      if (!formData.partnerCode || formData.partnerCode !== currentMission.expectedData.partnerCode) {
+      if (!formData.partnerCode || (currentMission.expectedData.partnerCode && formData.partnerCode !== currentMission.expectedData.partnerCode)) {
         errors.push("partnerCode");
         localHint = `Código do Parceiro incorreto. Esperado: ${currentMission.expectedData.partnerCode}`;
-      } else if (!formData.salesOrg || formData.salesOrg !== currentMission.expectedData.orgVendas) {
+      } else if (!formData.salesOrg || (currentMission.expectedData.orgVendas && formData.salesOrg !== currentMission.expectedData.orgVendas)) {
         errors.push("salesOrg");
         localHint = `Organização de Vendas incorreta. Esperado: ${currentMission.expectedData.orgVendas}`;
       } else if (currentMission.expectedData.canalDist && (!formData.distChannel || formData.distChannel !== currentMission.expectedData.canalDist)) {
@@ -1414,34 +1414,25 @@ function SAPSDQuestApp() {
        // Logic for billing
     } else {
       // Standard Sales Orders (VA01, etc)
-      if (!formData.orderType || formData.orderType !== currentMission.expectedData.tipoOrdem) {
-        errors.push("orderType");
-        localHint = `Tipo de ordem incorreto. Esperado: ${currentMission.expectedData.tipoOrdem}`;
-      } else if (!formData.salesOrg || formData.salesOrg !== currentMission.expectedData.orgVendas) {
-        errors.push("salesOrg");
-        localHint = `Org. Vendas incorreta. Esperado: ${currentMission.expectedData.orgVendas}`;
-      } else if (!formData.partnerCode || formData.partnerCode !== currentMission.expectedData.partnerCode) {
-        errors.push("partnerCode");
-        localHint = `Cliente incorreto. Esperado: ${currentMission.expectedData.partnerCode}`;
-      } else if (!formData.materialCode || formData.materialCode !== currentMission.expectedData.materialCode) {
-        errors.push("materialCode");
-        localHint = `Material incorreto. Esperado: ${currentMission.expectedData.materialCode}`;
-      } else if (!formData.incoterms || formData.incoterms !== currentMission.expectedData.headerIncoterms) {
-        errors.push("incoterms");
-        localHint = `Incoterms incorreto. Esperado: ${currentMission.expectedData.headerIncoterms}`;
-      } else if (!formData.distChannel || formData.distChannel !== currentMission.expectedData.canalDist) {
-        errors.push("distChannel");
-        localHint = `Canal de Distribuição incorreto. Esperado: ${currentMission.expectedData.canalDist}`;
-      } else if (!formData.quantity || formData.quantity !== currentMission.expectedData.quantidade) {
-        errors.push("quantity");
-        localHint = `Quantidade incorreta. Esperado: ${currentMission.expectedData.quantidade}`;
-      } else if (!formData.division || formData.division !== currentMission.expectedData.setorAtiv) {
-        errors.push("division");
-        localHint = `Setor de Atividade incorreto. Esperado: ${currentMission.expectedData.setorAtiv}`;
-      } else if (!formData.partnerFunction || formData.partnerFunction !== currentMission.expectedData.partnerFunction) {
-        errors.push("partnerFunction");
-        localHint = `Condição de Pagamento/Função incorreta. Esperado: ${currentMission.expectedData.partnerFunction}`;
-      }
+      const validateField = (fieldKey: keyof typeof formData, expectedKey: keyof typeof currentMission.expectedData, label: string) => {
+        const expected = currentMission.expectedData[expectedKey];
+        if (expected && formData[fieldKey] !== expected) {
+          errors.push(fieldKey);
+          localHint = `${label} incorreto. Esperado: ${expected}`;
+          return false;
+        }
+        return true;
+      };
+
+      validateField("orderType", "tipoOrdem", "Tipo de ordem");
+      validateField("salesOrg", "orgVendas", "Org. Vendas");
+      validateField("partnerCode", "partnerCode", "Cliente");
+      validateField("materialCode", "materialCode", "Material");
+      validateField("incoterms", "headerIncoterms", "Incoterms");
+      validateField("distChannel", "canalDist", "Canal de Distribuição");
+      validateField("quantity", "quantidade", "Quantidade");
+      validateField("division", "setorAtiv", "Setor de Atividade");
+      validateField("partnerFunction", "partnerFunction", "Condição de Pagamento/Função");
     }
 
     if (isSuperAdmin) {
