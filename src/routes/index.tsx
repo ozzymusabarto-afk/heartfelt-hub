@@ -1025,19 +1025,19 @@ function SAPSDQuestApp() {
       <div className="flex-1 flex flex-col md:flex-row relative">
         <aside className={`fixed inset-y-0 left-0 z-40 w-[260px] bg-card border-r p-6 transform transition-transform md:relative md:translate-x-0 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} h-screen md:h-auto flex flex-col`}>
           <nav className="space-y-1 flex-1">
-            {[
+            {( [
               { icon: Gamepad2, label: "Trilha Principal", sub: "Carreira passo a passo", active: true },
               { icon: Rocket, label: "Treino Rápido", sub: "Desafios aleatórios" },
               { icon: BookOpen, label: "Módulos & Apostila", sub: "Estude por tópico" },
+              { icon: FileText, label: "Simulador de Certificação", sub: "100 questões S/4HANA SD", premium: true },
+              { icon: BarChart3, label: "Perfil Profissional", sub: "Avaliação de competências", premium: true },
               { icon: HelpCircle, label: "Como Usar / Sobre", sub: "Guia e Aviso Legal", action: openOnboarding },
               { icon: Crown, label: "Modos Premium", sub: "Recursos exclusivos" },
               { icon: BarChart3, label: "Estatísticas", sub: "Seu desempenho" },
               { icon: Trophy, label: "Conquistas", sub: "Medalhas e troféus" },
               { icon: Settings, label: "Configurações", sub: "Conta e preferências" },
-
               { icon: Shield, label: "Admin", sub: "Painel de Controle", path: "/admin", adminOnly: true },
-
-            ].map((item) => {
+            ] as any[]).map((item) => {
               const isAdminSession = typeof window !== "undefined" && localStorage.getItem("sap-quest-admin-session") === "true";
               const userData = typeof window !== "undefined" ? localStorage.getItem("sap-quest-data") : null;
               const isAdminProfile = userData ? JSON.parse(userData).isAdmin === true : false;
