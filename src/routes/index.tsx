@@ -1380,6 +1380,12 @@ function SAPSDQuestApp() {
       } else if (!formData.salesOrg || formData.salesOrg !== currentMission.expectedData.orgVendas) {
         errors.push("salesOrg");
         localHint = `Organização de Vendas incorreta. Esperado: ${currentMission.expectedData.orgVendas}`;
+      } else if (currentMission.expectedData.canalDist && (!formData.distChannel || formData.distChannel !== currentMission.expectedData.canalDist)) {
+        errors.push("distChannel");
+        localHint = `Canal de Distribuição incorreto. Esperado: ${currentMission.expectedData.canalDist}`;
+      } else if (currentMission.expectedData.setorAtiv && (!formData.division || formData.division !== currentMission.expectedData.setorAtiv)) {
+        errors.push("division");
+        localHint = `Setor de Atividade incorreto. Esperado: ${currentMission.expectedData.setorAtiv}`;
       }
     } else if (selectedTransaction === "VL01N") {
       if (!formData.salesOrg || formData.salesOrg !== "1000") {
