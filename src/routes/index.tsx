@@ -98,7 +98,7 @@ const randomizeMissionData = (mission: Mission, name: string): Mission => {
   newMission.chefeHugoDialog = newMission.chefeHugoDialog
     .replace(/^Olá Consultor\(a\)!/g, greeting)
     .replace(/\bAAM LOGÍSTICA\b/g, "AAM LOGÍSTICA LTDA (Cód: 208015)")
-    .replace(/\bMAT-SD-\d+\b/g, newMission.expectedData.materialCode)
+    .replace(/\bMAT-SD-0\d+\b/g, newMission.expectedData.materialCode)
     .replace(/\b\d+ unidades\b/g, `${newMission.expectedData.quantidade} unidades`)
     .replace(/\b\d+ peças\b/g, `${newMission.expectedData.quantidade} peças`)
     .replace(/\bfrete \w+\b/g, `frete ${newMission.expectedData.headerIncoterms}`)
@@ -854,7 +854,7 @@ function CertificateModule({ completedMissions, xp, certName, setCertName, certi
 
 function SAPSDQuestApp() {
   const [isAuth, setIsAuth] = useState(false);
-  const [userName, setUserName] = useState("");
+  const [userName, setUserName] = useState("Adriana");
   const [password, setPassword] = useState("");
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
@@ -1218,7 +1218,12 @@ function SAPSDQuestApp() {
           }
         } catch (e) {}
       } else if (savedUser) {
-        setCurrentMissionIndex(getRandomMissionIndex(undefined, [], 0));
+        const startIdx = getRandomMissionIndex(undefined, [], 0);
+        setCurrentMissionIndex(startIdx);
+        // Force randomization for first mission if it's the start
+        const baseM = (missions[startIdx] || missions[0]) as Mission;
+        const firstMission = randomizeMissionData(baseM, "Adriana");
+        setActiveMission(firstMission);
       }
       if (savedUser && savedHistory) {
         try { setTrainingHistory(JSON.parse(savedHistory)); } catch (e) {}
@@ -1515,7 +1520,7 @@ function SAPSDQuestApp() {
     
     // If it's a reinforced mission, randomize its data
     if (nextM && reinforcementQueue.includes(nextM.id)) {
-      nextM = randomizeMissionData(nextM, userName);
+      nextM = randomizeMissionData(nextM as Mission, userName || "Adriana");
       setActiveMission(nextM);
     } else {
       setActiveMission(null);
