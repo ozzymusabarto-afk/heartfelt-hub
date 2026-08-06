@@ -902,6 +902,13 @@ function SAPSDQuestApp() {
     impact: string;
   } | null>(null);
 
+  const seniorityLevel = useMemo(() => {
+    if (completedMissions >= 131) return "Sênior";
+    if (completedMissions >= 81) return "Pleno";
+    if (completedMissions >= 41) return "Júnior";
+    return "Trainee";
+  }, [completedMissions]);
+
   const CUSTOMER_MASTER = [
     { code: "208015", name: "AAM LOGÍSTICA LTDA", uf: "SP", canal: "10" },
     { code: "208016", name: "NORTEL DISTRIBUIDORA", uf: "RJ", canal: "20" },
