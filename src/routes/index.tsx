@@ -2236,6 +2236,200 @@ function SAPSDQuestApp() {
 
           {activeTab === "certification" && <CertificationModule />}
           {activeTab === "profile" && <ProfileTestModule />}
+          
+          {activeTab === "quick" && (
+            <Card className="flex-1 p-8 flex flex-col items-center justify-center text-center bg-white border-slate-200 rounded-3xl animate-in fade-in zoom-in-95 duration-300">
+              <div className="size-20 bg-indigo-100 rounded-3xl flex items-center justify-center text-indigo-600 mb-6 shadow-xl shadow-indigo-50">
+                <Rocket className="size-10" />
+              </div>
+              <h2 className="text-3xl font-black text-slate-800 mb-4 tracking-tight">Treino Rápido (Desafios Aleatórios)</h2>
+              <p className="text-slate-600 max-w-md mb-8 leading-relaxed">
+                Gere missões aleatórias para praticar conceitos específicos do SAP SD sem seguir a ordem da trilha principal.
+              </p>
+              <Button 
+                onClick={() => {
+                  nextMission();
+                  setActiveTab("main");
+                }}
+                className="h-14 px-10 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl shadow-lg shadow-indigo-100 gap-2 text-lg transition-all active:scale-95"
+              >
+                GERAR NOVA MISSÃO <Dices className="size-5" />
+              </Button>
+            </Card>
+          )}
+
+          {activeTab === "docs" && (
+            <div className="flex-1 flex flex-col gap-6 animate-in fade-in duration-300">
+              <div className="flex flex-col gap-1">
+                <h2 className="text-2xl font-black text-slate-800 tracking-tight">Módulos & Apostila</h2>
+                <p className="text-slate-500 text-sm font-medium">Estude os conceitos fundamentais do SAP SD por tópico.</p>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {[
+                  { title: "Business Partner (BP) & Dados Mestre", icon: UserCheck, topics: ["Cadastro de Clientes", "Funções de Parceiro", "Grupos de Contas"] },
+                  { title: "Ordens de Venda (VA01/VA02/VA03)", icon: FileText, topics: ["Tipos de Ordem (OR, QT, ZBN)", "Itens de Remessa", "Bloqueios"] },
+                  { title: "Esquema de Cálculo & Precificação (Pricing)", icon: Target, topics: ["Condições VK11", "Esquema de Cálculo", "Acessos"] },
+                  { title: "Remessa & Expedição (VL01N / VL02N)", icon: Rocket, topics: ["Ponto de Expedição", "Picking / Packing", "Saída de Mercadoria"] },
+                  { title: "Faturamento & Impostos Brasil", icon: Shield, topics: ["Faturamento (VF01)", "Localização Brasil", "NF-e e Impostos"] }
+                ].map((mod, i) => (
+                  <Card key={i} className="p-6 bg-white border-slate-200 hover:border-indigo-600 transition-colors rounded-2xl group cursor-pointer">
+                    <div className="size-12 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center mb-4 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                      <mod.icon className="size-6" />
+                    </div>
+                    <h3 className="font-bold text-slate-800 mb-3 group-hover:text-indigo-600 transition-colors">{mod.title}</h3>
+                    <ul className="space-y-2">
+                      {mod.topics.map((t, ti) => (
+                        <li key={ti} className="flex items-center gap-2 text-xs text-slate-500 font-medium">
+                          <Check className="size-3 text-emerald-500" /> {t}
+                        </li>
+                      ))}
+                    </ul>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {activeTab === "stats" && (
+            <div className="flex-1 flex flex-col gap-6 animate-in fade-in duration-300">
+              <div className="flex flex-col gap-1">
+                <h2 className="text-2xl font-black text-slate-800 tracking-tight">Estatísticas de Desempenho</h2>
+                <p className="text-slate-500 text-sm font-medium">Acompanhe sua evolução técnica e métricas de acerto.</p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                {[
+                  { label: "Taxa de Acerto", value: `${successRate}%`, icon: Target, color: "text-emerald-600", bg: "bg-emerald-50" },
+                  { label: "Missões Concluídas", value: completedMissions.toString(), icon: Rocket, color: "text-indigo-600", bg: "bg-indigo-50" },
+                  { label: "XP Acumulado", value: (xp * 5).toString(), icon: Star, color: "text-amber-500", bg: "bg-amber-50" },
+                  { label: "Nível Atual", value: seniorityLevel, icon: Trophy, color: "text-indigo-600", bg: "bg-indigo-50" }
+                ].map((stat, i) => (
+                  <Card key={i} className="p-4 bg-white border-slate-200 rounded-2xl flex items-center gap-4">
+                    <div className={`size-12 ${stat.bg} ${stat.color} rounded-xl flex items-center justify-center`}>
+                      <stat.icon className="size-6" />
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{stat.label}</p>
+                      <p className="text-xl font-black text-slate-800">{stat.value}</p>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+
+              <Card className="p-6 bg-white border-slate-200 rounded-3xl">
+                <h3 className="font-bold text-slate-800 mb-6 flex items-center gap-2">
+                  <BarChart3 className="size-5 text-indigo-600" /> Evolução de XP (Histórico)
+                </h3>
+                <div className="h-64 w-full">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart data={trainingHistory.filter(h => h.status === 'success').reverse().map((h, i) => ({
+                      name: i + 1,
+                      total: trainingHistory.filter(hs => hs.status === 'success').reverse().slice(0, i + 1).reduce((acc, curr) => acc + (curr.xpEarned || 0), 0)
+                    }))}>
+                      <defs>
+                        <linearGradient id="colorTotalStats" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor="#4f46e5" stopOpacity={0.3}/>
+                          <stop offset="95%" stopColor="#4f46e5" stopOpacity={0}/>
+                        </linearGradient>
+                      </defs>
+                      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                      <XAxis dataKey="name" fontSize={10} axisLine={false} tickLine={false} />
+                      <YAxis fontSize={10} axisLine={false} tickLine={false} />
+                      <Tooltip 
+                        contentStyle={{ fontSize: '12px', borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }}
+                      />
+                      <Area type="monotone" dataKey="total" stroke="#4f46e5" fillOpacity={1} fill="url(#colorTotalStats)" strokeWidth={3} />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </div>
+              </Card>
+            </div>
+          )}
+
+          {activeTab === "achievements" && (
+            <div className="flex-1 flex flex-col gap-6 animate-in fade-in duration-300">
+              <div className="flex flex-col gap-1">
+                <h2 className="text-2xl font-black text-slate-800 tracking-tight">Conquistas & Medalhas</h2>
+                <p className="text-slate-500 text-sm font-medium">Desbloqueie marcos em sua carreira como Consultor SAP SD.</p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {[
+                  { title: "Primeira Venda", desc: "Completar missão 1", icon: Star, unlocked: completedMissions >= 1 },
+                  { title: "Mestre do Fiori", desc: "Completar nível Trainee", icon: Rocket, unlocked: completedMissions >= 40 },
+                  { title: "Especialista em Pricing", desc: "5 missões de pricing sem erros", icon: Target, unlocked: false },
+                  { title: "Pronto para o Projeto", desc: "Concluir todas as 170 missões", icon: Trophy, unlocked: completedMissions >= 170 }
+                ].map((ach, i) => (
+                  <Card key={i} className={`p-6 flex flex-col items-center text-center rounded-2xl border-2 transition-all ${ach.unlocked ? "bg-white border-indigo-100 shadow-lg shadow-indigo-50" : "bg-slate-50 border-slate-100 opacity-60 grayscale"}`}>
+                    <div className={`size-16 rounded-full flex items-center justify-center mb-4 ${ach.unlocked ? "bg-indigo-100 text-indigo-600" : "bg-slate-200 text-slate-400"}`}>
+                      <ach.icon className="size-8" />
+                    </div>
+                    <h3 className="font-bold text-slate-800 mb-1">{ach.title}</h3>
+                    <p className="text-[10px] text-slate-500 font-medium uppercase tracking-wider">{ach.desc}</p>
+                    {ach.unlocked ? (
+                      <Badge className="mt-4 bg-emerald-500 text-white border-none">DESBLOQUEADO</Badge>
+                    ) : (
+                      <Badge variant="outline" className="mt-4 bg-transparent text-slate-400 border-slate-200">BLOQUEADO</Badge>
+                    )}
+                  </Card>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {activeTab === "settings" && (
+            <div className="flex-1 flex flex-col gap-6 animate-in fade-in duration-300 max-w-2xl mx-auto w-full">
+              <div className="flex flex-col gap-1">
+                <h2 className="text-2xl font-black text-slate-800 tracking-tight">Configurações</h2>
+                <p className="text-slate-500 text-sm font-medium">Gerencie sua conta e preferências do sistema.</p>
+              </div>
+
+              <Card className="p-8 bg-white border-slate-200 rounded-3xl space-y-8">
+                <div className="space-y-4">
+                  <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                    <User className="size-4" /> Perfil do Consultor
+                  </h3>
+                  <div className="space-y-2">
+                    <Label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Nome Exibido</Label>
+                    <Input 
+                      value={userName} 
+                      onChange={(e) => {
+                        setUserName(e.target.value);
+                        localStorage.setItem("sap-quest-username", e.target.value);
+                      }} 
+                      className="h-12 rounded-xl border-slate-200"
+                    />
+                  </div>
+                </div>
+
+                <div className="pt-8 border-t border-slate-100 space-y-4">
+                  <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                    <Shield className="size-4" /> Segurança e Dados
+                  </h3>
+                  <div className="flex items-center justify-between p-4 bg-red-50 rounded-2xl border border-red-100">
+                    <div>
+                      <h4 className="text-sm font-bold text-red-900">Reiniciar Todo o Progresso</h4>
+                      <p className="text-xs text-red-700">Esta ação não pode ser desfeita (exceto pelo botão Undo temporário).</p>
+                    </div>
+                    <Button variant="destructive" size="sm" onClick={fullReset} className="font-bold">
+                      REINICIAR
+                    </Button>
+                  </div>
+                </div>
+
+                <div className="pt-8 border-t border-slate-100 space-y-4">
+                  <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                    <Settings className="size-4" /> Preferências do Sistema
+                  </h3>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-bold text-slate-700">Tema do Simulador</span>
+                    <Badge variant="outline" className="bg-slate-50 text-slate-500 font-bold px-3 py-1">Padrão do Sistema</Badge>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          )}
         </main>
 
 
