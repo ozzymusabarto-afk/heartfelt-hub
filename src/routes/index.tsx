@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect, useRef, useMemo } from "react";
 import { 
   Rocket, Target, BookOpen, Crown, BarChart3, Trophy, Settings, 
@@ -374,9 +374,10 @@ function SAPSDQuestApp() {
     const saved = localStorage.getItem("sap-quest-data");
     const savedHistory = localStorage.getItem("sap-quest-history");
     
+    // Check for Super Admin mode
+    const isSuperAdmin = localStorage.getItem("sap-quest-super-admin") === "true";
+    
     if (!hasStarted) {
-      // Don't remove data anymore to allow persistence across logout
-      // We only reset the current form/UI state for a "fresh" start of the session
       setFormData({
         orderType: "", orderDate: "", salesOrg: "", deliveryDate: "",
         distChannel: "", paymentCond: "", customer: "", quantity: "", material: "",
@@ -384,12 +385,13 @@ function SAPSDQuestApp() {
       });
       setSelectedTransaction("");
       
-      // If we are authenticated but it's a new session, ensure we have the data loaded
       if (savedUser && saved) {
         try {
           const parsed = JSON.parse(saved);
           if (parsed.xp !== undefined) setXp(parsed.xp);
           if (parsed.completedMissions !== undefined) {
+            // Super Admin can skip missions or has them all unlocked, but let's keep normal flow
+            // for tracking, and only handle the "unlock" part in the UI if needed
             setCompletedMissions(parsed.completedMissions);
           }
           if (parsed.currentMissionIndex !== undefined) {
@@ -399,7 +401,6 @@ function SAPSDQuestApp() {
           }
         } catch (e) {}
       } else if (savedUser) {
-        // No saved data found for user, pick a random mission
         setCurrentMissionIndex(getRandomMissionIndex());
       }
       if (savedUser && savedHistory) {
@@ -410,6 +411,7 @@ function SAPSDQuestApp() {
       sessionStorage.setItem("sap-quest-session-started", "true");
     } else {
       if (saved) {
+
         try {
           const parsed = JSON.parse(saved);
           if (parsed.formData) setFormData(parsed.formData);
@@ -532,7 +534,11 @@ function SAPSDQuestApp() {
   };
 
   const handleSubmit = () => {
+    // Check for Super Admin bypass
+    const isSuperAdmin = localStorage.getItem("sap-quest-super-admin") === "true";
+    
     const errors: string[] = [];
+
     let localHint = "";
     
     // Validate Transaction
@@ -596,10 +602,16 @@ function SAPSDQuestApp() {
       }
     }
 
+    if (isSuperAdmin) {
+      errors.length = 0;
+      localHint = "";
+    }
+
     setValidationErrors(errors);
     setHintMessage(localHint);
 
     if (errors.length === 0) {
+
       if (feedbackState === "idle") {
         setFeedbackState("review");
         toast.info("Validação OK! Revise antes de enviar.");
@@ -971,15 +983,33 @@ function SAPSDQuestApp() {
               { icon: BarChart3, label: "Estatísticas", sub: "Seu desempenho" },
               { icon: Trophy, label: "Conquistas", sub: "Medalhas e troféus" },
               { icon: Settings, label: "Configurações", sub: "Conta e preferências" },
-            ].map((item) => (
-              <Button key={item.label} variant="ghost" className={`w-full justify-start h-12 px-3 py-2 rounded-xl gap-3 ${item.label === "Trilha Principal" ? "bg-indigo-600 text-white shadow-md shadow-indigo-100" : "text-slate-500 hover:bg-indigo-50 hover:text-indigo-600"}`}>
-                <item.icon className={`size-5 ${item.label === "Trilha Principal" ? "text-white" : ""}`} />
-                <div className="flex flex-col items-start text-left">
-                  <span className="text-xs font-bold leading-tight">{item.label}</span>
-                  <span className={`text-[9px] ${item.label === "Trilha Principal" ? "text-indigo-100" : "text-slate-400"}`}>{item.sub}</span>
-                </div>
-              </Button>
-            ))}
+              { icon: Shield, label: "Admin", sub: "Painel de Controle", path: "/admin", adminOnly: true },
+
+            ].map((item) => {
+              const isAdminSession = typeof window !== "undefined" && localStorage.getItem("sap-quest-admin-session") === "true";
+              if (item.adminOnly && !isAdminSession) return null;
+              
+              const Content = (
+                <Button key={item.label} variant="ghost" className={`w-full justify-start h-12 px-3 py-2 rounded-xl gap-3 ${item.label === "Trilha Principal" ? "bg-indigo-600 text-white shadow-md shadow-indigo-100" : "text-slate-500 hover:bg-indigo-50 hover:text-indigo-600"}`}>
+                  <item.icon className={`size-5 ${item.label === "Trilha Principal" ? "text-white" : ""}`} />
+                  <div className="flex flex-col items-start text-left">
+                    <span className="text-xs font-bold leading-tight">{item.label}</span>
+                    <span className={`text-[9px] ${item.label === "Trilha Principal" ? "text-indigo-100" : "text-slate-400"}`}>{item.sub}</span>
+                  </div>
+                </Button>
+              );
+
+              if (item.path) {
+                return (
+                  <Link to={item.path} key={item.label} className="block no-underline">
+                    {Content}
+                  </Link>
+                );
+              }
+
+              return Content;
+            })}
+
           </nav>
 
           <Card className="mt-8 p-4 bg-indigo-50 border-indigo-100 rounded-2xl relative overflow-hidden group cursor-pointer hover:bg-indigo-100 transition-colors">
