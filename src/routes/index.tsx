@@ -1962,9 +1962,8 @@ function SAPSDQuestApp() {
             </>
           )}
 
-          {activeTab === "certification" && (
-            <CertificationModule />
-          )}
+          {activeTab === "certification" && <CertificationModule />}
+          {activeTab === "profile" && <ProfileTestModule />}
         </main>
 
 
