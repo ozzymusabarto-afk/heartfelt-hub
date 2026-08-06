@@ -1349,20 +1349,31 @@ function SAPSDQuestApp() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div className="flex flex-col gap-3">
-              <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Tópico Atual</h3>
+              <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Progresso de Senioridade</h3>
               <Card className="p-4 bg-white shadow-sm border-indigo-100 rounded-2xl border-l-4 border-l-indigo-600 relative overflow-hidden group">
-                <div className="relative z-10">
-                  <span className="inline-block px-2 py-0.5 bg-indigo-50 text-indigo-600 text-[9px] font-black rounded-md mb-2">MODULO 01</span>
-                  <h4 className="font-bold text-slate-800 text-sm mb-1">Processo Order-to-Cash</h4>
-                  <p className="text-[11px] text-slate-500 leading-relaxed mb-3">
-                    Aprenda e pratique todo o fluxo de pedido à fatura.
-                  </p>
-                  <div className="flex items-center justify-between">
+                <div className="relative z-10 space-y-3">
+                  <div className="flex justify-between items-center">
+                    <span className="inline-block px-2 py-0.5 bg-indigo-50 text-indigo-600 text-[9px] font-black rounded-md uppercase">
+                      {completedMissions <= 40 ? 'Trainee' : completedMissions <= 80 ? 'Júnior' : completedMissions <= 130 ? 'Pleno' : 'Sênior'}
+                    </span>
                     <span className="text-[10px] font-bold text-slate-700 bg-slate-100 px-2 py-1 rounded-lg">[{completedMissions} / {missions.length} Missões]</span>
-                    <Button variant="ghost" size="sm" className="h-7 text-indigo-600 text-[10px] font-bold hover:bg-indigo-50">VER DETALHES</Button>
+                  </div>
+                  
+                  <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                    <div 
+                      className="h-full bg-indigo-600 transition-all duration-1000 ease-out"
+                      style={{ width: `${(completedMissions / missions.length) * 100}%` }}
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-4 gap-1 text-[8px] text-center font-bold uppercase tracking-tighter">
+                    <div className={completedMissions > 0 ? 'text-indigo-600' : 'text-slate-300'}>Trainee</div>
+                    <div className={completedMissions > 40 ? 'text-indigo-600' : 'text-slate-300'}>Júnior</div>
+                    <div className={completedMissions > 80 ? 'text-indigo-600' : 'text-slate-300'}>Pleno</div>
+                    <div className={completedMissions > 130 ? 'text-indigo-600' : 'text-slate-300'}>Sênior</div>
                   </div>
                 </div>
-                <Rocket className="absolute -right-4 -top-4 size-16 text-indigo-50 -rotate-12 group-hover:scale-110 transition-transform" />
+                <Trophy className="absolute -right-4 -top-4 size-16 text-indigo-50 -rotate-12 group-hover:scale-110 transition-transform" />
               </Card>
             </div>
 
