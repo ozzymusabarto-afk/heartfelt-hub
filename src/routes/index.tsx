@@ -1050,37 +1050,29 @@ function SAPSDQuestApp() {
 
 
   const generatePDFReport = () => {
-    toast.info("Gerando relatório...");
-    const content = `
-      RELATÓRIO DE TREINAMENTO SAP SD QUEST
-      Data: ${new Date().toLocaleDateString()}
-      Consultor(a): ${userName}
-      -------------------------------------
-      Empresa: AAM LOGÍSTICA LTDA
-      Status: ${seniorityLevel} SD
-      XP Total: ${xp} / 1700
-      Missões Concluídas: ${completedMissions} / ${missions.length}
-      Taxa de Sucesso: ${Math.round((trainingHistory.filter(h => h.status === 'success').length / Math.max(trainingHistory.length, 1)) * 100)}%
-      -------------------------------------
-      Última Missão: ${trainingHistory[0]?.missionName || 'Nenhuma'}
-      Resultado: ${trainingHistory[0]?.status === 'success' ? 'SUCESSO' : 'ERRO'}
+    setIsPDFPreviewOpen(true);
+  };
+
+  const downloadPDFReport = async () => {
+    const element = document.getElementById("pdf-report-content");
+    if (!element) return;
+    
+    toast.info("Processando PDF...");
+    try {
+      const canvas = await html2canvas(element, { scale: 2 });
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+      const imgProps = pdf.getImageProperties(imgData);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
       
-      DADOS TÉCNICOS DA MISSÃO:
-      Transação: ${trainingHistory[0]?.transaction || 'N/A'}
-      Mensagem Hugo: ${trainingHistory[0]?.message || 'N/A'}
-      
-      FEEDBACK ESTRATÉGICO:
-      ${trainingHistory[0]?.status === 'success' 
-        ? "Excelente execução! Com a criação correta desta ordem, a AAM LOGÍSTICA LTDA garante a reserva automática no estoque (MM) e o fluxo logístico sem gargalos." 
-        : "Atenção necessária! O erro cometido pode impactar a expedição e causar rejeições na SEFAZ. Revise os conceitos na Ajuda F1."}
-    `;
-    const blob = new Blob([content], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `relatorio_sap_sd_${Date.now()}.txt`;
-    link.click();
-    toast.success("Relatório baixado com sucesso!");
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+      pdf.save(`ficha_tecnica_${currentMission.transaction}_${Date.now()}.pdf`);
+      toast.success("PDF baixado com sucesso!");
+      setIsPDFPreviewOpen(false);
+    } catch (err) {
+      toast.error("Erro ao gerar PDF");
+    }
   };
 
   const handleLogoutClick = () => {
