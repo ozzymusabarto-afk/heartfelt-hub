@@ -116,7 +116,8 @@ function SAPSDQuestApp() {
     if (activeMission && activeMission.id === missions[currentMissionIndex]?.id) {
        return activeMission;
     }
-    return missions[currentMissionIndex] || missions[0];
+    const baseMission = missions[currentMissionIndex] || missions[0];
+    return baseMission!;
   }, [currentMissionIndex, activeMission]);
 
   const [selectedTransaction, setSelectedTransaction] = useState("");
