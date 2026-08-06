@@ -1025,13 +1025,6 @@ export const MISSIONS: Mission[] = [
         "brazilRule": "Valide se o número do protocolo da SEFAZ está presente no documento de faturamento."
     }
 },
-    "f1Help": {
-      "title": "Dica SAP: VA05",
-      "concept": "Entenda o fluxo de VA05 no nível Trainee.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
-  },
   {
     "id": "M041-VA01",
     "title": "41. Júnior - Operação VA01",
