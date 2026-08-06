@@ -1369,9 +1369,9 @@ function SAPSDQuestApp() {
 
     // Dynamic validation logic based on Transaction
     if (selectedTransaction === "BP") {
-      if (!formData.partnerCode || formData.partnerCode !== currentMission.expectedData.cliente) {
+      if (!formData.partnerCode || formData.partnerCode !== currentMission.expectedData.partnerCode) {
         errors.push("partnerCode");
-        localHint = `Código do Parceiro incorreto. Esperado: ${currentMission.expectedData.cliente}`;
+        localHint = `Código do Parceiro incorreto. Esperado: ${currentMission.expectedData.partnerCode}`;
       } else if (!formData.salesOrg || formData.salesOrg !== currentMission.expectedData.orgVendas) {
         errors.push("salesOrg");
         localHint = `Organização de Vendas incorreta. Esperado: ${currentMission.expectedData.orgVendas}`;
@@ -1391,15 +1391,15 @@ function SAPSDQuestApp() {
       } else if (!formData.salesOrg || formData.salesOrg !== currentMission.expectedData.orgVendas) {
         errors.push("salesOrg");
         localHint = `Org. Vendas incorreta. Esperado: ${currentMission.expectedData.orgVendas}`;
-      } else if (!formData.partnerCode || formData.partnerCode !== currentMission.expectedData.cliente) {
+      } else if (!formData.partnerCode || formData.partnerCode !== currentMission.expectedData.partnerCode) {
         errors.push("partnerCode");
-        localHint = `Cliente incorreto. Esperado: ${currentMission.expectedData.cliente}`;
-      } else if (!formData.materialCode || formData.materialCode !== currentMission.expectedData.material) {
+        localHint = `Cliente incorreto. Esperado: ${currentMission.expectedData.partnerCode}`;
+      } else if (!formData.materialCode || formData.materialCode !== currentMission.expectedData.materialCode) {
         errors.push("materialCode");
-        localHint = `Material incorreto. Esperado: ${currentMission.expectedData.material}`;
-      } else if (!formData.incoterms || formData.incoterms !== currentMission.expectedData.incoterms) {
+        localHint = `Material incorreto. Esperado: ${currentMission.expectedData.materialCode}`;
+      } else if (!formData.incoterms || formData.incoterms !== currentMission.expectedData.headerIncoterms) {
         errors.push("incoterms");
-        localHint = `Incoterms incorreto. Esperado: ${currentMission.expectedData.incoterms}`;
+        localHint = `Incoterms incorreto. Esperado: ${currentMission.expectedData.headerIncoterms}`;
       } else if (!formData.distChannel || formData.distChannel !== currentMission.expectedData.canalDist) {
         errors.push("distChannel");
         localHint = `Canal de Distribuição incorreto. Esperado: ${currentMission.expectedData.canalDist}`;
@@ -1409,9 +1409,9 @@ function SAPSDQuestApp() {
       } else if (!formData.division || formData.division !== currentMission.expectedData.setorAtiv) {
         errors.push("division");
         localHint = `Setor de Atividade incorreto. Esperado: ${currentMission.expectedData.setorAtiv}`;
-      } else if (!formData.partnerFunction || formData.partnerFunction !== currentMission.expectedData.condPagto) {
+      } else if (!formData.partnerFunction || formData.partnerFunction !== currentMission.expectedData.partnerFunction) {
         errors.push("partnerFunction");
-        localHint = `Condição de Pagamento/Função incorreta. Esperado: ${currentMission.expectedData.condPagto}`;
+        localHint = `Condição de Pagamento/Função incorreta. Esperado: ${currentMission.expectedData.partnerFunction}`;
       }
     }
 
