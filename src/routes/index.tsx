@@ -1363,7 +1363,16 @@ function SAPSDQuestApp() {
   }, [trainingHistory]);
 
   const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData(prev => {
+      const newData = { ...prev, [field]: value };
+      // Preservar dados globais da sessão se necessário (ex: parceiro e org em BP que serão usados em VA01)
+      if (selectedTransaction === "BP") {
+        if (field === "partnerCode" || field === "salesOrg") {
+          // Poderíamos ter um estado global 'sessionPersistentData' para isso
+        }
+      }
+      return newData;
+    });
   };
 
   const handleSubmit = () => {
@@ -1371,13 +1380,14 @@ function SAPSDQuestApp() {
     const isSuperAdmin = localStorage.getItem("sap-quest-super-admin") === "true";
     
     const errors: string[] = [];
-
     let localHint = "";
     
-    // Validate Transaction
-    if (!selectedTransaction || selectedTransaction !== currentMission.transaction) {
+    // Validate if current selection matches mission goal (or one of the goals)
+    const validTransactions = currentMission.requiredTransactions || [currentMission.transaction];
+    
+    if (!selectedTransaction || !validTransactions.includes(selectedTransaction)) {
       errors.push("transaction");
-      localHint = `Transação incorreta. O Chefe Hugo pediu ${currentMission.transaction}.`;
+      localHint = `Transação incorreta. O Chefe Hugo solicitou o uso de: ${validTransactions.join(", ")}.`;
     } 
 
     // Dynamic validation logic based on Transaction
@@ -2152,10 +2162,18 @@ function SAPSDQuestApp() {
                 {["VA01 - Criar Ordem", "BP - Parceiro", "VL01N - Entrega", "VF01 - Faturar", "VA02 - Modificar", "VA03 - Exibir", "VF11 - Cancelar", "VA05 - Lista", "V.02 - Incomp"].map((label) => {
                   const id = label.split(" ")[0];
                   if (!id) return null;
+                  
+                  // Check if this transaction is required by the current mission
+                  const isRequired = currentMission.requiredTransactions?.includes(id) || currentMission.transaction === id;
+                  const isCompleted = false; // Mock logic for "check" visual
+
                   return (
-                    <Label key={id} className={`flex items-center gap-2 p-3 border rounded-xl cursor-pointer transition-all ${selectedTransaction === id ? "border-indigo-600 bg-indigo-50/50 ring-1 ring-indigo-600" : "border-slate-100 hover:bg-slate-50"}`}>
-                      <RadioGroupItem value={id} id={id} className="text-indigo-600" /> 
-                      <span className={`text-xs font-bold ${selectedTransaction === id ? "text-indigo-700" : "text-slate-600"}`}>{label}</span>
+                    <Label key={id} className={`flex items-center justify-between gap-2 p-3 border rounded-xl cursor-pointer transition-all ${selectedTransaction === id ? "border-indigo-600 bg-indigo-50/50 ring-1 ring-indigo-600" : "border-slate-100 hover:bg-slate-50"} ${!isRequired ? "opacity-40" : ""}`}>
+                      <div className="flex items-center gap-2">
+                        <RadioGroupItem value={id} id={id} className="text-indigo-600" /> 
+                        <span className={`text-xs font-bold ${selectedTransaction === id ? "text-indigo-700" : "text-slate-600"}`}>{label}</span>
+                      </div>
+                      {isCompleted && <CheckCircle2 className="size-3.5 text-emerald-500" />}
                     </Label>
                   );
                 })}

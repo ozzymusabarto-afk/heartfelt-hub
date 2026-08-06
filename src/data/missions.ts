@@ -2,6 +2,7 @@ export interface Mission {
   id: string;
   title: string;
   transaction: string;
+  requiredTransactions?: string[]; // Para fluxos encadeados (ex: ['BP', 'VA01'])
   chefeHugoDialog: string;
   successFeedback: string;
   errorFeedback: string;
@@ -15,6 +16,7 @@ export interface Mission {
     quantidade: string;
     headerIncoterms: string;
     partnerFunction: string;
+    [key: string]: string; // Permitir chaves dinâmicas sem erro de tipo
   };
   f1Help: {
     title: string;
