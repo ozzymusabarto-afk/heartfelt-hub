@@ -332,7 +332,7 @@ function SAPSDQuestApp() {
           if (parsed.currentMissionIndex !== undefined) {
             setCurrentMissionIndex(parsed.currentMissionIndex);
           } else {
-            setCurrentMissionIndex(getRandomMissionIndex());
+            setCurrentMissionIndex(getRandomMissionIndex(undefined, [], parsed.completedMissions || 0));
           }
           // Merge admin status if not already set by email
           if (parsed.isAdmin) isAdmin = true;
