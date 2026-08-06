@@ -1005,13 +1005,19 @@ function SAPSDQuestApp() {
               if (item.adminOnly && !isAdminSession) return null;
               
               const Content = (
-                <Button key={item.label} variant="ghost" className={`w-full justify-start h-12 px-3 py-2 rounded-xl gap-3 ${item.label === "Trilha Principal" ? "bg-indigo-600 text-white shadow-md shadow-indigo-100" : "text-slate-500 hover:bg-indigo-50 hover:text-indigo-600"}`}>
+                <Button 
+                  key={item.label} 
+                  variant="ghost" 
+                  className={`w-full justify-start h-12 px-3 py-2 rounded-xl gap-3 ${item.label === "Trilha Principal" ? "bg-indigo-600 text-white shadow-md shadow-indigo-100" : "text-slate-500 hover:bg-indigo-50 hover:text-indigo-600"}`}
+                  onClick={item.action}
+                >
                   <item.icon className={`size-5 ${item.label === "Trilha Principal" ? "text-white" : ""}`} />
                   <div className="flex flex-col items-start text-left">
                     <span className="text-xs font-bold leading-tight">{item.label}</span>
                     <span className={`text-[9px] ${item.label === "Trilha Principal" ? "text-indigo-100" : "text-slate-400"}`}>{item.sub}</span>
                   </div>
                 </Button>
+
               );
 
               if (item.path) {
