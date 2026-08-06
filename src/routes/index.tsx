@@ -70,7 +70,7 @@ const getRandomMissionIndex = (excludeIndex?: number, reinforcementQueue: string
   return newIndex;
 };
 
-const randomizeMissionData = (mission: Mission): Mission => {
+const randomizeMissionData = (mission: Mission, name: string): Mission => {
   const materials = ["MAT-SD-015", "MAT-SD-020", "MAT-SD-030", "MAT-SD-045"];
   const incoterms = ["FOB", "CIF"];
   const paymentConds = ["ZF30", "ZF60", "ZB00"];
@@ -92,8 +92,12 @@ const randomizeMissionData = (mission: Mission): Mission => {
     newMission.expectedData.cliente = randomValue(customers);
   }
 
-  // Update dialog text with new values
+  // Personalization: inject name and clean dialogue
+  const greeting = name ? `Olá, ${name}!` : "Olá Consultor(a)!";
+  
   newMission.chefeHugoDialog = newMission.chefeHugoDialog
+    .replace(/^Olá Consultor\(a\)!/g, greeting)
+    .replace(/\bAAM LOGÍSTICA\b/g, "AAM LOGÍSTICA LTDA (Cód: 208015)")
     .replace(/\bMAT-SD-\d+\b/g, newMission.expectedData.material)
     .replace(/\b\d+ unidades\b/g, `${newMission.expectedData.quantidade} unidades`)
     .replace(/\b\d+ peças\b/g, `${newMission.expectedData.quantidade} peças`)
@@ -1977,10 +1981,9 @@ function SAPSDQuestApp() {
                 <HugoAvatar className="size-14" />
                 <div>
                   <h3 className="font-bold text-slate-800 text-sm">Chefe Hugo 👋</h3>
-                  <p className="text-xs text-slate-600">{userName}, sua missão [{currentMissionIndex + 1}/{missions.length}]: <b>{currentMission.title}</b>.</p>
-                  <p className="text-[10px] text-slate-400 mt-0.5 italic">
-                    "{currentMission.chefeHugoDialog.replace("AAM LOGÍSTICA", "AAM LOGÍSTICA LTDA (Cód: 208015)")}"
-                  </p>
+                  <div className="text-[11px] text-slate-600 leading-relaxed mt-1">
+                    "{currentMission.chefeHugoDialog}"
+                  </div>
                 </div>
               </div>
 

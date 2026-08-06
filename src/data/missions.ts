@@ -37,11 +37,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "11",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito SAP: BP (Business Partner)",
@@ -62,11 +62,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "12",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito SAP: BP (Business Partner)",
@@ -87,11 +87,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "13",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito SAP: BP (Business Partner)",
@@ -112,11 +112,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "14",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito SAP: BP (Business Partner)",
@@ -137,11 +137,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "15",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito SAP: BP (Business Partner)",
@@ -162,11 +162,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "16",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito SAP: BP (Business Partner)",
@@ -187,11 +187,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "17",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito SAP: BP (Business Partner)",
@@ -212,11 +212,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "18",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito SAP: BP (Business Partner)",
@@ -237,11 +237,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "19",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito SAP: BP (Business Partner)",
@@ -262,11 +262,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "20",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito SAP: BP (Business Partner)",
@@ -287,11 +287,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "21",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito SAP: BP (Business Partner)",
@@ -312,11 +312,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "22",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito SAP: BP (Business Partner)",
@@ -337,11 +337,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "23",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito SAP: BP (Business Partner)",
@@ -362,11 +362,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "24",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito SAP: BP (Business Partner)",
@@ -387,11 +387,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "25",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito SAP: BP (Business Partner)",
@@ -412,11 +412,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "26",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito SAP: BP (Business Partner)",
@@ -437,11 +437,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "27",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito SAP: BP (Business Partner)",
@@ -462,11 +462,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "28",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito SAP: BP (Business Partner)",
@@ -487,11 +487,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "29",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito SAP: BP (Business Partner)",
@@ -512,11 +512,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "30",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito SAP: BP (Business Partner)",
@@ -537,11 +537,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "31",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito SAP: VA05 (Lista de Ordens)",
@@ -562,11 +562,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "32",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito SAP: VA05 (Lista de Ordens)",
@@ -587,11 +587,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "33",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito SAP: VA05 (Lista de Ordens)",
@@ -612,11 +612,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "34",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito SAP: VA05 (Lista de Ordens)",
@@ -637,11 +637,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "25",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Dica BP: Funções",
@@ -662,11 +662,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208016",
-        "material": "MAT-SD-015",
+        "partnerCode": "208016",
+        "materialCode": "MAT-SD-015",
         "quantidade": "26",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Dica BP: SH",
@@ -687,11 +687,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208017",
-        "material": "MAT-SD-020",
+        "partnerCode": "208017",
+        "materialCode": "MAT-SD-020",
         "quantidade": "27",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Dica BP: PY",
@@ -712,11 +712,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-020",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-020",
         "quantidade": "28",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Dica BP: Funções Básicas",
@@ -737,11 +737,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "29",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Dica VA03",
@@ -762,11 +762,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "30",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Dica VA03: Itens",
@@ -787,11 +787,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-020",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-020",
         "quantidade": "31",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Dica VA03: Quantidades",
@@ -812,11 +812,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-020",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-020",
         "quantidade": "32",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Dica VA03: Conclusão",
@@ -837,11 +837,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "33",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Dica VL03N",
@@ -862,11 +862,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "34",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Dica VL03N: Status",
@@ -887,11 +887,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-020",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-020",
         "quantidade": "35",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Dica VL03N: Integração",
@@ -912,11 +912,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-020",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-020",
         "quantidade": "36",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Dica VL03N: Fluxo",
@@ -937,11 +937,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "37",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Dica VA05",
@@ -962,11 +962,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "38",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Dica VA05: Filtros",
@@ -987,11 +987,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-020",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-020",
         "quantidade": "39",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Dica VF03",
@@ -1012,11 +1012,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-020",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-020",
         "quantidade": "40",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Dica VF03: Finalização",
@@ -1037,11 +1037,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208018",
-          "material": "MAT-SD-030",
+          "partnerCode": "208018",
+          "materialCode": "MAT-SD-030",
           "quantidade": "91",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: VA01 - Cotação",
@@ -1062,11 +1062,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208015",
-          "material": "MAT-SD-015",
+          "partnerCode": "208015",
+          "materialCode": "MAT-SD-015",
           "quantidade": "92",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: VA01 - Cotação",
@@ -1087,11 +1087,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208016",
-          "material": "MAT-SD-020",
+          "partnerCode": "208016",
+          "materialCode": "MAT-SD-020",
           "quantidade": "93",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: VA01 - Cotação",
@@ -1112,11 +1112,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208018",
-          "material": "MAT-SD-030",
+          "partnerCode": "208018",
+          "materialCode": "MAT-SD-030",
           "quantidade": "94",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: VA01 - Cotação",
@@ -1137,11 +1137,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208015",
-          "material": "MAT-SD-015",
+          "partnerCode": "208015",
+          "materialCode": "MAT-SD-015",
           "quantidade": "95",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: VA01 - Cotação",
@@ -1162,11 +1162,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208016",
-          "material": "MAT-SD-020",
+          "partnerCode": "208016",
+          "materialCode": "MAT-SD-020",
           "quantidade": "96",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: VA01 - Ordem de Venda",
@@ -1187,11 +1187,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208018",
-          "material": "MAT-SD-030",
+          "partnerCode": "208018",
+          "materialCode": "MAT-SD-030",
           "quantidade": "97",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: VA01 - Ordem de Venda",
@@ -1212,11 +1212,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208015",
-          "material": "MAT-SD-015",
+          "partnerCode": "208015",
+          "materialCode": "MAT-SD-015",
           "quantidade": "98",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: VA01 - Ordem de Venda",
@@ -1237,11 +1237,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208016",
-          "material": "MAT-SD-020",
+          "partnerCode": "208016",
+          "materialCode": "MAT-SD-020",
           "quantidade": "99",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: VA01 - Ordem de Venda",
@@ -1262,11 +1262,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208018",
-          "material": "MAT-SD-030",
+          "partnerCode": "208018",
+          "materialCode": "MAT-SD-030",
           "quantidade": "100",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: VA01 - Ordem de Venda",
@@ -1287,11 +1287,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208016",
-          "material": "MAT-SD-020",
+          "partnerCode": "208016",
+          "materialCode": "MAT-SD-020",
           "quantidade": "111",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: VA02 - Modificações",
@@ -1312,11 +1312,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208015",
-          "material": "MAT-SD-015",
+          "partnerCode": "208015",
+          "materialCode": "MAT-SD-015",
           "quantidade": "112",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: VA02 - Modificações",
@@ -1337,11 +1337,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208016",
-          "material": "MAT-SD-020",
+          "partnerCode": "208016",
+          "materialCode": "MAT-SD-020",
           "quantidade": "113",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: VA02 - Modificações",
@@ -1362,11 +1362,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208015",
-          "material": "MAT-SD-015",
+          "partnerCode": "208015",
+          "materialCode": "MAT-SD-015",
           "quantidade": "114",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: VA02 - Modificações",
@@ -1387,11 +1387,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208016",
-          "material": "MAT-SD-020",
+          "partnerCode": "208016",
+          "materialCode": "MAT-SD-020",
           "quantidade": "115",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: VA02 - Modificações",
@@ -1412,11 +1412,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208015",
-          "material": "MAT-SD-015",
+          "partnerCode": "208015",
+          "materialCode": "MAT-SD-015",
           "quantidade": "116",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: VA02 - Modificações",
@@ -1437,11 +1437,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208016",
-          "material": "MAT-SD-020",
+          "partnerCode": "208016",
+          "materialCode": "MAT-SD-020",
           "quantidade": "117",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: VA02 - Modificações",
@@ -1462,11 +1462,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208015",
-          "material": "MAT-SD-015",
+          "partnerCode": "208015",
+          "materialCode": "MAT-SD-015",
           "quantidade": "118",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: VA02 - Modificações",
@@ -1487,11 +1487,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208016",
-          "material": "MAT-SD-020",
+          "partnerCode": "208016",
+          "materialCode": "MAT-SD-020",
           "quantidade": "119",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: VA02 - Modificações",
@@ -1512,11 +1512,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208015",
-          "material": "MAT-SD-015",
+          "partnerCode": "208015",
+          "materialCode": "MAT-SD-015",
           "quantidade": "120",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: VA02 - Modificações",
@@ -1537,11 +1537,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208015",
-          "material": "MAT-SD-015",
+          "partnerCode": "208015",
+          "materialCode": "MAT-SD-015",
           "quantidade": "131",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: Precificação - PR00",
@@ -1562,11 +1562,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208018",
-          "material": "MAT-SD-015",
+          "partnerCode": "208018",
+          "materialCode": "MAT-SD-015",
           "quantidade": "132",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: Precificação - PR00",
@@ -1587,11 +1587,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208015",
-          "material": "MAT-SD-015",
+          "partnerCode": "208015",
+          "materialCode": "MAT-SD-015",
           "quantidade": "133",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: Precificação - PR00",
@@ -1612,11 +1612,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208018",
-          "material": "MAT-SD-015",
+          "partnerCode": "208018",
+          "materialCode": "MAT-SD-015",
           "quantidade": "134",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: Precificação - PR00",
@@ -1637,11 +1637,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208015",
-          "material": "MAT-SD-015",
+          "partnerCode": "208015",
+          "materialCode": "MAT-SD-015",
           "quantidade": "135",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: Precificação - PR00",
@@ -1662,11 +1662,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208018",
-          "material": "MAT-SD-015",
+          "partnerCode": "208018",
+          "materialCode": "MAT-SD-015",
           "quantidade": "136",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: Precificação - K007",
@@ -1687,11 +1687,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208015",
-          "material": "MAT-SD-015",
+          "partnerCode": "208015",
+          "materialCode": "MAT-SD-015",
           "quantidade": "137",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: Precificação - K007",
@@ -1712,11 +1712,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208018",
-          "material": "MAT-SD-015",
+          "partnerCode": "208018",
+          "materialCode": "MAT-SD-015",
           "quantidade": "138",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: Precificação - K007",
@@ -1737,11 +1737,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208015",
-          "material": "MAT-SD-015",
+          "partnerCode": "208015",
+          "materialCode": "MAT-SD-015",
           "quantidade": "139",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: Precificação - K007",
@@ -1762,11 +1762,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208018",
-          "material": "MAT-SD-015",
+          "partnerCode": "208018",
+          "materialCode": "MAT-SD-015",
           "quantidade": "140",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: Precificação - K007",
@@ -1787,11 +1787,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208016",
-          "material": "MAT-SD-030",
+          "partnerCode": "208016",
+          "materialCode": "MAT-SD-030",
           "quantidade": "151",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: ATP (Available to Promise)",
@@ -1812,11 +1812,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208015",
-          "material": "MAT-SD-030",
+          "partnerCode": "208015",
+          "materialCode": "MAT-SD-030",
           "quantidade": "152",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: ATP (Available to Promise)",
@@ -1837,11 +1837,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208016",
-          "material": "MAT-SD-030",
+          "partnerCode": "208016",
+          "materialCode": "MAT-SD-030",
           "quantidade": "153",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: ATP (Available to Promise)",
@@ -1862,11 +1862,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208015",
-          "material": "MAT-SD-030",
+          "partnerCode": "208015",
+          "materialCode": "MAT-SD-030",
           "quantidade": "154",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: ATP (Available to Promise)",
@@ -1887,11 +1887,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208016",
-          "material": "MAT-SD-030",
+          "partnerCode": "208016",
+          "materialCode": "MAT-SD-030",
           "quantidade": "155",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: ATP (Available to Promise)",
@@ -1912,11 +1912,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208015",
-          "material": "MAT-SD-030",
+          "partnerCode": "208015",
+          "materialCode": "MAT-SD-030",
           "quantidade": "156",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: ATP (Available to Promise)",
@@ -1937,11 +1937,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208016",
-          "material": "MAT-SD-030",
+          "partnerCode": "208016",
+          "materialCode": "MAT-SD-030",
           "quantidade": "157",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: ATP (Available to Promise)",
@@ -1962,11 +1962,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208015",
-          "material": "MAT-SD-030",
+          "partnerCode": "208015",
+          "materialCode": "MAT-SD-030",
           "quantidade": "158",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: ATP (Available to Promise)",
@@ -1987,11 +1987,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208016",
-          "material": "MAT-SD-030",
+          "partnerCode": "208016",
+          "materialCode": "MAT-SD-030",
           "quantidade": "159",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: ATP (Available to Promise)",
@@ -2012,11 +2012,11 @@ export const MISSIONS: Mission[] = [
           "orgVendas": "1000",
           "canalDist": "10",
           "setorAtiv": "00",
-          "cliente": "208015",
-          "material": "MAT-SD-030",
+          "partnerCode": "208015",
+          "materialCode": "MAT-SD-030",
           "quantidade": "160",
-          "incoterms": "FOB",
-          "condPagto": "ZF30"
+          "headerIncoterms": "FOB",
+          "partnerFunction": "ZF30"
       },
       "f1Help": {
           "title": "Dica Júnior: ATP (Available to Promise)",
@@ -2037,11 +2037,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "81",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VL01N / VL02N",
@@ -2062,11 +2062,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "82",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VL01N / VL02N",
@@ -2087,11 +2087,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "83",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VL01N / VL02N",
@@ -2112,11 +2112,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "84",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VL01N / VL02N",
@@ -2137,11 +2137,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "85",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VL01N / VL02N",
@@ -2162,11 +2162,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "86",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VL01N / VL02N",
@@ -2187,11 +2187,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "87",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VL01N / VL02N",
@@ -2212,11 +2212,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "88",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VL01N / VL02N",
@@ -2237,11 +2237,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "89",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VL01N / VL02N",
@@ -2262,11 +2262,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "90",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VL01N / VL02N",
@@ -2287,11 +2287,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "91",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VL01N / VL02N",
@@ -2312,11 +2312,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "92",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VL01N / VL02N",
@@ -2337,11 +2337,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "93",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VL01N / VL02N",
@@ -2362,11 +2362,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "94",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VL01N / VL02N",
@@ -2387,11 +2387,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "95",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VL01N / VL02N",
@@ -2412,11 +2412,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "96",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VF01 (Billing)",
@@ -2437,11 +2437,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "97",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VF01 (Billing)",
@@ -2462,11 +2462,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "98",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VF01 (Billing)",
@@ -2487,11 +2487,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "99",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VF01 (Billing)",
@@ -2512,11 +2512,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "100",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VF01 (Billing)",
@@ -2537,11 +2537,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "101",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VF01 (Billing)",
@@ -2562,11 +2562,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "102",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VF01 (Billing)",
@@ -2587,11 +2587,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "103",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VF01 (Billing)",
@@ -2612,11 +2612,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "104",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VF01 (Billing)",
@@ -2637,11 +2637,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "105",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VF01 (Billing)",
@@ -2662,11 +2662,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "106",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VF01 (Billing)",
@@ -2687,11 +2687,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "107",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VF01 (Billing)",
@@ -2712,11 +2712,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "108",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VF01 (Billing)",
@@ -2737,11 +2737,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "109",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VF01 (Billing)",
@@ -2762,11 +2762,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "110",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VF01 (Billing)",
@@ -2787,11 +2787,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "111",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: Localização Brasil",
@@ -2812,11 +2812,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "112",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: Localização Brasil",
@@ -2837,11 +2837,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "113",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: Localização Brasil",
@@ -2862,11 +2862,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "114",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: Localização Brasil",
@@ -2887,11 +2887,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "115",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: Localização Brasil",
@@ -2912,11 +2912,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "116",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: Localização Brasil",
@@ -2937,11 +2937,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "117",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: Localização Brasil",
@@ -2962,11 +2962,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "118",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: Localização Brasil",
@@ -2987,11 +2987,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "119",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: Localização Brasil",
@@ -3012,11 +3012,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "120",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: Localização Brasil",
@@ -3037,11 +3037,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "121",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VKM1 (Credit Management)",
@@ -3062,11 +3062,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "122",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VKM1 (Credit Management)",
@@ -3087,11 +3087,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "123",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VKM1 (Credit Management)",
@@ -3112,11 +3112,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "124",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VKM1 (Credit Management)",
@@ -3137,11 +3137,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "125",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VKM1 (Credit Management)",
@@ -3162,11 +3162,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "126",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VKM1 (Credit Management)",
@@ -3187,11 +3187,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "127",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VKM1 (Credit Management)",
@@ -3212,11 +3212,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "128",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VKM1 (Credit Management)",
@@ -3237,11 +3237,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "129",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VKM1 (Credit Management)",
@@ -3262,11 +3262,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "130",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Conceito Pleno: VKM1 (Credit Management)",
@@ -3287,11 +3287,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "131",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Devoluções",
@@ -3312,11 +3312,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "132",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Devoluções",
@@ -3337,11 +3337,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "133",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Devoluções",
@@ -3362,11 +3362,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "134",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Devoluções",
@@ -3387,11 +3387,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "135",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Devoluções",
@@ -3412,11 +3412,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "136",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Devoluções",
@@ -3437,11 +3437,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "137",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Devoluções",
@@ -3462,11 +3462,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "138",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Devoluções",
@@ -3487,11 +3487,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "139",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Devoluções",
@@ -3512,11 +3512,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "140",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Devoluções",
@@ -3537,11 +3537,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "141",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Estornos",
@@ -3562,11 +3562,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "142",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Estornos",
@@ -3587,11 +3587,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "143",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Estornos",
@@ -3612,11 +3612,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "144",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Estornos",
@@ -3637,11 +3637,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "145",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Estornos",
@@ -3662,11 +3662,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "146",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Estornos",
@@ -3687,11 +3687,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "147",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Estornos",
@@ -3712,11 +3712,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "148",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Estornos",
@@ -3737,11 +3737,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "149",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Estornos",
@@ -3762,11 +3762,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "150",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Estornos",
@@ -3787,11 +3787,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "151",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Incompletude",
@@ -3812,11 +3812,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "152",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Incompletude",
@@ -3837,11 +3837,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "153",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Incompletude",
@@ -3862,11 +3862,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "154",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Incompletude",
@@ -3887,11 +3887,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "155",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Incompletude",
@@ -3912,11 +3912,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "156",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Incompletude",
@@ -3937,11 +3937,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "157",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Incompletude",
@@ -3962,11 +3962,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "158",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Incompletude",
@@ -3987,11 +3987,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "159",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Incompletude",
@@ -4012,11 +4012,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "160",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Incompletude",
@@ -4037,11 +4037,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "161",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Arquitetura OTC",
@@ -4062,11 +4062,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "162",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Arquitetura OTC",
@@ -4087,11 +4087,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "163",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Arquitetura OTC",
@@ -4112,11 +4112,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "164",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Arquitetura OTC",
@@ -4137,11 +4137,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "165",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Arquitetura OTC",
@@ -4162,11 +4162,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "166",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Arquitetura OTC",
@@ -4187,11 +4187,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "167",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Arquitetura OTC",
@@ -4212,11 +4212,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "168",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Arquitetura OTC",
@@ -4237,11 +4237,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "169",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Arquitetura OTC",
@@ -4262,11 +4262,11 @@ export const MISSIONS: Mission[] = [
         "orgVendas": "1000",
         "canalDist": "10",
         "setorAtiv": "00",
-        "cliente": "208015",
-        "material": "MAT-SD-015",
+        "partnerCode": "208015",
+        "materialCode": "MAT-SD-015",
         "quantidade": "170",
-        "incoterms": "FOB",
-        "condPagto": "ZF30"
+        "headerIncoterms": "FOB",
+        "partnerFunction": "ZF30"
     },
     "f1Help": {
         "title": "Diagnóstico Sênior: Arquitetura OTC",
