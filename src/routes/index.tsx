@@ -236,7 +236,7 @@ function ProfileTestModule() {
   if (testState === "result") {
     const results = getProfileResults();
     if (results.length === 0) return null;
-    const primaryProfile = results[0].profile;
+    const primaryProfile = results[0]?.profile || "Consultor";
     const metadata = PROFILE_METADATA[primaryProfile];
 
     return (
