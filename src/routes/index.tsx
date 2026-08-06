@@ -2028,11 +2028,18 @@ function SAPSDQuestApp() {
                     >
                       {[
                         { 
+                          id: "MISSION_TITLE", 
+                          title: `Missão [${currentMissionIndex + 1}/${missions.length}]`, 
+                          icon: Target, 
+                          content: currentMission.title,
+                          variant: "indigo"
+                        },
+                        { 
                           id: "MISSION_OBJ", 
                           title: currentMission.f1Help.title, 
-                          icon: Target, 
+                          icon: HelpCircle, 
                           content: currentMission.f1Help.concept,
-                          variant: "indigo"
+                          variant: "slate"
                         },
                         { 
                           id: "IMPACT", 
