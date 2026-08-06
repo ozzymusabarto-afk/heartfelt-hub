@@ -2210,7 +2210,7 @@ function SAPSDQuestApp() {
                           {field.type === "select" ? (
                             <Select value={formData[fieldId] || ""} onValueChange={(v) => handleInputChange(field.id, v)}>
                               <SelectTrigger className={`h-9 rounded-lg border-slate-200 text-xs ${validationErrors.includes(field.id) ? "border-red-400 ring-1 ring-red-400" : ""}`}><SelectValue placeholder="-" /></SelectTrigger>
-                              <SelectContent>{field.options?.map(o => <SelectItem key={o} value={o} className="text-xs">{o}</SelectItem>)}</SelectContent>
+                              <SelectContent>{field.options?.map((o: string) => <SelectItem key={o} value={o} className="text-xs">{o}</SelectItem>)}</SelectContent>
                             </Select>
                           ) : (
                             <div className="relative group">
