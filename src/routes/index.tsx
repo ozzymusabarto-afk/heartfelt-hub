@@ -992,7 +992,7 @@ function SAPSDQuestApp() {
               { icon: Gamepad2, label: "Trilha Principal", sub: "Carreira passo a passo", active: true },
               { icon: Rocket, label: "Treino Rápido", sub: "Desafios aleatórios" },
               { icon: BookOpen, label: "Módulos & Apostila", sub: "Estude por tópico" },
-              { icon: BookOpen, label: "Como Usar / Sobre", sub: "Guia e Aviso Legal", action: openOnboarding },
+              { icon: HelpCircle, label: "Como Usar / Sobre", sub: "Guia e Aviso Legal", action: openOnboarding },
               { icon: Crown, label: "Modos Premium", sub: "Recursos exclusivos" },
               { icon: BarChart3, label: "Estatísticas", sub: "Seu desempenho" },
               { icon: Trophy, label: "Conquistas", sub: "Medalhas e troféus" },
