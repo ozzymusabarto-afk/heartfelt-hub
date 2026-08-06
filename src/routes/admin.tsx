@@ -213,7 +213,7 @@ function AdminPage() {
           <div className="p-6 flex flex-col md:flex-row items-center justify-between gap-6 bg-white">
             <div className="space-y-1">
               <p className="font-semibold text-slate-900">Modo Super Admin</p>
-              <p className="text-sm text-slate-500">Libera acesso total a todas as 24 missões e níveis da aplicação.</p>
+              <p className="text-sm text-slate-500">Libera acesso total a todas as 170 missões e níveis da aplicação.</p>
             </div>
             <div className="flex items-center gap-4">
               <Button 
