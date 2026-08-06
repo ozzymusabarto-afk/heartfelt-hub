@@ -634,6 +634,10 @@ function SAPSDQuestApp() {
       }
     } else {
       setFeedbackState("error");
+      // Add to reinforcement queue on error
+      if (!reinforcementQueue.includes(currentMission.id)) {
+        setReinforcementQueue(prev => [...prev, currentMission.id]);
+      }
       setHintMessage(currentMission.errorFeedback + " " + localHint);
       setTrainingHistory(prev => [{
         id: Math.random().toString(36).substr(2, 9),
@@ -651,10 +655,10 @@ function SAPSDQuestApp() {
 
   const nextMission = () => {
     const nextIdx = getRandomMissionIndex(currentMissionIndex, reinforcementQueue);
-    let nextM = missions[nextIdx];
+    let nextM = missions[nextIdx] || missions[0];
     
     // If it's a reinforced mission, randomize its data
-    if (reinforcementQueue.includes(nextM.id)) {
+    if (nextM && reinforcementQueue.includes(nextM.id)) {
       nextM = randomizeMissionData(nextM);
       setActiveMission(nextM);
     } else {
