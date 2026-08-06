@@ -110,7 +110,14 @@ function SAPSDQuestApp() {
   const [onboardingStep, setOnboardingStep] = useState(0);
 
   const [currentMissionIndex, setCurrentMissionIndex] = useState(0);
-  const currentMission = missions[currentMissionIndex]!;
+  const [activeMission, setActiveMission] = useState<Mission | null>(null);
+  
+  const currentMission = useMemo(() => {
+    if (activeMission && activeMission.id === missions[currentMissionIndex].id) {
+       return activeMission;
+    }
+    return missions[currentMissionIndex];
+  }, [currentMissionIndex, activeMission]);
 
   const [selectedTransaction, setSelectedTransaction] = useState("");
   const [mode, setMode] = useState("standard");
