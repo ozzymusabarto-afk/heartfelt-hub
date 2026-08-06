@@ -411,36 +411,65 @@ function SAPSDQuestApp() {
     const errors: string[] = [];
     let localHint = "";
     
+    // Validate Transaction
     if (!selectedTransaction || selectedTransaction !== currentMission.transaction) {
       errors.push("transaction");
       localHint = `Transação incorreta. O Chefe Hugo pediu ${currentMission.transaction}.`;
-    } else if (!formData.orderType || formData.orderType !== currentMission.expectedData.tipoOrdem) {
-      errors.push("orderType");
-      localHint = `Tipo de ordem incorreto. Esperado: ${currentMission.expectedData.tipoOrdem}`;
-    } else if (!formData.salesOrg || formData.salesOrg !== currentMission.expectedData.orgVendas) {
-      errors.push("salesOrg");
-      localHint = `Org. Vendas incorreta. Esperado: ${currentMission.expectedData.orgVendas}`;
-    } else if (!formData.customer || formData.customer !== currentMission.expectedData.cliente) {
-      errors.push("customer");
-      localHint = `Cliente incorreto. Esperado: ${currentMission.expectedData.cliente}`;
-    } else if (!formData.material || formData.material !== currentMission.expectedData.material) {
-      errors.push("material");
-      localHint = `Material incorreto. Esperado: ${currentMission.expectedData.material}`;
-    } else if (!formData.incoterms || formData.incoterms !== currentMission.expectedData.incoterms) {
-      errors.push("incoterms");
-      localHint = `Incoterms incorreto. Esperado: ${currentMission.expectedData.incoterms}`;
-    } else if (!formData.distChannel || formData.distChannel !== currentMission.expectedData.canalDist) {
-      errors.push("distChannel");
-      localHint = `Canal de Distribuição incorreto. Esperado: ${currentMission.expectedData.canalDist}`;
-    } else if (!formData.quantity || formData.quantity !== currentMission.expectedData.quantidade) {
-      errors.push("quantity");
-      localHint = `Quantidade incorreta. Esperado: ${currentMission.expectedData.quantidade}`;
-    } else if (!formData.division || formData.division !== currentMission.expectedData.setorAtiv) {
-      errors.push("division");
-      localHint = `Setor de Atividade incorreto. Esperado: ${currentMission.expectedData.setorAtiv}`;
-    } else if (!formData.paymentCond || formData.paymentCond !== currentMission.expectedData.condPagto) {
-      errors.push("paymentCond");
-      localHint = `Condição de Pagamento incorreta. Esperado: ${currentMission.expectedData.condPagto}`;
+    } 
+
+    // Dynamic validation logic based on Transaction
+    if (selectedTransaction === "BP") {
+      // Missions M19 and M20 require code and function
+      if (!formData.customer || formData.customer !== currentMission.expectedData.cliente) {
+        errors.push("customer");
+        localHint = `Código do Parceiro incorreto. Esperado: ${currentMission.expectedData.cliente}`;
+      } else if (!formData.salesOrg || formData.salesOrg !== currentMission.expectedData.orgVendas) {
+        // Even for BP, we are checking the Sales Org as per requirement "Exibir apenas... Organização de Vendas (1000)"
+        errors.push("salesOrg");
+        localHint = `Organização de Vendas incorreta. Esperado: ${currentMission.expectedData.orgVendas}`;
+      }
+    } else if (selectedTransaction === "VL01N") {
+      // Logic for delivery
+      if (!formData.salesOrg || formData.salesOrg !== "1000") { // Using 1000 as point of expedition mock
+        errors.push("salesOrg");
+        localHint = `Ponto de Expedição incorreto. Esperado: 1000`;
+      } else if (!formData.poNumber || formData.poNumber !== "REF-ORDEM") { // Mock ref
+         // Validation would be more specific in real scenario
+      }
+    } else if (selectedTransaction === "VF01") {
+       // Logic for billing
+    } else if (selectedTransaction === "VA05" || selectedTransaction === "V.02") {
+       // Logic for reports
+    } else {
+      // Standard VA01 logic
+      if (!formData.orderType || formData.orderType !== currentMission.expectedData.tipoOrdem) {
+        errors.push("orderType");
+        localHint = `Tipo de ordem incorreto. Esperado: ${currentMission.expectedData.tipoOrdem}`;
+      } else if (!formData.salesOrg || formData.salesOrg !== currentMission.expectedData.orgVendas) {
+        errors.push("salesOrg");
+        localHint = `Org. Vendas incorreta. Esperado: ${currentMission.expectedData.orgVendas}`;
+      } else if (!formData.customer || formData.customer !== currentMission.expectedData.cliente) {
+        errors.push("customer");
+        localHint = `Cliente incorreto. Esperado: ${currentMission.expectedData.cliente}`;
+      } else if (!formData.material || formData.material !== currentMission.expectedData.material) {
+        errors.push("material");
+        localHint = `Material incorreto. Esperado: ${currentMission.expectedData.material}`;
+      } else if (!formData.incoterms || formData.incoterms !== currentMission.expectedData.incoterms) {
+        errors.push("incoterms");
+        localHint = `Incoterms incorreto. Esperado: ${currentMission.expectedData.incoterms}`;
+      } else if (!formData.distChannel || formData.distChannel !== currentMission.expectedData.canalDist) {
+        errors.push("distChannel");
+        localHint = `Canal de Distribuição incorreto. Esperado: ${currentMission.expectedData.canalDist}`;
+      } else if (!formData.quantity || formData.quantity !== currentMission.expectedData.quantidade) {
+        errors.push("quantity");
+        localHint = `Quantidade incorreta. Esperado: ${currentMission.expectedData.quantidade}`;
+      } else if (!formData.division || formData.division !== currentMission.expectedData.setorAtiv) {
+        errors.push("division");
+        localHint = `Setor de Atividade incorreto. Esperado: ${currentMission.expectedData.setorAtiv}`;
+      } else if (!formData.paymentCond || formData.paymentCond !== currentMission.expectedData.condPagto) {
+        errors.push("paymentCond");
+        localHint = `Condição de Pagamento incorreta. Esperado: ${currentMission.expectedData.condPagto}`;
+      }
     }
 
     setValidationErrors(errors);
@@ -968,63 +997,106 @@ function SAPSDQuestApp() {
                 <Target className="size-4 text-indigo-600" /> Dados do Pedido
               </h3>
               <div className="grid grid-cols-2 gap-3 pr-1">
-                {[
-                  { id: "orderType", label: "Tipo", type: "select", options: ["OR", "QT", "ZBN", "RE"] },
-                  { id: "orderDate", label: "Data Pedido" },
-                  { id: "salesOrg", label: "Org. Vendas", type: "select", options: ["1000", "2000"] },
-                  { id: "distChannel", label: "Canal Dist.", type: "select", options: ["10", "20"] },
-                  { id: "division", label: "Setor Ativ.", type: "select", options: ["00", "01"] },
-                  { id: "customer", label: "Emissor", hasSearch: true },
-                  { id: "poNumber", label: "Nº Pedido" },
-                  { id: "material", label: "Material", type: "select", options: ["MAT-SD-015", "MAT-SD-020", "MAT-SD-099"] },
-                  { id: "quantity", label: "Quantidade" },
-                  { id: "incoterms", label: "Incoterms", type: "select", options: ["FOB", "CIF"] },
-                  { id: "paymentCond", label: "Cond. Pagto.", type: "select", options: ["ZF30", "ZB00", "ZF60", "0001"] },
-                ].map((field) => {
-                  const fieldId = field.id as keyof typeof formData;
-                  return (
-                    <div key={field.id} className="space-y-1">
-                      <div className="flex items-center justify-between">
-                        <Label className="text-[9px] font-black text-slate-400 uppercase tracking-wider">{field.label}</Label>
-                        <Button 
-                          variant="ghost" 
-                          size="icon" 
-                          className="size-4 h-4 w-4 p-0 text-slate-300 hover:text-indigo-600 transition-colors"
-                          onClick={() => openF1ForField(field.id)}
-                          title="Ajuda F1"
-                        >
-                          <HelpCircle className="size-2.5" />
-                        </Button>
-                      </div>
-                      {field.type === "select" ? (
-                        <Select value={formData[fieldId] || ""} onValueChange={(v) => handleInputChange(field.id, v)}>
-                          <SelectTrigger className={`h-9 rounded-lg border-slate-200 text-xs ${validationErrors.includes(field.id) ? "border-red-400 ring-1 ring-red-400" : ""}`}><SelectValue placeholder="-" /></SelectTrigger>
-                          <SelectContent>{field.options?.map(o => <SelectItem key={o} value={o} className="text-xs">{o}</SelectItem>)}</SelectContent>
-                        </Select>
-                      ) : (
-                        <div className="relative group">
-                          <Input 
-                            value={formData[fieldId] || ""} 
-                            onChange={(e) => handleInputChange(field.id, e.target.value)} 
-                            className={`h-9 rounded-lg border-slate-200 text-xs placeholder:text-slate-300 focus:ring-indigo-600 ${field.hasSearch ? "pr-8" : ""} ${validationErrors.includes(field.id) ? "border-red-400 ring-1 ring-red-400" : ""}`}
-                          />
-                          {field.hasSearch && (
-                            <Button
-                              size="icon"
-                              variant="ghost"
-                              className="absolute right-0 top-0 h-9 w-8 text-slate-400 hover:text-indigo-600"
-                              onClick={() => setIsCustomerSearchOpen(true)}
-                              title="Busca F4 (Matchcode)"
-                            >
-                              <Search className="size-3" />
-                            </Button>
-                          )}
+                {(() => {
+                  let fieldsToShow = [
+                    { id: "orderType", label: "Tipo", type: "select", options: ["OR", "QT", "ZBN", "RE"] },
+                    { id: "orderDate", label: "Data Pedido" },
+                    { id: "salesOrg", label: "Org. Vendas", type: "select", options: ["1000", "2000"] },
+                    { id: "distChannel", label: "Canal Dist.", type: "select", options: ["10", "20"] },
+                    { id: "division", label: "Setor Ativ.", type: "select", options: ["00", "01"] },
+                    { id: "customer", label: "Emissor", hasSearch: true },
+                    { id: "poNumber", label: "Nº Pedido" },
+                    { id: "material", label: "Material", type: "select", options: ["MAT-SD-015", "MAT-SD-020", "MAT-SD-099"] },
+                    { id: "quantity", label: "Quantidade" },
+                    { id: "incoterms", label: "Incoterms", type: "select", options: ["FOB", "CIF"] },
+                    { id: "paymentCond", label: "Cond. Pagto.", type: "select", options: ["ZF30", "ZB00", "ZF60", "0001"] },
+                  ];
+
+                  if (selectedTransaction === "BP") {
+                    fieldsToShow = [
+                      { id: "customer", label: "Cód. Parceiro Comercial", hasSearch: true },
+                      { id: "poNumber", label: "Categoria (Empresa/Pessoa)", type: "select", options: ["Empresa", "Pessoa"] }, // Reusing poNumber for Categoria
+                      { id: "paymentCond", label: "Função de Parceiro", type: "select", options: ["Cliente SD", "Fornecedor"] }, // Reusing paymentCond for Função
+                      { id: "salesOrg", label: "Organização de Vendas", type: "select", options: ["1000"] },
+                    ];
+                  } else if (selectedTransaction === "VL01N") {
+                    fieldsToShow = [
+                      { id: "salesOrg", label: "Ponto de Expedição", type: "select", options: ["1000"] },
+                      { id: "orderDate", label: "Data de Seleção" },
+                      { id: "poNumber", label: "Ordem de Venda Ref." },
+                    ];
+                  } else if (selectedTransaction === "VF01") {
+                    fieldsToShow = [
+                      { id: "poNumber", label: "Documento Faturável Ref." },
+                      { id: "orderType", label: "Tipo de Fatura", type: "select", options: ["F2 - Fatura Padrão", "NFS-e"] },
+                    ];
+                  } else if (selectedTransaction === "VA05" || selectedTransaction === "V.02") {
+                    fieldsToShow = [
+                      { id: "customer", label: "Filtro: Cliente", hasSearch: true },
+                      { id: "salesOrg", label: "Área de Vendas", type: "select", options: ["1000/10/00"] },
+                    ];
+                  }
+
+                  return fieldsToShow.map((field) => {
+                    const fieldId = field.id as keyof typeof formData;
+                    return (
+                      <div key={field.id} className="space-y-1">
+                        <div className="flex items-center justify-between">
+                          <Label className="text-[9px] font-black text-slate-400 uppercase tracking-wider">{field.label}</Label>
+                          <Button 
+                            variant="ghost" 
+                            size="icon" 
+                            className="size-4 h-4 w-4 p-0 text-slate-300 hover:text-indigo-600 transition-colors"
+                            onClick={() => openF1ForField(field.id)}
+                            title="Ajuda F1"
+                          >
+                            <HelpCircle className="size-2.5" />
+                          </Button>
                         </div>
-                      )}
-                    </div>
-                  );
-                })}
+                        {field.type === "select" ? (
+                          <Select value={formData[fieldId] || ""} onValueChange={(v) => handleInputChange(field.id, v)}>
+                            <SelectTrigger className={`h-9 rounded-lg border-slate-200 text-xs ${validationErrors.includes(field.id) ? "border-red-400 ring-1 ring-red-400" : ""}`}><SelectValue placeholder="-" /></SelectTrigger>
+                            <SelectContent>{field.options?.map(o => <SelectItem key={o} value={o} className="text-xs">{o}</SelectItem>)}</SelectContent>
+                          </Select>
+                        ) : (
+                          <div className="relative group">
+                            <Input 
+                              value={formData[fieldId] || ""} 
+                              onChange={(e) => handleInputChange(field.id, e.target.value)} 
+                              className={`h-9 rounded-lg border-slate-200 text-xs placeholder:text-slate-300 focus:ring-indigo-600 ${field.hasSearch ? "pr-8" : ""} ${validationErrors.includes(field.id) ? "border-red-400 ring-1 ring-red-400" : ""}`}
+                            />
+                            {field.hasSearch && (
+                              <Button
+                                size="icon"
+                                variant="ghost"
+                                className="absolute right-0 top-0 h-9 w-8 text-slate-400 hover:text-indigo-600"
+                                onClick={() => setIsCustomerSearchOpen(true)}
+                                title="Busca F4 (Matchcode)"
+                              >
+                                <Search className="size-3" />
+                              </Button>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  });
+                })()}
               </div>
+
+              {(selectedTransaction === "VA05" || selectedTransaction === "V.02") && (
+                <div className="mt-4 pt-4 border-t border-slate-100">
+                  <Button 
+                    className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl h-10 gap-2 shadow-md shadow-indigo-100"
+                    onClick={() => {
+                      toast.success("Relatório executado com sucesso!");
+                      // In a real app, this would show a table modal
+                    }}
+                  >
+                    EXECUTAR RELATÓRIO <Search className="size-4" />
+                  </Button>
+                </div>
+              )}
 
               <Button 
                 onClick={handleSubmit} 
