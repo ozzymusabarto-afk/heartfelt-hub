@@ -2272,34 +2272,198 @@ function SAPSDQuestApp() {
 
           {activeTab === "docs" && (
             <div className="flex-1 flex flex-col gap-6 animate-in fade-in duration-300">
-              <div className="flex flex-col gap-1">
-                <h2 className="text-2xl font-black text-slate-800 tracking-tight">Módulos & Apostila</h2>
-                <p className="text-slate-500 text-sm font-medium">Estude os conceitos fundamentais do SAP SD por tópico.</p>
+              <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div className="flex flex-col gap-1">
+                  <h2 className="text-2xl font-black text-slate-800 tracking-tight">Módulos & Apostila</h2>
+                  <p className="text-slate-500 text-sm font-medium">Estude os conceitos fundamentais do SAP SD por tópico.</p>
+                </div>
+                <div className="relative w-full md:w-72">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-slate-400" />
+                  <Input 
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Buscar T-Code ou Tópico..." 
+                    className="pl-9 h-10 rounded-xl border-slate-200 focus:ring-indigo-500 bg-white"
+                  />
+                </div>
               </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {[
-                  { title: "Business Partner (BP) & Dados Mestre", icon: UserCheck, topics: ["Cadastro de Clientes", "Funções de Parceiro", "Grupos de Contas"] },
-                  { title: "Ordens de Venda (VA01/VA02/VA03)", icon: FileText, topics: ["Tipos de Ordem (OR, QT, ZBN)", "Itens de Remessa", "Bloqueios"] },
-                  { title: "Esquema de Cálculo & Precificação (Pricing)", icon: Target, topics: ["Condições VK11", "Esquema de Cálculo", "Acessos"] },
-                  { title: "Remessa & Expedição (VL01N / VL02N)", icon: Rocket, topics: ["Ponto de Expedição", "Picking / Packing", "Saída de Mercadoria"] },
-                  { title: "Faturamento & Impostos Brasil", icon: Shield, topics: ["Faturamento (VF01)", "Localização Brasil", "NF-e e Impostos"] }
-                ].map((mod, i) => (
-                  <Card key={i} className="p-6 bg-white border-slate-200 hover:border-indigo-600 transition-colors rounded-2xl group cursor-pointer">
-                    <div className="size-12 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center mb-4 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
-                      <mod.icon className="size-6" />
+
+              {selectedModule ? (
+                <div className="animate-in fade-in slide-in-from-right-4 duration-300 space-y-6 pb-20">
+                  <Button 
+                    variant="ghost" 
+                    onClick={() => setSelectedModule(null)}
+                    className="gap-2 text-slate-500 font-bold hover:text-indigo-600 pl-0"
+                  >
+                    <ChevronLeft className="size-4" /> VOLTAR AOS MÓDULOS
+                  </Button>
+
+                  <Card className="overflow-hidden bg-white border-slate-200 rounded-3xl shadow-sm">
+                    <div className="bg-indigo-600 p-8 text-white relative overflow-hidden">
+                      <div className="relative z-10">
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="size-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
+                            {(() => {
+                              const Icon = (mod: any) => {
+                                switch(selectedModule.id) {
+                                  case 'org-bp': return <UserCheck className="size-6" />;
+                                  case 'sales-docs': return <FileText className="size-6" />;
+                                  case 'pricing': return <Flame className="size-6" />;
+                                  case 'shipping': return <Truck className="size-6" />;
+                                  case 'brazil': return <Shield className="size-6" />;
+                                  default: return <BookOpen className="size-6" />;
+                                }
+                              };
+                              return Icon(selectedModule);
+                            })()}
+                          </div>
+                          <Badge className="bg-white/20 text-white border-white/30 font-black uppercase tracking-widest text-[10px]">Módulo SD</Badge>
+                        </div>
+                        <h2 className="text-3xl font-black mb-4 tracking-tight">{selectedModule.title}</h2>
+                        <p className="text-indigo-100 max-w-3xl leading-relaxed text-sm font-medium">
+                          {selectedModule.summary}
+                        </p>
+                      </div>
+                      <div className="absolute -right-10 -bottom-10 size-64 bg-white/5 rounded-full blur-3xl" />
                     </div>
-                    <h3 className="font-bold text-slate-800 mb-3 group-hover:text-indigo-600 transition-colors">{mod.title}</h3>
-                    <ul className="space-y-2">
-                      {mod.topics.map((t, ti) => (
-                        <li key={ti} className="flex items-center gap-2 text-xs text-slate-500 font-medium">
-                          <Check className="size-3 text-emerald-500" /> {t}
-                        </li>
-                      ))}
-                    </ul>
+
+                    <div className="p-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
+                      <div className="space-y-8">
+                        <div>
+                          <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+                            <Rocket className="size-3.5 text-indigo-600" /> Transações Fundamentais (T-Codes)
+                          </h3>
+                          <div className="grid grid-cols-1 gap-2">
+                            {selectedModule.transactions.map((t, idx) => (
+                              <div key={idx} className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100 group hover:border-indigo-200 transition-colors">
+                                <div className="bg-white px-2 py-1 rounded-lg border border-slate-200 text-[10px] font-mono font-black text-indigo-600 shadow-sm min-w-[60px] text-center">
+                                  {t.tcode}
+                                </div>
+                                <span className="text-xs font-bold text-slate-700">{t.description}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div>
+                          <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+                            <Database className="size-3.5 text-indigo-600" /> Tabelas Transparentes
+                          </h3>
+                          <div className="grid grid-cols-1 gap-2">
+                            {selectedModule.tables.map((t, idx) => (
+                              <div key={idx} className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100 group hover:border-indigo-200 transition-colors">
+                                <div className="bg-white px-2 py-1 rounded-lg border border-slate-200 text-[10px] font-mono font-black text-slate-900 shadow-sm min-w-[70px] text-center">
+                                  {t.name}
+                                </div>
+                                <span className="text-xs font-bold text-slate-600">{t.description}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="space-y-8">
+                        <div>
+                          <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+                            <Lightbulb className="size-3.5 text-amber-500" /> Dicas de Projeto & Melhores Práticas
+                          </h3>
+                          <div className="space-y-3">
+                            {selectedModule.tips.map((tip, idx) => (
+                              <div key={idx} className="flex gap-3 p-4 bg-amber-50/50 rounded-2xl border border-amber-100/50">
+                                <Info className="size-4 text-amber-500 shrink-0 mt-0.5" />
+                                <p className="text-xs font-medium text-slate-700 leading-relaxed">{tip}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div>
+                          <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+                            <AlertTriangle className="size-3.5 text-red-500" /> Erros Comuns no Dia a Dia
+                          </h3>
+                          <div className="space-y-3">
+                            {selectedModule.commonErrors.map((error, idx) => (
+                              <div key={idx} className="flex gap-3 p-4 bg-red-50/50 rounded-2xl border border-red-100/50">
+                                <X className="size-4 text-red-500 shrink-0 mt-0.5" />
+                                <p className="text-xs font-medium text-slate-700 leading-relaxed">{error}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="bg-slate-50 p-6 border-t border-slate-100 flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <HugoAvatar className="size-10" />
+                        <div>
+                          <h4 className="text-[10px] font-black text-indigo-600 uppercase tracking-widest leading-none">Material de Apoio AAM</h4>
+                          <p className="text-[9px] text-slate-400 font-bold uppercase">Consulte sempre o guia oficial da empresa.</p>
+                        </div>
+                      </div>
+                      <Button 
+                        onClick={() => setSelectedModule(null)}
+                        className="bg-indigo-600 text-white font-bold rounded-xl h-10 px-6"
+                      >
+                        ENTENDI, VOLTAR
+                      </Button>
+                    </div>
                   </Card>
-                ))}
-              </div>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {SAP_MODULES.filter(mod => 
+                    mod.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    mod.summary.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    mod.transactions.some(t => t.tcode.toLowerCase().includes(searchQuery.toLowerCase()))
+                  ).map((mod, i) => (
+                    <Card 
+                      key={mod.id} 
+                      onClick={() => setSelectedModule(mod)}
+                      className="p-6 bg-white border-slate-200 hover:border-indigo-600 hover:shadow-xl hover:shadow-indigo-50 transition-all rounded-3xl group cursor-pointer flex flex-col h-full relative overflow-hidden"
+                    >
+                      <div className="size-14 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
+                        {(() => {
+                          const Icon = (m: any) => {
+                            switch(mod.id) {
+                              case 'org-bp': return <UserCheck className="size-7" />;
+                              case 'sales-docs': return <FileText className="size-7" />;
+                              case 'pricing': return <Flame className="size-7" />;
+                              case 'shipping': return <Truck className="size-7" />;
+                              case 'brazil': return <Shield className="size-7" />;
+                              default: return <BookOpen className="size-7" />;
+                            }
+                          };
+                          return Icon(mod);
+                        })()}
+                      </div>
+                      <h3 className="text-lg font-black text-slate-800 mb-3 group-hover:text-indigo-600 transition-colors tracking-tight leading-tight">
+                        {mod.title}
+                      </h3>
+                      <p className="text-xs text-slate-500 font-medium leading-relaxed mb-6 flex-1">
+                        {mod.summary.substring(0, 120)}...
+                      </p>
+                      
+                      <div className="flex flex-wrap gap-1.5 mb-6">
+                        {mod.transactions.slice(0, 3).map((t, ti) => (
+                          <Badge key={ti} variant="outline" className="bg-slate-50 text-[9px] font-mono font-bold text-slate-400 border-slate-100">
+                            {t.tcode}
+                          </Badge>
+                        ))}
+                        {mod.transactions.length > 3 && <Badge variant="outline" className="bg-slate-50 text-[9px] font-bold text-slate-400 border-slate-100">+{mod.transactions.length - 3}</Badge>}
+                      </div>
+
+                      <div className="flex items-center justify-between pt-4 border-t border-slate-50">
+                        <span className="text-[10px] font-black text-indigo-600 uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">ESTUDAR MÓDULO</span>
+                        <ArrowRight className="size-4 text-slate-300 group-hover:text-indigo-600 group-hover:translate-x-1 transition-all" />
+                      </div>
+                      
+                      {/* Decorative elements */}
+                      <div className="absolute top-0 right-0 size-24 bg-indigo-50/30 rounded-full -mr-12 -mt-12 group-hover:bg-indigo-50/50 transition-colors" />
+                    </Card>
+                  ))}
+                </div>
+              )}
             </div>
           )}
 
