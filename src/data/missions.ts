@@ -3276,1003 +3276,1003 @@ export const MISSIONS: Mission[] = [
     }
 },
   {
-    "id": "M131-VA02",
-    "title": "131. Sênior - Operação VA02",
-    "transaction": "VA02",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 141.",
-    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "id": "M131-RE",
+    "title": "131. Sênior - Processo de Devolução (RE)",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor Sênior, o cliente 208015 está devolvendo mercadorias por avaria. Crie uma Ordem de Devolução tipo RE para o material MAT-SD-015 (Qtd 131). Lembre-se que este processo exige referência à fatura original e gera um crédito posterior.",
+    "successFeedback": "Ordem de devolução criada! O fluxo de recebimento e a nota de crédito (G2) podem ser processados. Visão analítica perfeita.",
+    "errorFeedback": "Falha no processo de devolução. Verifique se o tipo de ordem é RE e se a quantidade de devolução está correta.",
     "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "141",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
+        "tipoOrdem": "RE",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "131",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
     },
     "f1Help": {
-      "title": "Dica SAP: VA02",
-      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+        "title": "Diagnóstico Sênior: Devoluções",
+        "concept": "O processo de devolução (Return) no SAP integra SD, MM e FI, afetando o estoque e as contas a receber.",
+        "businessImpact": "Gerenciar devoluções com eficiência é crucial para a satisfação do cliente e a acuracidade do estoque.",
+        "brazilRule": "No Brasil, a devolução deve ser acompanhada de uma Nota Fiscal de Entrada para anular os impostos da venda original."
     }
-  },
-  {
-    "id": "M132-VA02",
-    "title": "132. Sênior - Operação VA02",
-    "transaction": "VA02",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 142.",
-    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+},
+{
+    "id": "M132-RE",
+    "title": "132. Sênior - Processo de Devolução (RE)",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor Sênior, o cliente 208015 está devolvendo mercadorias por avaria. Crie uma Ordem de Devolução tipo RE para o material MAT-SD-015 (Qtd 132). Lembre-se que este processo exige referência à fatura original e gera um crédito posterior.",
+    "successFeedback": "Ordem de devolução criada! O fluxo de recebimento e a nota de crédito (G2) podem ser processados. Visão analítica perfeita.",
+    "errorFeedback": "Falha no processo de devolução. Verifique se o tipo de ordem é RE e se a quantidade de devolução está correta.",
     "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "142",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
+        "tipoOrdem": "RE",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "132",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
     },
     "f1Help": {
-      "title": "Dica SAP: VA02",
-      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+        "title": "Diagnóstico Sênior: Devoluções",
+        "concept": "O processo de devolução (Return) no SAP integra SD, MM e FI, afetando o estoque e as contas a receber.",
+        "businessImpact": "Gerenciar devoluções com eficiência é crucial para a satisfação do cliente e a acuracidade do estoque.",
+        "brazilRule": "No Brasil, a devolução deve ser acompanhada de uma Nota Fiscal de Entrada para anular os impostos da venda original."
     }
-  },
-  {
-    "id": "M133-VA02",
-    "title": "133. Sênior - Operação VA02",
-    "transaction": "VA02",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 143.",
-    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+},
+{
+    "id": "M133-RE",
+    "title": "133. Sênior - Processo de Devolução (RE)",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor Sênior, o cliente 208015 está devolvendo mercadorias por avaria. Crie uma Ordem de Devolução tipo RE para o material MAT-SD-015 (Qtd 133). Lembre-se que este processo exige referência à fatura original e gera um crédito posterior.",
+    "successFeedback": "Ordem de devolução criada! O fluxo de recebimento e a nota de crédito (G2) podem ser processados. Visão analítica perfeita.",
+    "errorFeedback": "Falha no processo de devolução. Verifique se o tipo de ordem é RE e se a quantidade de devolução está correta.",
     "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "143",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
+        "tipoOrdem": "RE",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "133",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
     },
     "f1Help": {
-      "title": "Dica SAP: VA02",
-      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+        "title": "Diagnóstico Sênior: Devoluções",
+        "concept": "O processo de devolução (Return) no SAP integra SD, MM e FI, afetando o estoque e as contas a receber.",
+        "businessImpact": "Gerenciar devoluções com eficiência é crucial para a satisfação do cliente e a acuracidade do estoque.",
+        "brazilRule": "No Brasil, a devolução deve ser acompanhada de uma Nota Fiscal de Entrada para anular os impostos da venda original."
     }
-  },
-  {
-    "id": "M134-VA02",
-    "title": "134. Sênior - Operação VA02",
-    "transaction": "VA02",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 144.",
-    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+},
+{
+    "id": "M134-RE",
+    "title": "134. Sênior - Processo de Devolução (RE)",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor Sênior, o cliente 208015 está devolvendo mercadorias por avaria. Crie uma Ordem de Devolução tipo RE para o material MAT-SD-015 (Qtd 134). Lembre-se que este processo exige referência à fatura original e gera um crédito posterior.",
+    "successFeedback": "Ordem de devolução criada! O fluxo de recebimento e a nota de crédito (G2) podem ser processados. Visão analítica perfeita.",
+    "errorFeedback": "Falha no processo de devolução. Verifique se o tipo de ordem é RE e se a quantidade de devolução está correta.",
     "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "144",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
+        "tipoOrdem": "RE",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "134",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
     },
     "f1Help": {
-      "title": "Dica SAP: VA02",
-      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+        "title": "Diagnóstico Sênior: Devoluções",
+        "concept": "O processo de devolução (Return) no SAP integra SD, MM e FI, afetando o estoque e as contas a receber.",
+        "businessImpact": "Gerenciar devoluções com eficiência é crucial para a satisfação do cliente e a acuracidade do estoque.",
+        "brazilRule": "No Brasil, a devolução deve ser acompanhada de uma Nota Fiscal de Entrada para anular os impostos da venda original."
     }
-  },
-  {
-    "id": "M135-VA02",
-    "title": "135. Sênior - Operação VA02",
-    "transaction": "VA02",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 145.",
-    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+},
+{
+    "id": "M135-RE",
+    "title": "135. Sênior - Processo de Devolução (RE)",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor Sênior, o cliente 208015 está devolvendo mercadorias por avaria. Crie uma Ordem de Devolução tipo RE para o material MAT-SD-015 (Qtd 135). Lembre-se que este processo exige referência à fatura original e gera um crédito posterior.",
+    "successFeedback": "Ordem de devolução criada! O fluxo de recebimento e a nota de crédito (G2) podem ser processados. Visão analítica perfeita.",
+    "errorFeedback": "Falha no processo de devolução. Verifique se o tipo de ordem é RE e se a quantidade de devolução está correta.",
     "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "145",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
+        "tipoOrdem": "RE",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "135",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
     },
     "f1Help": {
-      "title": "Dica SAP: VA02",
-      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+        "title": "Diagnóstico Sênior: Devoluções",
+        "concept": "O processo de devolução (Return) no SAP integra SD, MM e FI, afetando o estoque e as contas a receber.",
+        "businessImpact": "Gerenciar devoluções com eficiência é crucial para a satisfação do cliente e a acuracidade do estoque.",
+        "brazilRule": "No Brasil, a devolução deve ser acompanhada de uma Nota Fiscal de Entrada para anular os impostos da venda original."
     }
-  },
-  {
-    "id": "M136-VA02",
-    "title": "136. Sênior - Operação VA02",
-    "transaction": "VA02",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 146.",
-    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+},
+{
+    "id": "M136-RE",
+    "title": "136. Sênior - Processo de Devolução (RE)",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor Sênior, o cliente 208015 está devolvendo mercadorias por avaria. Crie uma Ordem de Devolução tipo RE para o material MAT-SD-015 (Qtd 136). Lembre-se que este processo exige referência à fatura original e gera um crédito posterior.",
+    "successFeedback": "Ordem de devolução criada! O fluxo de recebimento e a nota de crédito (G2) podem ser processados. Visão analítica perfeita.",
+    "errorFeedback": "Falha no processo de devolução. Verifique se o tipo de ordem é RE e se a quantidade de devolução está correta.",
     "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "146",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
+        "tipoOrdem": "RE",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "136",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
     },
     "f1Help": {
-      "title": "Dica SAP: VA02",
-      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+        "title": "Diagnóstico Sênior: Devoluções",
+        "concept": "O processo de devolução (Return) no SAP integra SD, MM e FI, afetando o estoque e as contas a receber.",
+        "businessImpact": "Gerenciar devoluções com eficiência é crucial para a satisfação do cliente e a acuracidade do estoque.",
+        "brazilRule": "No Brasil, a devolução deve ser acompanhada de uma Nota Fiscal de Entrada para anular os impostos da venda original."
     }
-  },
-  {
-    "id": "M137-VA02",
-    "title": "137. Sênior - Operação VA02",
-    "transaction": "VA02",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 147.",
-    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+},
+{
+    "id": "M137-RE",
+    "title": "137. Sênior - Processo de Devolução (RE)",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor Sênior, o cliente 208015 está devolvendo mercadorias por avaria. Crie uma Ordem de Devolução tipo RE para o material MAT-SD-015 (Qtd 137). Lembre-se que este processo exige referência à fatura original e gera um crédito posterior.",
+    "successFeedback": "Ordem de devolução criada! O fluxo de recebimento e a nota de crédito (G2) podem ser processados. Visão analítica perfeita.",
+    "errorFeedback": "Falha no processo de devolução. Verifique se o tipo de ordem é RE e se a quantidade de devolução está correta.",
     "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "147",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
+        "tipoOrdem": "RE",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "137",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
     },
     "f1Help": {
-      "title": "Dica SAP: VA02",
-      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+        "title": "Diagnóstico Sênior: Devoluções",
+        "concept": "O processo de devolução (Return) no SAP integra SD, MM e FI, afetando o estoque e as contas a receber.",
+        "businessImpact": "Gerenciar devoluções com eficiência é crucial para a satisfação do cliente e a acuracidade do estoque.",
+        "brazilRule": "No Brasil, a devolução deve ser acompanhada de uma Nota Fiscal de Entrada para anular os impostos da venda original."
     }
-  },
-  {
-    "id": "M138-VA02",
-    "title": "138. Sênior - Operação VA02",
-    "transaction": "VA02",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 148.",
-    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+},
+{
+    "id": "M138-RE",
+    "title": "138. Sênior - Processo de Devolução (RE)",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor Sênior, o cliente 208015 está devolvendo mercadorias por avaria. Crie uma Ordem de Devolução tipo RE para o material MAT-SD-015 (Qtd 138). Lembre-se que este processo exige referência à fatura original e gera um crédito posterior.",
+    "successFeedback": "Ordem de devolução criada! O fluxo de recebimento e a nota de crédito (G2) podem ser processados. Visão analítica perfeita.",
+    "errorFeedback": "Falha no processo de devolução. Verifique se o tipo de ordem é RE e se a quantidade de devolução está correta.",
     "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "148",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
+        "tipoOrdem": "RE",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "138",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
     },
     "f1Help": {
-      "title": "Dica SAP: VA02",
-      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+        "title": "Diagnóstico Sênior: Devoluções",
+        "concept": "O processo de devolução (Return) no SAP integra SD, MM e FI, afetando o estoque e as contas a receber.",
+        "businessImpact": "Gerenciar devoluções com eficiência é crucial para a satisfação do cliente e a acuracidade do estoque.",
+        "brazilRule": "No Brasil, a devolução deve ser acompanhada de uma Nota Fiscal de Entrada para anular os impostos da venda original."
     }
-  },
-  {
-    "id": "M139-VA02",
-    "title": "139. Sênior - Operação VA02",
-    "transaction": "VA02",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 149.",
-    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+},
+{
+    "id": "M139-RE",
+    "title": "139. Sênior - Processo de Devolução (RE)",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor Sênior, o cliente 208015 está devolvendo mercadorias por avaria. Crie uma Ordem de Devolução tipo RE para o material MAT-SD-015 (Qtd 139). Lembre-se que este processo exige referência à fatura original e gera um crédito posterior.",
+    "successFeedback": "Ordem de devolução criada! O fluxo de recebimento e a nota de crédito (G2) podem ser processados. Visão analítica perfeita.",
+    "errorFeedback": "Falha no processo de devolução. Verifique se o tipo de ordem é RE e se a quantidade de devolução está correta.",
     "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "149",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
+        "tipoOrdem": "RE",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "139",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
     },
     "f1Help": {
-      "title": "Dica SAP: VA02",
-      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+        "title": "Diagnóstico Sênior: Devoluções",
+        "concept": "O processo de devolução (Return) no SAP integra SD, MM e FI, afetando o estoque e as contas a receber.",
+        "businessImpact": "Gerenciar devoluções com eficiência é crucial para a satisfação do cliente e a acuracidade do estoque.",
+        "brazilRule": "No Brasil, a devolução deve ser acompanhada de uma Nota Fiscal de Entrada para anular os impostos da venda original."
     }
-  },
-  {
-    "id": "M140-VA02",
-    "title": "140. Sênior - Operação VA02",
-    "transaction": "VA02",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 150.",
-    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+},
+{
+    "id": "M140-RE",
+    "title": "140. Sênior - Processo de Devolução (RE)",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Consultor Sênior, o cliente 208015 está devolvendo mercadorias por avaria. Crie uma Ordem de Devolução tipo RE para o material MAT-SD-015 (Qtd 140). Lembre-se que este processo exige referência à fatura original e gera um crédito posterior.",
+    "successFeedback": "Ordem de devolução criada! O fluxo de recebimento e a nota de crédito (G2) podem ser processados. Visão analítica perfeita.",
+    "errorFeedback": "Falha no processo de devolução. Verifique se o tipo de ordem é RE e se a quantidade de devolução está correta.",
     "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "150",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
+        "tipoOrdem": "RE",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "140",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
     },
     "f1Help": {
-      "title": "Dica SAP: VA02",
-      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+        "title": "Diagnóstico Sênior: Devoluções",
+        "concept": "O processo de devolução (Return) no SAP integra SD, MM e FI, afetando o estoque e as contas a receber.",
+        "businessImpact": "Gerenciar devoluções com eficiência é crucial para a satisfação do cliente e a acuracidade do estoque.",
+        "brazilRule": "No Brasil, a devolução deve ser acompanhada de uma Nota Fiscal de Entrada para anular os impostos da venda original."
     }
-  },
-  {
-    "id": "M141-VA02",
-    "title": "141. Sênior - Operação VA02",
-    "transaction": "VA02",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 151.",
-    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "151",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA02",
-      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
-  },
-  {
-    "id": "M142-VA02",
-    "title": "142. Sênior - Operação VA02",
-    "transaction": "VA02",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 152.",
-    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "152",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA02",
-      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
-  },
-  {
-    "id": "M143-VA02",
-    "title": "143. Sênior - Operação VA02",
-    "transaction": "VA02",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 153.",
-    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "153",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA02",
-      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
-  },
-  {
-    "id": "M144-VA02",
-    "title": "144. Sênior - Operação VA02",
-    "transaction": "VA02",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 154.",
-    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "154",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA02",
-      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
-  },
-  {
-    "id": "M145-VA02",
-    "title": "145. Sênior - Operação VA02",
-    "transaction": "VA02",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 155.",
-    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "155",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA02",
-      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
-  },
-  {
-    "id": "M146-VA02",
-    "title": "146. Sênior - Operação VA02",
-    "transaction": "VA02",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 156.",
-    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "156",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA02",
-      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
-  },
-  {
-    "id": "M147-VA02",
-    "title": "147. Sênior - Operação VA02",
-    "transaction": "VA02",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 157.",
-    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "157",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA02",
-      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
-  },
-  {
-    "id": "M148-VA02",
-    "title": "148. Sênior - Operação VA02",
-    "transaction": "VA02",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 158.",
-    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "158",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA02",
-      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
-  },
-  {
-    "id": "M149-VA02",
-    "title": "149. Sênior - Operação VA02",
-    "transaction": "VA02",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 159.",
-    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "159",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA02",
-      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
-  },
-  {
-    "id": "M150-VA02",
-    "title": "150. Sênior - Operação VA02",
-    "transaction": "VA02",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VA02. Use Material MAT-SD-015 e Qtd 160.",
-    "successFeedback": "Excelente! Operação VA02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VA02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
-    "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "160",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
-    },
-    "f1Help": {
-      "title": "Dica SAP: VA02",
-      "concept": "Entenda o fluxo de VA02 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
-    }
-  },
-  {
-    "id": "M151-VF11",
-    "title": "151. Sênior - Operação VF11",
+},
+{
+    "id": "M141-CANCEL",
+    "title": "141. Sênior - Estorno e Cancelamento (VF11/VL09)",
     "transaction": "VF11",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF11. Use Material MAT-SD-015 e Qtd 161.",
-    "successFeedback": "Excelente! Operação VF11 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VF11. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "chefeHugoDialog": "Atenção, erro crítico no faturamento! Precisamos estornar a fatura do Cliente 208015 para o material MAT-SD-015 (Qtd 141). Use a VF11 e depois anule o PGI via VL09 para reverter o estoque.",
+    "successFeedback": "Faturamento estornado e fluxo logístico revertido. O sistema está limpo para a nova tentativa. Excelente suporte N3!",
+    "errorFeedback": "Erro ao estornar. Verifique se a fatura já possui lançamentos contábeis compensados ou se a VL09 não foi executada.",
     "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "161",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
+        "tipoOrdem": "S1",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "141",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
     },
     "f1Help": {
-      "title": "Dica SAP: VF11",
-      "concept": "Entenda o fluxo de VF11 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+        "title": "Diagnóstico Sênior: Estornos",
+        "concept": "O estorno (Reversal) no SAP deve seguir a ordem inversa da criação: VF11 (Fatura) -> VL09 (PGI) -> VA02 (Ordem).",
+        "businessImpact": "Estornos incorretos causam divergências em inventário e na contabilidade fiscal.",
+        "brazilRule": "O cancelamento da NF-e tem prazo legal na SEFAZ (geralmente 24h). Passado o prazo, deve-se emitir NF de estorno."
     }
-  },
-  {
-    "id": "M152-VF11",
-    "title": "152. Sênior - Operação VF11",
+},
+{
+    "id": "M142-CANCEL",
+    "title": "142. Sênior - Estorno e Cancelamento (VF11/VL09)",
     "transaction": "VF11",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF11. Use Material MAT-SD-015 e Qtd 162.",
-    "successFeedback": "Excelente! Operação VF11 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VF11. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "chefeHugoDialog": "Atenção, erro crítico no faturamento! Precisamos estornar a fatura do Cliente 208015 para o material MAT-SD-015 (Qtd 142). Use a VF11 e depois anule o PGI via VL09 para reverter o estoque.",
+    "successFeedback": "Faturamento estornado e fluxo logístico revertido. O sistema está limpo para a nova tentativa. Excelente suporte N3!",
+    "errorFeedback": "Erro ao estornar. Verifique se a fatura já possui lançamentos contábeis compensados ou se a VL09 não foi executada.",
     "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "162",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
+        "tipoOrdem": "S1",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "142",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
     },
     "f1Help": {
-      "title": "Dica SAP: VF11",
-      "concept": "Entenda o fluxo de VF11 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+        "title": "Diagnóstico Sênior: Estornos",
+        "concept": "O estorno (Reversal) no SAP deve seguir a ordem inversa da criação: VF11 (Fatura) -> VL09 (PGI) -> VA02 (Ordem).",
+        "businessImpact": "Estornos incorretos causam divergências em inventário e na contabilidade fiscal.",
+        "brazilRule": "O cancelamento da NF-e tem prazo legal na SEFAZ (geralmente 24h). Passado o prazo, deve-se emitir NF de estorno."
     }
-  },
-  {
-    "id": "M153-VF11",
-    "title": "153. Sênior - Operação VF11",
+},
+{
+    "id": "M143-CANCEL",
+    "title": "143. Sênior - Estorno e Cancelamento (VF11/VL09)",
     "transaction": "VF11",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF11. Use Material MAT-SD-015 e Qtd 163.",
-    "successFeedback": "Excelente! Operação VF11 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VF11. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "chefeHugoDialog": "Atenção, erro crítico no faturamento! Precisamos estornar a fatura do Cliente 208015 para o material MAT-SD-015 (Qtd 143). Use a VF11 e depois anule o PGI via VL09 para reverter o estoque.",
+    "successFeedback": "Faturamento estornado e fluxo logístico revertido. O sistema está limpo para a nova tentativa. Excelente suporte N3!",
+    "errorFeedback": "Erro ao estornar. Verifique se a fatura já possui lançamentos contábeis compensados ou se a VL09 não foi executada.",
     "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "163",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
+        "tipoOrdem": "S1",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "143",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
     },
     "f1Help": {
-      "title": "Dica SAP: VF11",
-      "concept": "Entenda o fluxo de VF11 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+        "title": "Diagnóstico Sênior: Estornos",
+        "concept": "O estorno (Reversal) no SAP deve seguir a ordem inversa da criação: VF11 (Fatura) -> VL09 (PGI) -> VA02 (Ordem).",
+        "businessImpact": "Estornos incorretos causam divergências em inventário e na contabilidade fiscal.",
+        "brazilRule": "O cancelamento da NF-e tem prazo legal na SEFAZ (geralmente 24h). Passado o prazo, deve-se emitir NF de estorno."
     }
-  },
-  {
-    "id": "M154-VF11",
-    "title": "154. Sênior - Operação VF11",
+},
+{
+    "id": "M144-CANCEL",
+    "title": "144. Sênior - Estorno e Cancelamento (VF11/VL09)",
     "transaction": "VF11",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF11. Use Material MAT-SD-015 e Qtd 164.",
-    "successFeedback": "Excelente! Operação VF11 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VF11. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "chefeHugoDialog": "Atenção, erro crítico no faturamento! Precisamos estornar a fatura do Cliente 208015 para o material MAT-SD-015 (Qtd 144). Use a VF11 e depois anule o PGI via VL09 para reverter o estoque.",
+    "successFeedback": "Faturamento estornado e fluxo logístico revertido. O sistema está limpo para a nova tentativa. Excelente suporte N3!",
+    "errorFeedback": "Erro ao estornar. Verifique se a fatura já possui lançamentos contábeis compensados ou se a VL09 não foi executada.",
     "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "164",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
+        "tipoOrdem": "S1",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "144",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
     },
     "f1Help": {
-      "title": "Dica SAP: VF11",
-      "concept": "Entenda o fluxo de VF11 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+        "title": "Diagnóstico Sênior: Estornos",
+        "concept": "O estorno (Reversal) no SAP deve seguir a ordem inversa da criação: VF11 (Fatura) -> VL09 (PGI) -> VA02 (Ordem).",
+        "businessImpact": "Estornos incorretos causam divergências em inventário e na contabilidade fiscal.",
+        "brazilRule": "O cancelamento da NF-e tem prazo legal na SEFAZ (geralmente 24h). Passado o prazo, deve-se emitir NF de estorno."
     }
-  },
-  {
-    "id": "M155-VF11",
-    "title": "155. Sênior - Operação VF11",
+},
+{
+    "id": "M145-CANCEL",
+    "title": "145. Sênior - Estorno e Cancelamento (VF11/VL09)",
     "transaction": "VF11",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF11. Use Material MAT-SD-015 e Qtd 165.",
-    "successFeedback": "Excelente! Operação VF11 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VF11. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "chefeHugoDialog": "Atenção, erro crítico no faturamento! Precisamos estornar a fatura do Cliente 208015 para o material MAT-SD-015 (Qtd 145). Use a VF11 e depois anule o PGI via VL09 para reverter o estoque.",
+    "successFeedback": "Faturamento estornado e fluxo logístico revertido. O sistema está limpo para a nova tentativa. Excelente suporte N3!",
+    "errorFeedback": "Erro ao estornar. Verifique se a fatura já possui lançamentos contábeis compensados ou se a VL09 não foi executada.",
     "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "165",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
+        "tipoOrdem": "S1",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "145",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
     },
     "f1Help": {
-      "title": "Dica SAP: VF11",
-      "concept": "Entenda o fluxo de VF11 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+        "title": "Diagnóstico Sênior: Estornos",
+        "concept": "O estorno (Reversal) no SAP deve seguir a ordem inversa da criação: VF11 (Fatura) -> VL09 (PGI) -> VA02 (Ordem).",
+        "businessImpact": "Estornos incorretos causam divergências em inventário e na contabilidade fiscal.",
+        "brazilRule": "O cancelamento da NF-e tem prazo legal na SEFAZ (geralmente 24h). Passado o prazo, deve-se emitir NF de estorno."
     }
-  },
-  {
-    "id": "M156-VF11",
-    "title": "156. Sênior - Operação VF11",
+},
+{
+    "id": "M146-CANCEL",
+    "title": "146. Sênior - Estorno e Cancelamento (VF11/VL09)",
     "transaction": "VF11",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF11. Use Material MAT-SD-015 e Qtd 166.",
-    "successFeedback": "Excelente! Operação VF11 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VF11. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "chefeHugoDialog": "Atenção, erro crítico no faturamento! Precisamos estornar a fatura do Cliente 208015 para o material MAT-SD-015 (Qtd 146). Use a VF11 e depois anule o PGI via VL09 para reverter o estoque.",
+    "successFeedback": "Faturamento estornado e fluxo logístico revertido. O sistema está limpo para a nova tentativa. Excelente suporte N3!",
+    "errorFeedback": "Erro ao estornar. Verifique se a fatura já possui lançamentos contábeis compensados ou se a VL09 não foi executada.",
     "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "166",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
+        "tipoOrdem": "S1",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "146",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
     },
     "f1Help": {
-      "title": "Dica SAP: VF11",
-      "concept": "Entenda o fluxo de VF11 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+        "title": "Diagnóstico Sênior: Estornos",
+        "concept": "O estorno (Reversal) no SAP deve seguir a ordem inversa da criação: VF11 (Fatura) -> VL09 (PGI) -> VA02 (Ordem).",
+        "businessImpact": "Estornos incorretos causam divergências em inventário e na contabilidade fiscal.",
+        "brazilRule": "O cancelamento da NF-e tem prazo legal na SEFAZ (geralmente 24h). Passado o prazo, deve-se emitir NF de estorno."
     }
-  },
-  {
-    "id": "M157-VF11",
-    "title": "157. Sênior - Operação VF11",
+},
+{
+    "id": "M147-CANCEL",
+    "title": "147. Sênior - Estorno e Cancelamento (VF11/VL09)",
     "transaction": "VF11",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF11. Use Material MAT-SD-015 e Qtd 167.",
-    "successFeedback": "Excelente! Operação VF11 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VF11. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "chefeHugoDialog": "Atenção, erro crítico no faturamento! Precisamos estornar a fatura do Cliente 208015 para o material MAT-SD-015 (Qtd 147). Use a VF11 e depois anule o PGI via VL09 para reverter o estoque.",
+    "successFeedback": "Faturamento estornado e fluxo logístico revertido. O sistema está limpo para a nova tentativa. Excelente suporte N3!",
+    "errorFeedback": "Erro ao estornar. Verifique se a fatura já possui lançamentos contábeis compensados ou se a VL09 não foi executada.",
     "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "167",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
+        "tipoOrdem": "S1",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "147",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
     },
     "f1Help": {
-      "title": "Dica SAP: VF11",
-      "concept": "Entenda o fluxo de VF11 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+        "title": "Diagnóstico Sênior: Estornos",
+        "concept": "O estorno (Reversal) no SAP deve seguir a ordem inversa da criação: VF11 (Fatura) -> VL09 (PGI) -> VA02 (Ordem).",
+        "businessImpact": "Estornos incorretos causam divergências em inventário e na contabilidade fiscal.",
+        "brazilRule": "O cancelamento da NF-e tem prazo legal na SEFAZ (geralmente 24h). Passado o prazo, deve-se emitir NF de estorno."
     }
-  },
-  {
-    "id": "M158-VF11",
-    "title": "158. Sênior - Operação VF11",
+},
+{
+    "id": "M148-CANCEL",
+    "title": "148. Sênior - Estorno e Cancelamento (VF11/VL09)",
     "transaction": "VF11",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF11. Use Material MAT-SD-015 e Qtd 168.",
-    "successFeedback": "Excelente! Operação VF11 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VF11. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "chefeHugoDialog": "Atenção, erro crítico no faturamento! Precisamos estornar a fatura do Cliente 208015 para o material MAT-SD-015 (Qtd 148). Use a VF11 e depois anule o PGI via VL09 para reverter o estoque.",
+    "successFeedback": "Faturamento estornado e fluxo logístico revertido. O sistema está limpo para a nova tentativa. Excelente suporte N3!",
+    "errorFeedback": "Erro ao estornar. Verifique se a fatura já possui lançamentos contábeis compensados ou se a VL09 não foi executada.",
     "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "168",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
+        "tipoOrdem": "S1",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "148",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
     },
     "f1Help": {
-      "title": "Dica SAP: VF11",
-      "concept": "Entenda o fluxo de VF11 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+        "title": "Diagnóstico Sênior: Estornos",
+        "concept": "O estorno (Reversal) no SAP deve seguir a ordem inversa da criação: VF11 (Fatura) -> VL09 (PGI) -> VA02 (Ordem).",
+        "businessImpact": "Estornos incorretos causam divergências em inventário e na contabilidade fiscal.",
+        "brazilRule": "O cancelamento da NF-e tem prazo legal na SEFAZ (geralmente 24h). Passado o prazo, deve-se emitir NF de estorno."
     }
-  },
-  {
-    "id": "M159-VF11",
-    "title": "159. Sênior - Operação VF11",
+},
+{
+    "id": "M149-CANCEL",
+    "title": "149. Sênior - Estorno e Cancelamento (VF11/VL09)",
     "transaction": "VF11",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF11. Use Material MAT-SD-015 e Qtd 169.",
-    "successFeedback": "Excelente! Operação VF11 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VF11. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "chefeHugoDialog": "Atenção, erro crítico no faturamento! Precisamos estornar a fatura do Cliente 208015 para o material MAT-SD-015 (Qtd 149). Use a VF11 e depois anule o PGI via VL09 para reverter o estoque.",
+    "successFeedback": "Faturamento estornado e fluxo logístico revertido. O sistema está limpo para a nova tentativa. Excelente suporte N3!",
+    "errorFeedback": "Erro ao estornar. Verifique se a fatura já possui lançamentos contábeis compensados ou se a VL09 não foi executada.",
     "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "169",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
+        "tipoOrdem": "S1",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "149",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
     },
     "f1Help": {
-      "title": "Dica SAP: VF11",
-      "concept": "Entenda o fluxo de VF11 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+        "title": "Diagnóstico Sênior: Estornos",
+        "concept": "O estorno (Reversal) no SAP deve seguir a ordem inversa da criação: VF11 (Fatura) -> VL09 (PGI) -> VA02 (Ordem).",
+        "businessImpact": "Estornos incorretos causam divergências em inventário e na contabilidade fiscal.",
+        "brazilRule": "O cancelamento da NF-e tem prazo legal na SEFAZ (geralmente 24h). Passado o prazo, deve-se emitir NF de estorno."
     }
-  },
-  {
-    "id": "M160-VF11",
-    "title": "160. Sênior - Operação VF11",
+},
+{
+    "id": "M150-CANCEL",
+    "title": "150. Sênior - Estorno e Cancelamento (VF11/VL09)",
     "transaction": "VF11",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar VF11. Use Material MAT-SD-015 e Qtd 170.",
-    "successFeedback": "Excelente! Operação VF11 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação VF11. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "chefeHugoDialog": "Atenção, erro crítico no faturamento! Precisamos estornar a fatura do Cliente 208015 para o material MAT-SD-015 (Qtd 150). Use a VF11 e depois anule o PGI via VL09 para reverter o estoque.",
+    "successFeedback": "Faturamento estornado e fluxo logístico revertido. O sistema está limpo para a nova tentativa. Excelente suporte N3!",
+    "errorFeedback": "Erro ao estornar. Verifique se a fatura já possui lançamentos contábeis compensados ou se a VL09 não foi executada.",
     "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "170",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
+        "tipoOrdem": "S1",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "150",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
     },
     "f1Help": {
-      "title": "Dica SAP: VF11",
-      "concept": "Entenda o fluxo de VF11 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+        "title": "Diagnóstico Sênior: Estornos",
+        "concept": "O estorno (Reversal) no SAP deve seguir a ordem inversa da criação: VF11 (Fatura) -> VL09 (PGI) -> VA02 (Ordem).",
+        "businessImpact": "Estornos incorretos causam divergências em inventário e na contabilidade fiscal.",
+        "brazilRule": "O cancelamento da NF-e tem prazo legal na SEFAZ (geralmente 24h). Passado o prazo, deve-se emitir NF de estorno."
     }
-  },
-  {
-    "id": "M161-V.02",
-    "title": "161. Sênior - Operação V.02",
+},
+{
+    "id": "M151-INCOMP",
+    "title": "151. Sênior - Log de Incompletude (V.02)",
     "transaction": "V.02",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar V.02. Use Material MAT-SD-015 e Qtd 171.",
-    "successFeedback": "Excelente! Operação V.02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação V.02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "chefeHugoDialog": "Consultor, temos ordens bloqueadas por incompletude. Acesse a V.02 e resolva os campos faltantes para o Cliente 208015, material MAT-SD-015 (Qtd 151). Foque nos Incoterms FOB e Cond. Pagto ZF30.",
+    "successFeedback": "Log de incompletude resolvido! A ordem foi liberada para remessa. Sua atenção aos detalhes é de nível sênior.",
+    "errorFeedback": "A ordem continua incompleta. Verifique o esquema de incompletude no customizing e preencha todos os campos obrigatórios.",
     "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "171",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
+        "tipoOrdem": "OR",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "151",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
     },
     "f1Help": {
-      "title": "Dica SAP: V.02",
-      "concept": "Entenda o fluxo de V.02 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+        "title": "Diagnóstico Sênior: Incompletude",
+        "concept": "O Log de Incompletude (Incompletion Log) garante que nenhum documento avance sem dados vitais para faturamento ou logística.",
+        "businessImpact": "Reduz o retrabalho manual no faturamento e evita rejeições sistêmicas.",
+        "brazilRule": "Campos como NCM, Origem da Mercadoria e Dados do Transportador são frequentes causas de incompletude no Brasil."
     }
-  },
-  {
-    "id": "M162-V.02",
-    "title": "162. Sênior - Operação V.02",
+},
+{
+    "id": "M152-INCOMP",
+    "title": "152. Sênior - Log de Incompletude (V.02)",
     "transaction": "V.02",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar V.02. Use Material MAT-SD-015 e Qtd 172.",
-    "successFeedback": "Excelente! Operação V.02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação V.02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "chefeHugoDialog": "Consultor, temos ordens bloqueadas por incompletude. Acesse a V.02 e resolva os campos faltantes para o Cliente 208015, material MAT-SD-015 (Qtd 152). Foque nos Incoterms FOB e Cond. Pagto ZF30.",
+    "successFeedback": "Log de incompletude resolvido! A ordem foi liberada para remessa. Sua atenção aos detalhes é de nível sênior.",
+    "errorFeedback": "A ordem continua incompleta. Verifique o esquema de incompletude no customizing e preencha todos os campos obrigatórios.",
     "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "172",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
+        "tipoOrdem": "OR",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "152",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
     },
     "f1Help": {
-      "title": "Dica SAP: V.02",
-      "concept": "Entenda o fluxo de V.02 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+        "title": "Diagnóstico Sênior: Incompletude",
+        "concept": "O Log de Incompletude (Incompletion Log) garante que nenhum documento avance sem dados vitais para faturamento ou logística.",
+        "businessImpact": "Reduz o retrabalho manual no faturamento e evita rejeições sistêmicas.",
+        "brazilRule": "Campos como NCM, Origem da Mercadoria e Dados do Transportador são frequentes causas de incompletude no Brasil."
     }
-  },
-  {
-    "id": "M163-V.02",
-    "title": "163. Sênior - Operação V.02",
+},
+{
+    "id": "M153-INCOMP",
+    "title": "153. Sênior - Log de Incompletude (V.02)",
     "transaction": "V.02",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar V.02. Use Material MAT-SD-015 e Qtd 173.",
-    "successFeedback": "Excelente! Operação V.02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação V.02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "chefeHugoDialog": "Consultor, temos ordens bloqueadas por incompletude. Acesse a V.02 e resolva os campos faltantes para o Cliente 208015, material MAT-SD-015 (Qtd 153). Foque nos Incoterms FOB e Cond. Pagto ZF30.",
+    "successFeedback": "Log de incompletude resolvido! A ordem foi liberada para remessa. Sua atenção aos detalhes é de nível sênior.",
+    "errorFeedback": "A ordem continua incompleta. Verifique o esquema de incompletude no customizing e preencha todos os campos obrigatórios.",
     "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "173",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
+        "tipoOrdem": "OR",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "153",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
     },
     "f1Help": {
-      "title": "Dica SAP: V.02",
-      "concept": "Entenda o fluxo de V.02 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+        "title": "Diagnóstico Sênior: Incompletude",
+        "concept": "O Log de Incompletude (Incompletion Log) garante que nenhum documento avance sem dados vitais para faturamento ou logística.",
+        "businessImpact": "Reduz o retrabalho manual no faturamento e evita rejeições sistêmicas.",
+        "brazilRule": "Campos como NCM, Origem da Mercadoria e Dados do Transportador são frequentes causas de incompletude no Brasil."
     }
-  },
-  {
-    "id": "M164-V.02",
-    "title": "164. Sênior - Operação V.02",
+},
+{
+    "id": "M154-INCOMP",
+    "title": "154. Sênior - Log de Incompletude (V.02)",
     "transaction": "V.02",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar V.02. Use Material MAT-SD-015 e Qtd 174.",
-    "successFeedback": "Excelente! Operação V.02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação V.02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "chefeHugoDialog": "Consultor, temos ordens bloqueadas por incompletude. Acesse a V.02 e resolva os campos faltantes para o Cliente 208015, material MAT-SD-015 (Qtd 154). Foque nos Incoterms FOB e Cond. Pagto ZF30.",
+    "successFeedback": "Log de incompletude resolvido! A ordem foi liberada para remessa. Sua atenção aos detalhes é de nível sênior.",
+    "errorFeedback": "A ordem continua incompleta. Verifique o esquema de incompletude no customizing e preencha todos os campos obrigatórios.",
     "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "174",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
+        "tipoOrdem": "OR",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "154",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
     },
     "f1Help": {
-      "title": "Dica SAP: V.02",
-      "concept": "Entenda o fluxo de V.02 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+        "title": "Diagnóstico Sênior: Incompletude",
+        "concept": "O Log de Incompletude (Incompletion Log) garante que nenhum documento avance sem dados vitais para faturamento ou logística.",
+        "businessImpact": "Reduz o retrabalho manual no faturamento e evita rejeições sistêmicas.",
+        "brazilRule": "Campos como NCM, Origem da Mercadoria e Dados do Transportador são frequentes causas de incompletude no Brasil."
     }
-  },
-  {
-    "id": "M165-V.02",
-    "title": "165. Sênior - Operação V.02",
+},
+{
+    "id": "M155-INCOMP",
+    "title": "155. Sênior - Log de Incompletude (V.02)",
     "transaction": "V.02",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar V.02. Use Material MAT-SD-015 e Qtd 175.",
-    "successFeedback": "Excelente! Operação V.02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação V.02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "chefeHugoDialog": "Consultor, temos ordens bloqueadas por incompletude. Acesse a V.02 e resolva os campos faltantes para o Cliente 208015, material MAT-SD-015 (Qtd 155). Foque nos Incoterms FOB e Cond. Pagto ZF30.",
+    "successFeedback": "Log de incompletude resolvido! A ordem foi liberada para remessa. Sua atenção aos detalhes é de nível sênior.",
+    "errorFeedback": "A ordem continua incompleta. Verifique o esquema de incompletude no customizing e preencha todos os campos obrigatórios.",
     "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "175",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
+        "tipoOrdem": "OR",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "155",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
     },
     "f1Help": {
-      "title": "Dica SAP: V.02",
-      "concept": "Entenda o fluxo de V.02 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+        "title": "Diagnóstico Sênior: Incompletude",
+        "concept": "O Log de Incompletude (Incompletion Log) garante que nenhum documento avance sem dados vitais para faturamento ou logística.",
+        "businessImpact": "Reduz o retrabalho manual no faturamento e evita rejeições sistêmicas.",
+        "brazilRule": "Campos como NCM, Origem da Mercadoria e Dados do Transportador são frequentes causas de incompletude no Brasil."
     }
-  },
-  {
-    "id": "M166-V.02",
-    "title": "166. Sênior - Operação V.02",
+},
+{
+    "id": "M156-INCOMP",
+    "title": "156. Sênior - Log de Incompletude (V.02)",
     "transaction": "V.02",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar V.02. Use Material MAT-SD-015 e Qtd 176.",
-    "successFeedback": "Excelente! Operação V.02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação V.02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "chefeHugoDialog": "Consultor, temos ordens bloqueadas por incompletude. Acesse a V.02 e resolva os campos faltantes para o Cliente 208015, material MAT-SD-015 (Qtd 156). Foque nos Incoterms FOB e Cond. Pagto ZF30.",
+    "successFeedback": "Log de incompletude resolvido! A ordem foi liberada para remessa. Sua atenção aos detalhes é de nível sênior.",
+    "errorFeedback": "A ordem continua incompleta. Verifique o esquema de incompletude no customizing e preencha todos os campos obrigatórios.",
     "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "176",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
+        "tipoOrdem": "OR",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "156",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
     },
     "f1Help": {
-      "title": "Dica SAP: V.02",
-      "concept": "Entenda o fluxo de V.02 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+        "title": "Diagnóstico Sênior: Incompletude",
+        "concept": "O Log de Incompletude (Incompletion Log) garante que nenhum documento avance sem dados vitais para faturamento ou logística.",
+        "businessImpact": "Reduz o retrabalho manual no faturamento e evita rejeições sistêmicas.",
+        "brazilRule": "Campos como NCM, Origem da Mercadoria e Dados do Transportador são frequentes causas de incompletude no Brasil."
     }
-  },
-  {
-    "id": "M167-V.02",
-    "title": "167. Sênior - Operação V.02",
+},
+{
+    "id": "M157-INCOMP",
+    "title": "157. Sênior - Log de Incompletude (V.02)",
     "transaction": "V.02",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar V.02. Use Material MAT-SD-015 e Qtd 177.",
-    "successFeedback": "Excelente! Operação V.02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação V.02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "chefeHugoDialog": "Consultor, temos ordens bloqueadas por incompletude. Acesse a V.02 e resolva os campos faltantes para o Cliente 208015, material MAT-SD-015 (Qtd 157). Foque nos Incoterms FOB e Cond. Pagto ZF30.",
+    "successFeedback": "Log de incompletude resolvido! A ordem foi liberada para remessa. Sua atenção aos detalhes é de nível sênior.",
+    "errorFeedback": "A ordem continua incompleta. Verifique o esquema de incompletude no customizing e preencha todos os campos obrigatórios.",
     "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "177",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
+        "tipoOrdem": "OR",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "157",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
     },
     "f1Help": {
-      "title": "Dica SAP: V.02",
-      "concept": "Entenda o fluxo de V.02 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+        "title": "Diagnóstico Sênior: Incompletude",
+        "concept": "O Log de Incompletude (Incompletion Log) garante que nenhum documento avance sem dados vitais para faturamento ou logística.",
+        "businessImpact": "Reduz o retrabalho manual no faturamento e evita rejeições sistêmicas.",
+        "brazilRule": "Campos como NCM, Origem da Mercadoria e Dados do Transportador são frequentes causas de incompletude no Brasil."
     }
-  },
-  {
-    "id": "M168-V.02",
-    "title": "168. Sênior - Operação V.02",
+},
+{
+    "id": "M158-INCOMP",
+    "title": "158. Sênior - Log de Incompletude (V.02)",
     "transaction": "V.02",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar V.02. Use Material MAT-SD-015 e Qtd 178.",
-    "successFeedback": "Excelente! Operação V.02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação V.02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "chefeHugoDialog": "Consultor, temos ordens bloqueadas por incompletude. Acesse a V.02 e resolva os campos faltantes para o Cliente 208015, material MAT-SD-015 (Qtd 158). Foque nos Incoterms FOB e Cond. Pagto ZF30.",
+    "successFeedback": "Log de incompletude resolvido! A ordem foi liberada para remessa. Sua atenção aos detalhes é de nível sênior.",
+    "errorFeedback": "A ordem continua incompleta. Verifique o esquema de incompletude no customizing e preencha todos os campos obrigatórios.",
     "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "178",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
+        "tipoOrdem": "OR",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "158",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
     },
     "f1Help": {
-      "title": "Dica SAP: V.02",
-      "concept": "Entenda o fluxo de V.02 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+        "title": "Diagnóstico Sênior: Incompletude",
+        "concept": "O Log de Incompletude (Incompletion Log) garante que nenhum documento avance sem dados vitais para faturamento ou logística.",
+        "businessImpact": "Reduz o retrabalho manual no faturamento e evita rejeições sistêmicas.",
+        "brazilRule": "Campos como NCM, Origem da Mercadoria e Dados do Transportador são frequentes causas de incompletude no Brasil."
     }
-  },
-  {
-    "id": "M169-V.02",
-    "title": "169. Sênior - Operação V.02",
+},
+{
+    "id": "M159-INCOMP",
+    "title": "159. Sênior - Log de Incompletude (V.02)",
     "transaction": "V.02",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar V.02. Use Material MAT-SD-015 e Qtd 179.",
-    "successFeedback": "Excelente! Operação V.02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação V.02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "chefeHugoDialog": "Consultor, temos ordens bloqueadas por incompletude. Acesse a V.02 e resolva os campos faltantes para o Cliente 208015, material MAT-SD-015 (Qtd 159). Foque nos Incoterms FOB e Cond. Pagto ZF30.",
+    "successFeedback": "Log de incompletude resolvido! A ordem foi liberada para remessa. Sua atenção aos detalhes é de nível sênior.",
+    "errorFeedback": "A ordem continua incompleta. Verifique o esquema de incompletude no customizing e preencha todos os campos obrigatórios.",
     "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "179",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
+        "tipoOrdem": "OR",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "159",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
     },
     "f1Help": {
-      "title": "Dica SAP: V.02",
-      "concept": "Entenda o fluxo de V.02 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+        "title": "Diagnóstico Sênior: Incompletude",
+        "concept": "O Log de Incompletude (Incompletion Log) garante que nenhum documento avance sem dados vitais para faturamento ou logística.",
+        "businessImpact": "Reduz o retrabalho manual no faturamento e evita rejeições sistêmicas.",
+        "brazilRule": "Campos como NCM, Origem da Mercadoria e Dados do Transportador são frequentes causas de incompletude no Brasil."
     }
-  },
-  {
-    "id": "M170-V.02",
-    "title": "170. Sênior - Operação V.02",
+},
+{
+    "id": "M160-INCOMP",
+    "title": "160. Sênior - Log de Incompletude (V.02)",
     "transaction": "V.02",
-    "chefeHugoDialog": "Consultor(a), no nível Sênior a AAM LOGÍSTICA demanda precisão. O cliente solicitou processar V.02. Use Material MAT-SD-015 e Qtd 180.",
-    "successFeedback": "Excelente! Operação V.02 finalizada com sucesso no nível Sênior. Hugo está satisfeito.",
-    "errorFeedback": "Erro na operação V.02. Revise o Tipo de Ordem e Cliente para o nível Sênior.",
+    "chefeHugoDialog": "Consultor, temos ordens bloqueadas por incompletude. Acesse a V.02 e resolva os campos faltantes para o Cliente 208015, material MAT-SD-015 (Qtd 160). Foque nos Incoterms FOB e Cond. Pagto ZF30.",
+    "successFeedback": "Log de incompletude resolvido! A ordem foi liberada para remessa. Sua atenção aos detalhes é de nível sênior.",
+    "errorFeedback": "A ordem continua incompleta. Verifique o esquema de incompletude no customizing e preencha todos os campos obrigatórios.",
     "expectedData": {
-      "tipoOrdem": "OR",
-      "orgVendas": "1000",
-      "canalDist": "10",
-      "setorAtiv": "00",
-      "cliente": "208015",
-      "material": "MAT-SD-015",
-      "quantidade": "180",
-      "incoterms": "FOB",
-      "condPagto": "ZF30"
+        "tipoOrdem": "OR",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "160",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
     },
     "f1Help": {
-      "title": "Dica SAP: V.02",
-      "concept": "Entenda o fluxo de V.02 no nível Sênior.",
-      "businessImpact": "Mantém o KPI de entregas da AAM LOGÍSTICA em dia.",
-      "brazilRule": "Obrigatório validar NCM e impostos para a SEFAZ."
+        "title": "Diagnóstico Sênior: Incompletude",
+        "concept": "O Log de Incompletude (Incompletion Log) garante que nenhum documento avance sem dados vitais para faturamento ou logística.",
+        "businessImpact": "Reduz o retrabalho manual no faturamento e evita rejeições sistêmicas.",
+        "brazilRule": "Campos como NCM, Origem da Mercadoria e Dados do Transportador são frequentes causas de incompletude no Brasil."
     }
-  }
+},
+{
+    "id": "M161-ADV",
+    "title": "161. Sênior - Arquitetura de Vendas Complexa",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Desafio final! Precisamos estruturar uma Venda Triangular complexa para o Cliente 208015. Material MAT-SD-015 (Qtd 161). Garanta a integração total do fluxo OTC, desde a análise de crédito até o faturamento consolidado.",
+    "successFeedback": "Cenário complexo implementado com maestria! Você dominou o fluxo OTC da AAM LOGÍSTICA. Nível Sênior alcançado!",
+    "errorFeedback": "O fluxo quebrou em algum ponto. Analise o fluxo de documentos e identifique onde a integração falhou.",
+    "expectedData": {
+        "tipoOrdem": "OR",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "161",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
+    },
+    "f1Help": {
+        "title": "Diagnóstico Sênior: Arquitetura OTC",
+        "concept": "O Order-to-Cash (OTC) avançado envolve Invoice Split, Vendas de Terceiros e Processamento Intercompany.",
+        "businessImpact": "Uma arquitetura robusta permite que a AAM LOGÍSTICA opere em modelos de negócio diversificados.",
+        "brazilRule": "Vendas triangulares exigem emissão de Notas Fiscais simbólicas e de entrega, respeitando a legislação de ICMS/IPI."
+    }
+},
+{
+    "id": "M162-ADV",
+    "title": "162. Sênior - Arquitetura de Vendas Complexa",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Desafio final! Precisamos estruturar uma Venda Triangular complexa para o Cliente 208015. Material MAT-SD-015 (Qtd 162). Garanta a integração total do fluxo OTC, desde a análise de crédito até o faturamento consolidado.",
+    "successFeedback": "Cenário complexo implementado com maestria! Você dominou o fluxo OTC da AAM LOGÍSTICA. Nível Sênior alcançado!",
+    "errorFeedback": "O fluxo quebrou em algum ponto. Analise o fluxo de documentos e identifique onde a integração falhou.",
+    "expectedData": {
+        "tipoOrdem": "OR",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "162",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
+    },
+    "f1Help": {
+        "title": "Diagnóstico Sênior: Arquitetura OTC",
+        "concept": "O Order-to-Cash (OTC) avançado envolve Invoice Split, Vendas de Terceiros e Processamento Intercompany.",
+        "businessImpact": "Uma arquitetura robusta permite que a AAM LOGÍSTICA opere em modelos de negócio diversificados.",
+        "brazilRule": "Vendas triangulares exigem emissão de Notas Fiscais simbólicas e de entrega, respeitando a legislação de ICMS/IPI."
+    }
+},
+{
+    "id": "M163-ADV",
+    "title": "163. Sênior - Arquitetura de Vendas Complexa",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Desafio final! Precisamos estruturar uma Venda Triangular complexa para o Cliente 208015. Material MAT-SD-015 (Qtd 163). Garanta a integração total do fluxo OTC, desde a análise de crédito até o faturamento consolidado.",
+    "successFeedback": "Cenário complexo implementado com maestria! Você dominou o fluxo OTC da AAM LOGÍSTICA. Nível Sênior alcançado!",
+    "errorFeedback": "O fluxo quebrou em algum ponto. Analise o fluxo de documentos e identifique onde a integração falhou.",
+    "expectedData": {
+        "tipoOrdem": "OR",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "163",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
+    },
+    "f1Help": {
+        "title": "Diagnóstico Sênior: Arquitetura OTC",
+        "concept": "O Order-to-Cash (OTC) avançado envolve Invoice Split, Vendas de Terceiros e Processamento Intercompany.",
+        "businessImpact": "Uma arquitetura robusta permite que a AAM LOGÍSTICA opere em modelos de negócio diversificados.",
+        "brazilRule": "Vendas triangulares exigem emissão de Notas Fiscais simbólicas e de entrega, respeitando a legislação de ICMS/IPI."
+    }
+},
+{
+    "id": "M164-ADV",
+    "title": "164. Sênior - Arquitetura de Vendas Complexa",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Desafio final! Precisamos estruturar uma Venda Triangular complexa para o Cliente 208015. Material MAT-SD-015 (Qtd 164). Garanta a integração total do fluxo OTC, desde a análise de crédito até o faturamento consolidado.",
+    "successFeedback": "Cenário complexo implementado com maestria! Você dominou o fluxo OTC da AAM LOGÍSTICA. Nível Sênior alcançado!",
+    "errorFeedback": "O fluxo quebrou em algum ponto. Analise o fluxo de documentos e identifique onde a integração falhou.",
+    "expectedData": {
+        "tipoOrdem": "OR",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "164",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
+    },
+    "f1Help": {
+        "title": "Diagnóstico Sênior: Arquitetura OTC",
+        "concept": "O Order-to-Cash (OTC) avançado envolve Invoice Split, Vendas de Terceiros e Processamento Intercompany.",
+        "businessImpact": "Uma arquitetura robusta permite que a AAM LOGÍSTICA opere em modelos de negócio diversificados.",
+        "brazilRule": "Vendas triangulares exigem emissão de Notas Fiscais simbólicas e de entrega, respeitando a legislação de ICMS/IPI."
+    }
+},
+{
+    "id": "M165-ADV",
+    "title": "165. Sênior - Arquitetura de Vendas Complexa",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Desafio final! Precisamos estruturar uma Venda Triangular complexa para o Cliente 208015. Material MAT-SD-015 (Qtd 165). Garanta a integração total do fluxo OTC, desde a análise de crédito até o faturamento consolidado.",
+    "successFeedback": "Cenário complexo implementado com maestria! Você dominou o fluxo OTC da AAM LOGÍSTICA. Nível Sênior alcançado!",
+    "errorFeedback": "O fluxo quebrou em algum ponto. Analise o fluxo de documentos e identifique onde a integração falhou.",
+    "expectedData": {
+        "tipoOrdem": "OR",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "165",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
+    },
+    "f1Help": {
+        "title": "Diagnóstico Sênior: Arquitetura OTC",
+        "concept": "O Order-to-Cash (OTC) avançado envolve Invoice Split, Vendas de Terceiros e Processamento Intercompany.",
+        "businessImpact": "Uma arquitetura robusta permite que a AAM LOGÍSTICA opere em modelos de negócio diversificados.",
+        "brazilRule": "Vendas triangulares exigem emissão de Notas Fiscais simbólicas e de entrega, respeitando a legislação de ICMS/IPI."
+    }
+},
+{
+    "id": "M166-ADV",
+    "title": "166. Sênior - Arquitetura de Vendas Complexa",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Desafio final! Precisamos estruturar uma Venda Triangular complexa para o Cliente 208015. Material MAT-SD-015 (Qtd 166). Garanta a integração total do fluxo OTC, desde a análise de crédito até o faturamento consolidado.",
+    "successFeedback": "Cenário complexo implementado com maestria! Você dominou o fluxo OTC da AAM LOGÍSTICA. Nível Sênior alcançado!",
+    "errorFeedback": "O fluxo quebrou em algum ponto. Analise o fluxo de documentos e identifique onde a integração falhou.",
+    "expectedData": {
+        "tipoOrdem": "OR",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "166",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
+    },
+    "f1Help": {
+        "title": "Diagnóstico Sênior: Arquitetura OTC",
+        "concept": "O Order-to-Cash (OTC) avançado envolve Invoice Split, Vendas de Terceiros e Processamento Intercompany.",
+        "businessImpact": "Uma arquitetura robusta permite que a AAM LOGÍSTICA opere em modelos de negócio diversificados.",
+        "brazilRule": "Vendas triangulares exigem emissão de Notas Fiscais simbólicas e de entrega, respeitando a legislação de ICMS/IPI."
+    }
+},
+{
+    "id": "M167-ADV",
+    "title": "167. Sênior - Arquitetura de Vendas Complexa",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Desafio final! Precisamos estruturar uma Venda Triangular complexa para o Cliente 208015. Material MAT-SD-015 (Qtd 167). Garanta a integração total do fluxo OTC, desde a análise de crédito até o faturamento consolidado.",
+    "successFeedback": "Cenário complexo implementado com maestria! Você dominou o fluxo OTC da AAM LOGÍSTICA. Nível Sênior alcançado!",
+    "errorFeedback": "O fluxo quebrou em algum ponto. Analise o fluxo de documentos e identifique onde a integração falhou.",
+    "expectedData": {
+        "tipoOrdem": "OR",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "167",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
+    },
+    "f1Help": {
+        "title": "Diagnóstico Sênior: Arquitetura OTC",
+        "concept": "O Order-to-Cash (OTC) avançado envolve Invoice Split, Vendas de Terceiros e Processamento Intercompany.",
+        "businessImpact": "Uma arquitetura robusta permite que a AAM LOGÍSTICA opere em modelos de negócio diversificados.",
+        "brazilRule": "Vendas triangulares exigem emissão de Notas Fiscais simbólicas e de entrega, respeitando a legislação de ICMS/IPI."
+    }
+},
+{
+    "id": "M168-ADV",
+    "title": "168. Sênior - Arquitetura de Vendas Complexa",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Desafio final! Precisamos estruturar uma Venda Triangular complexa para o Cliente 208015. Material MAT-SD-015 (Qtd 168). Garanta a integração total do fluxo OTC, desde a análise de crédito até o faturamento consolidado.",
+    "successFeedback": "Cenário complexo implementado com maestria! Você dominou o fluxo OTC da AAM LOGÍSTICA. Nível Sênior alcançado!",
+    "errorFeedback": "O fluxo quebrou em algum ponto. Analise o fluxo de documentos e identifique onde a integração falhou.",
+    "expectedData": {
+        "tipoOrdem": "OR",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "168",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
+    },
+    "f1Help": {
+        "title": "Diagnóstico Sênior: Arquitetura OTC",
+        "concept": "O Order-to-Cash (OTC) avançado envolve Invoice Split, Vendas de Terceiros e Processamento Intercompany.",
+        "businessImpact": "Uma arquitetura robusta permite que a AAM LOGÍSTICA opere em modelos de negócio diversificados.",
+        "brazilRule": "Vendas triangulares exigem emissão de Notas Fiscais simbólicas e de entrega, respeitando a legislação de ICMS/IPI."
+    }
+},
+{
+    "id": "M169-ADV",
+    "title": "169. Sênior - Arquitetura de Vendas Complexa",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Desafio final! Precisamos estruturar uma Venda Triangular complexa para o Cliente 208015. Material MAT-SD-015 (Qtd 169). Garanta a integração total do fluxo OTC, desde a análise de crédito até o faturamento consolidado.",
+    "successFeedback": "Cenário complexo implementado com maestria! Você dominou o fluxo OTC da AAM LOGÍSTICA. Nível Sênior alcançado!",
+    "errorFeedback": "O fluxo quebrou em algum ponto. Analise o fluxo de documentos e identifique onde a integração falhou.",
+    "expectedData": {
+        "tipoOrdem": "OR",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "169",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
+    },
+    "f1Help": {
+        "title": "Diagnóstico Sênior: Arquitetura OTC",
+        "concept": "O Order-to-Cash (OTC) avançado envolve Invoice Split, Vendas de Terceiros e Processamento Intercompany.",
+        "businessImpact": "Uma arquitetura robusta permite que a AAM LOGÍSTICA opere em modelos de negócio diversificados.",
+        "brazilRule": "Vendas triangulares exigem emissão de Notas Fiscais simbólicas e de entrega, respeitando a legislação de ICMS/IPI."
+    }
+},
+{
+    "id": "M170-ADV",
+    "title": "170. Sênior - Arquitetura de Vendas Complexa",
+    "transaction": "VA01",
+    "chefeHugoDialog": "Desafio final! Precisamos estruturar uma Venda Triangular complexa para o Cliente 208015. Material MAT-SD-015 (Qtd 170). Garanta a integração total do fluxo OTC, desde a análise de crédito até o faturamento consolidado.",
+    "successFeedback": "Cenário complexo implementado com maestria! Você dominou o fluxo OTC da AAM LOGÍSTICA. Nível Sênior alcançado!",
+    "errorFeedback": "O fluxo quebrou em algum ponto. Analise o fluxo de documentos e identifique onde a integração falhou.",
+    "expectedData": {
+        "tipoOrdem": "OR",
+        "orgVendas": "1000",
+        "canalDist": "10",
+        "setorAtiv": "00",
+        "cliente": "208015",
+        "material": "MAT-SD-015",
+        "quantidade": "170",
+        "incoterms": "FOB",
+        "condPagto": "ZF30"
+    },
+    "f1Help": {
+        "title": "Diagnóstico Sênior: Arquitetura OTC",
+        "concept": "O Order-to-Cash (OTC) avançado envolve Invoice Split, Vendas de Terceiros e Processamento Intercompany.",
+        "businessImpact": "Uma arquitetura robusta permite que a AAM LOGÍSTICA opere em modelos de negócio diversificados.",
+        "brazilRule": "Vendas triangulares exigem emissão de Notas Fiscais simbólicas e de entrega, respeitando a legislação de ICMS/IPI."
+    }
+}
 ];
