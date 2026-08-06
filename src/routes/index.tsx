@@ -1080,7 +1080,8 @@ function SAPSDQuestApp() {
                       )}
                     </div>
                   );
-                })}
+                })() // Invoke the IIFE
+                }
               </div>
 
               {(selectedTransaction === "VA05" || selectedTransaction === "V.02") && (
