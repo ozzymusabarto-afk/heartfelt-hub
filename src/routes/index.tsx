@@ -2124,7 +2124,7 @@ function SAPSDQuestApp() {
                     onClick={() => setFormTab('header')}
                   >
                     1. Cabeçalho / Parceiro
-                    {formData.customer && formData.salesOrg && (
+                    {formData.partnerCode && formData.salesOrg && (
                       <div className="size-1.5 rounded-full bg-emerald-500" />
                     )}
                   </button>
@@ -2136,7 +2136,7 @@ function SAPSDQuestApp() {
                       onClick={() => setFormTab('items')}
                     >
                       2. Itens / Material
-                      {formData.material && formData.quantity && (
+                      {formData.materialCode && formData.quantity && (
                         <div className="size-1.5 rounded-full bg-emerald-500" />
                       )}
                     </button>
