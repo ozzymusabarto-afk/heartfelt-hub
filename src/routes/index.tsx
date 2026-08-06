@@ -1842,6 +1842,7 @@ function SAPSDQuestApp() {
                     }
                     if (item.id === "main" || item.id === "certification" || item.id === "profile" || item.id === "certificate" || item.id === "quick" || item.id === "docs" || item.id === "stats" || item.id === "achievements" || item.id === "settings") {
                       setActiveTab(item.id as any);
+                      setIsSidebarOpen(false);
                     }
                     if (item.action) item.action();
                   }}
