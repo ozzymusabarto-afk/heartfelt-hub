@@ -3328,7 +3328,7 @@ function SAPSDQuestApp() {
                       ))}
                     </div>
                     <p className="text-[9px] text-slate-400 mt-4 leading-relaxed font-medium">
-                      Nota: Em ambiente de produção, certifique-se de validar o fluxo de documentos via VA03 -> Fluxo de Documentos.
+                      Nota: Em ambiente de produção, certifique-se de validar o fluxo de documentos via VA03 {"->"} Fluxo de Documentos.
                     </p>
                   </div>
                 </div>
