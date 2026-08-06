@@ -5,12 +5,15 @@ import {
   ChevronRight, HelpCircle, CheckCircle2, Flame, Star, Shield,
   Search, Bell, Plus, MoreHorizontal, ArrowRight, Check, Menu, X,
   Gamepad2, Dices, User, UserCheck, Eye, EyeOff, LogIn,
-  FileText, Undo2, ChevronDown, LogOut
+  FileText, Undo2, ChevronDown, LogOut, ClipboardList, Timer, 
+  AlertCircle, ChevronLeft, Award
 } from "lucide-react";
 import { 
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area 
 } from 'recharts';
 import { MISSIONS as missions, type Mission } from "@/data/missions";
+import { CERTIFICATION_QUESTIONS, type CertificationQuestion } from "@/data/certificationQuestions";
+
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Card } from "@/components/ui/card";
@@ -115,14 +118,325 @@ function HugoAvatar({ className }: { className?: string }) {
   );
 }
 
+function CertificationModule() {
+  const [examState, setExamState] = useState<"intro" | "mode-select" | "testing" | "result">("intro");
+  const [examMode, setExamMode] = useState<"study" | "exam">("study");
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [showExplanation, setShowExplanation] = useState(false);
+  const [examQuestions, setExamQuestions] = useState<CertificationQuestion[]>([]);
+
+  const startExam = (mode: "study" | "exam") => {
+    // Shuffle and pick questions (simplified for now, using all 10)
+    setExamQuestions([...CERTIFICATION_QUESTIONS].sort(() => Math.random() - 0.5));
+    setExamMode(mode);
+    setExamState("testing");
+    setCurrentQuestionIndex(0);
+    setAnswers({});
+    setShowExplanation(false);
+  };
+
+  const currentQuestion = examQuestions[currentQuestionIndex];
+  
+  const handleAnswer = (optionId: string) => {
+    if (examState !== "testing" || !currentQuestion) return;
+    
+    setAnswers(prev => ({ ...prev, [currentQuestion.id]: optionId }));
+
+    
+    if (examMode === "study") {
+      setShowExplanation(true);
+    } else {
+      // In exam mode, go to next automatically or wait for "Next" button? 
+      // Let's wait for manual next to allow review.
+    }
+  };
+
+  const nextQuestion = () => {
+    if (currentQuestionIndex < examQuestions.length - 1) {
+      setCurrentQuestionIndex(prev => prev + 1);
+      setShowExplanation(false);
+    } else {
+      setExamState("result");
+    }
+  };
+
+  const correctAnswersCount = examQuestions.reduce((acc, q) => {
+    return answers[q.id] === q.correctOptionId ? acc + 1 : acc;
+  }, 0);
+
+  const scorePercentage = Math.round((correctAnswersCount / examQuestions.length) * 100);
+  const isPassed = scorePercentage >= 70;
+
+  if (examState === "intro") {
+    return (
+      <Card className="flex-1 p-8 flex flex-col items-center justify-center text-center bg-white border-slate-200 rounded-3xl animate-in fade-in zoom-in-95 duration-300">
+        <div className="size-20 bg-indigo-100 rounded-3xl flex items-center justify-center text-indigo-600 mb-6 shadow-xl shadow-indigo-50">
+          <Award className="size-10" />
+        </div>
+        <h2 className="text-3xl font-black text-slate-800 mb-4 tracking-tight">Simulador de Certificação SAP S/4HANA SD</h2>
+        <p className="text-slate-600 max-w-md mb-8 leading-relaxed">
+          Prepare-se para o exame oficial <b>C_TS462</b>. Teste seus conhecimentos em precificação, expedição, faturamento e processos de venda no S/4HANA.
+        </p>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-2xl mb-10">
+          <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+            <ClipboardList className="size-5 text-indigo-600 mx-auto mb-2" />
+            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Questões</p>
+            <p className="text-lg font-bold text-slate-700">{CERTIFICATION_QUESTIONS.length}</p>
+          </div>
+          <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+            <Timer className="size-5 text-indigo-600 mx-auto mb-2" />
+            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Tempo Est.</p>
+            <p className="text-lg font-bold text-slate-700">15 min</p>
+          </div>
+          <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+            <CheckCircle2 className="size-5 text-indigo-600 mx-auto mb-2" />
+            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Nota de Corte</p>
+            <p className="text-lg font-bold text-slate-700">70%</p>
+          </div>
+        </div>
+        
+        <Button 
+          onClick={() => setExamState("mode-select")}
+          className="h-14 px-10 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl shadow-lg shadow-indigo-100 gap-2 text-lg transition-all active:scale-95"
+        >
+          INICIAR SIMULADO <ArrowRight className="size-5" />
+        </Button>
+      </Card>
+    );
+  }
+
+  if (examState === "mode-select") {
+    return (
+      <Card className="flex-1 p-8 flex flex-col items-center justify-center bg-white border-slate-200 rounded-3xl animate-in fade-in zoom-in-95 duration-300">
+        <h2 className="text-2xl font-black text-slate-800 mb-8 tracking-tight">Escolha o Modo de Simulação</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-2xl">
+          <button 
+            onClick={() => startExam("study")}
+            className="p-8 border-2 border-slate-100 hover:border-indigo-600 hover:bg-indigo-50 rounded-3xl text-left transition-all group"
+          >
+            <div className="size-12 bg-indigo-100 rounded-2xl flex items-center justify-center text-indigo-600 mb-4 group-hover:scale-110 transition-transform">
+              <BookOpen className="size-6" />
+            </div>
+            <h3 className="text-lg font-bold text-slate-800 mb-2">Modo Estudo / Treino</h3>
+            <p className="text-sm text-slate-500 leading-relaxed">
+              Ideal para aprendizado. A explicação do gabarito é exibida imediatamente após cada resposta.
+            </p>
+          </button>
+          
+          <button 
+            onClick={() => startExam("exam")}
+            className="p-8 border-2 border-slate-100 hover:border-amber-500 hover:bg-amber-50 rounded-3xl text-left transition-all group"
+          >
+            <div className="size-12 bg-amber-100 rounded-2xl flex items-center justify-center text-amber-600 mb-4 group-hover:scale-110 transition-transform">
+              <Timer className="size-6" />
+            </div>
+            <h3 className="text-lg font-bold text-slate-800 mb-2">Modo Exame / Simulado</h3>
+            <p className="text-sm text-slate-500 leading-relaxed">
+              Simula as condições reais de prova. O resultado e os comentários só aparecem no relatório final.
+            </p>
+          </button>
+        </div>
+        <Button variant="ghost" className="mt-8 font-bold text-slate-400" onClick={() => setExamState("intro")}>
+          <ChevronLeft className="size-4 mr-2" /> VOLTAR
+        </Button>
+      </Card>
+    );
+  }
+
+  if (examState === "testing" && currentQuestion) {
+    const isAnswered = currentQuestion ? !!answers[currentQuestion.id] : false;
+
+    
+    return (
+      <div className="flex-1 flex flex-col gap-4 animate-in fade-in duration-300">
+        <div className="flex items-center justify-between bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+          <div className="flex items-center gap-4">
+            <Badge variant="outline" className="bg-indigo-50 text-indigo-600 border-indigo-100 font-bold px-3 py-1">
+              Questão {currentQuestionIndex + 1} de {examQuestions.length}
+            </Badge>
+            <Badge variant="outline" className="bg-slate-50 text-slate-500 border-slate-100 font-bold px-3 py-1">
+              {currentQuestion.topic}
+            </Badge>
+          </div>
+          <div className="flex items-center gap-2">
+            <Timer className="size-4 text-slate-400" />
+            <span className="text-xs font-mono font-bold text-slate-500">MODO: {examMode === "study" ? "ESTUDO" : "EXAME"}</span>
+          </div>
+        </div>
+
+        <Card className="flex-1 p-8 bg-white border-slate-200 rounded-3xl shadow-sm flex flex-col">
+          <h3 className="text-xl font-bold text-slate-800 mb-8 leading-tight">
+            {currentQuestion.question}
+          </h3>
+          
+          <div className="space-y-3 flex-1">
+            {currentQuestion.options.map((option) => {
+              const isSelected = answers[currentQuestion.id] === option.id;
+              const isCorrect = option.id === currentQuestion.correctOptionId;
+              const showResult = examMode === "study" && isAnswered;
+              
+              let borderColor = "border-slate-100";
+              let bgColor = "bg-white hover:bg-slate-50";
+              
+              if (isSelected) {
+                borderColor = "border-indigo-600";
+                bgColor = "bg-indigo-50";
+              }
+              
+              if (showResult) {
+                if (isCorrect) {
+                  borderColor = "border-emerald-500";
+                  bgColor = "bg-emerald-50";
+                } else if (isSelected) {
+                  borderColor = "border-red-500";
+                  bgColor = "bg-red-50";
+                }
+              }
+
+              return (
+                <button
+                  key={option.id}
+                  disabled={isAnswered && examMode === "study"}
+                  onClick={() => handleAnswer(option.id)}
+                  className={`w-full p-4 border-2 ${borderColor} ${bgColor} rounded-2xl text-left transition-all flex items-start gap-4 group disabled:cursor-default`}
+                >
+                  <div className={`size-6 rounded-lg flex items-center justify-center font-black text-xs shrink-0 ${isSelected ? "bg-indigo-600 text-white" : "bg-slate-100 text-slate-400 group-hover:bg-slate-200 transition-colors"}`}>
+                    {option.id}
+                  </div>
+                  <span className={`text-sm font-bold ${isSelected ? "text-indigo-900" : "text-slate-600"}`}>
+                    {option.text}
+                  </span>
+                  {showResult && isCorrect && <CheckCircle2 className="size-5 text-emerald-500 ml-auto" />}
+                  {showResult && isSelected && !isCorrect && <AlertCircle className="size-5 text-red-500 ml-auto" />}
+                </button>
+              );
+            })}
+          </div>
+
+          {showExplanation && (
+            <div className="mt-8 p-6 bg-slate-50 rounded-2xl border border-slate-200 animate-in slide-in-from-bottom-2 duration-300">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="size-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white">
+                  <HugoAvatar className="size-6" />
+                </div>
+                <h4 className="text-[10px] font-black text-indigo-600 uppercase tracking-widest">Gabarito Comentado</h4>
+              </div>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                {currentQuestion.explanation}
+              </p>
+            </div>
+          )}
+
+          <div className="mt-8 pt-8 border-t border-slate-100 flex justify-end">
+            <Button 
+              disabled={!isAnswered}
+              onClick={nextQuestion}
+              className="h-12 px-8 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl gap-2 shadow-lg shadow-indigo-100"
+            >
+              {currentQuestionIndex < examQuestions.length - 1 ? "PRÓXIMA QUESTÃO" : "FINALIZAR EXAME"} <ArrowRight className="size-4" />
+            </Button>
+          </div>
+        </Card>
+      </div>
+    );
+  }
+
+  if (examState === "result") {
+    return (
+      <Card className="flex-1 p-8 flex flex-col items-center justify-center bg-white border-slate-200 rounded-3xl animate-in fade-in zoom-in-95 duration-300">
+        <div className={`size-24 rounded-full flex items-center justify-center mb-6 shadow-xl ${isPassed ? "bg-emerald-100 text-emerald-600 shadow-emerald-50" : "bg-amber-100 text-amber-600 shadow-amber-50"}`}>
+          {isPassed ? <Trophy className="size-12" /> : <AlertCircle className="size-12" />}
+        </div>
+        
+        <h2 className="text-3xl font-black text-slate-800 mb-2 tracking-tight">
+          {isPassed ? "Aprovado no Simulado!" : "Precisa Praticar Mais"}
+        </h2>
+        <p className="text-slate-500 mb-8 font-bold uppercase tracking-widest text-xs">
+          Seu Score: <span className={isPassed ? "text-emerald-600" : "text-amber-500"}>{scorePercentage}%</span> (Corte: 70%)
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-xl mb-10">
+          <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100 flex items-center gap-4">
+            <div className="size-10 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-600">
+              <Check className="size-6" />
+            </div>
+            <div>
+              <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest leading-none">Corretas</p>
+              <p className="text-lg font-bold text-slate-700">{correctAnswersCount}</p>
+            </div>
+          </div>
+          <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100 flex items-center gap-4">
+            <div className="size-10 bg-red-100 rounded-xl flex items-center justify-center text-red-600">
+              <X className="size-6" />
+            </div>
+            <div>
+              <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest leading-none">Incorretas</p>
+              <p className="text-lg font-bold text-slate-700">{examQuestions.length - correctAnswersCount}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col sm:flex-row gap-4 w-full max-w-xl">
+          <Button 
+            className="flex-1 h-12 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg shadow-indigo-100"
+            onClick={() => setExamState("mode-select")}
+          >
+            TENTAR NOVAMENTE
+          </Button>
+          <Button 
+            variant="outline"
+            className="flex-1 h-12 border-slate-200 text-slate-600 font-bold rounded-xl"
+            onClick={() => setExamState("intro")}
+          >
+            VOLTAR AO INÍCIO
+          </Button>
+        </div>
+        
+        <div className="mt-12 w-full max-w-2xl">
+          <h3 className="text-sm font-black text-slate-400 uppercase tracking-widest mb-4 text-center">Revisão do Exame</h3>
+          <div className="space-y-4">
+            {examQuestions.map((q, idx) => (
+              <Card key={q.id} className="p-6 border-slate-100 bg-slate-50/50 rounded-2xl">
+                <div className="flex items-start gap-4">
+                  <div className={`size-6 rounded-lg flex items-center justify-center shrink-0 font-black text-[10px] ${answers[q.id] === q.correctOptionId ? "bg-emerald-500 text-white" : "bg-red-500 text-white"}`}>
+                    {idx + 1}
+                  </div>
+                  <div className="space-y-3">
+                    <p className="text-sm font-bold text-slate-800 leading-tight">{q.question}</p>
+                    <div className="p-4 bg-white rounded-xl border border-slate-100">
+                      <p className="text-[10px] font-black text-indigo-600 uppercase tracking-widest mb-2 flex items-center gap-1">
+                        <HugoAvatar className="size-3" /> Gabarito Comentado
+                      </p>
+                      <p className="text-xs text-slate-600 leading-relaxed">
+                        {q.explanation}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </Card>
+    );
+  }
+
+  return null;
+}
+
+
 function SAPSDQuestApp() {
   const [isAuth, setIsAuth] = useState(false);
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [onboardingStep, setOnboardingStep] = useState(0);
+  const [activeTab, setActiveTab] = useState<"main" | "certification" | "profile">("main");
 
   const [currentMissionIndex, setCurrentMissionIndex] = useState(0);
+
   const [activeMission, setActiveMission] = useState<Mission | null>(null);
   
   const currentMission = useMemo((): Mission => {
@@ -1026,18 +1340,19 @@ function SAPSDQuestApp() {
         <aside className={`fixed inset-y-0 left-0 z-40 w-[260px] bg-card border-r p-6 transform transition-transform md:relative md:translate-x-0 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} h-screen md:h-auto flex flex-col`}>
           <nav className="space-y-1 flex-1">
             {( [
-              { icon: Gamepad2, label: "Trilha Principal", sub: "Carreira passo a passo", active: true },
-              { icon: Rocket, label: "Treino Rápido", sub: "Desafios aleatórios" },
-              { icon: BookOpen, label: "Módulos & Apostila", sub: "Estude por tópico" },
-              { icon: FileText, label: "Simulador de Certificação", sub: "100 questões S/4HANA SD", premium: true },
-              { icon: BarChart3, label: "Perfil Profissional", sub: "Avaliação de competências", premium: true },
-              { icon: HelpCircle, label: "Como Usar / Sobre", sub: "Guia e Aviso Legal", action: openOnboarding },
-              { icon: Crown, label: "Modos Premium", sub: "Recursos exclusivos" },
-              { icon: BarChart3, label: "Estatísticas", sub: "Seu desempenho" },
-              { icon: Trophy, label: "Conquistas", sub: "Medalhas e troféus" },
-              { icon: Settings, label: "Configurações", sub: "Conta e preferências" },
-              { icon: Shield, label: "Admin", sub: "Painel de Controle", path: "/admin", adminOnly: true },
+              { id: "main", icon: Gamepad2, label: "Trilha Principal", sub: "Carreira passo a passo" },
+              { id: "quick", icon: Rocket, label: "Treino Rápido", sub: "Desafios aleatórios" },
+              { id: "docs", icon: BookOpen, label: "Módulos & Apostila", sub: "Estude por tópico" },
+              { id: "certification", icon: FileText, label: "Simulador de Certificação", sub: "100 questões S/4HANA SD", premium: true },
+              { id: "profile", icon: BarChart3, label: "Perfil Profissional", sub: "Avaliação de competências", premium: true },
+              { id: "about", icon: HelpCircle, label: "Como Usar / Sobre", sub: "Guia e Aviso Legal", action: openOnboarding },
+              { id: "premium", icon: Crown, label: "Modos Premium", sub: "Recursos exclusivos" },
+              { id: "stats", icon: BarChart3, label: "Estatísticas", sub: "Seu desempenho" },
+              { id: "achievements", icon: Trophy, label: "Conquistas", sub: "Medalhas e troféus" },
+              { id: "settings", icon: Settings, label: "Configurações", sub: "Conta e preferências" },
+              { id: "admin", icon: Shield, label: "Admin", sub: "Painel de Controle", path: "/admin", adminOnly: true },
             ] as any[]).map((item) => {
+
               const isAdminSession = typeof window !== "undefined" && localStorage.getItem("sap-quest-admin-session") === "true";
               const userData = typeof window !== "undefined" ? localStorage.getItem("sap-quest-data") : null;
               const isAdminProfile = userData ? JSON.parse(userData).isAdmin === true : false;
@@ -1050,16 +1365,23 @@ function SAPSDQuestApp() {
                 <Button 
                   key={item.label} 
                   variant="ghost" 
-                  className={`w-full justify-start h-12 px-3 py-2 rounded-xl gap-3 ${item.label === "Trilha Principal" ? "bg-indigo-600 text-white shadow-md shadow-indigo-100" : "text-slate-500 hover:bg-indigo-50 hover:text-indigo-600"}`}
+                  className={`w-full justify-start h-12 px-3 py-2 rounded-xl gap-3 ${activeTab === item.id ? "bg-indigo-600 text-white shadow-md shadow-indigo-100" : "text-slate-500 hover:bg-indigo-50 hover:text-indigo-600"}`}
                   onClick={() => {
                     if (item.premium) {
-                      setFeedbackState("review");
-                      setHintMessage("🌟 RECURSO PREMIUM: Este módulo está disponível apenas no Plano Premium. Adquira agora para acessar simuladores de prova e testes de perfil!");
-                      toast.info("Módulo Premium bloqueado.");
-                      return;
+                      // Check if user is "admin@aam.com.br" to allow access for free
+                      if (userName.toLowerCase() !== "admin@aam.com.br") {
+                        setFeedbackState("review");
+                        setHintMessage("🌟 RECURSO PREMIUM: Este módulo está disponível apenas no Plano Premium. Adquira agora para acessar simuladores de prova e testes de perfil!");
+                        toast.info("Módulo Premium bloqueado.");
+                        return;
+                      }
+                    }
+                    if (item.id === "main" || item.id === "certification" || item.id === "profile") {
+                      setActiveTab(item.id as any);
                     }
                     if (item.action) item.action();
                   }}
+
                 >
                   <div className="relative">
                     <item.icon className={`size-5 ${item.label === "Trilha Principal" ? "text-white" : ""}`} />
@@ -1109,6 +1431,9 @@ function SAPSDQuestApp() {
         </aside>
 
         <main className="bg-slate-50 p-4 flex-1 flex flex-col gap-4">
+          {activeTab === "main" && (
+            <>
+
           <Card className="p-0 border-slate-200 shadow-sm rounded-2xl overflow-hidden shrink-0">
             <div className="p-4 flex items-center justify-between gap-4 bg-white">
               <div className="flex items-center gap-4">
@@ -1429,7 +1754,14 @@ function SAPSDQuestApp() {
               </div>
             </div>
           </div>
+            </>
+          )}
+
+          {activeTab === "certification" && (
+            <CertificationModule />
+          )}
         </main>
+
 
         <aside className="hidden lg:flex w-[320px] border-l bg-card p-5 flex-col gap-6">
           <Card className={`p-4 border shadow-sm rounded-2xl flex flex-col items-center text-center relative overflow-hidden ${feedbackState === "success" ? "bg-emerald-50 border-emerald-200" : feedbackState === "error" ? "bg-red-50 border-red-200" : "bg-white border-slate-200"}`}>
