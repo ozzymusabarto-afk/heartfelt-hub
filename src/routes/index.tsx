@@ -983,6 +983,8 @@ function SAPSDQuestApp() {
               { icon: BarChart3, label: "Estatísticas", sub: "Seu desempenho" },
               { icon: Trophy, label: "Conquistas", sub: "Medalhas e troféus" },
               { icon: Settings, label: "Configurações", sub: "Conta e preferências" },
+              { icon: Shield, label: "Admin", sub: "Painel de Controle", path: "/admin", adminOnly: true },
+
             ].map((item) => (
               <Button key={item.label} variant="ghost" className={`w-full justify-start h-12 px-3 py-2 rounded-xl gap-3 ${item.label === "Trilha Principal" ? "bg-indigo-600 text-white shadow-md shadow-indigo-100" : "text-slate-500 hover:bg-indigo-50 hover:text-indigo-600"}`}>
                 <item.icon className={`size-5 ${item.label === "Trilha Principal" ? "text-white" : ""}`} />
