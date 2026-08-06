@@ -1688,6 +1688,64 @@ function SAPSDQuestApp() {
         </div>
       )}
 
+      {showWelcomeModal && (
+        <div className="fixed inset-0 z-[100] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-300">
+          <Card className="w-full max-w-[550px] border-none shadow-2xl rounded-3xl overflow-hidden bg-white animate-in zoom-in-95 duration-300">
+            <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-indigo-600 to-emerald-500" />
+            <div className="p-8">
+              <div className="flex items-center gap-4 mb-6">
+                <HugoAvatar className="size-16" />
+                <div>
+                  <h2 className="text-2xl font-black text-slate-800 tracking-tight">Bem-vindo(a) à Equipe, {userName}!</h2>
+                  <p className="text-indigo-600 text-xs font-bold uppercase tracking-widest">Primeiro Dia de Trabalho</p>
+                </div>
+              </div>
+
+              <div className="space-y-4 mb-8">
+                <p className="text-slate-600 leading-relaxed text-sm">
+                  "Olá, <b>{userName}</b>! Sou o Chefe Hugo, gestor da equipe de SD. Estamos muito felizes em ter você no time!"
+                </p>
+                
+                <p className="text-slate-600 leading-relaxed text-sm">
+                  "Aqui no SAP SD Quest, você vai aprender a operação do SAP S/4HANA na prática, resolvendo as demandas reais do nosso dia a dia."
+                </p>
+
+                <div className="bg-slate-50 border border-slate-100 rounded-2xl p-5 space-y-3">
+                  <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Como funciona sua rotina:</h4>
+                  <ol className="space-y-2">
+                    {[
+                      "Verifique as 'Minhas Solicitações' no topo da tela com as instruções da missão.",
+                      "Escolha a Transação SAP correta no menu do simulador.",
+                      "Preencha os Dados do Pedido conforme as especificações que eu te enviar.",
+                      "Submeta para revisão e receba meu feedback na hora!"
+                    ].map((step, i) => (
+                      <li key={i} className="flex gap-3 text-xs text-slate-600">
+                        <span className="flex-shrink-0 size-5 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center font-black text-[9px]">{i + 1}</span>
+                        <span>{step}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+
+                <p className="text-slate-700 font-bold text-sm">
+                  "Pronto para sua primeira tarefa? Clique em 'Iniciar 1ª Missão' e mãos à obra!"
+                </p>
+              </div>
+
+              <Button 
+                className="w-full h-14 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl shadow-lg shadow-indigo-100 text-lg transition-all active:scale-[0.98]"
+                onClick={() => {
+                  setShowWelcomeModal(false);
+                  toast.success("Primeira missão carregada!");
+                }}
+              >
+                Iniciar 1ª Missão <Rocket className="ml-2 size-5" />
+              </Button>
+            </div>
+          </Card>
+        </div>
+      )}
+
       <header className="sticky top-0 z-50 w-full border-b border-border bg-card shadow-sm px-4 md:px-6 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
