@@ -991,7 +991,7 @@ function SAPSDQuestApp() {
       Consultor(a): ${userName}
       -------------------------------------
       Empresa: AAM LOGÍSTICA LTDA
-      Status: ${xp < 400 ? 'Trainee' : xp < 800 ? 'Júnior' : xp < 1300 ? 'Pleno' : 'Sênior'} SD
+      Status: ${seniorityLevel} SD
       XP Total: ${xp} / 1700
       Missões Concluídas: ${completedMissions} / ${missions.length}
       Taxa de Sucesso: ${Math.round((trainingHistory.filter(h => h.status === 'success').length / Math.max(trainingHistory.length, 1)) * 100)}%
