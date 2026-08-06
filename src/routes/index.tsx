@@ -139,9 +139,10 @@ function CertificationModule() {
   const currentQuestion = examQuestions[currentQuestionIndex];
   
   const handleAnswer = (optionId: string) => {
-    if (examState !== "testing") return;
+    if (examState !== "testing" || !currentQuestion) return;
     
     setAnswers(prev => ({ ...prev, [currentQuestion.id]: optionId }));
+
     
     if (examMode === "study") {
       setShowExplanation(true);
@@ -245,7 +246,8 @@ function CertificationModule() {
   }
 
   if (examState === "testing" && currentQuestion) {
-    const isAnswered = !!answers[currentQuestion.id];
+    const isAnswered = currentQuestion ? !!answers[currentQuestion.id] : false;
+
     
     return (
       <div className="flex-1 flex flex-col gap-4 animate-in fade-in duration-300">
