@@ -831,6 +831,8 @@ function SAPSDQuestApp() {
   const [activeTab, setActiveTab] = useState<"main" | "certification" | "profile" | "certificate" | "quick" | "docs" | "stats" | "achievements" | "settings">("main");
   const [certName, setCertName] = useState("");
   const certificateRef = useRef<HTMLDivElement>(null);
+  const [selectedModule, setSelectedModule] = useState<SAPModule | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const [currentMissionIndex, setCurrentMissionIndex] = useState(0);
 
