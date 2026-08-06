@@ -98,12 +98,12 @@ const randomizeMissionData = (mission: Mission, name: string): Mission => {
   newMission.chefeHugoDialog = newMission.chefeHugoDialog
     .replace(/^Olá Consultor\(a\)!/g, greeting)
     .replace(/\bAAM LOGÍSTICA\b/g, "AAM LOGÍSTICA LTDA (Cód: 208015)")
-    .replace(/\bMAT-SD-\d+\b/g, newMission.expectedData.material)
+    .replace(/\bMAT-SD-\d+\b/g, newMission.expectedData.materialCode)
     .replace(/\b\d+ unidades\b/g, `${newMission.expectedData.quantidade} unidades`)
     .replace(/\b\d+ peças\b/g, `${newMission.expectedData.quantidade} peças`)
-    .replace(/\bfrete \w+\b/g, `frete ${newMission.expectedData.incoterms}`)
-    .replace(/\bCondição \w+\b/g, `Condição ${newMission.expectedData.condPagto}`)
-    .replace(/\bZF\d+\b/g, newMission.expectedData.condPagto);
+    .replace(/\bfrete \w+\b/g, `frete ${newMission.expectedData.headerIncoterms}`)
+    .replace(/\bCondição \w+\b/g, `Condição ${newMission.expectedData.partnerFunction}`)
+    .replace(/\bZF\d+\b/g, newMission.expectedData.partnerFunction);
 
   return newMission;
 };
