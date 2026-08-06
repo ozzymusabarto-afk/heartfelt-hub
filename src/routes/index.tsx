@@ -1023,7 +1023,12 @@ function SAPSDQuestApp() {
 
             ].map((item) => {
               const isAdminSession = typeof window !== "undefined" && localStorage.getItem("sap-quest-admin-session") === "true";
-              if (item.adminOnly && !isAdminSession) return null;
+              const userData = typeof window !== "undefined" ? localStorage.getItem("sap-quest-data") : null;
+              const isAdminProfile = userData ? JSON.parse(userData).isAdmin === true : false;
+              
+              const isUserAdmin = isAdminSession || isAdminProfile;
+              
+              if (item.adminOnly && !isUserAdmin) return null;
               
               const Content = (
                 <Button 
@@ -1038,7 +1043,6 @@ function SAPSDQuestApp() {
                     <span className={`text-[9px] ${item.label === "Trilha Principal" ? "text-indigo-100" : "text-slate-400"}`}>{item.sub}</span>
                   </div>
                 </Button>
-
               );
 
               if (item.path) {
