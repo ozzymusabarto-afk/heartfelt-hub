@@ -965,13 +965,13 @@ function SAPSDQuestApp() {
       concept: "Unidade organizacional responsável pelas vendas e contratos.", 
       impact: "Define a origem do faturamento e a base de cálculo de impostos estaduais." 
     },
-    customer: { 
+    partnerCode: { 
       label: "Emissor (Cliente)", 
       table: "KNA1-KUNNR", 
       concept: "O parceiro de negócios que solicita a mercadoria.", 
       impact: "Determina o endereço de entrega e as alíquotas de ICMS/Substituição Tributária." 
     },
-    material: { 
+    materialCode: { 
       label: "Material", 
       table: "VBAP-MATNR", 
       concept: "Código único do produto no mestre de materiais.", 
@@ -995,17 +995,35 @@ function SAPSDQuestApp() {
       concept: "Meio pelo qual o produto chega ao cliente (Varejo/Atacado).", 
       impact: "Pode alterar a precificação e a incidência de PIS/COFINS." 
     },
-    paymentCond: { 
-      label: "Condição de Pagamento", 
+    partnerFunction: { 
+      label: "Função de Parceiro / Cond. Pagto", 
       table: "VBAK-ZTERM", 
-      concept: "Regras de vencimento e parcelamento acordadas.", 
-      impact: "Define as datas de vencimento das duplicatas no financeiro." 
+      concept: "Regras de vencimento e parcelamento ou função do parceiro no BP.", 
+      impact: "Define as datas de vencimento ou as responsabilidades do parceiro." 
     },
     division: { 
       label: "Setor de Atividade", 
       table: "VBAK-SPART", 
       concept: "Agrupamento de produtos (Peças, Serviços).", 
       impact: "Usado para determinar o setor fiscal de saída dos produtos." 
+    },
+    partnerCategory: {
+      label: "Categoria / Nº Pedido",
+      table: "BUT000-TYPE",
+      concept: "Define se o parceiro é Pessoa ou Empresa, ou o número do pedido de compra.",
+      impact: "Influencia o tratamento fiscal e a rastreabilidade do documento."
+    },
+    plant: {
+      label: "Centro (Plant)",
+      table: "VBAP-WERKS",
+      concept: "Unidade logística onde o estoque é armazenado ou produzido.",
+      impact: "Define a origem física da mercadoria para cálculo de frete e impostos."
+    },
+    storageLocation: {
+      label: "Depósito",
+      table: "VBAP-LGORT",
+      concept: "Localização específica dentro do centro para armazenamento.",
+      impact: "Essencial para a execução da remessa e controle de inventário."
     }
   };
 
