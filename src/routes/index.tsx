@@ -410,13 +410,8 @@ function SAPSDQuestApp() {
       setFeedbackState("idle");
       sessionStorage.setItem("sap-quest-session-started", "true");
     } else {
-      // Normal continuous flow...
-
-
-      setFeedbackState("idle");
-      sessionStorage.setItem("sap-quest-session-started", "true");
-    } else {
       if (saved) {
+
         try {
           const parsed = JSON.parse(saved);
           if (parsed.formData) setFormData(parsed.formData);
