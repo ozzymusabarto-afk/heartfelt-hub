@@ -2193,7 +2193,7 @@ function SAPSDQuestApp() {
                 <div className="relative z-10 space-y-3">
                   <div className="flex justify-between items-center">
                     <span className="inline-block px-2 py-0.5 bg-indigo-50 text-indigo-600 text-[9px] font-black rounded-md uppercase">
-                      {completedMissions <= 40 ? 'Trainee' : completedMissions <= 80 ? 'Júnior' : completedMissions <= 130 ? 'Pleno' : 'Sênior'}
+                      {seniorityLevel}
                     </span>
                     <span className="text-[10px] font-bold text-slate-700 bg-slate-100 px-2 py-1 rounded-lg">[{completedMissions} / {missions.length} Missões]</span>
                   </div>
