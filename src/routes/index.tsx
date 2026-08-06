@@ -1416,7 +1416,8 @@ function SAPSDQuestApp() {
       // Standard Sales Orders (VA01, etc)
       const validateField = (fieldKey: keyof typeof formData, expectedKey: keyof typeof currentMission.expectedData, label: string) => {
         const expected = currentMission.expectedData[expectedKey];
-        if (expected && formData[fieldKey] !== expected) {
+        // Only validate if the field is present in expectedData and is not an empty string
+        if (expected !== undefined && expected !== "" && formData[fieldKey] !== expected) {
           errors.push(fieldKey);
           localHint = `${label} incorreto. Esperado: ${expected}`;
           return false;
