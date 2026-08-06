@@ -117,6 +117,7 @@ export const PROFILE_METADATA: Record<SAPProfile, {
   title: string; 
   description: string; 
   strengths: string[]; 
+  developmentPoints: string[];
   transactions: string[]; 
   recommendations: string;
 }> = {
