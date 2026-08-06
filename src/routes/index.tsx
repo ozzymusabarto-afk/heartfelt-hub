@@ -428,7 +428,7 @@ function SAPSDQuestApp() {
           if (parsed.currentMissionIndex !== undefined) {
             setCurrentMissionIndex(parsed.currentMissionIndex);
           } else {
-            setCurrentMissionIndex(getRandomMissionIndex());
+            setCurrentMissionIndex(getRandomMissionIndex(undefined, [], parsed.completedMissions || 0));
           }
         } catch (e) {}
       } else if (savedUser) {
