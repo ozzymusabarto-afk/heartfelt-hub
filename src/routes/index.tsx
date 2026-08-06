@@ -880,21 +880,23 @@ function SAPSDQuestApp() {
   const [xp, setXp] = useState(0);
   const [completedMissions, setCompletedMissions] = useState(0);
   const [formData, setFormData] = useState({
-    // Header Data
-    customer: "",
-    poNumber: "", // Also used for partnerCategory in BP
-    paymentCond: "", // Also used for partnerFunction in BP
-    salesOrg: "",
-    distChannel: "",
-    division: "",
-    orderType: "",
-    orderDate: "",
-    incoterms: "",
-    // Item Data
-    material: "",
-    quantity: "",
-    plant: "1000", // Default plant
-    storageLocation: "SL01", // Default storage location
+    headerData: {
+      partnerCode: "",
+      partnerCategory: "", 
+      partnerFunction: "",
+      salesOrg: "",
+      distChannel: "",
+      division: "",
+      orderType: "",
+      orderDate: "",
+      incoterms: "",
+    },
+    itemData: {
+      materialCode: "",
+      quantity: "",
+      plant: "1000",
+      storageLocation: "SL01",
+    }
   });
   const [feedbackState, setFeedbackState] = useState<"idle" | "review" | "success" | "error">("idle");
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
