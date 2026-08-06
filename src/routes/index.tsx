@@ -456,7 +456,7 @@ function SAPSDQuestApp() {
 
     window.addEventListener("storage", handleStorageChange);
     return () => window.removeEventListener("storage", handleStorageChange);
-  }, [formData, selectedTransaction, xp, completedMissions, currentMissionIndex, feedbackState, mode]);
+  }, [formData, selectedTransaction, xp, completedMissions, currentMissionIndex, feedbackState, mode, reinforcementQueue]);
 
   // Shortcut for F1 Help and Keyboard Access
   useEffect(() => {
@@ -596,6 +596,11 @@ function SAPSDQuestApp() {
         toast.info("Validação OK! Revise antes de enviar.");
       } else {
         setFeedbackState("success");
+        // Remove from reinforcement queue if completed successfully
+        if (reinforcementQueue.includes(currentMission.id)) {
+          setReinforcementQueue(prev => prev.filter(id => id !== currentMission.id));
+        }
+
         const isVL01N = currentMission.transaction === "VL01N";
         const isVF01 = currentMission.transaction === "VF01";
         const docPrefix = isVL01N ? "Remessa de Entrega" : isVF01 ? "Fatura de Venda (NF-e)" : "Ordem de Venda Standard";
@@ -645,12 +650,22 @@ function SAPSDQuestApp() {
   };
 
   const nextMission = () => {
-    const nextIdx = getRandomMissionIndex(currentMissionIndex);
-    const nextM = missions[nextIdx];
+    const nextIdx = getRandomMissionIndex(currentMissionIndex, reinforcementQueue);
+    let nextM = missions[nextIdx];
+    
+    // If it's a reinforced mission, randomize its data
+    if (reinforcementQueue.includes(nextM.id)) {
+      nextM = randomizeMissionData(nextM);
+      setActiveMission(nextM);
+    } else {
+      setActiveMission(null);
+    }
+
     setCurrentMissionIndex(nextIdx);
     resetGame();
     if (nextM) {
-      toast.info(`Sorteando Nova Missão: ${nextM.title}`);
+      const isReinforced = reinforcementQueue.includes(nextM.id);
+      toast.info(isReinforced ? `Reforço de Aprendizado: ${nextM.title}` : `Sorteando Nova Missão: ${nextM.title}`);
     }
   };
 
