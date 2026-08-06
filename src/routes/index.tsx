@@ -1427,7 +1427,7 @@ function SAPSDQuestApp() {
         
         let successMsg = "";
         if (isBP) {
-          successMsg = `Parceiro Comercial ${formData.customer || currentMission.expectedData.cliente} verificado com sucesso no cadastro do SAP S/4HANA! Dados fiscais e áreas de vendas validados.`;
+          successMsg = `Parceiro Comercial ${formData.partnerCode || currentMission.expectedData.cliente} verificado com sucesso no cadastro do SAP S/4HANA! Dados fiscais e áreas de vendas validados.`;
         } else if (isVL01N) {
           const remNum = Math.floor(800000000 + Math.random() * 999999);
           const ordNum = 450000000 + Math.floor(Math.random() * 1000);
@@ -1443,7 +1443,7 @@ function SAPSDQuestApp() {
           successMsg = `Alteração/Auditoria da Ordem ${ordNum} realizada com sucesso no sistema.`;
         } else {
           const ordNum = Math.floor(450000000 + Math.random() * 999999);
-          successMsg = `Ordem de Venda ${currentMission.expectedData.tipoOrdem} ${ordNum} criada com sucesso para o cliente ${formData.customer || currentMission.expectedData.cliente}!`;
+          successMsg = `Ordem de Venda ${currentMission.expectedData.tipoOrdem} ${ordNum} criada com sucesso para o cliente ${formData.partnerCode || currentMission.expectedData.cliente}!`;
         }
 
         setHintMessage(`🎉 ${successMsg} \n\n${currentMission.successFeedback}`);
