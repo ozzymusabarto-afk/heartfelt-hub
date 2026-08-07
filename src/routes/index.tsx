@@ -2342,8 +2342,8 @@ function SAPSDQuestApp() {
                           { id: "partnerCode", label: "Emissor", hasSearch: true },
                           { id: "orderDate", label: "Data Pedido" },
                           { id: "partnerCategory", label: "Nº Pedido" },
-                          { id: "partnerFunction", label: "Cond. Pagto.", type: "select", options: ["ZF30", "ZB00", "ZF60", "0001"] },
-                          { id: "incoterms", label: "Incoterms", type: "select", options: ["FOB", "CIF"] },
+                          { id: "partnerFunction", label: "Cond. Pagto.", type: "select", options: ["ZF30", "ZB00", "ZF60", "0001", "ZF90"] },
+                          { id: "incoterms", label: "Incoterms", type: "select", options: ["FOB", "CIF", "EXW", "DDP"] },
                         ];
                       } else {
                         fieldsToShow = [
