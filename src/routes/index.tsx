@@ -118,7 +118,9 @@ const randomizeMissionData = (mission: Mission, name: string): Mission => {
   }
 
   // Personalization and business creativity in Chefe Hugo's request
-  const greeting = name ? `Olá, ${name}!` : "Olá Consultor(a)!";
+  // Personalize greeting with fallback
+  const greeting = name ? `Olá, ${name}!` : "Olá!";
+  
   const businessScenarios = [
     "Temos uma urgência na logística:",
     "Recebi um chamado do diretor comercial:",
@@ -133,7 +135,7 @@ const randomizeMissionData = (mission: Mission, name: string): Mission => {
   // Reconstruct dialog with the new values and scenario
   let dialog = newMission.chefeHugoDialog;
   
-  // Replace standard intro
+  // Replace standard intro - handles "Olá Consultor(a)!" pattern
   dialog = dialog.replace(/^Olá Consultor\(a\)!/g, `${greeting} ${scenario}`);
   
   // Inject values
@@ -1816,7 +1818,7 @@ function SAPSDQuestApp() {
 
               <div className="space-y-4 mb-8">
                 <p className="text-slate-600 leading-relaxed text-sm">
-                  "Olá, <b>{userName}</b>! Sou o Chefe Hugo, gestor da equipe de SD. Estamos muito felizes em ter você no time!"
+                  "{userName ? `Olá, ${userName}!` : "Olá!"} Sou o Chefe Hugo, gestor da equipe de SD. Estamos muito felizes em ter você no time!"
                 </p>
                 
                 <p className="text-slate-600 leading-relaxed text-sm">
