@@ -86,8 +86,7 @@ const randomizeMissionData = (mission: Mission, name: string): Mission => {
   
   const newMission = JSON.parse(JSON.stringify(mission));
   
-  // To avoid repetition in 3 missions, we'd need state outside this pure-ish function.
-  // But for now, let's just make the selection as random as possible from the expanded pool.
+  // Sorteio dos dados mestres
   const selectedMaterial = randomValue(materials);
   const selectedCustomer = randomValue(customers);
   const selectedOrg = randomValue(salesOrgs);
@@ -97,32 +96,29 @@ const randomizeMissionData = (mission: Mission, name: string): Mission => {
   const selectedInco = randomValue(incoterms);
   const selectedPay = randomValue(paymentConds);
 
-  // Scramble expected data values based on the central mission object
-  if (newMission.expectedData.materialCode !== undefined && newMission.expectedData.materialCode !== "") {
-    newMission.expectedData.materialCode = selectedMaterial.code;
-  }
-  if (newMission.expectedData.headerIncoterms !== undefined) {
-    newMission.expectedData.headerIncoterms = selectedInco;
-  }
-  if (newMission.expectedData.partnerFunction !== undefined) {
-    newMission.expectedData.partnerFunction = selectedPay;
-  }
-  if (newMission.expectedData.quantidade !== undefined && newMission.expectedData.quantidade !== "") {
-    newMission.expectedData.quantidade = selectedQty;
-  }
-  
+  // 1. Atualiza expectedData de forma consistente
   newMission.expectedData.orgVendas = selectedOrg.code;
   newMission.expectedData.canalDist = selectedChannel.code;
   newMission.expectedData.setorAtiv = selectedDiv.code;
+  newMission.expectedData.partnerCode = selectedCustomer.code;
   
-  if (newMission.transaction !== "BP") {
-    newMission.expectedData.partnerCode = selectedCustomer.code;
-  } else {
-    // For BP, sometimes it validates an existing code, sometimes it might be creating.
-    // Let's ensure it always has a valid customer code to validate against.
-    newMission.expectedData.partnerCode = selectedCustomer.code;
+  if (newMission.expectedData.materialCode !== undefined) {
+    newMission.expectedData.materialCode = selectedMaterial.code;
+  }
+  
+  if (newMission.expectedData.quantidade !== undefined) {
+    newMission.expectedData.quantidade = selectedQty;
+  }
+  
+  if (newMission.expectedData.headerIncoterms !== undefined) {
+    newMission.expectedData.headerIncoterms = selectedInco;
+  }
+  
+  if (newMission.expectedData.partnerFunction !== undefined) {
+    newMission.expectedData.partnerFunction = selectedPay;
   }
 
+  // 2. Constrói o enunciado de forma 100% dinâmica a partir do objeto da missão
   const greeting = name ? `Olá, ${name}!` : "Olá!";
   
   const businessScenarios = [
@@ -137,11 +133,10 @@ const randomizeMissionData = (mission: Mission, name: string): Mission => {
   ];
   const scenario = randomValue(businessScenarios);
   
-  // Build dialog dynamically using the exact properties of the randomized object
   let dialog = `${greeting} ${scenario}\n\n`;
   
   if (newMission.transaction === "BP") {
-    dialog += `Precisamos validar o cadastro do Parceiro de Negócios (BP) código ${newMission.expectedData.partnerCode}. `;
+    dialog += `Precisamos validar o cadastro do Parceiro de Negócios (BP) código ${newMission.expectedData.partnerCode} (${selectedCustomer.name}). `;
   } else {
     dialog += `O cliente ${newMission.expectedData.partnerCode} (${selectedCustomer.name}) solicitou uma operação de ${newMission.transaction}. `;
   }
@@ -154,7 +149,7 @@ const randomizeMissionData = (mission: Mission, name: string): Mission => {
     dialog += `O frete acordado é ${newMission.expectedData.headerIncoterms} e a condição de pagamento deve ser ${newMission.expectedData.partnerFunction}. `;
   }
 
-  // Ensure all required fields are mentioned in the dialog or the data block
+  // Adiciona bloco de dados obrigatórios extraídos diretamente da validação
   dialog += `\n\n[DADOS OBRIGATÓRIOS: Org. Vendas: ${newMission.expectedData.orgVendas}, Canal: ${newMission.expectedData.canalDist}, Setor: ${newMission.expectedData.setorAtiv}`;
   
   if (newMission.expectedData.tipoOrdem) {

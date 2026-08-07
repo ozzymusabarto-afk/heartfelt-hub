@@ -34,20 +34,24 @@ export const SAP_MASTER_DATA = {
     { code: "1000", name: "AAM Vendas São Paulo" },
     { code: "2000", name: "AAM Vendas Rio de Janeiro" },
     { code: "3000", name: "AAM Vendas Curitiba" },
-    { code: "4000", name: "AAM Vendas Porto Alegre" }
+    { code: "4000", name: "AAM Vendas Porto Alegre" },
+    { code: "5000", name: "AAM Vendas Salvador" },
+    { code: "6000", name: "AAM Vendas Belo Horizonte" }
   ],
   channels: [
     { code: "10", name: "Venda Direta" },
     { code: "20", name: "Distribuição" },
     { code: "30", name: "Exportação" },
-    { code: "40", name: "Venda Online" }
+    { code: "40", name: "Venda Online" },
+    { code: "50", name: "Grandes Contas" }
   ],
   divisions: [
     { code: "00", name: "Geral" },
     { code: "01", name: "Peças" },
     { code: "10", name: "Serviços" },
     { code: "20", name: "Projetos" },
-    { code: "30", name: "Insumos" }
+    { code: "30", name: "Insumos" },
+    { code: "40", name: "Máquinas" }
   ],
   materials: [
     { code: "MAT-SD-001", desc: "Parafuso Sextavado Aço G5" },
@@ -60,6 +64,9 @@ export const SAP_MASTER_DATA = {
     { code: "MAT-SD-030", desc: "Kit de Vedação Premium" },
     { code: "MAT-SD-045", desc: "Rolamento Blindado" },
     { code: "MAT-SD-060", desc: "Pistão Pneumático 100psi" },
+    { code: "MAT-SD-070", desc: "Válvula Solenoide 24V" },
+    { code: "MAT-SD-085", desc: "Sensor de Proximidade Laser" },
+    { code: "MAT-SD-090", desc: "Acoplamento Flexível 150mm" },
     { code: "MAT-PRIME-X", desc: "Módulo Eletrônico Central" },
     { code: "MAT-ECO-99", desc: "Lubrificante Sintético" }
   ],
@@ -73,7 +80,9 @@ export const SAP_MASTER_DATA = {
     { code: "405002", name: "Panteon Construções" },
     { code: "506003", name: "Mineração Vale das Sombras" },
     { code: "607004", name: "Siderúrgica Nacional S/A" },
-    { code: "708005", name: "AeroParts Brasil" }
+    { code: "708005", name: "AeroParts Brasil" },
+    { code: "809006", name: "Têxtil Horizonte Ltda" },
+    { code: "901007", name: "Química Sustentável EIRELI" }
   ],
   incoterms: ["FOB", "CIF", "EXW", "DDP", "CFR"],
   paymentConds: ["ZF30", "ZF60", "ZB00", "0001", "ZF90", "ZF15"]
