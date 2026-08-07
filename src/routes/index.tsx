@@ -1818,7 +1818,7 @@ function SAPSDQuestApp() {
 
               <div className="space-y-4 mb-8">
                 <p className="text-slate-600 leading-relaxed text-sm">
-                  "Olá, <b>{userName}</b>! Sou o Chefe Hugo, gestor da equipe de SD. Estamos muito felizes em ter você no time!"
+                  "{userName ? `Olá, ${userName}!` : "Olá!"} Sou o Chefe Hugo, gestor da equipe de SD. Estamos muito felizes em ter você no time!"
                 </p>
                 
                 <p className="text-slate-600 leading-relaxed text-sm">
