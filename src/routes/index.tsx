@@ -2184,7 +2184,7 @@ function SAPSDQuestApp() {
                 <Dices className="size-4 text-indigo-600" /> Transação
               </h3>
               <RadioGroup value={selectedTransaction} onValueChange={setSelectedTransaction} className="space-y-2 pr-1">
-                {["VA01 - Criar Ordem", "BP - Parceiro", "VL01N - Entrega", "VF01 - Faturar", "VA02 - Modificar", "VA03 - Exibir", "VF11 - Cancelar", "VA05 - Lista", "V.02 - Incomp"].map((label) => {
+                {["VA01 - Criar Ordem", "VA02 - Alterar Ordem", "VA03 - Exibir", "VA05 - Lista", "VA11 - Cotação", "VA21 - Proposta", "BP - Parceiro", "VL01N - Entrega", "VL02N - Mod. Entrega", "VF01 - Faturar", "VF04 - Lista Fat.", "VK11 - Criar Preço", "MM03 - Mat."].map((label) => {
                   const id = label.split(" ")[0];
                   if (!id) return null;
                   
