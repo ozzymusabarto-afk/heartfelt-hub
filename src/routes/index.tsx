@@ -2184,7 +2184,7 @@ function SAPSDQuestApp() {
                 <Dices className="size-4 text-indigo-600" /> Transação
               </h3>
               <RadioGroup value={selectedTransaction} onValueChange={setSelectedTransaction} className="space-y-2 pr-1">
-                {["VA01 - Criar Ordem", "BP - Parceiro", "VL01N - Entrega", "VF01 - Faturar", "VA02 - Modificar", "VA03 - Exibir", "VF11 - Cancelar", "VA05 - Lista", "V.02 - Incomp"].map((label) => {
+                {["VA01 - Criar Ordem", "VA02 - Alterar Ordem", "VA03 - Exibir", "VA05 - Lista", "VA11 - Cotação", "VA21 - Proposta", "BP - Parceiro", "VL01N - Entrega", "VL02N - Mod. Entrega", "VF01 - Faturar", "VF04 - Lista Fat.", "VK11 - Criar Preço", "MM03 - Mat."].map((label) => {
                   const id = label.split(" ")[0];
                   if (!id) return null;
                   
@@ -2256,38 +2256,52 @@ function SAPSDQuestApp() {
                           { id: "division", label: "Setor Ativ.", type: "select", options: SAP_MASTER_DATA.divisions.map(o => o.code) },
                         ];
                       }
-                    } else if (selectedTransaction === "VL01N") {
+                    } else if (selectedTransaction === "VL01N" || selectedTransaction === "VL02N" || selectedTransaction === "VL03N") {
                       if (isHeader) {
                         fieldsToShow = [
-                          { id: "salesOrg", label: "Ponto Expedição", type: "select", options: ["1000"] },
+                          { id: "salesOrg", label: "Ponto Expedição", type: "select", options: ["1000", "2000"] },
                           { id: "orderDate", label: "Data Seleção" },
                         ];
                       } else {
                         fieldsToShow = [
-                          { id: "partnerCategory", label: "Ordem Ref." },
+                          { id: "partnerCode", label: "Ordem Ref." },
                         ];
                       }
-                    } else if (selectedTransaction === "VF01") {
+                    } else if (selectedTransaction === "VF01" || selectedTransaction === "VF02" || selectedTransaction === "VF03") {
                       if (isHeader) {
                         fieldsToShow = [
-                          { id: "orderType", label: "Tipo Fatura", type: "select", options: ["F2 - Fatura Padrão", "NFS-e"] },
+                          { id: "orderType", label: "Tipo Fatura", type: "select", options: ["F2", "S1", "NFS-e"] },
                         ];
                       } else {
                         fieldsToShow = [
-                          { id: "partnerCategory", label: "Doc. Ref." },
+                          { id: "partnerCode", label: "Doc. Ref." },
                         ];
                       }
-                    } else {
-                      // Standard Sales Orders (VA01, etc)
+                    } else if (selectedTransaction === "VK11" || selectedTransaction === "VK12" || selectedTransaction === "VK13") {
                       if (isHeader) {
                         fieldsToShow = [
-                          { id: "orderType", label: "Tipo", type: "select", options: ["OR", "QT", "ZBN", "RE"] },
+                          { id: "orderType", label: "Tipo Condição", type: "select", options: ["PR00", "MWST", "ZBRA"] },
+                          { id: "salesOrg", label: "Org. Vendas", type: "select", options: SAP_MASTER_DATA.salesOrgs.map(o => o.code) },
+                          { id: "distChannel", label: "Canal Dist.", type: "select", options: SAP_MASTER_DATA.channels.map(o => o.code) },
+                        ];
+                      } else {
+                        fieldsToShow = [
+                          { id: "materialCode", label: "Material", hasSearch: "materials" },
+                        ];
+                      }
+                    } else if (selectedTransaction === "MM03") {
+                        fieldsToShow = [
+                          { id: "materialCode", label: "Material", hasSearch: "materials" },
+                        ];
+                    } else {
+                      // VA01, VA02, VA03, VA11, VA21, etc
+                      if (isHeader) {
+                        fieldsToShow = [
+                          { id: "orderType", label: "Tipo", type: "select", options: ["OR", "QT", "VA", "RE"] },
                           { id: "salesOrg", label: "Org. Vendas", type: "select", options: SAP_MASTER_DATA.salesOrgs.map(o => o.code) },
                           { id: "distChannel", label: "Canal Dist.", type: "select", options: SAP_MASTER_DATA.channels.map(o => o.code) },
                           { id: "division", label: "Setor Ativ.", type: "select", options: SAP_MASTER_DATA.divisions.map(o => o.code) },
                           { id: "partnerCode", label: "Emissor", hasSearch: "customers" },
-                          { id: "orderDate", label: "Data Pedido" },
-                          { id: "partnerCategory", label: "Nº Pedido" },
                           { id: "partnerFunction", label: "Cond. Pagto.", type: "select", options: SAP_MASTER_DATA.paymentConds },
                           { id: "incoterms", label: "Incoterms", type: "select", options: SAP_MASTER_DATA.incoterms },
                         ];
@@ -2295,8 +2309,6 @@ function SAPSDQuestApp() {
                         fieldsToShow = [
                           { id: "materialCode", label: "Material", hasSearch: "materials" },
                           { id: "quantity", label: "Quantidade" },
-                          { id: "plant", label: "Centro / Plant", type: "select", options: ["1000", "2000"] },
-                          { id: "storageLocation", label: "Depósito", type: "select", options: ["SL01", "SL02"] },
                         ];
                       }
                     }

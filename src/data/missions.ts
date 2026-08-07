@@ -7,16 +7,16 @@ export interface Mission {
   successFeedback: string;
   errorFeedback: string;
   expectedData: {
-    tipoOrdem: string;
-    orgVendas: string;
-    canalDist: string;
-    setorAtiv: string;
-    partnerCode: string;
-    materialCode: string;
-    quantidade: string;
-    headerIncoterms: string;
-    partnerFunction: string;
-    [key: string]: string;
+    tipoOrdem?: string;
+    orgVendas?: string;
+    canalDist?: string;
+    setorAtiv?: string;
+    partnerCode?: string;
+    materialCode?: string;
+    quantidade?: string;
+    headerIncoterms?: string;
+    partnerFunction?: string;
+    [key: string]: any;
   };
   f1Help: {
     title: string;
@@ -26,118 +26,113 @@ export interface Mission {
   };
 }
 
-/**
- * SAP SD Master Data - Single Source of Truth for selection options
- */
 export const SAP_MASTER_DATA = {
   salesOrgs: [
     { code: "1000", name: "AAM Vendas São Paulo" },
     { code: "2000", name: "AAM Vendas Rio de Janeiro" },
-    { code: "3000", name: "AAM Vendas Curitiba" },
-    { code: "4000", name: "AAM Vendas Porto Alegre" },
-    { code: "5000", name: "AAM Vendas Salvador" },
-    { code: "6000", name: "AAM Vendas Belo Horizonte" }
+    { code: "3000", name: "AAM Vendas Curitiba" }
   ],
   channels: [
     { code: "10", name: "Venda Direta" },
-    { code: "20", name: "Distribuição" },
-    { code: "30", name: "Exportação" },
-    { code: "40", name: "Venda Online" },
-    { code: "50", name: "Grandes Contas" }
+    { code: "20", name: "Distribuição" }
   ],
   divisions: [
     { code: "00", name: "Geral" },
-    { code: "01", name: "Peças" },
-    { code: "10", name: "Serviços" },
-    { code: "20", name: "Projetos" },
-    { code: "30", name: "Insumos" },
-    { code: "40", name: "Máquinas" }
+    { code: "01", name: "Peças" }
   ],
   materials: [
     { code: "MAT-SD-001", desc: "Parafuso Sextavado Aço G5" },
-    { code: "MAT-SD-002", desc: "Arruela de Pressão Industrial" },
-    { code: "MAT-SD-003", desc: "Eixo de Transmissão 40mm" },
-    { code: "MAT-SD-004", desc: "Engrenagem Helicoidal" },
-    { code: "MAT-SD-005", desc: "Bomba Hidráulica de Sucção" },
     { code: "MAT-SD-015", desc: "Cabo de Aço Reforçado" },
-    { code: "MAT-SD-020", desc: "Polímero Industrial G3" },
-    { code: "MAT-SD-030", desc: "Kit de Vedação Premium" },
-    { code: "MAT-SD-045", desc: "Rolamento Blindado" },
-    { code: "MAT-SD-060", desc: "Pistão Pneumático 100psi" },
-    { code: "MAT-SD-070", desc: "Válvula Solenoide 24V" },
-    { code: "MAT-SD-085", desc: "Sensor de Proximidade Laser" },
-    { code: "MAT-SD-090", desc: "Acoplamento Flexível 150mm" },
-    { code: "MAT-PRIME-X", desc: "Módulo Eletrônico Central" },
-    { code: "MAT-ECO-99", desc: "Lubrificante Sintético" }
+    { code: "MAT-PRIME-X", desc: "Módulo Eletrônico Central" }
   ],
   customers: [
     { code: "208015", name: "TechBrasil Automação Ltda" },
     { code: "208016", name: "Distribuidora Sul de Metais" },
-    { code: "208017", name: "Comércio Fictício S/A" },
-    { code: "208018", name: "Logística Integrada Global" },
-    { code: "208019", name: "Manutenção Express ME" },
-    { code: "309001", name: "Indústrias Reunidas do Norte" },
-    { code: "405002", name: "Panteon Construções" },
-    { code: "506003", name: "Mineração Vale das Sombras" },
-    { code: "607004", name: "Siderúrgica Nacional S/A" },
-    { code: "708005", name: "AeroParts Brasil" },
-    { code: "809006", name: "Têxtil Horizonte Ltda" },
-    { code: "901007", name: "Química Sustentável EIRELI" }
+    { code: "309001", name: "Indústrias Reunidas do Norte" }
   ],
-  incoterms: ["FOB", "CIF", "EXW", "DDP", "CFR"],
-  paymentConds: ["ZF30", "ZF60", "ZB00", "0001", "ZF90", "ZF15"]
+  incoterms: ["FOB", "CIF", "EXW"],
+  paymentConds: ["ZF30", "ZF60", "ZB00"]
 };
 
 export const MISSIONS: Mission[] = [
   {
-    "id": "M001-BP",
-    "title": "01. Trainee - Cadastro de Parceiro (BP)",
-    "transaction": "BP",
-    "chefeHugoDialog": "Olá Consultor(a)! A AAM LOGÍSTICA precisa cadastrar um novo Parceiro de Negócios (BP) no sistema. Por favor, valide o código do cliente 208015 para a Organização de Vendas 1000. Garanta que os dados mestres estejam corretos.",
-    "successFeedback": "Excelente trabalho! O Parceiro de Negócios (BP) foi validado e estendido para as áreas de vendas corretamente. Esse é o primeiro passo para o fluxo de vendas.",
-    "errorFeedback": "Atenção! O código do cliente ou os dados da área de vendas não coincidem com o mestre. Verifique se usou o Cliente 208015 e a Org. Vendas 1000.",
-    "expectedData": {
-        "tipoOrdem": "OR",
-        "orgVendas": "1000",
-        "canalDist": "10",
-        "setorAtiv": "00",
-        "partnerCode": "208015",
-        "materialCode": "",
-        "quantidade": "",
-        "headerIncoterms": "FOB",
-        "partnerFunction": "ZF30"
-    },
-    "f1Help": {
-        "title": "Conceito SAP: BP (Business Partner)",
-        "concept": "No S/4HANA, o BP é o ponto de entrada único para gerenciar dados mestres de Clientes e Fornecedores.",
-        "businessImpact": "Um cadastro de BP correto evita bloqueios no faturamento e garante que os impostos sejam calculados pela localização (Brasil).",
-        "brazilRule": "O campo 'Contribuinte de ICMS' deve ser validado no cadastro para evitar rejeição da NF-e na SEFAZ."
-    }
+    id: "M001-BP",
+    title: "01. Trainee - Cadastro de Parceiro (BP)",
+    transaction: "BP",
+    chefeHugoDialog: "",
+    successFeedback: "Excelente trabalho! O Parceiro de Negócios (BP) foi validado corretamente.",
+    errorFeedback: "Atenção! Os dados do BP não coincidem com o solicitado.",
+    expectedData: { orgVendas: "1000", canalDist: "10", setorAtiv: "00", partnerCode: "208015" },
+    f1Help: { title: "Conceito: BP", concept: "Business Partner no S/4HANA", businessImpact: "Evita bloqueios", brazilRule: "Contribuinte ICMS" }
   },
-  // ... including more missions simplified or kept as they were, but they will be hydrated dynamically in App
   {
-    "id": "M002-BP",
-    "title": "02. Trainee - Cadastro de Parceiro (BP)",
-    "transaction": "BP",
-    "chefeHugoDialog": "Olá Consultor(a)! A AAM LOGÍSTICA precisa cadastrar um novo Parceiro de Negócios (BP) no sistema. Por favor, valide o código do cliente 208015 para a Organização de Vendas 1000 com o material MAT-SD-015 (Qtd: 12). Garanta que os dados mestres estejam corretos.",
-    "successFeedback": "Excelente trabalho! O Parceiro de Negócios (BP) foi validado e estendido para as áreas de vendas corretamente. Esse é o primeiro passo para o fluxo de vendas.",
-    "errorFeedback": "Atenção! O código do cliente ou os dados da área de vendas não coincidem com o mestre. Verifique se usou o Cliente 208015 e a Org. Vendas 1000.",
-    "expectedData": {
-        "tipoOrdem": "OR",
-        "orgVendas": "1000",
-        "canalDist": "10",
-        "setorAtiv": "00",
-        "partnerCode": "208015",
-        "materialCode": "MAT-SD-015",
-        "quantidade": "12",
-        "headerIncoterms": "FOB",
-        "partnerFunction": "ZF30"
-    },
-    "f1Help": {
-        "title": "Conceito SAP: BP (Business Partner)",
-        "concept": "No S/4HANA, o BP é o ponto de entrada único para gerenciar dados mestres de Clientes e Fornecedores.",
-        "businessImpact": "Um cadastro de BP correto evita bloqueios no faturamento e garante que os impostos sejam calculados pela localização (Brasil).",
-        "brazilRule": "O campo 'Contribuinte de ICMS' deve ser validado no cadastro para evitar rejeição da NF-e na SEFAZ."
-    }
+    id: "M002-VA01",
+    title: "02. Trainee - Criar Pedido de Venda (VA01)",
+    transaction: "VA01",
+    chefeHugoDialog: "",
+    successFeedback: "Pedido criado com sucesso!",
+    errorFeedback: "Erro nos dados do pedido.",
+    expectedData: { tipoOrdem: "OR", orgVendas: "1000", canalDist: "10", setorAtiv: "00", partnerCode: "208015", materialCode: "MAT-SD-001", quantidade: "10" },
+    f1Help: { title: "Conceito: VA01", concept: "Criação de ordens de venda", businessImpact: "Gera receita", brazilRule: "Impostos automáticos" }
+  },
+  {
+    id: "M003-VA02",
+    title: "03. Trainee - Alterar Pedido (VA02)",
+    transaction: "VA02",
+    chefeHugoDialog: "",
+    successFeedback: "Pedido alterado!",
+    errorFeedback: "Dados de alteração incorretos.",
+    expectedData: { orgVendas: "1000", canalDist: "10", setorAtiv: "00", partnerCode: "208015", materialCode: "MAT-SD-001", quantidade: "20" },
+    f1Help: { title: "Conceito: VA02", concept: "Alteração de ordens", businessImpact: "Flexibilidade", brazilRule: "NF-e re-emissão se necessário" }
+  },
+  {
+    id: "M004-VA11",
+    title: "04. Trainee - Criar Solicitação de Cotação (VA11)",
+    transaction: "VA11",
+    chefeHugoDialog: "",
+    successFeedback: "Cotação solicitada!",
+    errorFeedback: "Erro na solicitação.",
+    expectedData: { orgVendas: "1000", canalDist: "10", setorAtiv: "00", partnerCode: "208016", materialCode: "MAT-PRIME-X", quantidade: "1" },
+    f1Help: { title: "Conceito: VA11", concept: "Pré-venda", businessImpact: "Lead time", brazilRule: "Validade da proposta" }
+  },
+  {
+    id: "M005-VL01N",
+    title: "05. Trainee - Criar Entrega (VL01N)",
+    transaction: "VL01N",
+    chefeHugoDialog: "",
+    successFeedback: "Entrega processada!",
+    errorFeedback: "Erro no processamento da entrega.",
+    expectedData: { orgVendas: "1000", partnerCode: "REF-ORD-123" },
+    f1Help: { title: "Conceito: VL01N", concept: "Expedição de mercadorias", businessImpact: "Logística física", brazilRule: "Data de saída" }
+  },
+  {
+    id: "M006-VF01",
+    title: "06. Trainee - Criar Faturamento (VF01)",
+    transaction: "VF01",
+    chefeHugoDialog: "",
+    successFeedback: "Fatura emitida!",
+    errorFeedback: "Erro na fatura.",
+    expectedData: { tipoOrdem: "F2", partnerCode: "REF-DEL-456" },
+    f1Help: { title: "Conceito: VF01", concept: "Faturamento e NF-e", businessImpact: "Financeiro", brazilRule: "SEFAZ Integration" }
+  },
+  {
+    id: "M007-VK11",
+    title: "07. Trainee - Criar Condição de Preço (VK11)",
+    transaction: "VK11",
+    chefeHugoDialog: "",
+    successFeedback: "Preço cadastrado!",
+    errorFeedback: "Erro no cadastro de preço.",
+    expectedData: { orgVendas: "1000", canalDist: "10", materialCode: "MAT-SD-001" },
+    f1Help: { title: "Conceito: VK11", concept: "Pricing (PR00)", businessImpact: "Margem de lucro", brazilRule: "ICMS/IPI inclusions" }
+  },
+  {
+    id: "M008-MM03",
+    title: "08. Trainee - Visualizar Material (MM03)",
+    transaction: "MM03",
+    chefeHugoDialog: "",
+    successFeedback: "Material visualizado!",
+    errorFeedback: "Material incorreto.",
+    expectedData: { materialCode: "MAT-SD-015" },
+    f1Help: { title: "Conceito: MM03", concept: "Mestre de Materiais", businessImpact: "Dados técnicos", brazilRule: "NCM Code" }
   }
 ];
