@@ -86,7 +86,8 @@ const randomizeMissionData = (mission: Mission, name: string): Mission => {
   
   const newMission = JSON.parse(JSON.stringify(mission));
   
-  // Randomize master data using Single Source of Truth (SAP_MASTER_DATA)
+  // To avoid repetition in 3 missions, we'd need state outside this pure-ish function.
+  // But for now, let's just make the selection as random as possible from the expanded pool.
   const selectedMaterial = randomValue(materials);
   const selectedCustomer = randomValue(customers);
   const selectedOrg = randomValue(salesOrgs);
@@ -97,16 +98,16 @@ const randomizeMissionData = (mission: Mission, name: string): Mission => {
   const selectedPay = randomValue(paymentConds);
 
   // Scramble expected data values based on the central mission object
-  if (mission.expectedData.materialCode !== undefined) {
+  if (newMission.expectedData.materialCode !== undefined && newMission.expectedData.materialCode !== "") {
     newMission.expectedData.materialCode = selectedMaterial.code;
   }
-  if (mission.expectedData.headerIncoterms !== undefined) {
+  if (newMission.expectedData.headerIncoterms !== undefined) {
     newMission.expectedData.headerIncoterms = selectedInco;
   }
-  if (mission.expectedData.partnerFunction !== undefined) {
+  if (newMission.expectedData.partnerFunction !== undefined) {
     newMission.expectedData.partnerFunction = selectedPay;
   }
-  if (mission.expectedData.quantidade !== undefined) {
+  if (newMission.expectedData.quantidade !== undefined && newMission.expectedData.quantidade !== "") {
     newMission.expectedData.quantidade = selectedQty;
   }
   
@@ -114,12 +115,12 @@ const randomizeMissionData = (mission: Mission, name: string): Mission => {
   newMission.expectedData.canalDist = selectedChannel.code;
   newMission.expectedData.setorAtiv = selectedDiv.code;
   
-  if (mission.transaction !== "BP") {
+  if (newMission.transaction !== "BP") {
     newMission.expectedData.partnerCode = selectedCustomer.code;
   } else {
-    if (Math.random() > 0.5) {
-      newMission.expectedData.partnerCode = selectedCustomer.code;
-    }
+    // For BP, sometimes it validates an existing code, sometimes it might be creating.
+    // Let's ensure it always has a valid customer code to validate against.
+    newMission.expectedData.partnerCode = selectedCustomer.code;
   }
 
   const greeting = name ? `Olá, ${name}!` : "Olá!";
@@ -153,7 +154,14 @@ const randomizeMissionData = (mission: Mission, name: string): Mission => {
     dialog += `O frete acordado é ${newMission.expectedData.headerIncoterms} e a condição de pagamento deve ser ${newMission.expectedData.partnerFunction}. `;
   }
 
-  dialog += `\n\n[DADOS OBRIGATÓRIOS: Org. Vendas: ${newMission.expectedData.orgVendas}, Canal: ${newMission.expectedData.canalDist}, Setor: ${newMission.expectedData.setorAtiv}]`;
+  // Ensure all required fields are mentioned in the dialog or the data block
+  dialog += `\n\n[DADOS OBRIGATÓRIOS: Org. Vendas: ${newMission.expectedData.orgVendas}, Canal: ${newMission.expectedData.canalDist}, Setor: ${newMission.expectedData.setorAtiv}`;
+  
+  if (newMission.expectedData.tipoOrdem) {
+    dialog += `, Tipo: ${newMission.expectedData.tipoOrdem}`;
+  }
+  
+  dialog += `]`;
 
   newMission.chefeHugoDialog = dialog;
 
@@ -2241,7 +2249,7 @@ function SAPSDQuestApp() {
                     if (selectedTransaction === "BP") {
                       if (isHeader) {
                         fieldsToShow = [
-                          { id: "partnerCode", label: "Cód. Parceiro Comercial", hasSearch: true },
+                          { id: "partnerCode", label: "Cód. Parceiro Comercial", hasSearch: "customers" },
                           { id: "partnerCategory", label: "Categoria", type: "select", options: ["Empresa", "Pessoa"] },
                           { id: "partnerFunction", label: "Função", type: "select", options: ["Cliente SD", "Fornecedor"] },
                         ];
@@ -2281,7 +2289,7 @@ function SAPSDQuestApp() {
                           { id: "salesOrg", label: "Org. Vendas", type: "select", options: SAP_MASTER_DATA.salesOrgs.map(o => o.code) },
                           { id: "distChannel", label: "Canal Dist.", type: "select", options: SAP_MASTER_DATA.channels.map(o => o.code) },
                           { id: "division", label: "Setor Ativ.", type: "select", options: SAP_MASTER_DATA.divisions.map(o => o.code) },
-                          { id: "partnerCode", label: "Emissor", hasSearch: true },
+                          { id: "partnerCode", label: "Emissor", hasSearch: "customers" },
                           { id: "orderDate", label: "Data Pedido" },
                           { id: "partnerCategory", label: "Nº Pedido" },
                           { id: "partnerFunction", label: "Cond. Pagto.", type: "select", options: SAP_MASTER_DATA.paymentConds },
@@ -2289,7 +2297,7 @@ function SAPSDQuestApp() {
                         ];
                       } else {
                         fieldsToShow = [
-                          { id: "materialCode", label: "Material", type: "select", options: SAP_MASTER_DATA.materials.map(o => o.code) },
+                          { id: "materialCode", label: "Material", hasSearch: "materials" },
                           { id: "quantity", label: "Quantidade" },
                           { id: "plant", label: "Centro / Plant", type: "select", options: ["1000", "2000"] },
                           { id: "storageLocation", label: "Depósito", type: "select", options: ["SL01", "SL02"] },
