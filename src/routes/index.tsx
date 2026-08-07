@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router"; // faça uma varredura 100% para garantir que todo o projeto esteja perfeito sem erros,
 import { useState, useEffect, useRef, useMemo } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
