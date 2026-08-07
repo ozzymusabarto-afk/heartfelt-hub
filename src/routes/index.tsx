@@ -50,68 +50,111 @@ export const Route = createFileRoute("/")({
 
 // Correct data is now handled per mission from missions.ts
 const getRandomMissionIndex = (excludeIndex?: number, reinforcementQueue: string[] = [], completedCount: number = 0) => {
-  // If there's a mission in the reinforcement queue, and it's not the same as the current one,
-  // we have a chance to pick it (spaced repetition)
+  // Logic for picking missions:
+  // 1. If we have something in the reinforcement queue, prioritize it (60% chance)
+  // 2. Otherwise, pick randomly from the available pool based on seniority progress
+  
   if (reinforcementQueue.length > 0 && Math.random() > 0.4) {
-    const queueIndex = missions.findIndex(m => m.id === reinforcementQueue[0]);
+    // Pick a random ID from the queue to avoid being sequential within reinforcement
+    const randomQueueId = reinforcementQueue[Math.floor(Math.random() * reinforcementQueue.length)];
+    const queueIndex = missions.findIndex(m => m.id === randomQueueId);
+    
     if (queueIndex !== -1 && queueIndex !== excludeIndex) {
       return queueIndex;
     }
   }
 
-  // Progressive unlock: pick from missions up to the current seniority level + a small buffer
+  // Progressive unlock: pool size is current progress + 5 mission buffer
   // Level ranges: Trainee (1-40), Júnior (41-80), Pleno (81-130), Sênior (131-170)
-  const maxAvailableIndex = Math.min(missions.length, completedCount + 5);
+  const poolSize = Math.min(missions.length, completedCount + 8);
   
   let newIndex;
+  let attempts = 0;
   do {
-    newIndex = Math.floor(Math.random() * maxAvailableIndex);
-  } while (newIndex === excludeIndex && maxAvailableIndex > 1);
+    newIndex = Math.floor(Math.random() * poolSize);
+    attempts++;
+  } while (newIndex === excludeIndex && poolSize > 1 && attempts < 10);
+  
   return newIndex;
 };
 
 const randomizeMissionData = (mission: Mission, name: string): Mission => {
-  const materials = ["MAT-SD-015", "MAT-SD-020", "MAT-SD-030", "MAT-SD-045"];
-  const incoterms = ["FOB", "CIF"];
-  const paymentConds = ["ZF30", "ZF60", "ZB00"];
-  const quantities = ["10", "25", "50", "80", "100", "150"];
+  const materials = ["MAT-SD-015", "MAT-SD-020", "MAT-SD-030", "MAT-SD-045", "MAT-PRIME-X", "MAT-ECO-99"];
+  const incoterms = ["FOB", "CIF", "EXW", "DDP"];
+  const paymentConds = ["ZF30", "ZF60", "ZB00", "Z001", "ZF90"];
+  const quantities = ["5", "12", "28", "45", "67", "110", "250", "500"];
+  const divisions = ["00", "10", "20"];
+  const channels = ["10", "20", "30"];
 
   const randomValue = (arr: string[]) => arr[Math.floor(Math.random() * arr.length)];
   
-  // Create a deep copy to avoid mutating the original mission
+  // Create a deep copy
   const newMission = JSON.parse(JSON.stringify(mission));
   
-  if (mission.expectedData.materialCode) {
+  // Scramble expected data values
+  if (mission.expectedData.materialCode !== undefined) {
     newMission.expectedData.materialCode = randomValue(materials);
   }
-  if (mission.expectedData.headerIncoterms) {
+  if (mission.expectedData.headerIncoterms !== undefined) {
     newMission.expectedData.headerIncoterms = randomValue(incoterms);
   }
-  if (mission.expectedData.partnerFunction) {
+  if (mission.expectedData.partnerFunction !== undefined) {
     newMission.expectedData.partnerFunction = randomValue(paymentConds);
   }
-  if (mission.expectedData.quantidade) {
+  if (mission.expectedData.quantidade !== undefined) {
     newMission.expectedData.quantidade = randomValue(quantities);
+  }
+  if (mission.expectedData.setorAtiv !== undefined && mission.expectedData.setorAtiv !== "") {
+    newMission.expectedData.setorAtiv = randomValue(divisions);
+  }
+  if (mission.expectedData.canalDist !== undefined && mission.expectedData.canalDist !== "") {
+    newMission.expectedData.canalDist = randomValue(channels);
   }
   
   // Randomize customer from master if not BP
   if (mission.transaction !== "BP") {
-    const customers = ["208015", "208016", "208017", "208018", "208019"];
+    const customers = ["208015", "208016", "208017", "208018", "208019", "309001", "405002"];
     newMission.expectedData.partnerCode = randomValue(customers);
   }
 
-  // Personalization: inject name and clean dialogue
+  // Personalization and business creativity in Chefe Hugo's request
   const greeting = name ? `Olá, ${name}!` : "Olá Consultor(a)!";
+  const businessScenarios = [
+    "Temos uma urgência na logística:",
+    "Recebi um chamado do diretor comercial:",
+    "Houve uma discrepância no último pedido:",
+    "A AAM LOGÍSTICA precisa de agilidade aqui:",
+    "O cliente está aguardando na linha:",
+    "Processo de auditoria interna detectou uma falha:",
+    "Novo fluxo de distribuição em teste:"
+  ];
+  const scenario = randomValue(businessScenarios);
   
-  newMission.chefeHugoDialog = newMission.chefeHugoDialog
-    .replace(/^Olá Consultor\(a\)!/g, greeting)
-    .replace(/\bAAM LOGÍSTICA\b/g, "AAM LOGÍSTICA LTDA (Cód: 208015)")
-    .replace(/\bMAT-SD-0\d+\b/g, newMission.expectedData.materialCode)
-    .replace(/\b\d+ unidades\b/g, `${newMission.expectedData.quantidade} unidades`)
-    .replace(/\b\d+ peças\b/g, `${newMission.expectedData.quantidade} peças`)
-    .replace(/\bfrete \w+\b/g, `frete ${newMission.expectedData.headerIncoterms}`)
-    .replace(/\bCondição \w+\b/g, `Condição ${newMission.expectedData.partnerFunction}`)
-    .replace(/\bZF\d+\b/g, newMission.expectedData.partnerFunction);
+  // Reconstruct dialog with the new values and scenario
+  let dialog = newMission.chefeHugoDialog;
+  
+  // Replace standard intro
+  dialog = dialog.replace(/^Olá Consultor\(a\)!/g, `${greeting} ${scenario}`);
+  
+  // Inject values
+  dialog = dialog.replace(/\bAAM LOGÍSTICA\b/g, "AAM LOGÍSTICA LTDA");
+  if (newMission.expectedData.materialCode) {
+    dialog = dialog.replace(/\bMAT-SD-\d+\b/g, newMission.expectedData.materialCode);
+  }
+  if (newMission.expectedData.quantidade) {
+    dialog = dialog.replace(/\b\d+ (unidades|peças)\b/g, `${newMission.expectedData.quantidade} $1`);
+  }
+  if (newMission.expectedData.headerIncoterms) {
+    dialog = dialog.replace(/\bfrete (FOB|CIF|EXW|DDP)\b/gi, `frete ${newMission.expectedData.headerIncoterms}`);
+  }
+  if (newMission.expectedData.partnerFunction) {
+    dialog = dialog.replace(/\b(Condição|ZF|ZB)\d+\b/g, newMission.expectedData.partnerFunction);
+  }
+  if (newMission.expectedData.partnerCode && mission.transaction !== "BP") {
+    dialog = dialog.replace(/\b20801\d\b/g, newMission.expectedData.partnerCode);
+  }
+
+  newMission.chefeHugoDialog = dialog;
 
   return newMission;
 };
@@ -1527,13 +1570,9 @@ function SAPSDQuestApp() {
     const nextIdx = getRandomMissionIndex(currentMissionIndex, reinforcementQueue, completedMissions);
     let nextM = missions[nextIdx] || missions[0];
     
-    // If it's a reinforced mission, randomize its data
-    if (nextM && reinforcementQueue.includes(nextM.id)) {
-      nextM = randomizeMissionData(nextM as Mission, userName || "Adriana");
-      setActiveMission(nextM);
-    } else {
-      setActiveMission(null);
-    }
+    // Always randomize mission data to ensure variety and creative business scenarios
+    nextM = randomizeMissionData(nextM as Mission, userName || "Adriana");
+    setActiveMission(nextM);
 
     setCurrentMissionIndex(nextIdx);
     resetGame();
