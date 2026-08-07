@@ -1429,8 +1429,8 @@ function SAPSDQuestApp() {
 
     // Dynamic validation logic based on Transaction
     // Single Source of Truth Validation: Compare directly against activeMission.expectedData
-    const validateField = (fieldKey: keyof typeof formData, expectedKey: keyof typeof activeMission.expectedData, label: string) => {
-      const expected = activeMission.expectedData[expectedKey];
+    const validateField = (fieldKey: keyof typeof formData, expectedKey: keyof typeof currentMission.expectedData, label: string) => {
+      const expected = currentMission.expectedData[expectedKey];
       const actual = formData[fieldKey];
       
       // Only validate if the field is explicitly defined in expectedData for this mission
