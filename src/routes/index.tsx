@@ -3007,7 +3007,7 @@ function SAPSDQuestApp() {
             <div className="bg-slate-50 px-6 py-4 border-b border-slate-200 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Search className="size-5 text-indigo-600" />
-                <h3 className="font-bold text-slate-800">Matchcode: Carteira de Clientes AAM Corp</h3>
+                <h3 className="font-bold text-slate-800">Matchcode: {f1ActiveField?.id === "materialCode" ? "Mestre de Materiais" : "Carteira de Clientes"} AAM Corp</h3>
               </div>
               <Button variant="ghost" size="icon" onClick={() => setIsCustomerSearchOpen(false)} className="hover:bg-slate-200 rounded-full size-8">
                 <X className="size-5" />
@@ -3018,28 +3018,38 @@ function SAPSDQuestApp() {
                 <thead className="bg-slate-100 text-slate-600 font-semibold sticky top-0">
                   <tr>
                     <th className="px-6 py-3 border-b">Código</th>
-                    <th className="px-6 py-3 border-b">Razão Social</th>
-                    <th className="px-6 py-3 border-b">UF</th>
-                    <th className="px-6 py-3 border-b">Canal</th>
+                    <th className="px-6 py-3 border-b">Razão Social/Descrição</th>
+                    <th className="px-6 py-3 border-b">Informação Adicional</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
-                  {CUSTOMER_MASTER.map((c) => (
-                    <tr 
-                      key={c.code} 
-                      className="hover:bg-indigo-50 cursor-pointer transition-colors group"
-                      onClick={() => {
-                      handleInputChange("partnerCode", c.code);
-                      setIsCustomerSearchOpen(false);
-                        toast.success(`Cliente ${c.name} selecionado.`);
-                      }}
-                    >
-                      <td className="px-6 py-4 font-mono text-indigo-600 font-semibold">{c.code}</td>
-                      <td className="px-6 py-4 font-medium text-slate-800">{c.name}</td>
-                      <td className="px-6 py-4 text-slate-500">{c.uf}</td>
-                      <td className="px-6 py-4 text-slate-500">{c.canal}</td>
-                    </tr>
-                  ))}
+                  {(() => {
+                    // isCustomerSearchOpen is used for both Customer and Material searches
+                    // based on which field triggered it.
+                    // To maintain simplicity without adding new state, we check if materialCode has the focus
+                    // but a cleaner way is to use the triggering field's metadata.
+                    const searchType = f1ActiveField?.id === "materialCode" ? "materials" : "customers";
+                    const data = searchType === "materials" ? SAP_MASTER_DATA.materials : SAP_MASTER_DATA.customers;
+                    
+                    return data.map((item: any) => (
+                      <tr 
+                        key={item.code} 
+                        className="hover:bg-indigo-50 cursor-pointer transition-colors group"
+                        onClick={() => {
+                          const targetField = searchType === "materials" ? "materialCode" : "partnerCode";
+                          handleInputChange(targetField, item.code);
+                          setIsCustomerSearchOpen(false);
+                          toast.success(`${searchType === "materials" ? "Material" : "Cliente"} ${item.desc || item.name} selecionado.`);
+                        }}
+                      >
+                        <td className="px-6 py-4 font-mono text-indigo-600 font-semibold">{item.code}</td>
+                        <td className="px-6 py-4 font-medium text-slate-800">{item.desc || item.name}</td>
+                        <td className="px-6 py-4 text-slate-500">
+                          {searchType === "materials" ? "Produto SD" : (item.uf ? `${item.uf} - ${item.canal}` : "Parceiro AAM")}
+                        </td>
+                      </tr>
+                    ));
+                  })()}
                 </tbody>
               </table>
             </div>
