@@ -8,10 +8,10 @@ export interface Mission {
   errorFeedback: string;
   expectedData: {
     tipoOrdem?: string;
-    orgVendas: string;
-    canalDist: string;
-    setorAtiv: string;
-    partnerCode: string;
+    orgVendas?: string;
+    canalDist?: string;
+    setorAtiv?: string;
+    partnerCode?: string;
     materialCode?: string;
     quantidade?: string;
     headerIncoterms?: string;
