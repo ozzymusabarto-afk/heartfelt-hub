@@ -1496,24 +1496,24 @@ function SAPSDQuestApp() {
         const isAudit = currentMission.transaction === "VA02" || currentMission.transaction === "VA03";
         
         let successMsg = "";
+        const pCode = formData.partnerCode || currentMission.expectedData.partnerCode;
+        const oVendas = formData.salesOrg || currentMission.expectedData.orgVendas;
+        
         if (isBP) {
-          successMsg = `Parceiro Comercial ${formData.partnerCode || currentMission.expectedData.partnerCode} verificado com sucesso no cadastro do SAP S/4HANA! Dados fiscais e áreas de vendas validados.`;
+          successMsg = `Parceiro Comercial ${pCode} verificado com sucesso no cadastro da Org. ${oVendas}! Dados fiscais validados.`;
         } else if (isVL01N) {
           const remNum = Math.floor(800000000 + Math.random() * 999999);
-          const ordNum = 450000000 + Math.floor(Math.random() * 1000);
-          successMsg = `Documento de Remessa ${remNum} criado com sucesso para o Pedido ${ordNum}!`;
+          successMsg = `Documento de Remessa ${remNum} criado com sucesso a partir do Pedido de Vendas!`;
         } else if (isVF01) {
           const fatNum = Math.floor(900000000 + Math.random() * 999999);
-          const refNum = currentMission.id.includes("SERVICO") ? 450000000 : 800000000;
-          successMsg = `Fatura/NF-e ${fatNum} emitida com sucesso para o documento ${refNum + Math.floor(Math.random() * 1000)}!`;
+          successMsg = `Fatura/NF-e ${fatNum} emitida com sucesso!`;
         } else if (isReport) {
-          successMsg = "Relatório gerado com sucesso! Nenhuma pendência crítica encontrada para os filtros selecionados.";
+          successMsg = "Relatório gerado com sucesso! Filtros aplicados corretamente.";
         } else if (isAudit) {
-          const ordNum = 450000000 + Math.floor(Math.random() * 1000);
-          successMsg = `Alteração/Auditoria da Ordem ${ordNum} realizada com sucesso no sistema.`;
+          successMsg = `Documento ${selectedTransaction} atualizado com sucesso no sistema.`;
         } else {
           const ordNum = Math.floor(450000000 + Math.random() * 999999);
-          successMsg = `Ordem de Venda ${currentMission.expectedData.tipoOrdem} ${ordNum} criada com sucesso para o cliente ${formData.partnerCode || currentMission.expectedData.partnerCode}!`;
+          successMsg = `${currentMission.expectedData.tipoOrdem || 'Documento'} ${ordNum} criado com sucesso para o cliente ${pCode}!`;
         }
 
         setHintMessage(`🎉 ${successMsg} \n\n${currentMission.successFeedback}`);
