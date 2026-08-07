@@ -79,81 +79,134 @@ const getRandomMissionIndex = (excludeIndex?: number, reinforcementQueue: string
 };
 
 const randomizeMissionData = (mission: Mission, name: string): Mission => {
-  const materials = ["MAT-SD-015", "MAT-SD-020", "MAT-SD-030", "MAT-SD-045", "MAT-PRIME-X", "MAT-ECO-99"];
+  const materials = [
+    { code: "MAT-SD-015", desc: "Cabo de Aço Reforçado" },
+    { code: "MAT-SD-020", desc: "Polímero Industrial G3" },
+    { code: "MAT-SD-030", desc: "Kit de Vedação Premium" },
+    { code: "MAT-SD-045", desc: "Rolamento Blindado" },
+    { code: "MAT-PRIME-X", desc: "Módulo Eletrônico Central" },
+    { code: "MAT-ECO-99", desc: "Lubrificante Sintético" }
+  ];
+  const customers = [
+    { code: "208015", name: "TechBrasil Automação Ltda" },
+    { code: "208016", name: "Distribuidora Sul de Metais" },
+    { code: "208017", name: "Comércio Fictício S/A" },
+    { code: "208018", name: "Logística Integrada Global" },
+    { code: "208019", name: "Manutenção Express ME" },
+    { code: "309001", name: "Indústrias Reunidas do Norte" },
+    { code: "405002", name: "Panteon Construções" }
+  ];
+  
   const incoterms = ["FOB", "CIF", "EXW", "DDP"];
-  const paymentConds = ["ZF30", "ZF60", "ZB00", "Z001", "ZF90"];
+  const paymentConds = ["ZF30", "ZF60", "ZB00", "0001", "ZF90"];
   const quantities = ["5", "12", "28", "45", "67", "110", "250", "500"];
-  const divisions = ["00", "10", "20"];
+  const salesOrgs = ["1000", "2000"];
+  const divisions = ["00", "01", "10", "20"];
   const channels = ["10", "20", "30"];
 
-  const randomValue = (arr: string[]) => arr[Math.floor(Math.random() * arr.length)];
+  const randomValue = (arr: any[]) => arr[Math.floor(Math.random() * arr.length)];
   
-  // Create a deep copy
   const newMission = JSON.parse(JSON.stringify(mission));
   
+  // Randomize master data
+  const selectedMaterial = randomValue(materials);
+  const selectedCustomer = randomValue(customers);
+  const selectedOrg = randomValue(salesOrgs);
+  const selectedChannel = randomValue(channels);
+  const selectedDiv = randomValue(divisions);
+  const selectedQty = randomValue(quantities);
+  const selectedInco = randomValue(incoterms);
+  const selectedPay = randomValue(paymentConds);
+
   // Scramble expected data values
   if (mission.expectedData.materialCode !== undefined) {
-    newMission.expectedData.materialCode = randomValue(materials);
+    newMission.expectedData.materialCode = selectedMaterial.code;
   }
   if (mission.expectedData.headerIncoterms !== undefined) {
-    newMission.expectedData.headerIncoterms = randomValue(incoterms);
+    newMission.expectedData.headerIncoterms = selectedInco;
   }
   if (mission.expectedData.partnerFunction !== undefined) {
-    newMission.expectedData.partnerFunction = randomValue(paymentConds);
+    newMission.expectedData.partnerFunction = selectedPay;
   }
   if (mission.expectedData.quantidade !== undefined) {
-    newMission.expectedData.quantidade = randomValue(quantities);
-  }
-  if (mission.expectedData.setorAtiv !== undefined && mission.expectedData.setorAtiv !== "") {
-    newMission.expectedData.setorAtiv = randomValue(divisions);
-  }
-  if (mission.expectedData.canalDist !== undefined && mission.expectedData.canalDist !== "") {
-    newMission.expectedData.canalDist = randomValue(channels);
+    newMission.expectedData.quantidade = selectedQty;
   }
   
-  // Randomize customer from master if not BP
+  // Always randomize organizational data to increase variety
+  newMission.expectedData.orgVendas = selectedOrg;
+  newMission.expectedData.canalDist = selectedChannel;
+  newMission.expectedData.setorAtiv = selectedDiv;
+  
   if (mission.transaction !== "BP") {
-    const customers = ["208015", "208016", "208017", "208018", "208019", "309001", "405002"];
-    newMission.expectedData.partnerCode = randomValue(customers);
+    newMission.expectedData.partnerCode = selectedCustomer.code;
+  } else {
+    // For BP transaction, we keep the original partner if it's the target of the creation, 
+    // or randomize if it's a general practice
+    if (Math.random() > 0.5) {
+      newMission.expectedData.partnerCode = selectedCustomer.code;
+    }
   }
 
-  // Personalization and business creativity in Chefe Hugo's request
-  // Personalize greeting with fallback
   const greeting = name ? `Olá, ${name}!` : "Olá!";
   
   const businessScenarios = [
-    "Temos uma urgência na logística:",
-    "Recebi um chamado do diretor comercial:",
-    "Houve uma discrepância no último pedido:",
-    "A AAM LOGÍSTICA precisa de agilidade aqui:",
-    "O cliente está aguardando na linha:",
-    "Processo de auditoria interna detectou uma falha:",
-    "Novo fluxo de distribuição em teste:"
+    `Urgência na logística para o cliente ${selectedCustomer.name}:`,
+    `Recebi um chamado do diretor comercial sobre a conta ${selectedCustomer.code}:`,
+    `Discrepância detectada no processamento para ${selectedCustomer.name}:`,
+    `A AAM LOGÍSTICA precisa priorizar o atendimento da ${selectedCustomer.name}:`,
+    `O cliente ${selectedCustomer.name} está aguardando a liberação no sistema:`,
+    `Auditoria interna solicitou revisão imediata do fluxo para ${selectedCustomer.code}:`,
+    `Novo teste de integração iniciado para ${selectedCustomer.name}:`,
+    `Ajuste de estoque urgente para o material ${selectedMaterial.desc}:`
   ];
   const scenario = randomValue(businessScenarios);
   
-  // Reconstruct dialog with the new values and scenario
   let dialog = newMission.chefeHugoDialog;
   
-  // Replace standard intro - handles "Olá Consultor(a)!" pattern
+  // Replace standard intro
   dialog = dialog.replace(/^Olá Consultor\(a\)!/g, `${greeting} ${scenario}`);
   
-  // Inject values
+  // Comprehensive replacement logic for all variables in the dialog
   dialog = dialog.replace(/\bAAM LOGÍSTICA\b/g, "AAM LOGÍSTICA LTDA");
-  if (newMission.expectedData.materialCode) {
-    dialog = dialog.replace(/\bMAT-SD-\d+\b/g, newMission.expectedData.materialCode);
+  
+  // Replace Organization Data in dialog
+  dialog = dialog.replace(/Organização de Vendas \d+/g, `Organização de Vendas ${newMission.expectedData.orgVendas}`);
+  dialog = dialog.replace(/Canal de Distribuição \d+/g, `Canal de Distribuição ${newMission.expectedData.canalDist}`);
+  dialog = dialog.replace(/Setor de Atividade \d+/g, `Setor de Atividade ${newMission.expectedData.setorAtiv}`);
+  
+  // Ensure dialog mentions Org/Channel/Division if they are mandatory
+  const orgInfo = `\n\n[DADOS OBRIGATÓRIOS: Org. Vendas: ${newMission.expectedData.orgVendas}, Canal: ${newMission.expectedData.canalDist}, Setor: ${newMission.expectedData.setorAtiv}]`;
+  if (!dialog.includes(newMission.expectedData.orgVendas)) {
+    dialog += orgInfo;
   }
+
+  if (newMission.expectedData.materialCode) {
+    // Replace material code or add it
+    const materialRegex = /\bMAT-[A-Z0-9-]+\b/g;
+    if (materialRegex.test(dialog)) {
+      dialog = dialog.replace(materialRegex, `${newMission.expectedData.materialCode} (${selectedMaterial.desc})`);
+    } else {
+      dialog = dialog.replace(/material/i, `material ${newMission.expectedData.materialCode} (${selectedMaterial.desc})`);
+    }
+  }
+  
   if (newMission.expectedData.quantidade) {
     dialog = dialog.replace(/\b\d+ (unidades|peças)\b/g, `${newMission.expectedData.quantidade} $1`);
   }
+  
   if (newMission.expectedData.headerIncoterms) {
     dialog = dialog.replace(/\bfrete (FOB|CIF|EXW|DDP)\b/gi, `frete ${newMission.expectedData.headerIncoterms}`);
   }
+  
   if (newMission.expectedData.partnerFunction) {
-    dialog = dialog.replace(/\b(Condição|ZF|ZB)\d+\b/g, newMission.expectedData.partnerFunction);
+    dialog = dialog.replace(/\b(Condição|ZF|ZB|000)\d*\b/g, newMission.expectedData.partnerFunction);
   }
-  if (newMission.expectedData.partnerCode && mission.transaction !== "BP") {
-    dialog = dialog.replace(/\b20801\d\b/g, newMission.expectedData.partnerCode);
+  
+  if (newMission.expectedData.partnerCode) {
+    const customerRegex = /\b(20801\d|309001|405002)\b/g;
+    if (customerRegex.test(dialog)) {
+      dialog = dialog.replace(customerRegex, newMission.expectedData.partnerCode);
+    }
   }
 
   newMission.chefeHugoDialog = dialog;
