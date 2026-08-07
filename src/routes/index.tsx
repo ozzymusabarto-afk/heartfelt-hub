@@ -86,7 +86,8 @@ const randomizeMissionData = (mission: Mission, name: string): Mission => {
   
   const newMission = JSON.parse(JSON.stringify(mission));
   
-  // Randomize master data using Single Source of Truth (SAP_MASTER_DATA)
+  // To avoid repetition in 3 missions, we'd need state outside this pure-ish function.
+  // But for now, let's just make the selection as random as possible from the expanded pool.
   const selectedMaterial = randomValue(materials);
   const selectedCustomer = randomValue(customers);
   const selectedOrg = randomValue(salesOrgs);
@@ -97,16 +98,16 @@ const randomizeMissionData = (mission: Mission, name: string): Mission => {
   const selectedPay = randomValue(paymentConds);
 
   // Scramble expected data values based on the central mission object
-  if (mission.expectedData.materialCode !== undefined) {
+  if (newMission.expectedData.materialCode !== undefined && newMission.expectedData.materialCode !== "") {
     newMission.expectedData.materialCode = selectedMaterial.code;
   }
-  if (mission.expectedData.headerIncoterms !== undefined) {
+  if (newMission.expectedData.headerIncoterms !== undefined) {
     newMission.expectedData.headerIncoterms = selectedInco;
   }
-  if (mission.expectedData.partnerFunction !== undefined) {
+  if (newMission.expectedData.partnerFunction !== undefined) {
     newMission.expectedData.partnerFunction = selectedPay;
   }
-  if (mission.expectedData.quantidade !== undefined) {
+  if (newMission.expectedData.quantidade !== undefined && newMission.expectedData.quantidade !== "") {
     newMission.expectedData.quantidade = selectedQty;
   }
   
@@ -114,12 +115,12 @@ const randomizeMissionData = (mission: Mission, name: string): Mission => {
   newMission.expectedData.canalDist = selectedChannel.code;
   newMission.expectedData.setorAtiv = selectedDiv.code;
   
-  if (mission.transaction !== "BP") {
+  if (newMission.transaction !== "BP") {
     newMission.expectedData.partnerCode = selectedCustomer.code;
   } else {
-    if (Math.random() > 0.5) {
-      newMission.expectedData.partnerCode = selectedCustomer.code;
-    }
+    // For BP, sometimes it validates an existing code, sometimes it might be creating.
+    // Let's ensure it always has a valid customer code to validate against.
+    newMission.expectedData.partnerCode = selectedCustomer.code;
   }
 
   const greeting = name ? `Olá, ${name}!` : "Olá!";
@@ -153,7 +154,14 @@ const randomizeMissionData = (mission: Mission, name: string): Mission => {
     dialog += `O frete acordado é ${newMission.expectedData.headerIncoterms} e a condição de pagamento deve ser ${newMission.expectedData.partnerFunction}. `;
   }
 
-  dialog += `\n\n[DADOS OBRIGATÓRIOS: Org. Vendas: ${newMission.expectedData.orgVendas}, Canal: ${newMission.expectedData.canalDist}, Setor: ${newMission.expectedData.setorAtiv}]`;
+  // Ensure all required fields are mentioned in the dialog or the data block
+  dialog += `\n\n[DADOS OBRIGATÓRIOS: Org. Vendas: ${newMission.expectedData.orgVendas}, Canal: ${newMission.expectedData.canalDist}, Setor: ${newMission.expectedData.setorAtiv}`;
+  
+  if (newMission.expectedData.tipoOrdem) {
+    dialog += `, Tipo: ${newMission.expectedData.tipoOrdem}`;
+  }
+  
+  dialog += `]`;
 
   newMission.chefeHugoDialog = dialog;
 
@@ -988,6 +996,7 @@ function SAPSDQuestApp() {
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const [isPDFPreviewOpen, setIsPDFPreviewOpen] = useState(false);
   const [f1ActiveField, setF1ActiveField] = useState<{
+    id: string; // Adicionado id
     label: string;
     table: string;
     concept: string;
@@ -1087,7 +1096,7 @@ function SAPSDQuestApp() {
   const openF1ForField = (field: string) => {
     const meta = FIELD_METADATA[field];
     if (meta) {
-      setF1ActiveField(meta);
+      setF1ActiveField({ ...meta, id: field });
       setIsF1ModalOpen(true);
     }
   };
@@ -2241,7 +2250,7 @@ function SAPSDQuestApp() {
                     if (selectedTransaction === "BP") {
                       if (isHeader) {
                         fieldsToShow = [
-                          { id: "partnerCode", label: "Cód. Parceiro Comercial", hasSearch: true },
+                          { id: "partnerCode", label: "Cód. Parceiro Comercial", hasSearch: "customers" },
                           { id: "partnerCategory", label: "Categoria", type: "select", options: ["Empresa", "Pessoa"] },
                           { id: "partnerFunction", label: "Função", type: "select", options: ["Cliente SD", "Fornecedor"] },
                         ];
@@ -2281,7 +2290,7 @@ function SAPSDQuestApp() {
                           { id: "salesOrg", label: "Org. Vendas", type: "select", options: SAP_MASTER_DATA.salesOrgs.map(o => o.code) },
                           { id: "distChannel", label: "Canal Dist.", type: "select", options: SAP_MASTER_DATA.channels.map(o => o.code) },
                           { id: "division", label: "Setor Ativ.", type: "select", options: SAP_MASTER_DATA.divisions.map(o => o.code) },
-                          { id: "partnerCode", label: "Emissor", hasSearch: true },
+                          { id: "partnerCode", label: "Emissor", hasSearch: "customers" },
                           { id: "orderDate", label: "Data Pedido" },
                           { id: "partnerCategory", label: "Nº Pedido" },
                           { id: "partnerFunction", label: "Cond. Pagto.", type: "select", options: SAP_MASTER_DATA.paymentConds },
@@ -2289,7 +2298,7 @@ function SAPSDQuestApp() {
                         ];
                       } else {
                         fieldsToShow = [
-                          { id: "materialCode", label: "Material", type: "select", options: SAP_MASTER_DATA.materials.map(o => o.code) },
+                          { id: "materialCode", label: "Material", hasSearch: "materials" },
                           { id: "quantity", label: "Quantidade" },
                           { id: "plant", label: "Centro / Plant", type: "select", options: ["1000", "2000"] },
                           { id: "storageLocation", label: "Depósito", type: "select", options: ["SL01", "SL02"] },
@@ -2302,16 +2311,17 @@ function SAPSDQuestApp() {
                       return (
                         <div key={field.id} className="space-y-1">
                           <div className="flex items-center justify-between">
-                            <Label className="text-[9px] font-black text-slate-400 uppercase tracking-wider">{field.label}</Label>
-                            <Button 
-                              variant="ghost" 
-                              size="icon" 
-                              className="size-4 h-4 w-4 p-0 text-slate-300 hover:text-indigo-600 transition-colors"
-                              onClick={() => openF1ForField(field.id)}
-                              title="Ajuda F1"
-                            >
-                              <HelpCircle className="size-2.5" />
-                            </Button>
+                             <Label className="text-[9px] font-black text-slate-400 uppercase tracking-wider">{field.label}</Label>
+                             <Button 
+                               variant="ghost" 
+                               size="icon" 
+                               className="size-4 h-4 w-4 p-0 text-slate-300 hover:text-indigo-600 transition-colors"
+                               onClick={() => openF1ForField(field.id)}
+                               title="Ajuda F1"
+                               type="button"
+                             >
+                               <HelpCircle className="size-2.5" />
+                             </Button>
                           </div>
                           {field.type === "select" ? (
                             <Select value={formData[fieldId] || ""} onValueChange={(v) => handleInputChange(field.id, v)}>
@@ -2320,19 +2330,26 @@ function SAPSDQuestApp() {
                             </Select>
                           ) : (
                             <div className="relative group">
-                              <Input 
-                                value={formData[fieldId] || ""} 
-                                onChange={(e) => handleInputChange(field.id, e.target.value)} 
-                                className={`h-9 rounded-lg border-slate-200 text-xs placeholder:text-slate-300 focus:ring-indigo-600 ${field.hasSearch ? "pr-8" : ""} ${validationErrors.includes(field.id) ? "border-red-400 ring-1 ring-red-400" : ""}`}
-                              />
-                              {field.hasSearch && (
-                                <Button
-                                  size="icon"
-                                  variant="ghost"
-                                  className="absolute right-0 top-0 h-9 w-8 text-slate-400 hover:text-indigo-600"
-                                  onClick={() => setIsCustomerSearchOpen(true)}
-                                  title="Busca F4 (Matchcode)"
-                                >
+                               <Input 
+                                 value={formData[fieldId] || ""} 
+                                 onChange={(e) => handleInputChange(field.id, e.target.value)} 
+                                 className={`h-9 rounded-lg border-slate-200 text-xs placeholder:text-slate-300 focus:ring-indigo-600 ${field.hasSearch ? "pr-8" : ""} ${validationErrors.includes(field.id) ? "border-red-400 ring-1 ring-red-400" : ""}`}
+                                 onFocus={() => {
+                                   if (field.hasSearch) openF1ForField(field.id);
+                                 }}
+                               />
+                               {field.hasSearch && (
+                                 <Button
+                                   size="icon"
+                                   variant="ghost"
+                                   type="button"
+                                   className="absolute right-0 top-0 h-9 w-8 text-slate-400 hover:text-indigo-600"
+                                   onClick={() => {
+                                      openF1ForField(field.id);
+                                      setIsCustomerSearchOpen(true);
+                                   }}
+                                   title="Busca F4 (Matchcode)"
+                                 >
                                   <Search className="size-3" />
                                 </Button>
                               )}
@@ -2999,7 +3016,7 @@ function SAPSDQuestApp() {
             <div className="bg-slate-50 px-6 py-4 border-b border-slate-200 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Search className="size-5 text-indigo-600" />
-                <h3 className="font-bold text-slate-800">Matchcode: Carteira de Clientes AAM Corp</h3>
+                <h3 className="font-bold text-slate-800">Matchcode: {f1ActiveField?.id === "materialCode" ? "Mestre de Materiais" : "Carteira de Clientes"} AAM Corp</h3>
               </div>
               <Button variant="ghost" size="icon" onClick={() => setIsCustomerSearchOpen(false)} className="hover:bg-slate-200 rounded-full size-8">
                 <X className="size-5" />
@@ -3010,28 +3027,38 @@ function SAPSDQuestApp() {
                 <thead className="bg-slate-100 text-slate-600 font-semibold sticky top-0">
                   <tr>
                     <th className="px-6 py-3 border-b">Código</th>
-                    <th className="px-6 py-3 border-b">Razão Social</th>
-                    <th className="px-6 py-3 border-b">UF</th>
-                    <th className="px-6 py-3 border-b">Canal</th>
+                    <th className="px-6 py-3 border-b">Razão Social/Descrição</th>
+                    <th className="px-6 py-3 border-b">Informação Adicional</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
-                  {CUSTOMER_MASTER.map((c) => (
-                    <tr 
-                      key={c.code} 
-                      className="hover:bg-indigo-50 cursor-pointer transition-colors group"
-                      onClick={() => {
-                      handleInputChange("partnerCode", c.code);
-                      setIsCustomerSearchOpen(false);
-                        toast.success(`Cliente ${c.name} selecionado.`);
-                      }}
-                    >
-                      <td className="px-6 py-4 font-mono text-indigo-600 font-semibold">{c.code}</td>
-                      <td className="px-6 py-4 font-medium text-slate-800">{c.name}</td>
-                      <td className="px-6 py-4 text-slate-500">{c.uf}</td>
-                      <td className="px-6 py-4 text-slate-500">{c.canal}</td>
-                    </tr>
-                  ))}
+                  {(() => {
+                    // isCustomerSearchOpen is used for both Customer and Material searches
+                    // based on which field triggered it.
+                    // To maintain simplicity without adding new state, we check if materialCode has the focus
+                    // but a cleaner way is to use the triggering field's metadata.
+                    const searchType = f1ActiveField?.id === "materialCode" ? "materials" : "customers";
+                    const data = searchType === "materials" ? SAP_MASTER_DATA.materials : SAP_MASTER_DATA.customers;
+                    
+                    return data.map((item: any) => (
+                      <tr 
+                        key={item.code} 
+                        className="hover:bg-indigo-50 cursor-pointer transition-colors group"
+                        onClick={() => {
+                          const targetField = searchType === "materials" ? "materialCode" : "partnerCode";
+                          handleInputChange(targetField, item.code);
+                          setIsCustomerSearchOpen(false);
+                          toast.success(`${searchType === "materials" ? "Material" : "Cliente"} ${item.desc || item.name} selecionado.`);
+                        }}
+                      >
+                        <td className="px-6 py-4 font-mono text-indigo-600 font-semibold">{item.code}</td>
+                        <td className="px-6 py-4 font-medium text-slate-800">{item.desc || item.name}</td>
+                        <td className="px-6 py-4 text-slate-500">
+                          {searchType === "materials" ? "Produto SD" : (item.uf ? `${item.uf} - ${item.canal}` : "Parceiro AAM")}
+                        </td>
+                      </tr>
+                    ));
+                  })()}
                 </tbody>
               </table>
             </div>
