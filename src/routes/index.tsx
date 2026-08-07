@@ -118,7 +118,9 @@ const randomizeMissionData = (mission: Mission, name: string): Mission => {
   }
 
   // Personalization and business creativity in Chefe Hugo's request
-  const greeting = name ? `Olá, ${name}!` : "Olá Consultor(a)!";
+  // Personalize greeting with fallback
+  const greeting = name ? `Olá, ${name}!` : "Olá!";
+  
   const businessScenarios = [
     "Temos uma urgência na logística:",
     "Recebi um chamado do diretor comercial:",
@@ -133,7 +135,7 @@ const randomizeMissionData = (mission: Mission, name: string): Mission => {
   // Reconstruct dialog with the new values and scenario
   let dialog = newMission.chefeHugoDialog;
   
-  // Replace standard intro
+  // Replace standard intro - handles "Olá Consultor(a)!" pattern
   dialog = dialog.replace(/^Olá Consultor\(a\)!/g, `${greeting} ${scenario}`);
   
   // Inject values
