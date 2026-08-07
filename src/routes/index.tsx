@@ -14,7 +14,7 @@ import {
 import { 
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area 
 } from 'recharts';
-import { MISSIONS as missions, type Mission } from "@/data/missions";
+import { MISSIONS as missions, SAP_MASTER_DATA, type Mission } from "@/data/missions";
 import { CERTIFICATION_QUESTIONS, type CertificationQuestion } from "@/data/certificationQuestions";
 import { PROFILE_TEST_QUESTIONS, PROFILE_METADATA, type SAPProfile, type ProfileQuestion } from "@/data/profileTestQuestions";
 import { SAP_MODULES, type SAPModule } from "@/data/sapModules";
@@ -79,36 +79,14 @@ const getRandomMissionIndex = (excludeIndex?: number, reinforcementQueue: string
 };
 
 const randomizeMissionData = (mission: Mission, name: string): Mission => {
-  const materials = [
-    { code: "MAT-SD-015", desc: "Cabo de Aço Reforçado" },
-    { code: "MAT-SD-020", desc: "Polímero Industrial G3" },
-    { code: "MAT-SD-030", desc: "Kit de Vedação Premium" },
-    { code: "MAT-SD-045", desc: "Rolamento Blindado" },
-    { code: "MAT-PRIME-X", desc: "Módulo Eletrônico Central" },
-    { code: "MAT-ECO-99", desc: "Lubrificante Sintético" }
-  ];
-  const customers = [
-    { code: "208015", name: "TechBrasil Automação Ltda" },
-    { code: "208016", name: "Distribuidora Sul de Metais" },
-    { code: "208017", name: "Comércio Fictício S/A" },
-    { code: "208018", name: "Logística Integrada Global" },
-    { code: "208019", name: "Manutenção Express ME" },
-    { code: "309001", name: "Indústrias Reunidas do Norte" },
-    { code: "405002", name: "Panteon Construções" }
-  ];
-  
-  const incoterms = ["FOB", "CIF", "EXW", "DDP"];
-  const paymentConds = ["ZF30", "ZF60", "ZB00", "0001", "ZF90"];
+  const { materials, customers, incoterms, paymentConds, salesOrgs, divisions, channels } = SAP_MASTER_DATA;
   const quantities = ["5", "12", "28", "45", "67", "110", "250", "500"];
-  const salesOrgs = ["1000", "2000"];
-  const divisions = ["00", "01", "10", "20"];
-  const channels = ["10", "20", "30"];
 
   const randomValue = (arr: any[]) => arr[Math.floor(Math.random() * arr.length)];
   
   const newMission = JSON.parse(JSON.stringify(mission));
   
-  // Randomize master data
+  // Randomize master data using Single Source of Truth (SAP_MASTER_DATA)
   const selectedMaterial = randomValue(materials);
   const selectedCustomer = randomValue(customers);
   const selectedOrg = randomValue(salesOrgs);
@@ -118,7 +96,7 @@ const randomizeMissionData = (mission: Mission, name: string): Mission => {
   const selectedInco = randomValue(incoterms);
   const selectedPay = randomValue(paymentConds);
 
-  // Scramble expected data values
+  // Scramble expected data values based on the central mission object
   if (mission.expectedData.materialCode !== undefined) {
     newMission.expectedData.materialCode = selectedMaterial.code;
   }
@@ -132,16 +110,13 @@ const randomizeMissionData = (mission: Mission, name: string): Mission => {
     newMission.expectedData.quantidade = selectedQty;
   }
   
-  // Always randomize organizational data to increase variety
-  newMission.expectedData.orgVendas = selectedOrg;
-  newMission.expectedData.canalDist = selectedChannel;
-  newMission.expectedData.setorAtiv = selectedDiv;
+  newMission.expectedData.orgVendas = selectedOrg.code;
+  newMission.expectedData.canalDist = selectedChannel.code;
+  newMission.expectedData.setorAtiv = selectedDiv.code;
   
   if (mission.transaction !== "BP") {
     newMission.expectedData.partnerCode = selectedCustomer.code;
   } else {
-    // For BP transaction, we keep the original partner if it's the target of the creation, 
-    // or randomize if it's a general practice
     if (Math.random() > 0.5) {
       newMission.expectedData.partnerCode = selectedCustomer.code;
     }
@@ -161,53 +136,24 @@ const randomizeMissionData = (mission: Mission, name: string): Mission => {
   ];
   const scenario = randomValue(businessScenarios);
   
-  let dialog = newMission.chefeHugoDialog;
+  // Build dialog dynamically using the exact properties of the randomized object
+  let dialog = `${greeting} ${scenario}\n\n`;
   
-  // Replace standard intro
-  dialog = dialog.replace(/^Olá Consultor\(a\)!/g, `${greeting} ${scenario}`);
-  
-  // Comprehensive replacement logic for all variables in the dialog
-  dialog = dialog.replace(/\bAAM LOGÍSTICA\b/g, "AAM LOGÍSTICA LTDA");
-  
-  // Replace Organization Data in dialog
-  dialog = dialog.replace(/Organização de Vendas \d+/g, `Organização de Vendas ${newMission.expectedData.orgVendas}`);
-  dialog = dialog.replace(/Canal de Distribuição \d+/g, `Canal de Distribuição ${newMission.expectedData.canalDist}`);
-  dialog = dialog.replace(/Setor de Atividade \d+/g, `Setor de Atividade ${newMission.expectedData.setorAtiv}`);
-  
-  // Ensure dialog mentions Org/Channel/Division if they are mandatory
-  const orgInfo = `\n\n[DADOS OBRIGATÓRIOS: Org. Vendas: ${newMission.expectedData.orgVendas}, Canal: ${newMission.expectedData.canalDist}, Setor: ${newMission.expectedData.setorAtiv}]`;
-  if (!dialog.includes(newMission.expectedData.orgVendas)) {
-    dialog += orgInfo;
+  if (newMission.transaction === "BP") {
+    dialog += `Precisamos validar o cadastro do Parceiro de Negócios (BP) código ${newMission.expectedData.partnerCode}. `;
+  } else {
+    dialog += `O cliente ${newMission.expectedData.partnerCode} (${selectedCustomer.name}) solicitou uma operação de ${newMission.transaction}. `;
   }
 
   if (newMission.expectedData.materialCode) {
-    // Replace material code or add it
-    const materialRegex = /\bMAT-[A-Z0-9-]+\b/g;
-    if (materialRegex.test(dialog)) {
-      dialog = dialog.replace(materialRegex, `${newMission.expectedData.materialCode} (${selectedMaterial.desc})`);
-    } else {
-      dialog = dialog.replace(/material/i, `material ${newMission.expectedData.materialCode} (${selectedMaterial.desc})`);
-    }
+    dialog += `Utilize o material ${newMission.expectedData.materialCode} (${selectedMaterial.desc}) com uma quantidade de ${newMission.expectedData.quantidade} unidades. `;
   }
-  
-  if (newMission.expectedData.quantidade) {
-    dialog = dialog.replace(/\b\d+ (unidades|peças)\b/g, `${newMission.expectedData.quantidade} $1`);
-  }
-  
+
   if (newMission.expectedData.headerIncoterms) {
-    dialog = dialog.replace(/\bfrete (FOB|CIF|EXW|DDP)\b/gi, `frete ${newMission.expectedData.headerIncoterms}`);
+    dialog += `O frete acordado é ${newMission.expectedData.headerIncoterms} e a condição de pagamento deve ser ${newMission.expectedData.partnerFunction}. `;
   }
-  
-  if (newMission.expectedData.partnerFunction) {
-    dialog = dialog.replace(/\b(Condição|ZF|ZB|000)\d*\b/g, newMission.expectedData.partnerFunction);
-  }
-  
-  if (newMission.expectedData.partnerCode) {
-    const customerRegex = /\b(20801\d|309001|405002)\b/g;
-    if (customerRegex.test(dialog)) {
-      dialog = dialog.replace(customerRegex, newMission.expectedData.partnerCode);
-    }
-  }
+
+  dialog += `\n\n[DADOS OBRIGATÓRIOS: Org. Vendas: ${newMission.expectedData.orgVendas}, Canal: ${newMission.expectedData.canalDist}, Setor: ${newMission.expectedData.setorAtiv}]`;
 
   newMission.chefeHugoDialog = dialog;
 
@@ -1482,49 +1428,45 @@ function SAPSDQuestApp() {
     } 
 
     // Dynamic validation logic based on Transaction
-    if (selectedTransaction === "BP") {
-      if (!formData.partnerCode || (currentMission.expectedData.partnerCode && formData.partnerCode !== currentMission.expectedData.partnerCode)) {
-        errors.push("partnerCode");
-        localHint = `Código do Parceiro incorreto. Esperado: ${currentMission.expectedData.partnerCode}`;
-      } else if (!formData.salesOrg || (currentMission.expectedData.orgVendas && formData.salesOrg !== currentMission.expectedData.orgVendas)) {
-        errors.push("salesOrg");
-        localHint = `Organização de Vendas incorreta. Esperado: ${currentMission.expectedData.orgVendas}`;
-      } else if (currentMission.expectedData.canalDist && (!formData.distChannel || formData.distChannel !== currentMission.expectedData.canalDist)) {
-        errors.push("distChannel");
-        localHint = `Canal de Distribuição incorreto. Esperado: ${currentMission.expectedData.canalDist}`;
-      } else if (currentMission.expectedData.setorAtiv && (!formData.division || formData.division !== currentMission.expectedData.setorAtiv)) {
-        errors.push("division");
-        localHint = `Setor de Atividade incorreto. Esperado: ${currentMission.expectedData.setorAtiv}`;
-      }
-    } else if (selectedTransaction === "VL01N") {
-      if (!formData.salesOrg || formData.salesOrg !== "1000") {
-        errors.push("salesOrg");
-        localHint = `Ponto de Expedição incorreto. Esperado: 1000`;
-      }
-    } else if (selectedTransaction === "VF01") {
-       // Logic for billing
-    } else {
-      // Standard Sales Orders (VA01, etc)
-      const validateField = (fieldKey: keyof typeof formData, expectedKey: keyof typeof currentMission.expectedData, label: string) => {
-        const expected = currentMission.expectedData[expectedKey];
-        // Only validate if the field is present in expectedData and is not an empty string
-        if (expected !== undefined && expected !== "" && formData[fieldKey] !== expected) {
+    // Single Source of Truth Validation: Compare directly against activeMission.expectedData
+    const validateField = (fieldKey: keyof typeof formData, expectedKey: keyof typeof currentMission.expectedData, label: string) => {
+      const expected = currentMission.expectedData[expectedKey];
+      const actual = formData[fieldKey];
+      
+      // Only validate if the field is explicitly defined in expectedData for this mission
+      if (expected !== undefined && expected !== "") {
+        if (actual !== expected) {
           errors.push(fieldKey);
           localHint = `${label} incorreto. Esperado: ${expected}`;
           return false;
         }
-        return true;
-      };
+      }
+      return true;
+    };
 
+    if (selectedTransaction === "BP") {
+      validateField("partnerCode", "partnerCode", "Código do Parceiro");
+      validateField("salesOrg", "orgVendas", "Org. Vendas");
+      validateField("distChannel", "canalDist", "Canal de Distribuição");
+      validateField("division", "setorAtiv", "Setor de Atividade");
+      validateField("partnerFunction", "partnerFunction", "Função/Condição");
+    } else if (selectedTransaction === "VL01N") {
+      validateField("salesOrg", "orgVendas", "Ponto de Expedição");
+      validateField("partnerCategory", "partnerCode", "Ordem de Referência");
+    } else if (selectedTransaction === "VF01") {
+      validateField("orderType", "tipoOrdem", "Tipo de Fatura");
+      validateField("partnerCategory", "partnerCode", "Documento de Referência");
+    } else {
+      // Standard Sales Orders (VA01, VA02, etc)
       validateField("orderType", "tipoOrdem", "Tipo de ordem");
       validateField("salesOrg", "orgVendas", "Org. Vendas");
+      validateField("distChannel", "canalDist", "Canal de Distribuição");
+      validateField("division", "setorAtiv", "Setor de Atividade");
       validateField("partnerCode", "partnerCode", "Cliente");
       validateField("materialCode", "materialCode", "Material");
       validateField("incoterms", "headerIncoterms", "Incoterms");
-      validateField("distChannel", "canalDist", "Canal de Distribuição");
       validateField("quantity", "quantidade", "Quantidade");
-      validateField("division", "setorAtiv", "Setor de Atividade");
-      validateField("partnerFunction", "partnerFunction", "Condição de Pagamento/Função");
+      validateField("partnerFunction", "partnerFunction", "Condição de Pagamento");
     }
 
     if (isSuperAdmin) {
@@ -1554,24 +1496,24 @@ function SAPSDQuestApp() {
         const isAudit = currentMission.transaction === "VA02" || currentMission.transaction === "VA03";
         
         let successMsg = "";
+        const pCode = formData.partnerCode || currentMission.expectedData.partnerCode;
+        const oVendas = formData.salesOrg || currentMission.expectedData.orgVendas;
+        
         if (isBP) {
-          successMsg = `Parceiro Comercial ${formData.partnerCode || currentMission.expectedData.partnerCode} verificado com sucesso no cadastro do SAP S/4HANA! Dados fiscais e áreas de vendas validados.`;
+          successMsg = `Parceiro Comercial ${pCode} verificado com sucesso no cadastro da Org. ${oVendas}! Dados fiscais validados.`;
         } else if (isVL01N) {
           const remNum = Math.floor(800000000 + Math.random() * 999999);
-          const ordNum = 450000000 + Math.floor(Math.random() * 1000);
-          successMsg = `Documento de Remessa ${remNum} criado com sucesso para o Pedido ${ordNum}!`;
+          successMsg = `Documento de Remessa ${remNum} criado com sucesso a partir do Pedido de Vendas!`;
         } else if (isVF01) {
           const fatNum = Math.floor(900000000 + Math.random() * 999999);
-          const refNum = currentMission.id.includes("SERVICO") ? 450000000 : 800000000;
-          successMsg = `Fatura/NF-e ${fatNum} emitida com sucesso para o documento ${refNum + Math.floor(Math.random() * 1000)}!`;
+          successMsg = `Fatura/NF-e ${fatNum} emitida com sucesso!`;
         } else if (isReport) {
-          successMsg = "Relatório gerado com sucesso! Nenhuma pendência crítica encontrada para os filtros selecionados.";
+          successMsg = "Relatório gerado com sucesso! Filtros aplicados corretamente.";
         } else if (isAudit) {
-          const ordNum = 450000000 + Math.floor(Math.random() * 1000);
-          successMsg = `Alteração/Auditoria da Ordem ${ordNum} realizada com sucesso no sistema.`;
+          successMsg = `Documento ${selectedTransaction} atualizado com sucesso no sistema.`;
         } else {
           const ordNum = Math.floor(450000000 + Math.random() * 999999);
-          successMsg = `Ordem de Venda ${currentMission.expectedData.tipoOrdem} ${ordNum} criada com sucesso para o cliente ${formData.partnerCode || currentMission.expectedData.partnerCode}!`;
+          successMsg = `${currentMission.expectedData.tipoOrdem || 'Documento'} ${ordNum} criado com sucesso para o cliente ${pCode}!`;
         }
 
         setHintMessage(`🎉 ${successMsg} \n\n${currentMission.successFeedback}`);
@@ -2305,9 +2247,9 @@ function SAPSDQuestApp() {
                         ];
                       } else {
                         fieldsToShow = [
-                          { id: "salesOrg", label: "Org. Vendas", type: "select", options: ["1000", "2000"] },
-                          { id: "distChannel", label: "Canal Dist.", type: "select", options: ["10", "20", "30"] },
-                          { id: "division", label: "Setor Ativ.", type: "select", options: ["00", "01", "10", "20"] },
+                          { id: "salesOrg", label: "Org. Vendas", type: "select", options: SAP_MASTER_DATA.salesOrgs.map(o => o.code) },
+                          { id: "distChannel", label: "Canal Dist.", type: "select", options: SAP_MASTER_DATA.channels.map(o => o.code) },
+                          { id: "division", label: "Setor Ativ.", type: "select", options: SAP_MASTER_DATA.divisions.map(o => o.code) },
                         ];
                       }
                     } else if (selectedTransaction === "VL01N") {
@@ -2336,18 +2278,18 @@ function SAPSDQuestApp() {
                       if (isHeader) {
                         fieldsToShow = [
                           { id: "orderType", label: "Tipo", type: "select", options: ["OR", "QT", "ZBN", "RE"] },
-                          { id: "salesOrg", label: "Org. Vendas", type: "select", options: ["1000", "2000"] },
-                          { id: "distChannel", label: "Canal Dist.", type: "select", options: ["10", "20", "30"] },
-                          { id: "division", label: "Setor Ativ.", type: "select", options: ["00", "01", "10", "20"] },
+                          { id: "salesOrg", label: "Org. Vendas", type: "select", options: SAP_MASTER_DATA.salesOrgs.map(o => o.code) },
+                          { id: "distChannel", label: "Canal Dist.", type: "select", options: SAP_MASTER_DATA.channels.map(o => o.code) },
+                          { id: "division", label: "Setor Ativ.", type: "select", options: SAP_MASTER_DATA.divisions.map(o => o.code) },
                           { id: "partnerCode", label: "Emissor", hasSearch: true },
                           { id: "orderDate", label: "Data Pedido" },
                           { id: "partnerCategory", label: "Nº Pedido" },
-                          { id: "partnerFunction", label: "Cond. Pagto.", type: "select", options: ["ZF30", "ZB00", "ZF60", "0001", "ZF90"] },
-                          { id: "incoterms", label: "Incoterms", type: "select", options: ["FOB", "CIF", "EXW", "DDP"] },
+                          { id: "partnerFunction", label: "Cond. Pagto.", type: "select", options: SAP_MASTER_DATA.paymentConds },
+                          { id: "incoterms", label: "Incoterms", type: "select", options: SAP_MASTER_DATA.incoterms },
                         ];
                       } else {
                         fieldsToShow = [
-                          { id: "materialCode", label: "Material", type: "select", options: ["MAT-SD-015", "MAT-SD-020", "MAT-SD-030", "MAT-SD-045", "MAT-PRIME-X", "MAT-ECO-99"] },
+                          { id: "materialCode", label: "Material", type: "select", options: SAP_MASTER_DATA.materials.map(o => o.code) },
                           { id: "quantity", label: "Quantidade" },
                           { id: "plant", label: "Centro / Plant", type: "select", options: ["1000", "2000"] },
                           { id: "storageLocation", label: "Depósito", type: "select", options: ["SL01", "SL02"] },
