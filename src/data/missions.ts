@@ -32,24 +32,34 @@ export interface Mission {
 export const SAP_MASTER_DATA = {
   salesOrgs: [
     { code: "1000", name: "AAM Vendas São Paulo" },
-    { code: "2000", name: "AAM Vendas Rio de Janeiro" }
+    { code: "2000", name: "AAM Vendas Rio de Janeiro" },
+    { code: "3000", name: "AAM Vendas Curitiba" },
+    { code: "4000", name: "AAM Vendas Porto Alegre" }
   ],
   channels: [
     { code: "10", name: "Venda Direta" },
     { code: "20", name: "Distribuição" },
-    { code: "30", name: "Exportação" }
+    { code: "30", name: "Exportação" },
+    { code: "40", name: "Venda Online" }
   ],
   divisions: [
     { code: "00", name: "Geral" },
     { code: "01", name: "Peças" },
     { code: "10", name: "Serviços" },
-    { code: "20", name: "Projetos" }
+    { code: "20", name: "Projetos" },
+    { code: "30", name: "Insumos" }
   ],
   materials: [
+    { code: "MAT-SD-001", desc: "Parafuso Sextavado Aço G5" },
+    { code: "MAT-SD-002", desc: "Arruela de Pressão Industrial" },
+    { code: "MAT-SD-003", desc: "Eixo de Transmissão 40mm" },
+    { code: "MAT-SD-004", desc: "Engrenagem Helicoidal" },
+    { code: "MAT-SD-005", desc: "Bomba Hidráulica de Sucção" },
     { code: "MAT-SD-015", desc: "Cabo de Aço Reforçado" },
     { code: "MAT-SD-020", desc: "Polímero Industrial G3" },
     { code: "MAT-SD-030", desc: "Kit de Vedação Premium" },
     { code: "MAT-SD-045", desc: "Rolamento Blindado" },
+    { code: "MAT-SD-060", desc: "Pistão Pneumático 100psi" },
     { code: "MAT-PRIME-X", desc: "Módulo Eletrônico Central" },
     { code: "MAT-ECO-99", desc: "Lubrificante Sintético" }
   ],
@@ -60,10 +70,13 @@ export const SAP_MASTER_DATA = {
     { code: "208018", name: "Logística Integrada Global" },
     { code: "208019", name: "Manutenção Express ME" },
     { code: "309001", name: "Indústrias Reunidas do Norte" },
-    { code: "405002", name: "Panteon Construções" }
+    { code: "405002", name: "Panteon Construções" },
+    { code: "506003", name: "Mineração Vale das Sombras" },
+    { code: "607004", name: "Siderúrgica Nacional S/A" },
+    { code: "708005", name: "AeroParts Brasil" }
   ],
-  incoterms: ["FOB", "CIF", "EXW", "DDP"],
-  paymentConds: ["ZF30", "ZF60", "ZB00", "0001", "ZF90"]
+  incoterms: ["FOB", "CIF", "EXW", "DDP", "CFR"],
+  paymentConds: ["ZF30", "ZF60", "ZB00", "0001", "ZF90", "ZF15"]
 };
 
 export const MISSIONS: Mission[] = [
