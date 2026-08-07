@@ -2251,9 +2251,9 @@ function SAPSDQuestApp() {
                         ];
                       } else {
                         fieldsToShow = [
-                          { id: "salesOrg", label: "Org. Vendas", type: "select", options: ["1000", "2000"] },
-                          { id: "distChannel", label: "Canal Dist.", type: "select", options: ["10", "20", "30"] },
-                          { id: "division", label: "Setor Ativ.", type: "select", options: ["00", "01", "10", "20"] },
+                          { id: "salesOrg", label: "Org. Vendas", type: "select", options: SAP_MASTER_DATA.salesOrgs.map(o => o.code) },
+                          { id: "distChannel", label: "Canal Dist.", type: "select", options: SAP_MASTER_DATA.channels.map(o => o.code) },
+                          { id: "division", label: "Setor Ativ.", type: "select", options: SAP_MASTER_DATA.divisions.map(o => o.code) },
                         ];
                       }
                     } else if (selectedTransaction === "VL01N") {
@@ -2282,18 +2282,18 @@ function SAPSDQuestApp() {
                       if (isHeader) {
                         fieldsToShow = [
                           { id: "orderType", label: "Tipo", type: "select", options: ["OR", "QT", "ZBN", "RE"] },
-                          { id: "salesOrg", label: "Org. Vendas", type: "select", options: ["1000", "2000"] },
-                          { id: "distChannel", label: "Canal Dist.", type: "select", options: ["10", "20", "30"] },
-                          { id: "division", label: "Setor Ativ.", type: "select", options: ["00", "01", "10", "20"] },
+                          { id: "salesOrg", label: "Org. Vendas", type: "select", options: SAP_MASTER_DATA.salesOrgs.map(o => o.code) },
+                          { id: "distChannel", label: "Canal Dist.", type: "select", options: SAP_MASTER_DATA.channels.map(o => o.code) },
+                          { id: "division", label: "Setor Ativ.", type: "select", options: SAP_MASTER_DATA.divisions.map(o => o.code) },
                           { id: "partnerCode", label: "Emissor", hasSearch: true },
                           { id: "orderDate", label: "Data Pedido" },
                           { id: "partnerCategory", label: "Nº Pedido" },
-                          { id: "partnerFunction", label: "Cond. Pagto.", type: "select", options: ["ZF30", "ZB00", "ZF60", "0001", "ZF90"] },
-                          { id: "incoterms", label: "Incoterms", type: "select", options: ["FOB", "CIF", "EXW", "DDP"] },
+                          { id: "partnerFunction", label: "Cond. Pagto.", type: "select", options: SAP_MASTER_DATA.paymentConds },
+                          { id: "incoterms", label: "Incoterms", type: "select", options: SAP_MASTER_DATA.incoterms },
                         ];
                       } else {
                         fieldsToShow = [
-                          { id: "materialCode", label: "Material", type: "select", options: ["MAT-SD-015", "MAT-SD-020", "MAT-SD-030", "MAT-SD-045", "MAT-PRIME-X", "MAT-ECO-99"] },
+                          { id: "materialCode", label: "Material", type: "select", options: SAP_MASTER_DATA.materials.map(o => o.code) },
                           { id: "quantity", label: "Quantidade" },
                           { id: "plant", label: "Centro / Plant", type: "select", options: ["1000", "2000"] },
                           { id: "storageLocation", label: "Depósito", type: "select", options: ["SL01", "SL02"] },
