@@ -30,28 +30,56 @@ export const SAP_MASTER_DATA = {
   salesOrgs: [
     { code: "1000", name: "AAM Vendas São Paulo" },
     { code: "2000", name: "AAM Vendas Rio de Janeiro" },
-    { code: "3000", name: "AAM Vendas Curitiba" }
+    { code: "3000", name: "AAM Vendas Curitiba" },
+    { code: "4000", name: "AAM Vendas Recife" },
+    { code: "5000", name: "AAM Vendas Porto Alegre" }
   ],
   channels: [
     { code: "10", name: "Venda Direta" },
-    { code: "20", name: "Distribuição" }
+    { code: "20", name: "Distribuição" },
+    { code: "30", name: "E-commerce" }
   ],
   divisions: [
     { code: "00", name: "Geral" },
-    { code: "01", name: "Peças" }
+    { code: "01", name: "Peças" },
+    { code: "02", name: "Serviços" }
   ],
   materials: [
     { code: "MAT-SD-001", desc: "Parafuso Sextavado Aço G5" },
     { code: "MAT-SD-015", desc: "Cabo de Aço Reforçado" },
-    { code: "MAT-PRIME-X", desc: "Módulo Eletrônico Central" }
+    { code: "MAT-PRIME-X", desc: "Módulo Eletrônico Central" },
+    { code: "MAT-OIL-500", desc: "Óleo Lubrificante Sintético" },
+    { code: "MAT-GEAR-S1", desc: "Engrenagem Helicoidal" },
+    { code: "MAT-BELT-V", desc: "Correia de Transmissão V" },
+    { code: "MAT-PUMP-H", desc: "Bomba Hidráulica 10bar" },
+    { code: "MAT-VALV-P", desc: "Válvula Pneumática 3/2" },
+    { code: "MAT-FLTR-A", desc: "Filtro de Ar Industrial" },
+    { code: "MAT-BRNG-6205", desc: "Rolamento de Esferas 6205" },
+    { code: "MAT-TOOL-KIT", desc: "Kit de Ferramentas Manuais" },
+    { code: "MAT-SCREW-M8", desc: "Parafuso M8 Zincado" },
+    { code: "MAT-WIRE-100", desc: "Rolo Fio Cobre 100m" },
+    { code: "MAT-CLMP-30", desc: "Braçadeira Inox 30mm" },
+    { code: "MAT-GASK-R", desc: "Junta de Vedação Borracha" }
   ],
   customers: [
-    { code: "208015", name: "TechBrasil Automação Ltda" },
-    { code: "208016", name: "Distribuidora Sul de Metais" },
-    { code: "309001", name: "Indústrias Reunidas do Norte" }
+    { code: "208015", name: "TechBrasil Automação Ltda", uf: "SP", cnpj: "12.345.678/0001-90" },
+    { code: "208016", name: "Distribuidora Sul de Metais", uf: "RS", cnpj: "23.456.789/0001-01" },
+    { code: "309001", name: "Indústrias Reunidas do Norte", uf: "AM", cnpj: "34.567.890/0001-12" },
+    { code: "208017", name: "Logística Expressa Nordeste", uf: "PE", cnpj: "45.678.901/0001-23" },
+    { code: "208018", name: "Manutenção Industrial Rio", uf: "RJ", cnpj: "56.789.012/0001-34" },
+    { code: "208019", name: "AgroTech Soluções", uf: "MT", cnpj: "67.890.123/0001-45" },
+    { code: "208020", name: "Construtora Horizonte", uf: "GO", cnpj: "78.901.234/0001-56" },
+    { code: "208021", name: "Metalúrgica Vale do Aço", uf: "MG", cnpj: "89.012.345/0001-67" },
+    { code: "208022", name: "Fábrica de Móveis Design", uf: "SC", cnpj: "90.123.456/0001-78" },
+    { code: "208023", name: "Química Industrial S.A.", uf: "BA", cnpj: "01.234.567/0001-89" },
+    { code: "208024", name: "Mineração Ouro Preto", uf: "MG", cnpj: "12.345.678/0002-99" },
+    { code: "208025", name: "Transportadora Rápido", uf: "SP", cnpj: "23.456.789/0002-02" },
+    { code: "208026", name: "Auto Peças Central", uf: "DF", cnpj: "34.567.890/0002-13" },
+    { code: "208027", name: "Elétrica São João", uf: "PR", cnpj: "45.678.901/0002-24" },
+    { code: "208028", name: "Papelaria Corporativa", uf: "SP", cnpj: "56.789.012/0002-35" }
   ],
-  incoterms: ["FOB", "CIF", "EXW"],
-  paymentConds: ["ZF30", "ZF60", "ZB00"]
+  incoterms: ["FOB", "CIF", "EXW", "DDP", "FCA"],
+  paymentConds: ["ZF30", "ZF60", "ZB00", "ZF90", "Z001"]
 };
 
 export const MISSIONS: Mission[] = [
