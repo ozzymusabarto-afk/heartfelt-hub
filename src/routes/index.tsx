@@ -1576,6 +1576,8 @@ function SAPSDQuestApp() {
       toast.error("Erro Crítico de Negócio", {
         description: "Verifique as orientações do Chefe Hugo.",
       });
+      // Avança ou muda para a próxima missão em caso de erro, mas sem pontuar
+      // O usuário pode clicar em 'Próxima Missão' no feedback de erro
     }
   };
 
