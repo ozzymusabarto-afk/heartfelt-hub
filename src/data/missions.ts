@@ -318,7 +318,7 @@ export const MISSIONS: Mission[] = [
     title: "24. Trainee - Fechamento do Dia (VF04)",
     transaction: "VF04",
     chefeHugoDialog: "",
-    successFeedback: "Fechamento realizado! Meta de 24 acertos alcançada!",
+    successFeedback: "Fechamento realizado! Meta de 40 acertos alcançada!",
     errorFeedback: "Erro no fechamento.",
     expectedData: { orgVendas: "1000" },
     f1Help: { title: "Conceito: Billing List", concept: "Fechamento mensal", businessImpact: "Compliance", brazilRule: "Escrituração Fiscal" }
