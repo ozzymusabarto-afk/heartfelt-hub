@@ -1632,15 +1632,16 @@ function SAPSDQuestApp() {
       setLastStateBeforeReset(currentState);
       setShowUndoReset(true);
 
-      // Limpa dados
+      // Limpa dados e reseta flag de promoção para permitir novos sorteios e nova trilha
       setXp(0);
       setCompletedMissions(0);
-      setCurrentMissionIndex(0);
+      setCurrentMissionIndex(getRandomMissionIndex(undefined, [], 0)); // Nova semente de sorteio
       setTrainingHistory([]);
-      resetGame();
       localStorage.removeItem("sap-quest-data");
       localStorage.removeItem("sap-quest-history");
-      toast.success("Progresso reiniciado!");
+      localStorage.removeItem("sap-quest-promotion-trainee"); // Permite nova promoção
+      resetGame();
+      toast.success("Progresso reiniciado com nova semente de missões!");
 
       // Inicia timeout para ocultar botão de desfazer
       if (undoTimeoutRef.current) clearTimeout(undoTimeoutRef.current);
