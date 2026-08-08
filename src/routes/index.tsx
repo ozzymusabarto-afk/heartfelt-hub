@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router"; // faça uma varredura 100% para garantir que todo o projeto esteja perfeito sem erros,
+import { createFileRoute, Link } from "@tanstack/react-router"; // Correções urgentes na lógica de geração de missões, gamificação e textos do Chefe Hugo: 1. CORREÇÃO DE VARIÁVEIS NULAS (BUG DO UNDEFINED) 2. FIM DAS MISSÕES EM BRANCO ("...") 3. REAJUSTE DA MECÂNICA DE ERRO E PONTUAÇÃO (SPACED REPETITION)
 import { useState, useEffect, useRef, useMemo } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
