@@ -1528,24 +1528,32 @@ function SAPSDQuestApp() {
         toast.success(successMsg);
 
         if (mode !== "practice") {
-          setXp(prev => Math.min(prev + 25, missions.length * 25));
+          // Só ganha XP se acertar de primeira (não está na fila de reforço e feedbackState ainda era Idle)
+          const isReinforced = reinforcementQueue.includes(currentMission.id);
+          const xpGained = isReinforced ? 0 : 25;
+          
+          if (xpGained > 0) {
+            setXp(prev => Math.min(prev + xpGained, missions.length * 25));
+            toast.success("Missão Concluída!", {
+              description: `Você ganhou +${xpGained} XP e desbloqueou a próxima etapa.`,
+            });
+          } else {
+            toast.info("Reforço Concluído", {
+              description: "Você revisou este tópico com sucesso, mas o XP só é concedido na primeira tentativa correta.",
+            });
+          }
           setCompletedMissions(prev => prev + 1);
-        }
-        setTrainingHistory(prev => [{
-          id: Math.random().toString(36).substr(2, 9),
-          status: "success" as const,
-          transaction: selectedTransaction,
-          message: currentMission.chefeHugoDialog,
-          timestamp: Date.now(),
-          xpEarned: mode !== "practice" ? 25 : 0,
-          missionName: currentMission.title,
-          progressAtTime: Math.round(((completedMissions + (mode !== "practice" ? 1 : 0)) / missions.length) * 100)
-        }, ...prev].slice(0, 10));
-        
-        if (mode !== "practice") {
-          toast.success("Missão Concluída!", {
-            description: "Você ganhou +25 XP e desbloqueou a próxima etapa.",
-          });
+          
+          setTrainingHistory(prev => [{
+            id: Math.random().toString(36).substr(2, 9),
+            status: "success" as const,
+            transaction: selectedTransaction,
+            message: currentMission.chefeHugoDialog,
+            timestamp: Date.now(),
+            xpEarned: xpGained,
+            missionName: currentMission.title,
+            progressAtTime: Math.round(((completedMissions + 1) / missions.length) * 100)
+          }, ...prev].slice(0, 10));
         } else {
           toast.success("Sucesso (Modo Prática)");
         }
