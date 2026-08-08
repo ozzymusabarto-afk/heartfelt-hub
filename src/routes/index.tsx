@@ -1221,11 +1221,24 @@ function SAPSDQuestApp() {
 
 
   useEffect(() => {
+    // Check for promotion milestone (24 correct missions)
+    if (completedMissions === 24 && !localStorage.getItem("sap-quest-promotion-trainee")) {
+      setPromotionData({
+        level: "Consultor Júnior SAP SD",
+        salary: "R$ 6.500,00"
+      });
+      setShowPromotionModal(true);
+      localStorage.setItem("sap-quest-promotion-trainee", "true");
+    }
+  }, [completedMissions]);
+
+  useEffect(() => {
     const handleGlobalKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setIsF1ModalOpen(false);
         setIsLogoutModalOpen(false);
         setIsCustomerSearchOpen(false);
+        setShowPromotionModal(false);
       }
     };
     window.addEventListener("keydown", handleGlobalKeyDown);
@@ -1238,7 +1251,6 @@ function SAPSDQuestApp() {
       if (!hasCompletedOnboarding) {
         setShowOnboarding(true);
       }
-
     }
 
     const hasStarted = sessionStorage.getItem("sap-quest-session-started");
