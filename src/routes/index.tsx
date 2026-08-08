@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router"; // Correções urgentes na lógica de geração de missões, gamificação e textos do Chefe Hugo: 1. CORREÇÃO DE VARIÁVEIS NULAS (BUG DO UNDEFINED) 2. FIM DAS MISSÕES EM BRANCO ("...") 3. REAJUSTE DA MECÂNICA DE ERRO E PONTUAÇÃO (SPACED REPETITION)
+import { createFileRoute, Link } from "@tanstack/react-router"; // Expansão massiva da base de dados, progressão de carreira e variedade de missões SAP SD: 1. BANCO DE DADOS MESTRE EXPANDIDO (SAP_MASTER_DATA) 2. TRILHA DE PROGRESSÃO E CARREIRA (GAMIFICAÇÃO) 3. COBERTURA TOTAL DO FLUXO SD NO SORTEIO
 import { useState, useEffect, useRef, useMemo } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
@@ -917,6 +917,8 @@ function SAPSDQuestApp() {
   const [password, setPassword] = useState("");
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
+  const [showPromotionModal, setShowPromotionModal] = useState(false);
+  const [promotionData, setPromotionData] = useState<{ level: string; salary: string } | null>(null);
   const [onboardingStep, setOnboardingStep] = useState(0);
   const [activeTab, setActiveTab] = useState<"main" | "certification" | "profile" | "certificate" | "quick" | "docs" | "stats" | "achievements" | "settings">("main");
   const [certName, setCertName] = useState("");
@@ -1219,11 +1221,24 @@ function SAPSDQuestApp() {
 
 
   useEffect(() => {
+    // Check for promotion milestone (24 correct missions)
+    if (completedMissions === 24 && !localStorage.getItem("sap-quest-promotion-trainee")) {
+      setPromotionData({
+        level: "Consultor Júnior SAP SD",
+        salary: "R$ 6.500,00"
+      });
+      setShowPromotionModal(true);
+      localStorage.setItem("sap-quest-promotion-trainee", "true");
+    }
+  }, [completedMissions]);
+
+  useEffect(() => {
     const handleGlobalKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setIsF1ModalOpen(false);
         setIsLogoutModalOpen(false);
         setIsCustomerSearchOpen(false);
+        setShowPromotionModal(false);
       }
     };
     window.addEventListener("keydown", handleGlobalKeyDown);
@@ -1236,7 +1251,6 @@ function SAPSDQuestApp() {
       if (!hasCompletedOnboarding) {
         setShowOnboarding(true);
       }
-
     }
 
     const hasStarted = sessionStorage.getItem("sap-quest-session-started");
@@ -1618,15 +1632,16 @@ function SAPSDQuestApp() {
       setLastStateBeforeReset(currentState);
       setShowUndoReset(true);
 
-      // Limpa dados
+      // Limpa dados e reseta flag de promoção para permitir novos sorteios e nova trilha
       setXp(0);
       setCompletedMissions(0);
-      setCurrentMissionIndex(0);
+      setCurrentMissionIndex(getRandomMissionIndex(undefined, [], 0)); // Nova semente de sorteio
       setTrainingHistory([]);
-      resetGame();
       localStorage.removeItem("sap-quest-data");
       localStorage.removeItem("sap-quest-history");
-      toast.success("Progresso reiniciado!");
+      localStorage.removeItem("sap-quest-promotion-trainee"); // Permite nova promoção
+      resetGame();
+      toast.success("Progresso reiniciado com nova semente de missões!");
 
       // Inicia timeout para ocultar botão de desfazer
       if (undoTimeoutRef.current) clearTimeout(undoTimeoutRef.current);
@@ -1870,6 +1885,65 @@ function SAPSDQuestApp() {
                 Iniciar 1ª Missão <Rocket className="ml-2 size-5" />
               </Button>
             </div>
+          </Card>
+        </div>
+      )}
+      {showPromotionModal && promotionData && (
+        <div className="fixed inset-0 z-[110] bg-slate-900/70 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-500">
+          <Card className="w-full max-w-[600px] border-none shadow-[0_0_50px_rgba(79,70,229,0.3)] rounded-3xl overflow-hidden bg-white animate-in zoom-in-95 duration-500 relative">
+            <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-amber-400 via-indigo-600 to-emerald-500" />
+            
+            <div className="p-10 text-center">
+              <div className="flex justify-center mb-6">
+                <div className="relative">
+                  <div className="absolute inset-0 bg-indigo-600 blur-2xl opacity-20 animate-pulse" />
+                  <div className="size-24 bg-gradient-to-tr from-indigo-600 to-indigo-400 rounded-3xl flex items-center justify-center text-white shadow-2xl relative z-10 rotate-3">
+                    <Trophy className="size-12" />
+                  </div>
+                </div>
+              </div>
+
+              <h2 className="text-3xl font-black text-slate-800 tracking-tight mb-2 uppercase">Proposta de Promoção!</h2>
+              <p className="text-indigo-600 text-sm font-black uppercase tracking-[0.3em] mb-8">AAM LOGÍSTICA LTDA</p>
+
+              <div className="bg-slate-50 border border-slate-100 rounded-3xl p-8 mb-8 space-y-6 text-left relative">
+                <div className="flex items-start gap-4">
+                  <HugoAvatar className="size-14" />
+                  <div>
+                    <h4 className="font-bold text-slate-800 text-sm">Mensagem do Chefe Hugo:</h4>
+                    <p className="text-slate-600 text-sm italic mt-1 leading-relaxed">
+                      "Excelente desempenho, {userName}! Você demonstrou consistência absoluta nas últimas 24 missões. O board da AAM LOGÍSTICA aprovou sua promoção imediata."
+                    </p>
+                  </div>
+                </div>
+
+                <div className="h-px bg-slate-200" />
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="p-4 bg-white rounded-2xl border border-slate-100 shadow-sm">
+                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Novo Cargo</p>
+                    <p className="text-sm font-black text-indigo-600">{promotionData.level}</p>
+                  </div>
+                  <div className="p-4 bg-white rounded-2xl border border-slate-100 shadow-sm">
+                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Novo Salário Base</p>
+                    <p className="text-sm font-black text-emerald-600">{promotionData.salary}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                <Button 
+                  className="w-full h-14 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl shadow-lg shadow-indigo-100 text-lg transition-all active:scale-[0.98] group"
+                  onClick={() => setShowPromotionModal(false)}
+                >
+                  ACEITAR E CONTINUAR NA EMPRESA <ArrowRight className="ml-2 size-5 group-hover:translate-x-1 transition-transform" />
+                </Button>
+                <p className="text-[10px] text-slate-400 font-medium">Avançando para Nível Pleno / Sênior</p>
+              </div>
+            </div>
+            
+            <div className="absolute -bottom-10 -right-10 size-40 bg-indigo-50 rounded-full opacity-50 blur-3xl pointer-events-none" />
+            <div className="absolute -top-10 -left-10 size-40 bg-emerald-50 rounded-full opacity-50 blur-3xl pointer-events-none" />
           </Card>
         </div>
       )}
