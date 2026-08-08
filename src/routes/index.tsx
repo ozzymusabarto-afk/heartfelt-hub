@@ -1560,7 +1560,7 @@ function SAPSDQuestApp() {
       }
     } else {
       setFeedbackState("error");
-      // Add to reinforcement queue on error
+      // Add to reinforcement queue on error (Spaced Repetition logic)
       if (!reinforcementQueue.includes(currentMission.id)) {
         setReinforcementQueue(prev => [...prev, currentMission.id]);
       }
