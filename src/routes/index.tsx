@@ -84,7 +84,7 @@ const randomizeMissionData = (mission: Mission, name: string): Mission => {
   
   // Sorteio dos dados mestres com fallbacks seguros
   const selectedMaterial = randomValue(materials) || { code: "MAT-SD-001", desc: "Material Padrão" };
-  const selectedCustomer = randomValue(customers) || { code: "208015", name: "Cliente Padrão" };
+  const selectedCustomer = randomValue(customers) || { code: "208015", name: "Cliente Padrão", code: "208015" };
   const selectedOrg = randomValue(salesOrgs) || { code: "1000", name: "Org Padrão" };
   const selectedChannel = randomValue(channels) || { code: "10", name: "Canal Padrão" };
   const selectedDiv = randomValue(divisions) || { code: "00", name: "Setor Padrão" };
