@@ -917,6 +917,8 @@ function SAPSDQuestApp() {
   const [password, setPassword] = useState("");
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
+  const [showPromotionModal, setShowPromotionModal] = useState(false);
+  const [promotionData, setPromotionData] = useState<{ level: string; salary: string } | null>(null);
   const [onboardingStep, setOnboardingStep] = useState(0);
   const [activeTab, setActiveTab] = useState<"main" | "certification" | "profile" | "certificate" | "quick" | "docs" | "stats" | "achievements" | "settings">("main");
   const [certName, setCertName] = useState("");
