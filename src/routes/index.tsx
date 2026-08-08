@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router"; // Correções urgentes na lógica de geração de missões, gamificação e textos do Chefe Hugo: 1. CORREÇÃO DE VARIÁVEIS NULAS (BUG DO UNDEFINED) 2. FIM DAS MISSÕES EM BRANCO ("...") 3. REAJUSTE DA MECÂNICA DE ERRO E PONTUAÇÃO (SPACED REPETITION)
+import { createFileRoute, Link } from "@tanstack/react-router"; // Expansão massiva da base de dados, progressão de carreira e variedade de missões SAP SD: 1. BANCO DE DADOS MESTRE EXPANDIDO (SAP_MASTER_DATA) 2. TRILHA DE PROGRESSÃO E CARREIRA (GAMIFICAÇÃO) 3. COBERTURA TOTAL DO FLUXO SD NO SORTEIO
 import { useState, useEffect, useRef, useMemo } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
