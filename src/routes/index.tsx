@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router"; // Expansão massiva da base de dados, progressão de carreira e variedade de missões SAP SD: 1. BANCO DE DADOS MESTRE EXPANDIDO (SAP_MASTER_DATA) 2. TRILHA DE PROGRESSÃO E CARREIRA (GAMIFICAÇÃO) 3. COBERTURA TOTAL DO FLUXO SD NO SORTEIO
+import { createFileRoute, Link } from "@tanstack/react-router"; // Ajuste urgente na meta de acertos e consistência da gamificação: 1. CORREÇÃO DA META DE PROMOÇÃO (40 ACERTOS) 2. REVISÃO DA FILA DE ERROS (SPACED REPETITION) 3. ESTABILIDADE DE TEXTOS (SEM UNDEFINED)
 import { useState, useEffect, useRef, useMemo } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
@@ -1221,8 +1221,8 @@ function SAPSDQuestApp() {
 
 
   useEffect(() => {
-    // Check for promotion milestone (24 correct missions)
-    if (completedMissions === 24 && !localStorage.getItem("sap-quest-promotion-trainee")) {
+    // Check for promotion milestone (40 correct missions)
+    if (completedMissions === 40 && !localStorage.getItem("sap-quest-promotion-trainee")) {
       setPromotionData({
         level: "Consultor Júnior SAP SD",
         salary: "R$ 6.500,00"
@@ -1912,7 +1912,7 @@ function SAPSDQuestApp() {
                   <div>
                     <h4 className="font-bold text-slate-800 text-sm">Mensagem do Chefe Hugo:</h4>
                     <p className="text-slate-600 text-sm italic mt-1 leading-relaxed">
-                      "Excelente desempenho, {userName}! Você demonstrou consistência absoluta nas últimas 24 missões. O board da AAM LOGÍSTICA aprovou sua promoção imediata."
+                      "Excelente desempenho, {userName}! Você demonstrou consistência absoluta nas últimas 40 missões. O board da AAM LOGÍSTICA aprovou sua promoção imediata."
                     </p>
                   </div>
                 </div>
