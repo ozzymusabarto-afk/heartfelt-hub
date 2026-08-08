@@ -52,10 +52,7 @@ export const Route = createFileRoute("/")({
 const getRandomMissionIndex = (excludeIndex?: number, reinforcementQueue: string[] = [], completedCount: number = 0) => {
   // Logic for picking missions:
   // 1. If we have something in the reinforcement queue, prioritize it (60% chance)
-  // 2. Otherwise, pick randomly from the available pool based on seniority progress
-  
   if (reinforcementQueue.length > 0 && Math.random() > 0.4) {
-    // Pick a random ID from the queue to avoid being sequential within reinforcement
     const randomQueueId = reinforcementQueue[Math.floor(Math.random() * reinforcementQueue.length)];
     const queueIndex = missions.findIndex(m => m.id === randomQueueId);
     
@@ -64,8 +61,7 @@ const getRandomMissionIndex = (excludeIndex?: number, reinforcementQueue: string
     }
   }
 
-  // Progressive unlock: pool size is current progress + 5 mission buffer
-  // Level ranges: Trainee (1-40), Júnior (41-80), Pleno (81-130), Sênior (131-170)
+  // Progressive unlock: pool size is current progress + 8 mission buffer
   const poolSize = Math.min(missions.length, completedCount + 8);
   
   let newIndex;
@@ -82,19 +78,19 @@ const randomizeMissionData = (mission: Mission, name: string): Mission => {
   const { materials, customers, incoterms, paymentConds, salesOrgs, divisions, channels } = SAP_MASTER_DATA;
   const quantities = ["5", "12", "28", "45", "67", "110", "250", "500"];
 
-  const randomValue = (arr: any[]) => arr[Math.floor(Math.random() * arr.length)];
+  const randomValue = (arr: any[]) => arr && arr.length > 0 ? arr[Math.floor(Math.random() * arr.length)] : null;
   
   const newMission = JSON.parse(JSON.stringify(mission));
   
-  // Sorteio dos dados mestres
-  const selectedMaterial = randomValue(materials);
-  const selectedCustomer = randomValue(customers);
-  const selectedOrg = randomValue(salesOrgs);
-  const selectedChannel = randomValue(channels);
-  const selectedDiv = randomValue(divisions);
-  const selectedQty = randomValue(quantities);
-  const selectedInco = randomValue(incoterms);
-  const selectedPay = randomValue(paymentConds);
+  // Sorteio dos dados mestres com fallbacks seguros
+  const selectedMaterial = randomValue(materials) || { code: "MAT-SD-001", desc: "Material Padrão" };
+  const selectedCustomer = randomValue(customers) || { code: "208015", name: "Cliente Padrão" };
+  const selectedOrg = randomValue(salesOrgs) || { code: "1000", name: "Org Padrão" };
+  const selectedChannel = randomValue(channels) || { code: "10", name: "Canal Padrão" };
+  const selectedDiv = randomValue(divisions) || { code: "00", name: "Setor Padrão" };
+  const selectedQty = randomValue(quantities) || "10";
+  const selectedInco = randomValue(incoterms) || "FOB";
+  const selectedPay = randomValue(paymentConds) || "ZF30";
 
   // 1. Atualiza expectedData de forma consistente
   newMission.expectedData.orgVendas = selectedOrg.code;
@@ -118,7 +114,7 @@ const randomizeMissionData = (mission: Mission, name: string): Mission => {
     newMission.expectedData.partnerFunction = selectedPay;
   }
 
-  // 2. Constrói o enunciado de forma 100% dinâmica a partir do objeto da missão
+  // 2. Constrói o enunciado de forma 100% dinâmica e segura (sem undefined)
   const greeting = name ? `Olá, ${name}!` : "Olá!";
   
   const businessScenarios = [
@@ -131,7 +127,7 @@ const randomizeMissionData = (mission: Mission, name: string): Mission => {
     `Novo teste de integração iniciado para ${selectedCustomer.name}:`,
     `Ajuste de estoque urgente para o material ${selectedMaterial.desc}:`
   ];
-  const scenario = randomValue(businessScenarios);
+  const scenario = randomValue(businessScenarios) || "Solicitação pendente:";
   
   let dialog = `${greeting} ${scenario}\n\n`;
   
@@ -141,22 +137,30 @@ const randomizeMissionData = (mission: Mission, name: string): Mission => {
     dialog += `O cliente ${newMission.expectedData.partnerCode} (${selectedCustomer.name}) solicitou uma operação de ${newMission.transaction}. `;
   }
 
-  if (newMission.expectedData.materialCode) {
+  // Apenas adiciona material/quantidade se aplicável e não for apenas exibição/BP
+  const isDisplayOnly = ["MM03", "VA03", "VL03N", "VF03", "BP"].includes(newMission.transaction);
+  if (newMission.expectedData.materialCode && !isDisplayOnly) {
     dialog += `Utilize o material ${newMission.expectedData.materialCode} (${selectedMaterial.desc}) com uma quantidade de ${newMission.expectedData.quantidade} unidades. `;
+  } else if (newMission.expectedData.materialCode) {
+    dialog += `O material em questão é o ${newMission.expectedData.materialCode} (${selectedMaterial.desc}). `;
   }
 
-  if (newMission.expectedData.headerIncoterms) {
+  if (newMission.expectedData.headerIncoterms && !isDisplayOnly) {
     dialog += `O frete acordado é ${newMission.expectedData.headerIncoterms} e a condição de pagamento deve ser ${newMission.expectedData.partnerFunction}. `;
   }
 
-  // Adiciona bloco de dados obrigatórios extraídos diretamente da validação
-  dialog += `\n\n[DADOS OBRIGATÓRIOS: Org. Vendas: ${newMission.expectedData.orgVendas}, Canal: ${newMission.expectedData.canalDist}, Setor: ${newMission.expectedData.setorAtiv}`;
+  // Bloco de dados obrigatórios extraídos diretamente da validação - Garante que nunca saia vazio ou com undefined
+  const mandatoryData = [
+    `Org. Vendas: ${newMission.expectedData.orgVendas || 'N/A'}`,
+    `Canal: ${newMission.expectedData.canalDist || 'N/A'}`,
+    `Setor: ${newMission.expectedData.setorAtiv || 'N/A'}`
+  ];
   
   if (newMission.expectedData.tipoOrdem) {
-    dialog += `, Tipo: ${newMission.expectedData.tipoOrdem}`;
+    mandatoryData.push(`Tipo: ${newMission.expectedData.tipoOrdem}`);
   }
   
-  dialog += `]`;
+  dialog += `\n\n[DADOS OBRIGATÓRIOS: ${mandatoryData.join(", ")}]`;
 
   newMission.chefeHugoDialog = dialog;
 
